@@ -1,20 +1,26 @@
 """Benchmarks with perf for the functions in the copies module"""
 
 import sys
+import os
 import perf
 
 sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
 
+
+from tada.util import configuration
 from speedsurprises.text import copies
 
-CONFIGURATION = ".configuration.txt"
-DESCRIPTION_METANAME = "description"
-PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
+
+def run_benchmark(chosen_function, current_chosen_size):
+    """Run a benchmark on a chosen_function and a current_chosen_size"""
+    chosen_function(current_chosen_size)
 
 
-def bench_copy_function(copy_function, current_chosen_size):
-    """Run a copy benchmark for a copy_function and a chosen_size"""
-    copy_function(current_chosen_size)
+def save_bencmark_results(current_benchmark):
+    """Save the benchmark results to disk in a JSON file"""
+    current_benchmark.dump(
+        RESULTS + current_experiment_name + ".json", compact=False, replace=True
+    )
 
 
 # Example of calling the function under analysis:
@@ -32,9 +38,7 @@ if __name__ == "__main__":
     runner.metadata[DESCRIPTION_METANAME] = current_experiment_name
     # run the perf benchmark for the function
     benchmark = runner.bench_func(
-        "mcopies", bench_copy_function, copies.mcopies_ofc, chosen_size
+        "mcopies", run_benchmark, copies.mcopies_ofc, chosen_size
     )
     # save the perf results from running the benchmark
-    benchmark.dump(
-        "results/" + current_experiment_name + ".json", compact=False, replace=True
-    )
+    save_bencmark_results(benchmark)
