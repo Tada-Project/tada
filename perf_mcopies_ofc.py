@@ -1,14 +1,18 @@
 """Benchmarks with perf for the functions in the copies module"""
 
-import sys
 import os
+import sys
 import perf
 
-sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
-
-
 from tada.util import configuration
-from speedsurprises.text import copies
+
+sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
+# pylint: disable=wrong-import-position
+# pylint: disable=import-error
+from speedsurprises.text import copies  # noqa: E402
+
+DESCRIPTION_METANAME = "description"
+PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
 
 
 def run_benchmark(chosen_function, current_chosen_size):
@@ -17,18 +21,22 @@ def run_benchmark(chosen_function, current_chosen_size):
 
 
 def save_bencmark_results(current_benchmark):
-    """Save the benchmark results to disk in a JSON file"""
+    """Save the benchmark results to disk in a perf-formatted JSON file"""
+    if not os.path.exists(configuration.RESULTS):
+        os.makedirs(configuration.RESULTS)
     current_benchmark.dump(
-        RESULTS + current_experiment_name + ".json", compact=False, replace=True
+        configuration.RESULTS
+        + configuration.SEPARATOR
+        + current_experiment_name
+        + ".json",
+        compact=False,
+        replace=True,
     )
 
 
-# Example of calling the function under analysis:
-# copied_character_string = copies.mcopies_ofc(copies_as_string)
-
 if __name__ == "__main__":
     # read the chosen_size
-    filepath = CONFIGURATION
+    filepath = configuration.CONFIGURATION
     with open(filepath) as fp:
         chosen_size = fp.readline().replace("\n", "")
     # configure perf
