@@ -23,6 +23,10 @@ def run_command(command):
     return output, error
 
 
+def run_benchmark(command):
+    """Run a benchmark using perf, through the CLI"""
+
+
 def save_configuration(configurationfile, size):
     """Save the current size for the doubling experiment to a file"""
     with open(configurationfile, "w") as fp:
@@ -50,7 +54,10 @@ if __name__ == "__main__":
         # run the benchmark by using it through python
         print("Start running experiment for size " + str(size) + " →\n")
         current_output, current_error = run_command(
-            "python3 " + PERF_EXPERIMENT_NAME + configuration.PYTHON_EXT
+            configuration.PYTHON_EXEC
+            + configuration.SPACE
+            + PERF_EXPERIMENT_NAME
+            + configuration.PYTHON_EXT
         )
         # display the standard output and error
         display_output(current_output.decode(configuration.UTF8))
