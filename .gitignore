@@ -233,7 +233,7 @@ tags.tmp
 # Results director and data files #
 ######################
 .json
-results/
+_results/
 
 # Configuration file #
 ######################
