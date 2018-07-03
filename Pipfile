@@ -6,6 +6,16 @@ name = "pypi"
 [packages]
 
 [dev-packages]
+pylint = "*"
+neovim = "*"
+black = "*"
+pytest = "*"
+pytest-benchmark = "*"
+hypothesis = "*"
+perf = "*"
 
 [requires]
 python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
