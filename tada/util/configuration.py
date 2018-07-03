@@ -4,6 +4,7 @@ import os
 
 # Separators
 SEPARATOR = os.sep
+SPACE = " "
 
 # Directories
 RESULTS = "_results"
@@ -17,6 +18,9 @@ UTF8 = "utf-8"
 # Extensions
 JSON_EXT = ".json"
 PYTHON_EXT = ".py"
+
+# Commands
+PYTHON_EXEC = "python3"
 
 # Perf
 DESCRIPTION_METANAME = "description"
