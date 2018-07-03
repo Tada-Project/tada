@@ -17,3 +17,6 @@ UTF8 = "utf-8"
 # Extensions
 JSON_EXT = ".json"
 PYTHON_EXT = ".py"
+
+# Perf
+DESCRIPTION_METANAME = "description"
