@@ -11,7 +11,6 @@ sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
 # pylint: disable=import-error
 from speedsurprises.text import copies  # noqa: E402
 
-DESCRIPTION_METANAME = "description"
 PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
 
 
@@ -43,7 +42,7 @@ if __name__ == "__main__":
     runner = perf.Runner()
     # configure the run of the benchmark
     current_experiment_name = PERF_EXPERIMENT_NAME + str(chosen_size)
-    runner.metadata[DESCRIPTION_METANAME] = current_experiment_name
+    runner.metadata[configuration.DESCRIPTION_METANAME] = current_experiment_name
     # run the perf benchmark for the function
     benchmark = runner.bench_func(
         "mcopies", run_benchmark, copies.mcopies_ofc, chosen_size
