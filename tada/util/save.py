@@ -23,10 +23,7 @@ def save_bencmark_results(current_benchmark, current_experiment_name):
     if not os.path.exists(constants.RESULTS):
         os.makedirs(constants.RESULTS)
     current_benchmark.dump(
-        constants.RESULTS
-        + constants.SEPARATOR
-        + current_experiment_name
-        + ".json",
+        constants.RESULTS + constants.SEPARATOR + current_experiment_name + ".json",
         compact=False,
         replace=True,
     )
