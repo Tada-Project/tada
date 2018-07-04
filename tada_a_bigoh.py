@@ -31,7 +31,10 @@ if __name__ == "__main__":
     else:
         # add the directory to the sys.path
         package.add_sys_path(tada_arguments.directory)
-        save.save_configuration(configuration.CONFIGURATION, size)
+        # save the size of the experiment in the configuration file
+        save.save_experiment_size(configuration.CONFIGURATION, size)
+        # save the directory containing functions to be analyzed
+        save.save_directory(configuration.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
         while size <= size_stop:
             # run the benchmark by using it through python
@@ -60,4 +63,4 @@ if __name__ == "__main__":
             # go to the next size for the doubling experiment
             size = size * 2
             # write the next doubling experiment size to the file
-            save.save_configuration(configuration.CONFIGURATION, size)
+            save.save_experiment_size(configuration.CONFIGURATION, size)
