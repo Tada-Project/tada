@@ -6,23 +6,9 @@ import perf
 
 from tada.util import configuration
 from tada.util import run
+from tada.util import save
 
 PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
-
-
-def save_bencmark_results(current_benchmark):
-    """Save the benchmark results to disk in a perf-formatted JSON file"""
-    if not os.path.exists(configuration.RESULTS):
-        os.makedirs(configuration.RESULTS)
-    current_benchmark.dump(
-        configuration.RESULTS
-        + configuration.SEPARATOR
-        + current_experiment_name
-        + ".json",
-        compact=False,
-        replace=True,
-    )
-
 
 if __name__ == "__main__":
     sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
@@ -39,8 +25,8 @@ if __name__ == "__main__":
     current_experiment_name = PERF_EXPERIMENT_NAME + str(chosen_size)
     runner.metadata[configuration.DESCRIPTION_METANAME] = current_experiment_name
     # run the perf benchmark for the function
-    benchmark = runner.bench_func(
+    current_benchmark = runner.bench_func(
         "mcopies", run.run_benchmark, copies.mcopies_ofc, chosen_size
     )
     # save the perf results from running the benchmark
-    save_bencmark_results(benchmark)
+    save.save_bencmark_results(current_benchmark, current_experiment_name)
