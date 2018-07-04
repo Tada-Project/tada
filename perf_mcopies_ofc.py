@@ -16,9 +16,6 @@ if __name__ == "__main__":
     from speedsurprises.text import copies  # noqa: E402
 
     # read the chosen_size
-    # filepath = configuration.CONFIGURATION
-    # with open(filepath) as fp:
-    # chosen_size = fp.readline().replace("\n", "")
     chosen_size = read.read_experiment_size()
     # configure perf
     runner = perf.Runner()
