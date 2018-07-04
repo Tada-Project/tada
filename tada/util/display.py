@@ -4,7 +4,7 @@
 def welcome_message():
     """Display a welcome message"""
     print()
-    print("🎆  Tada!: auTomAtic orDer of growth Analysis!")
+    print("🎆  Tada!: auTomAtic orDe- o- growth Analysis!")
     print("   https://github.com/gkapfham/tada")
     print()
 
