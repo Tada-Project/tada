@@ -1,4 +1,4 @@
-"""Benchmarks with perf for the functions in the copies module"""
+"""Benchmarks with perf for the function under analysis"""
 
 import importlib
 import perf
@@ -8,8 +8,6 @@ from tada.util import run
 from tada.util import package
 from tada.util import read
 from tada.util import save
-
-PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
 
 if __name__ == "__main__":
     chosen_directory = read.read_directory()
@@ -24,7 +22,8 @@ if __name__ == "__main__":
     # configure perf
     runner = perf.Runner()
     # configure the run of the benchmark
-    current_experiment_name = PERF_EXPERIMENT_NAME + str(chosen_size)
+    # TODO: make this based on the name of the experiment
+    current_experiment_name = constants.PERF_BENCHMARK + str(chosen_size)
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # run the perf benchmark for the function
     # current_benchmark = runner.bench_func(
