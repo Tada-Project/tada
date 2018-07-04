@@ -6,11 +6,6 @@ import perf
 
 from tada.util import configuration
 
-sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
-# pylint: disable=wrong-import-position
-# pylint: disable=import-error
-from speedsurprises.text import copies  # noqa: E402
-
 PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
 
 
@@ -34,6 +29,9 @@ def save_bencmark_results(current_benchmark):
 
 
 if __name__ == "__main__":
+    sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
+    # pylint: disable=import-error
+    from speedsurprises.text import copies  # noqa: E402
     # read the chosen_size
     filepath = configuration.CONFIGURATION
     with open(filepath) as fp:
