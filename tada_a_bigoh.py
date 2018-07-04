@@ -23,7 +23,7 @@ if __name__ == "__main__":
     # perform the small doubling experiment
     while size <= size_stop:
         # run the benchmark by using it through python
-        print("Start running experiment for size " + str(size) + " →\n")
+        display.display_start_message(size)
         current_output, current_error = run.run_command(
             configuration.PYTHON_EXEC
             + configuration.SPACE
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         # print('Values {0}'.format(current_benchmark.get_values()))
         print("Mean {0}".format(current_benchmark.mean()))
         print("Median {0}".format(current_benchmark.median()))
-        print("→ Done running experiment for size " + str(size) + "\n")
+        display.display_end_message(size)
         # go to the next size for the doubling experiment
         size = size * 2
         # write the next doubling experiment size to the file
