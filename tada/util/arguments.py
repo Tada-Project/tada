@@ -8,7 +8,7 @@ def parse(args):
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
-    parser.add_argument("--directory", nargs="+", type=str)
+    parser.add_argument("--directory", type=str)
     arguments_finished = parser.parse_args(args)
     return arguments_finished
 
