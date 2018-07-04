@@ -28,3 +28,4 @@ PYTHON_EXEC = "python3"
 
 # Perf
 DESCRIPTION_METANAME = "description"
+PERF_BENCHMARK = "perf_benchmark"
