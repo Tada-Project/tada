@@ -3,6 +3,7 @@
 import importlib
 import perf
 
+from tada.util import configuration
 from tada.util import constants
 from tada.util import run
 from tada.util import package
@@ -11,11 +12,11 @@ from tada.util import save
 
 if __name__ == "__main__":
     # TODO: Generalize these to work for values read from configuration
-    chosen_directory = read.read_directory()
-    package.add_sys_path(chosen_directory)
+    # import the package and reflectively access the function under analysis
+    tada_configuration_dict = configuration.read(constants.CONFIGURATION)
+    package.add_sys_path(tada_configuration_dict[configuration.DIRECTORY])
     module = importlib.import_module("speedsurprises.text.copies")
     method = getattr(module, "mcopies_ofc")
-
     # read the chosen_size
     chosen_size = read.read_experiment_size()
     # configure perf
