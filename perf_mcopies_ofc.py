@@ -1,6 +1,5 @@
 """Benchmarks with perf for the functions in the copies module"""
 
-import sys
 import importlib
 import perf
 
