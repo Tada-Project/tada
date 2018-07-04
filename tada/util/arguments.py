@@ -21,6 +21,7 @@ def parse(args):
 def verify(args):
     """Verify the command-line arguments"""
     verified_arguments = False
-    if args.directory is not None:
+    # CHECK: directory was specified and it is not None or ""
+    if args.directory is not None and args.directory is not "":
         verified_arguments = True
     return verified_arguments
