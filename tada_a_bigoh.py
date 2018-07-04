@@ -19,11 +19,13 @@ if __name__ == "__main__":
     size = 100
     factor = 2
     size_stop = 100
+    # display the welcome message
+    display.welcome_message()
     save.save_configuration(configuration.CONFIGURATION, size)
     # perform the small doubling experiment
     while size <= size_stop:
         # run the benchmark by using it through python
-        display.display_start_message(size)
+        display.start_message(size)
         current_output, current_error = run.run_command(
             configuration.PYTHON_EXEC
             + configuration.SPACE
