@@ -14,6 +14,7 @@ RESULTS = "_results"
 
 # Files
 CONFIGURATION = ".configuration.txt"
+DIRECTORY = ".directory.txt"
 
 # Configurations
 UTF8 = "utf-8"
