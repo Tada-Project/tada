@@ -5,6 +5,7 @@ import perf
 
 from tada.util import configuration
 from tada.util import run
+from tada.util import save
 
 # Make available the package with functions-under-analysis
 sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
@@ -13,16 +14,10 @@ sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
 PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
 
 
-def save_configuration(configurationfile, current_size):
-    """Save the current size for the doubling experiment to a file"""
-    with open(configurationfile, "w") as fp:
-        fp.write(str(current_size))
-
-
-def display_output(timingoutput):
+def display_output(timing_output):
     """Display the timing output as long as it is not empty"""
-    if timingoutput != "":
-        print(timingoutput)
+    if timing_output != "":
+        print(timing_output)
 
 
 if __name__ == "__main__":
@@ -30,7 +25,7 @@ if __name__ == "__main__":
     size = 100
     factor = 2
     size_stop = 100
-    save_configuration(configuration.CONFIGURATION, size)
+    save.save_configuration(configuration.CONFIGURATION, size)
     # perform the small doubling experiment
     while size <= size_stop:
         # run the benchmark by using it through python
