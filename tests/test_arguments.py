@@ -8,7 +8,7 @@ from tada.util import arguments
 VERIFIED = True
 NOT_VERIFIED = False
 
-EMPTY_STRING = ''
+EMPTY_STRING = ""
 ERROR = "error:"
 DIRECTORY = "--directory"
 
@@ -31,9 +31,15 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
     assert DIRECTORY in standard_err
 
 
-@pytest.mark.parametrize("chosen_arguments", [
-    (['--directory', 'D']),
-])
+@pytest.mark.parametrize(
+    "chosen_arguments",
+    [
+        (["--directory", "D"]),
+        (["--directory", "d"]),
+        (["--directory", "/a/"]),
+        (["--directory", "/a/b/c/"]),
+    ],
+)
 def test_directory_argument_verifiable(chosen_arguments):
     """Check that valid directory arguments will verify correctly"""
     parsed_arguments = arguments.parse(chosen_arguments)
