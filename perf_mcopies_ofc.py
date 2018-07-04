@@ -1,11 +1,11 @@
 """Benchmarks with perf for the functions in the copies module"""
 
-import os
 import sys
 import perf
 
 from tada.util import configuration
 from tada.util import run
+from tada.util import read
 from tada.util import save
 
 PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
@@ -16,9 +16,10 @@ if __name__ == "__main__":
     from speedsurprises.text import copies  # noqa: E402
 
     # read the chosen_size
-    filepath = configuration.CONFIGURATION
-    with open(filepath) as fp:
-        chosen_size = fp.readline().replace("\n", "")
+    # filepath = configuration.CONFIGURATION
+    # with open(filepath) as fp:
+    # chosen_size = fp.readline().replace("\n", "")
+    chosen_size = read.read_experiment_size()
     # configure perf
     runner = perf.Runner()
     # configure the run of the benchmark
