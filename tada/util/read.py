@@ -13,7 +13,7 @@ def read_value(filepath):
 
 def read_experiment_size():
     """Read the experiment size from the configuration file"""
-    filepath = configuration.CONFIGURATION
+    filepath = configuration.SIZE
     return read_value(filepath)
 
 
