@@ -6,6 +6,9 @@ import os
 SEPARATOR = os.sep
 SPACE = " "
 
+# Error codes
+INCORRECT_ARGUMENTS = 2
+
 # Directories
 RESULTS = "_results"
 
