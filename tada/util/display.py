@@ -1,7 +1,17 @@
 """Display output for Tada"""
 
 
-def display_start_message(current_size):
+def welcome_message():
+    """Display a welcome message"""
+    print()
+    print(
+        "✨ Tada!: auTomAtic orDer of growth Analysis!"
+    )
+    print("https://github.com/gkapfham/tada")
+    print()
+
+
+def start_message(current_size):
     """Display the start message for an experiment"""
     print("Start running experiment for size " + str(current_size) + " →\n")
 
