@@ -13,10 +13,10 @@ sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
 PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
 
 
-def save_configuration(configurationfile, size):
+def save_configuration(configurationfile, current_size):
     """Save the current size for the doubling experiment to a file"""
     with open(configurationfile, "w") as fp:
-        fp.write(str(size))
+        fp.write(str(current_size))
 
 
 def display_output(timingoutput):
