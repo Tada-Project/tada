@@ -1,4 +1,4 @@
-"""Run entities for Tada"""
+"""Save entities for Tada"""
 
 import os
 
@@ -6,10 +6,16 @@ import os
 from . import configuration
 
 
-def save_configuration(configurationfile, current_size):
+def save_experiment_size(configuration_file, current_size):
     """Save the current size configuration for the experiment to a file"""
-    with open(configurationfile, "w") as file_pointer:
+    with open(configuration_file, "w") as file_pointer:
         file_pointer.write(str(current_size))
+
+
+def save_directory(directory_file, directory_name):
+    """Save the current directory for the analyzed functions to a file"""
+    with open(directory_file, "w") as file_pointer:
+        file_pointer.write(directory_name)
 
 
 def save_bencmark_results(current_benchmark, current_experiment_name):
