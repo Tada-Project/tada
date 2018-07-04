@@ -10,9 +10,6 @@ from tada.util import package
 from tada.util import run
 from tada.util import save
 
-# TODO: the name of the experiment should be an argument
-PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
-
 if __name__ == "__main__":
     # TODO: move these to command-line arguments
     size = 100
@@ -42,7 +39,7 @@ if __name__ == "__main__":
             current_output, current_error = run.run_command(
                 constants.PYTHON_EXEC
                 + constants.SPACE
-                + PERF_EXPERIMENT_NAME
+                + constants.PERF_BENCHMARK
                 + constants.PYTHON_EXT
             )
             # display the standard output and error
@@ -52,7 +49,7 @@ if __name__ == "__main__":
             current_benchmark = perf.Benchmark.load(
                 constants.RESULTS
                 + constants.SEPARATOR
-                + PERF_EXPERIMENT_NAME
+                + constants.PERF_BENCHMARK
                 + str(size)
                 + constants.JSON_EXT
             )
