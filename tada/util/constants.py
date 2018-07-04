@@ -15,6 +15,7 @@ RESULTS = "_results"
 # Files
 SIZE = ".size.txt"
 DIRECTORY = ".directory.txt"
+CONFIGURATION = ".tada.json"
 
 # constants.
 UTF8 = "utf-8"
