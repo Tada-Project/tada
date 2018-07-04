@@ -4,6 +4,7 @@ import sys
 import perf
 
 from tada.util import arguments
+from tada.util import configuration
 from tada.util import constants
 from tada.util import display
 from tada.util import package
@@ -28,6 +29,8 @@ if __name__ == "__main__":
     else:
         # add the directory to the sys.path
         package.add_sys_path(tada_arguments.directory)
+        # create and save a configuration dictionary from the arguments
+        configuration.save(constants.CONFIGURATION, vars(tada_arguments))
         # save the size of the experiment in the constants.file
         save.save_experiment_size(constants.SIZE, size)
         # save the directory containing functions to be analyzed
