@@ -6,11 +6,9 @@ import perf
 from tada.util import arguments
 from tada.util import configuration
 from tada.util import display
+from tada.util import package
 from tada.util import run
 from tada.util import save
-
-# Make available the package with functions-under-analysis
-sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
 
 # TODO: the name of the experiment should be an argument
 PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
@@ -31,6 +29,8 @@ if __name__ == "__main__":
         sys.exit(configuration.INCORRECT_ARGUMENTS)
     # correct arguments, run doubling experiment
     else:
+        # add the directory to the sys.path
+        package.add_sys_path(tada_arguments.directory)
         save.save_configuration(configuration.CONFIGURATION, size)
         # perform the small doubling experiment
         while size <= size_stop:
