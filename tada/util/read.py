@@ -1,7 +1,7 @@
 """Read entities for Tada"""
 
 # pylint: disable=relative-beyond-top-level
-from . import configuration
+from . import constants
 
 
 def read_value(filepath):
@@ -12,12 +12,12 @@ def read_value(filepath):
 
 
 def read_experiment_size():
-    """Read the experiment size from the configuration file"""
-    filepath = configuration.SIZE
+    """Read the experiment size from the constants.file"""
+    filepath = constants.SIZE
     return read_value(filepath)
 
 
 def read_directory():
-    """Read the directory from the configuration file"""
-    filepath = configuration.DIRECTORY
+    """Read the directory from the constants.file"""
+    filepath = constants.DIRECTORY
     return read_value(filepath)
