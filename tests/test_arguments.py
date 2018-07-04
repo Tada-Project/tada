@@ -29,3 +29,13 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
     assert standard_out is EMPTY_STRING
     assert ERROR in standard_err
     assert DIRECTORY in standard_err
+
+
+@pytest.mark.parametrize("chosen_arguments", [
+    (['--directory', 'D']),
+])
+def test_directory_argument_verifiable(chosen_arguments):
+    """Check that valid directory arguments will verify correctly"""
+    parsed_arguments = arguments.parse(chosen_arguments)
+    verified_arguments = arguments.verify(parsed_arguments)
+    assert verified_arguments is True
