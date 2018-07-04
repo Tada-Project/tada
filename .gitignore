@@ -235,6 +235,7 @@ tags.tmp
 .json
 _results/
 
-# Configuration file #
+# 'Tada!' files #
 ######################
 .configuration.txt
+.directory.txt
