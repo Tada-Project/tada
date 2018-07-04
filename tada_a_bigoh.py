@@ -1,30 +1,16 @@
 """Run doubling experiments and 'Tada!' you get the time complexity"""
 
+import sys
 import perf
-import subprocess
 
 from tada.util import configuration
+from tada.util import run
 
 # Make available the package with functions-under-analysis
-import sys
-
 sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
 
 # TODO: the name of the experiment should be an argument
 PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
-
-
-def run_command(command):
-    """Run a command and return the output and error code"""
-    process = subprocess.Popen(
-        command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True
-    )
-    output, error = process.communicate()
-    return output, error
-
-
-def run_benchmark(command):
-    """Run a benchmark using perf, through the CLI"""
 
 
 def save_configuration(configurationfile, size):
@@ -39,21 +25,17 @@ def display_output(timingoutput):
         print(timingoutput)
 
 
-def read_benchmark_results(resultsfile):
-    """Read the results from a JSON file and return a benchmark"""
-
-
 if __name__ == "__main__":
     # setup parameters of a simple doubling experiment
     size = 100
     factor = 2
-    size_stop = 200
+    size_stop = 100
     save_configuration(configuration.CONFIGURATION, size)
     # perform the small doubling experiment
     while size <= size_stop:
         # run the benchmark by using it through python
         print("Start running experiment for size " + str(size) + " →\n")
-        current_output, current_error = run_command(
+        current_output, current_error = run.run_command(
             configuration.PYTHON_EXEC
             + configuration.SPACE
             + PERF_EXPERIMENT_NAME
