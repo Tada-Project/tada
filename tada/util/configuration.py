@@ -13,7 +13,7 @@ INCORRECT_ARGUMENTS = 2
 RESULTS = "_results"
 
 # Files
-CONFIGURATION = ".configuration.txt"
+SIZE = ".size.txt"
 DIRECTORY = ".directory.txt"
 
 # Configurations
