@@ -1,9 +1,14 @@
 """Display output for Tada"""
 
 
-def display_start_message(size):
+def display_start_message(current_size):
     """Display the start message for an experiment"""
-    print("Start running experiment for size " + str(size) + " →\n")
+    print("Start running experiment for size " + str(current_size) + " →\n")
+
+
+def display_end_message(current_size):
+    """Display the end message for an experiment"""
+    print("→ Done running experiment for size " + str(current_size) + "\n")
 
 
 def display_output(timing_output):
