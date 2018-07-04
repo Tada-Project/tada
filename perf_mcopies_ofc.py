@@ -5,13 +5,15 @@ import perf
 
 from tada.util import configuration
 from tada.util import run
+from tada.util import package
 from tada.util import read
 from tada.util import save
 
 PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
 
 if __name__ == "__main__":
-    sys.path.insert(0, "/home/gkapfham/working/research/source/speed-surprises")
+    chosen_directory = read.read_directory()
+    package.add_sys_path(chosen_directory)
     # pylint: disable=import-error
     from speedsurprises.text import copies  # noqa: E402
 
