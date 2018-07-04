@@ -15,7 +15,6 @@ PERF_EXPERIMENT_NAME = "perf_mcopies_ofc"
 if __name__ == "__main__":
     chosen_directory = read.read_directory()
     package.add_sys_path(chosen_directory)
-    # pylint: disable=import-error
     module = importlib.import_module("speedsurprises.text.copies")
     method = getattr(module, "mcopies_ofc")
     # from speedsurprises.text import copies  # noqa: E402
