@@ -26,7 +26,7 @@ def parse(args):
         "--function",
         required=True,
         type=str,
-        help="Name of the function to analyze",
+        help="Name of the module's function to analyze",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
