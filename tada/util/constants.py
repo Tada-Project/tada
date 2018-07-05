@@ -2,9 +2,13 @@
 
 import os
 
+# Names
+TADA = "tada"
+
 # Separators
 SEPARATOR = os.sep
 SPACE = " "
+UNDERSCORE = "_"
 
 # Error codes
 INCORRECT_ARGUMENTS = 2
