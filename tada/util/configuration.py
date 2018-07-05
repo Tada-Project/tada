@@ -5,6 +5,7 @@ import json
 WRITE = 'w'
 
 DIRECTORY = "directory"
+MODULE = "module"
 
 
 def save(configuration_filename, tada_configuration):
@@ -23,3 +24,8 @@ def read(configuration_filename):
 def get_directory(current_dictionary):
     """Return the directory argument from the provided dictionary"""
     return current_dictionary[DIRECTORY]
+
+
+def get_module(current_dictionary):
+    """Return the module argument from the provided dictionary"""
+    return current_dictionary[MODULE]
