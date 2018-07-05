@@ -11,6 +11,8 @@ NOT_VERIFIED = False
 EMPTY_STRING = ""
 ERROR = "error:"
 DIRECTORY = "--directory"
+MODULE = "--module"
+FUNCTION = "--function"
 
 
 @pytest.fixture
@@ -34,11 +36,11 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
 @pytest.mark.parametrize(
     "correct_arguments",
     [
-        (["--directory", "D", "--module", "M"]),
-        (["--directory", "d", "--module", "m"]),
-        (["--directory", "/d/", "--module", "m.a"]),
-        (["--directory", "/a/b/c/", "--module", "m.a.a"]),
-        (["--dir", "/a/", "--mod", "m"]),
+        (["--directory", "D", "--module", "M", "--function", "F"]),
+        (["--directory", "d", "--module", "m", "--function", "f"]),
+        (["--directory", "/d/", "--module", "m.a", "--function", "fullname"]),
+        (["--directory", "/a/b/c/", "--module", "m.a.a", "--function", "full_name"]),
+        (["--dir", "/a/", "--mod", "m", "--func", "f"]),
     ],
 )
 def test_directory_argument_verifiable(correct_arguments):
@@ -48,7 +50,7 @@ def test_directory_argument_verifiable(correct_arguments):
     assert verified_arguments is True
 
 
-@pytest.mark.parametrize("chosen_arguments", [(["--module", "", "--directory", ""])])
+@pytest.mark.parametrize("chosen_arguments", [(["--module", "", "--directory", "", "--function", ""])])
 def test_module_argument_not_verifiable(chosen_arguments):
     """Check that not valid directory arguments will not verify correctly"""
     parsed_arguments = arguments.parse(chosen_arguments)
@@ -74,3 +76,43 @@ def test_directory_argument_not_verifiable_syserror(chosen_arguments, capsys):
     assert standard_out is EMPTY_STRING
     assert ERROR in standard_err
     assert DIRECTORY in standard_err
+
+
+@pytest.mark.parametrize(
+    "chosen_arguments",
+    [
+        (["--modules", "m"]),
+        (["--mods", "m"]),
+        (["--modulle", "m"]),
+        (["--mmodule", "m"]),
+        (["-module", "m"]),
+    ],
+)
+def test_module_argument_not_verifiable_syserror(chosen_arguments, capsys):
+    """Check that not valid module arguments will not verify correctly"""
+    with pytest.raises(SystemExit):
+        arguments.parse(chosen_arguments)
+    standard_out, standard_err = capsys.readouterr()
+    assert standard_out is EMPTY_STRING
+    assert ERROR in standard_err
+    assert MODULE in standard_err
+
+
+@pytest.mark.parametrize(
+    "chosen_arguments",
+    [
+        (["--functions", "f"]),
+        (["--funcs", "f"]),
+        (["--functtion", "f"]),
+        (["--ffunction", "f"]),
+        (["-function", "f"]),
+    ],
+)
+def test_function_argument_not_verifiable_syserror(chosen_arguments, capsys):
+    """Check that not valid function arguments will not verify correctly"""
+    with pytest.raises(SystemExit):
+        arguments.parse(chosen_arguments)
+    standard_out, standard_err = capsys.readouterr()
+    assert standard_out is EMPTY_STRING
+    assert ERROR in standard_err
+    assert MODULE in standard_err
