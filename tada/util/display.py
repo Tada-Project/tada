@@ -16,7 +16,7 @@ def start_message(current_size):
 
 def display_end_message(current_size):
     """Display the end message for an experiment"""
-    print("→ Done running experiment for size " + str(current_size) + "\n")
+    print("\n→ Done running experiment for size " + str(current_size) + "\n")
 
 
 def display_output(timing_output):
