@@ -22,6 +22,12 @@ def parse(args):
         type=str,
         help="Module name with functions to analyze",
     )
+    parser.add_argument(
+        "--function",
+        required=True,
+        type=str,
+        help="Name of the function to analyze",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
@@ -35,5 +41,8 @@ def verify(args):
         verified_arguments = True
     # CHECK: module was specified and it is not ""
     if args.module is not "":
+        verified_arguments = True
+    # CHECK: function was specified and it is not ""
+    if args.function is not "":
         verified_arguments = True
     return verified_arguments
