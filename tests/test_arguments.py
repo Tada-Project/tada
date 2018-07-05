@@ -50,7 +50,9 @@ def test_directory_argument_verifiable(correct_arguments):
     assert verified_arguments is True
 
 
-@pytest.mark.parametrize("chosen_arguments", [(["--module", "", "--directory", "", "--function", ""])])
+@pytest.mark.parametrize(
+    "chosen_arguments", [(["--module", "", "--directory", "", "--function", ""])]
+)
 def test_module_argument_not_verifiable(chosen_arguments):
     """Check that not valid directory arguments will not verify correctly"""
     parsed_arguments = arguments.parse(chosen_arguments)
