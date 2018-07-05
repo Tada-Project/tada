@@ -46,6 +46,8 @@ def test_configuration_file_saved_retrieved(correct_arguments, tmpdir):
         directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
     )
     assert len(tmpdir.listdir()) == 1
-    tada_configuration_dict = configuration.read(directory_prefix + constants.CONFIGURATION)
+    tada_configuration_dict = configuration.read(
+        directory_prefix + constants.CONFIGURATION
+    )
     assert tada_configuration_dict[configuration.DIRECTORY] == correct_arguments[1]
     assert configuration.get_directory(tada_configuration_dict) == correct_arguments[1]
