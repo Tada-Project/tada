@@ -13,9 +13,7 @@ from tada.util import save
 
 if __name__ == "__main__":
     # TODO: move these to command-line arguments
-    size = 100
-    factor = 2
-    size_stop = 100
+    current_size = constants.SIZE_START
     # display the welcome message
     display.welcome_message()
     # read and verify the command-line arguments
@@ -32,13 +30,13 @@ if __name__ == "__main__":
         # create and save a configuration dictionary from the arguments
         configuration.save(constants.CONFIGURATION, vars(tada_arguments))
         # save the size of the experiment in the constants.file
-        save.save_experiment_size(constants.SIZE, size)
+        save.save_experiment_size(constants.SIZE, current_size)
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
-        while size <= size_stop:
+        while current_size <= constants.SIZE_STOP:
             # run the benchmark by using it through python
-            display.start_message(size)
+            display.start_message(current_size)
             current_output, current_error = run.run_command(
                 constants.PYTHON_EXEC
                 + constants.SPACE
@@ -52,7 +50,7 @@ if __name__ == "__main__":
             current_benchmark = perf.Benchmark.load(
                 constants.RESULTS
                 + constants.SEPARATOR
-                + configuration.get_experiment_name(vars(tada_arguments), size)
+                + configuration.get_experiment_name(vars(tada_arguments), current_size)
                 + constants.JSON_EXT
             )
             # perform additional analysis of the results
@@ -60,8 +58,8 @@ if __name__ == "__main__":
             print("Mean {0}".format(current_benchmark.mean()))
             print("Median {0}".format(current_benchmark.median()))
             # show that we are done running for a size
-            display.display_end_message(size)
+            display.display_end_message(current_size)
             # go to the next size for the doubling experiment
-            size = size * factor
+            current_size = current_size * constants.FACTOR
             # write the next doubling experiment size to the file
-            save.save_experiment_size(constants.SIZE, size)
+            save.save_experiment_size(constants.SIZE, current_size)
