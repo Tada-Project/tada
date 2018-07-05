@@ -2,6 +2,9 @@
 
 import json
 
+# pylint: disable=relative-beyond-top-level
+from . import constants
+
 WRITE = "w"
 
 DIRECTORY = "directory"
@@ -35,3 +38,18 @@ def get_function(current_dictionary):
 def get_module(current_dictionary):
     """Return the module argument from the provided dictionary"""
     return current_dictionary[MODULE]
+
+
+def get_experiment_name(current_dictionary, chosen_size):
+    """Return the complete name of an experiment"""
+    return (
+        constants.TADA
+        + constants.UNDERSCORE
+        + get_module(current_dictionary).replace(constants.PERIOD, constants.NONE)
+        + constants.UNDERSCORE
+        + get_function(current_dictionary).replace(constants.UNDERSCORE, constants.NONE)
+        + constants.UNDERSCORE
+        + constants.PERF_BENCHMARK
+        + constants.UNDERSCORE
+        + str(chosen_size)
+    )
