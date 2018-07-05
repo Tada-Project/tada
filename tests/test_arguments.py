@@ -34,11 +34,11 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
 @pytest.mark.parametrize(
     "chosen_arguments",
     [
-        (["--directory", "D"]),
-        (["--directory", "d"]),
-        (["--directory", "/a/"]),
-        (["--directory", "/a/b/c/"]),
-        (["--dir", "/a/"]),
+        (["--directory", "D", "--module", "M"]),
+        (["--directory", "d", "--module", "m"]),
+        (["--directory", "/d/", "--module", "m.a"]),
+        (["--directory", "/a/b/c/", "--module", "m.a.a"]),
+        (["--dir", "/a/", "--mod", "m"]),
     ],
 )
 def test_directory_argument_verifiable(chosen_arguments):
@@ -48,9 +48,9 @@ def test_directory_argument_verifiable(chosen_arguments):
     assert verified_arguments is True
 
 
-@pytest.mark.parametrize("chosen_arguments", [(["--directory", ""])])
-def test_directory_argument_not_verifiable(chosen_arguments):
-    """Check that valid directory arguments will verify correctly"""
+@pytest.mark.parametrize("chosen_arguments", [(["--module", "", "--directory", ""])])
+def test_module_argument_not_verifiable(chosen_arguments):
+    """Check that not valid directory arguments will not verify correctly"""
     parsed_arguments = arguments.parse(chosen_arguments)
     verified_arguments = arguments.verify(parsed_arguments)
     assert verified_arguments is False
@@ -67,7 +67,7 @@ def test_directory_argument_not_verifiable(chosen_arguments):
     ],
 )
 def test_directory_argument_not_verifiable_syserror(chosen_arguments, capsys):
-    """Check that valid directory arguments will verify correctly"""
+    """Check that not valid directory arguments will not verify correctly"""
     with pytest.raises(SystemExit):
         arguments.parse(chosen_arguments)
     standard_out, standard_err = capsys.readouterr()
