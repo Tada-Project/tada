@@ -11,11 +11,11 @@ from tada.util import constants
 @pytest.mark.parametrize(
     "correct_arguments",
     [
-        (["--directory", "D", "--module", "M"]),
-        (["--directory", "d", "--module", "m"]),
-        (["--directory", "/d/", "--module", "m.a"]),
-        (["--directory", "/a/b/c/", "--module", "m.a.a"]),
-        (["--dir", "/a/", "--mod", "m"]),
+        (["--directory", "D", "--module", "M", "--function", "F"]),
+        (["--directory", "d", "--module", "m", "--function", "f"]),
+        (["--directory", "/d/", "--module", "m.a", "--function", "fullname"]),
+        (["--directory", "/a/b/c/", "--module", "m.a.a", "--function", "full_name"]),
+        (["--dir", "/a/", "--mod", "m", "--func", "f"]),
     ],
 )
 def test_configuration_file_saved(correct_arguments, tmpdir):
@@ -30,11 +30,11 @@ def test_configuration_file_saved(correct_arguments, tmpdir):
 @pytest.mark.parametrize(
     "correct_arguments",
     [
-        (["--directory", "D", "--module", "M"]),
-        (["--directory", "d", "--module", "m"]),
-        (["--directory", "/d/", "--module", "m.a"]),
-        (["--directory", "/a/b/c/", "--module", "m.a.a"]),
-        (["--dir", "/a/", "--mod", "m"]),
+        (["--directory", "D", "--module", "M", "--function", "F"]),
+        (["--directory", "d", "--module", "m", "--function", "f"]),
+        (["--directory", "/d/", "--module", "m.a", "--function", "fullname"]),
+        (["--directory", "/a/b/c/", "--module", "m.a.a", "--function", "full_name"]),
+        (["--dir", "/a/", "--mod", "m", "--func", "f"]),
     ],
 )
 # pylint: disable=invalid-name
