@@ -31,7 +31,7 @@ if __name__ == "__main__":
     # TODO: Make this based on the name of the experiment
     current_experiment_name = constants.PERF_BENCHMARK + str(chosen_size)
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
-    # TODO: Make this run the function read from the configuration
+    # TODO: Handle this mcopies --- is it the metadata?
     current_benchmark = runner.bench_func(
         "mcopies", run.run_benchmark, analyzed_function, chosen_size
     )
