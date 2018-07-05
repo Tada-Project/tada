@@ -31,7 +31,9 @@ if __name__ == "__main__":
     current_experiment_name = configuration.get_experiment_name(
         tada_configuration_dict, chosen_size
     )
+    # set the name of the experiment for perf
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
+    # run the benchmark using the bench_func from perf
     current_benchmark = runner.bench_func(
         current_experiment_name, run.run_benchmark, analyzed_function, chosen_size
     )
