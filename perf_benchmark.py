@@ -27,9 +27,14 @@ if __name__ == "__main__":
     chosen_size = read.read_experiment_size()
     # configure perf
     runner = perf.Runner()
-    # configure the run of the benchmark
-    # TODO: Make this based on the name of the experiment
-    current_experiment_name = constants.PERF_BENCHMARK + str(chosen_size)
+    # give a by-configuration name to the experiment
+    current_experiment_name = (
+        constants.TADA
+        + constants.UNDERSCORE
+        + constants.PERF_BENCHMARK
+        + constants.UNDERSCORE
+        + str(chosen_size)
+    )
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # TODO: Handle this mcopies --- is it the metadata?
     current_benchmark = runner.bench_func(
