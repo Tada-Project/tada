@@ -2,6 +2,11 @@
 
 import os
 
+# Parameters
+SIZE_START = 100
+SIZE_STOP = 100
+FACTOR = 2
+
 # Names
 TADA = "tada"
 
