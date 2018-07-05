@@ -1,0 +1,27 @@
+"""Tests for the configuration module"""
+
+import pytest
+
+# pylint: disable=import-error
+from tada.util import arguments
+from tada.util import configuration
+from tada.util import constants
+
+
+@pytest.mark.parametrize(
+    "chosen_arguments",
+    [
+        (["--directory", "D"]),
+        (["--directory", "d"]),
+        (["--directory", "/a/"]),
+        (["--directory", "/a/b/c/"]),
+        (["--dir", "/a/"]),
+    ],
+)
+def test_configuration_file_saved(chosen_arguments, tmpdir):
+    """Checks that the configuration file was saved to the directory"""
+    parsed_arguments = arguments.parse(chosen_arguments)
+    configuration.save(
+        str(tmpdir) + "/" + constants.CONFIGURATION, vars(parsed_arguments)
+    )
+    assert len(tmpdir.listdir()) == 1
