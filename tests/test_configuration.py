@@ -9,18 +9,18 @@ from tada.util import constants
 
 
 @pytest.mark.parametrize(
-    "chosen_arguments",
+    "correct_arguments",
     [
-        (["--directory", "D"]),
-        (["--directory", "d"]),
-        (["--directory", "/a/"]),
-        (["--directory", "/a/b/c/"]),
-        (["--dir", "/a/"]),
+        (["--directory", "D", "--module", "M"]),
+        (["--directory", "d", "--module", "m"]),
+        (["--directory", "/d/", "--module", "m.a"]),
+        (["--directory", "/a/b/c/", "--module", "m.a.a"]),
+        (["--dir", "/a/", "--mod", "m"]),
     ],
 )
-def test_configuration_file_saved(chosen_arguments, tmpdir):
+def test_configuration_file_saved(correct_arguments, tmpdir):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(chosen_arguments)
+    parsed_arguments = arguments.parse(correct_arguments)
     configuration.save(
         str(tmpdir) + "/" + constants.CONFIGURATION, vars(parsed_arguments)
     )
@@ -28,24 +28,24 @@ def test_configuration_file_saved(chosen_arguments, tmpdir):
 
 
 @pytest.mark.parametrize(
-    "chosen_arguments",
+    "correct_arguments",
     [
-        (["--directory", "D"]),
-        (["--directory", "d"]),
-        (["--directory", "/a/"]),
-        (["--directory", "/a/b/c/"]),
-        (["--dir", "/a/"]),
+        (["--directory", "D", "--module", "M"]),
+        (["--directory", "d", "--module", "m"]),
+        (["--directory", "/d/", "--module", "m.a"]),
+        (["--directory", "/a/b/c/", "--module", "m.a.a"]),
+        (["--dir", "/a/", "--mod", "m"]),
     ],
 )
 # pylint: disable=invalid-name
-def test_configuration_file_saved_retrieved(chosen_arguments, tmpdir):
+def test_configuration_file_saved_retrieved(correct_arguments, tmpdir):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(chosen_arguments)
+    parsed_arguments = arguments.parse(correct_arguments)
     directory_prefix = str(tmpdir) + "/"
     configuration.save(
         directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
     )
     assert len(tmpdir.listdir()) == 1
     tada_configuration_dict = configuration.read(directory_prefix + constants.CONFIGURATION)
-    assert tada_configuration_dict[configuration.DIRECTORY] == chosen_arguments[1]
-    assert configuration.get_directory(tada_configuration_dict) == chosen_arguments[1]
+    assert tada_configuration_dict[configuration.DIRECTORY] == correct_arguments[1]
+    assert configuration.get_directory(tada_configuration_dict) == correct_arguments[1]
