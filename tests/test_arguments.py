@@ -32,7 +32,7 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
 
 
 @pytest.mark.parametrize(
-    "chosen_arguments",
+    "correct_arguments",
     [
         (["--directory", "D", "--module", "M"]),
         (["--directory", "d", "--module", "m"]),
@@ -41,9 +41,9 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
         (["--dir", "/a/", "--mod", "m"]),
     ],
 )
-def test_directory_argument_verifiable(chosen_arguments):
+def test_directory_argument_verifiable(correct_arguments):
     """Check that valid directory arguments will verify correctly"""
-    parsed_arguments = arguments.parse(chosen_arguments)
+    parsed_arguments = arguments.parse(correct_arguments)
     verified_arguments = arguments.verify(parsed_arguments)
     assert verified_arguments is True
 
