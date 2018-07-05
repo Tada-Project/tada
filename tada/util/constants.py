@@ -17,7 +17,7 @@ SIZE = ".size.txt"
 DIRECTORY = ".directory.txt"
 CONFIGURATION = ".tada.json"
 
-# constants.
+# Constants
 UTF8 = "utf-8"
 
 # Extensions
