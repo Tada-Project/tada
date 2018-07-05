@@ -15,7 +15,9 @@ if __name__ == "__main__":
     # import the package and reflectively access the function under analysis
     tada_configuration_dict = configuration.read(constants.CONFIGURATION)
     package.add_sys_path(configuration.get_directory(tada_configuration_dict))
-    analyzed_module = importlib.import_module("speedsurprises.text.copies")
+    analyzed_module = importlib.import_module(
+        configuration.get_module(tada_configuration_dict)
+    )
     analyzed_function = getattr(analyzed_module, "mcopies_ofc")
     # read the chosen_size
     chosen_size = read.read_experiment_size()
