@@ -2,9 +2,10 @@
 
 import json
 
-WRITE = 'w'
+WRITE = "w"
 
 DIRECTORY = "directory"
+FUNCTION = "function"
 MODULE = "module"
 
 
@@ -24,6 +25,11 @@ def read(configuration_filename):
 def get_directory(current_dictionary):
     """Return the directory argument from the provided dictionary"""
     return current_dictionary[DIRECTORY]
+
+
+def get_function(current_dictionary):
+    """Return the function argument from the provided dictionary"""
+    return current_dictionary[FUNCTION]
 
 
 def get_module(current_dictionary):
