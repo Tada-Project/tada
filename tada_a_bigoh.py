@@ -12,7 +12,6 @@ from tada.util import run
 from tada.util import save
 
 if __name__ == "__main__":
-    # TODO: move these to command-line arguments
     current_size = constants.SIZE_START
     # display the welcome message
     display.welcome_message()
