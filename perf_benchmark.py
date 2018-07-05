@@ -11,14 +11,18 @@ from tada.util import read
 from tada.util import save
 
 if __name__ == "__main__":
-    # TODO: Generalize these to work for values read from configuration
-    # import the package and reflectively access the function under analysis
+    # read the configuration file to access the configuration dictionary
     tada_configuration_dict = configuration.read(constants.CONFIGURATION)
+    # add the specified directory to the system path
     package.add_sys_path(configuration.get_directory(tada_configuration_dict))
+    # reflectively import the chosen module
     analyzed_module = importlib.import_module(
         configuration.get_module(tada_configuration_dict)
     )
-    analyzed_function = getattr(analyzed_module, "mcopies_ofc")
+    # reflectively access the chosen function
+    analyzed_function = getattr(
+        analyzed_module, configuration.get_function(tada_configuration_dict)
+    )
     # read the chosen_size
     chosen_size = read.read_experiment_size()
     # configure perf
