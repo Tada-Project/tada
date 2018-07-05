@@ -28,20 +28,8 @@ if __name__ == "__main__":
     # configure perf
     runner = perf.Runner()
     # give a by-configuration name to the experiment
-    current_experiment_name = (
-        constants.TADA
-        + constants.UNDERSCORE
-        + configuration.get_module(tada_configuration_dict).replace(
-            constants.PERIOD, constants.NONE
-        )
-        + constants.UNDERSCORE
-        + configuration.get_function(tada_configuration_dict).replace(
-            constants.UNDERSCORE, constants.NONE
-        )
-        + constants.UNDERSCORE
-        + constants.PERF_BENCHMARK
-        + constants.UNDERSCORE
-        + str(chosen_size)
+    current_experiment_name = configuration.get_experiment_name(
+        tada_configuration_dict, chosen_size
     )
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # TODO: Handle this mcopies --- is it the metadata?
