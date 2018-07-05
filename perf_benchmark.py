@@ -32,9 +32,8 @@ if __name__ == "__main__":
         tada_configuration_dict, chosen_size
     )
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
-    # TODO: Handle this mcopies --- is it the metadata?
     current_benchmark = runner.bench_func(
-        "mcopies", run.run_benchmark, analyzed_function, chosen_size
+        current_experiment_name, run.run_benchmark, analyzed_function, chosen_size
     )
     # save the perf results from running the benchmark
     save.save_bencmark_results(current_benchmark, current_experiment_name)
