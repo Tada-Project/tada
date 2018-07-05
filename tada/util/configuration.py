@@ -49,7 +49,5 @@ def get_experiment_name(current_dictionary, chosen_size):
         + constants.UNDERSCORE
         + get_function(current_dictionary).replace(constants.UNDERSCORE, constants.NONE)
         + constants.UNDERSCORE
-        + constants.PERF_BENCHMARK
-        + constants.UNDERSCORE
         + str(chosen_size)
     )
