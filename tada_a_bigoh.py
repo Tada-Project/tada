@@ -52,15 +52,16 @@ if __name__ == "__main__":
             current_benchmark = perf.Benchmark.load(
                 constants.RESULTS
                 + constants.SEPARATOR
-                + constants.PERF_BENCHMARK
-                + str(size)
+                + configuration.get_experiment_name(vars(tada_arguments), size)
                 + constants.JSON_EXT
             )
-            # print('Values {0}'.format(current_benchmark.get_values()))
+            # perform additional analysis of the results
+            # reminder: print('Values {0}'.format(current_benchmark.get_values()))
             print("Mean {0}".format(current_benchmark.mean()))
             print("Median {0}".format(current_benchmark.median()))
+            # show that we are done running for a size
             display.display_end_message(size)
             # go to the next size for the doubling experiment
-            size = size * 2
+            size = size * factor
             # write the next doubling experiment size to the file
             save.save_experiment_size(constants.SIZE, size)
