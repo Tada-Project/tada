@@ -18,3 +18,8 @@ def read(configuration_filename):
     with open(configuration_filename) as json_data_file:
         tada_configuration = json.load(json_data_file)
     return tada_configuration
+
+
+def get_directory(current_dictionary):
+    """Return the directory argument from the provided dictionary"""
+    return current_dictionary[DIRECTORY]
