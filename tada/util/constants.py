@@ -6,6 +6,8 @@ import os
 TADA = "tada"
 
 # Separators
+NONE = ""
+PERIOD = "."
 SEPARATOR = os.sep
 SPACE = " "
 UNDERSCORE = "_"
