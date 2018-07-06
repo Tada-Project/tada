@@ -12,6 +12,6 @@ def run_command(command):
     return output, error
 
 
-def run_benchmark(chosen_function, current_chosen_size):
+def run_benchmark(chosen_function, *args):
     """Run a benchmark on a chosen_function and a current_chosen_size"""
-    chosen_function(current_chosen_size)
+    chosen_function(*args)
