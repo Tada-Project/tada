@@ -240,3 +240,7 @@ _results/
 .size.txt
 .directory.txt
 .tada.json
+
+# Spell files #
+######################
+.extra.utf-8.add
