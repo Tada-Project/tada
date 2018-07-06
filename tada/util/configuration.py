@@ -10,6 +10,7 @@ WRITE = "w"
 DIRECTORY = "directory"
 FUNCTION = "function"
 MODULE = "module"
+TYPES = "types"
 
 
 def save(configuration_filename, tada_configuration):
@@ -38,6 +39,11 @@ def get_function(current_dictionary):
 def get_module(current_dictionary):
     """Return the module argument from the provided dictionary"""
     return current_dictionary[MODULE]
+
+
+def get_types(current_dictionary):
+    """Return the types argument from the provided dictionary"""
+    return current_dictionary[TYPES]
 
 
 def get_experiment_name(current_dictionary, chosen_size):

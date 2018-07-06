@@ -5,9 +5,10 @@ import perf
 
 from tada.util import configuration
 from tada.util import constants
-from tada.util import run
+from tada.util import generate
 from tada.util import package
 from tada.util import read
+from tada.util import run
 from tada.util import save
 
 if __name__ == "__main__":
@@ -35,7 +36,12 @@ if __name__ == "__main__":
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # run the benchmark using the bench_func from perf
     current_benchmark = runner.bench_func(
-        current_experiment_name, run.run_benchmark, analyzed_function, chosen_size
+        current_experiment_name,
+        run.run_benchmark,
+        analyzed_function,
+        *generate.generate_data(
+            configuration.get_types(tada_configuration_dict), chosen_size
+        ),
     )
     # save the perf results from running the benchmark
     save.save_bencmark_results(current_benchmark, current_experiment_name)
