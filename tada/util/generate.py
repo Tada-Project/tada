@@ -14,7 +14,8 @@ def generate_data(chosen_types, chosen_size):
     # call a generate function for each type
     for current_type in chosen_types:
         generator_to_invoke = getattr(GENERATE, "generate_" + str(current_type))
-        generator_to_invoke(chosen_size)
+        generated_value = generator_to_invoke(chosen_size)
+        generated_values = generated_values + (generated_value,)
     return generated_values
 
 
