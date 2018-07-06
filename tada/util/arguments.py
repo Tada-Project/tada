@@ -28,6 +28,14 @@ def parse(args):
         type=str,
         help="Name of the module's function to analyze",
     )
+    parser.add_argument(
+        "--types",
+        required=False,
+        type=str,
+        nargs="+",
+        default=[],
+        help="Parameter types for function to analyze",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
