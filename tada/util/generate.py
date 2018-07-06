@@ -5,7 +5,8 @@ import sys
 GENERATE = sys.modules[__name__]
 
 DEFAULT_VALUE_INT = 0
-DEFAULT_VALUE_TEXT = "C"
+DEFAULT_VALUE_CHAR = "C"
+DEFAULT_VALUE_TEXT = "TEXT"
 
 
 def generate_data(chosen_types, chosen_size):
@@ -22,3 +23,8 @@ def generate_data(chosen_types, chosen_size):
 def generate_int(chosen_size):
     """Generate an int value"""
     return chosen_size
+
+
+def generate_char(chosen_size):
+    """Generate a char value"""
+    return DEFAULT_VALUE_CHAR
