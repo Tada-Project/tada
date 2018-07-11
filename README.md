@@ -23,6 +23,11 @@ If you want to collect the coverage of the provided test suite, you can run:
 
 - `pipenv run pytest --cov-config pytest.cov --cov`
 
+If you want to collect the coverage of the provided test suite and see what
+lines of code are not covered, then you can run:
+
+- `pytest --cov-config pytest.cov --cov --cov-report term-missing`
+
 ## Using Tada
 
 Since the Tada tool is currently under heavy development, it is not yet feature
