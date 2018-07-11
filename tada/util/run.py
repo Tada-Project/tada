@@ -13,5 +13,5 @@ def run_command(command):
 
 
 def run_benchmark(chosen_function, *args):
-    """Run a benchmark on a chosen_function and a current_chosen_size"""
-    chosen_function(*args)
+    """Run a benchmark on a chosen_function and a chosen size and *args"""
+    return chosen_function(*args)
