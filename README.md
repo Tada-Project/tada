@@ -19,9 +19,15 @@ by typing the following in your terminal window:
 - `pipenv shell`
 - `pipenv run pytest`
 
-If you want to collect the coverage of the provided test suite, you can run:
+If you want to collect the coverage of the provided test suite, then you can
+run:
 
 - `pipenv run pytest --cov-config pytest.cov --cov`
+
+If you want to collect the coverage of the provided test suite and see what
+lines of code are not covered, then you can run:
+
+- `pytest --cov-config pytest.cov --cov --cov-report term-missing`
 
 ## Using Tada
 
