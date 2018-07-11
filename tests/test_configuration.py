@@ -86,3 +86,43 @@ def test_configuration_file_correct_types(correct_arguments, correct_types, tmpd
         directory_prefix + constants.CONFIGURATION
     )
     assert configuration.get_types(tada_configuration_dict) == correct_types
+
+
+@pytest.mark.parametrize(
+    "correct_arguments, correct_function, correct_module",
+    [
+        (
+            [
+                "--directory",
+                "D",
+                "--module",
+                "M",
+                "--function",
+                "F",
+                "--types",
+                "int",
+                "float",
+                "text",
+            ],
+            "F",
+            "M",
+        )
+    ],
+)
+# pylint: disable=invalid-name
+# pylint: disable=bad-continuation
+def test_configuration_file_correct_functions_modules(
+    correct_arguments, correct_function, correct_module, tmpdir
+):
+    """Checks that the configuration file was saved to the directory"""
+    parsed_arguments = arguments.parse(correct_arguments)
+    directory_prefix = str(tmpdir) + "/"
+    configuration.save(
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
+    )
+    assert len(tmpdir.listdir()) == 1
+    tada_configuration_dict = configuration.read(
+        directory_prefix + constants.CONFIGURATION
+    )
+    assert configuration.get_function(tada_configuration_dict) == correct_function
+    assert configuration.get_module(tada_configuration_dict) == correct_module
