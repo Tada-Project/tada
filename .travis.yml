@@ -1,0 +1,38 @@
+# use the Python 3.6 language
+language: python
+python:
+  - "3.6"
+
+# ignore the virtualenv travis creates
+env:
+  global:
+    - PIPENV_VENV_IN_PROJECT=1
+    - PIPENV_IGNORE_VIRTUALENVS=1
+
+# install mdl for checking Markdown
+before_install:
+  - gem install mdl
+
+# command to install dependencies
+install:
+  - pip install --upgrade pip
+  - pip install pipenv --upgrade
+  - pipenv install --dev --three
+
+# use a cache to improve performance
+cache: pip
+
+# perform testing:
+# --> run the test suite with pytest
+# --> lint the functions with flake8
+# --> lint the test suites with flake8
+# --> lint the README documentation with mdl
+script:
+  - pipenv run pytest --cov-config pytest.cov --cov
+  - pipenv run flake8 speedsurprises
+  - pipenv run flake8 tests
+  - mdl README.md
+
+# report coverage information to CodeCov
+after_success:
+  - pipenv run codecov
