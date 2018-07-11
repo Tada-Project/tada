@@ -1,0 +1,5 @@
+[run]
+# omit the tests for analysis during test coverage monitoring
+omit=test/*
+# run all of the tests that start with tada
+include=tada*
