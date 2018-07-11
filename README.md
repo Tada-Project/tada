@@ -1,13 +1,13 @@
 # Tada!: auTomAtic orDer-of-growth Analysis
 
-[![Build Status](https://api.travis-ci.org/gkapfham/tada.svg?branch=master)](https://travis-ci.org/gkapfham/tada) [![codecov.io](http://codecov.io/github/gkapfham/tada/coverage.svg?branch=master)](http://codecov.io/github/gkapfham/tada?branch=master) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Build Status](https://api.travis-ci.org/gkapfham/tada.svg?branch=master)](https://travis-ci.org/gkapfham/tada) [![codecov.io](http://codecov.io/github/gkapfham/tada/coverage.svg?branch=master)](http://codecov.io/github/gkapfham/tada?branch=master) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-orange.svg)](https://www.python.org/)
 
-This repository contains the source code and using instructions for a tool
-called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in Python
-3. This tool systematically runs a doubling experiment to ascertain the likely
-worst-case order-of-growth function for an arbitrary Python function. This
-documentation provides a brief overview about how to run the tool and its
-provided test suite.
+This repository contains the source code and usage instructions for a tool
+called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in the
+Python 3 language. The tool systematically runs a doubling experiment to
+ascertain the likely worst-case order-of-growth function for an arbitrary Python
+function. This documentation provides a brief overview about how to run the tool
+and its provided test suite.
 
 ## Installing and Testing Tada
 
@@ -25,7 +25,7 @@ If you want to collect the coverage of the provided test suite, you can run:
 
 ## Using Tada
 
-The Tada tool is currently under heavy development and is not yet feature
+Since the Tada tool is currently under heavy development, it is not yet feature
 complete. In the future, its documentation will feature examples of how to run
 the tool to automatically suggest the likely worst-case order-of-growth function
 for a provided Python function.
@@ -54,5 +54,5 @@ and then create a pull request.
 If you have any problems with installing or using the Tada or its provided test
 suite, then please create an issue associated with this Git repository using the
 "Issues" link at the top of this site. The contributors to Tada will do all that
-they can to resolve your issue and ensure that all of the features and the test
+they can to resolve your issue and ensure that all of its features and the test
 suite work well in your development environment.
