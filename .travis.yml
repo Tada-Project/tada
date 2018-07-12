@@ -33,7 +33,8 @@ script:
   - pipenv run pytest --cov-config pytest.cov --cov
   - pipenv run flake8 speedsurprises
   - pipenv run flake8 tests
-  - find . -iname "*.py" | xargs pipenv run pylint
+  - find . -wholename "./tada/*.py" | xargs pipenv run pylint
+  - find . -wholename "./tests/*.py" | xargs pipenv run pylint
   - mdl README.md
 
 # report coverage information to CodeCov
