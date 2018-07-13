@@ -2,8 +2,6 @@
 
 import json
 
-# pylint: disable=relative-beyond-top-level
-# pylint: disable=no-name-in-module
 from . import constants
 
 WRITE = "w"
