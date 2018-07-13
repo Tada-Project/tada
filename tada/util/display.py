@@ -9,7 +9,7 @@ def display_welcome_message():
     print()
 
 
-def start_message(current_size):
+def display_start_message(current_size):
     """Display the start message for an experiment"""
     print("Start running experiment for size " + str(current_size) + " →\n")
 

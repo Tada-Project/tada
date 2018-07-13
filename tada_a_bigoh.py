@@ -35,7 +35,7 @@ if __name__ == "__main__":
         # perform the small doubling experiment
         while current_size <= constants.SIZE_STOP:
             # run the benchmark by using it through python
-            display.start_message(current_size)
+            display.display_start_message(current_size)
             current_output, current_error = run.run_command(
                 constants.PYTHON_EXEC
                 + constants.SPACE
