@@ -14,7 +14,7 @@ from tada.util import save
 if __name__ == "__main__":
     current_size = constants.SIZE_START
     # display the welcome message
-    display.welcome_message()
+    display.display_welcome_message()
     # read and verify the command-line arguments
     tada_arguments = arguments.parse(sys.argv[1:])
     did_verify_arguments = arguments.verify(tada_arguments)
