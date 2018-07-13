@@ -1,7 +1,7 @@
 """Display output for Tada"""
 
 
-def welcome_message():
+def display_welcome_message():
     """Display a welcome message"""
     print()
     print("🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆 ")
