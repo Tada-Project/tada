@@ -1,6 +1,5 @@
 """Tests for the generate module"""
 
-# pylint: disable=import-error
 from tada.util import generate
 
 
