@@ -1,7 +1,5 @@
 """Read entities for Tada"""
 
-# pylint: disable=relative-beyond-top-level
-# pylint: disable=no-name-in-module
 from . import constants
 
 
