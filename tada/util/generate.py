@@ -29,3 +29,8 @@ def generate_int(chosen_size):
 def generate_char(chosen_size):
     """Generate a char value"""
     return DEFAULT_VALUE_CHAR
+
+
+def generate_float(chosen_size):
+    """Generate an float value"""
+    return float(chosen_size)
