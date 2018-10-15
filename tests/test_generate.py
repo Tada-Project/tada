@@ -65,4 +65,5 @@ def test_generate_floats_makes_size_default():
     # the default generator will return a tuple with 100 in it
     expected_tuple = (current_size, current_size,)
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(r
+    generated_data = generate.generate_data(requested_types, current_size)
+    assert generated_data == expected_tuple
