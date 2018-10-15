@@ -22,9 +22,14 @@ def generate_data(chosen_types, chosen_size):
 
 def generate_int(chosen_size):
     """Generate an int value"""
-    return chosen_size
+    return int(chosen_size)
 
 
+# pylint: disable=unused-argument
 def generate_char(chosen_size):
     """Generate a char value"""
     return DEFAULT_VALUE_CHAR
+
+def generate_float(chosen_size):
+    """Generate an int value"""
+    return float(chosen_size)

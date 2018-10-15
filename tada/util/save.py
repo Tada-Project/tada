@@ -2,7 +2,6 @@
 
 import os
 
-# pylint: disable=relative-beyond-top-level
 from . import constants
 
 
