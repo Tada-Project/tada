@@ -2,7 +2,6 @@
 
 import json
 
-# pylint: disable=relative-beyond-top-level
 from . import constants
 
 WRITE = "w"

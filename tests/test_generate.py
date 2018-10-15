@@ -1,6 +1,5 @@
 """Tests for the generate module"""
 
-# pylint: disable=import-error
 from tada.util import generate
 
 
@@ -41,6 +40,30 @@ def test_generate_char_makes_letter_default():
     current_size = 100
     # the default generator will return a tuple with the default character in it
     expected_tuple = (generate.DEFAULT_VALUE_CHAR,)
+    # generate the data for the requested_types and the current_size
+    generated_data = generate.generate_data(requested_types, current_size)
+    assert generated_data == expected_tuple
+    
+def test_generate_float_makes_size_default():
+    """Checks that requesting a generated float returns one"""
+    # request a single tuple with an float in it
+    requested_types = ["float"]
+    # assume the doubling experiment is at 100
+    current_size = 100
+    # the default generator will return a tuple with 100 in it
+    expected_tuple = (current_size,)
+    # generate the data for the requested_types and the current_size
+    generated_data = generate.generate_data(requested_types, current_size)
+    assert generated_data == expected_tuple
+
+def test_generate_floats_makes_size_default():
+    """Checks that requesting a generated float returns one"""
+    # request a single tuple with an float in it
+    requested_types = ["float", "float"]
+    # assume the doubling experiment is at 100
+    current_size = 100
+    # the default generator will return a tuple with 100 in it
+    expected_tuple = (current_size, current_size,)
     # generate the data for the requested_types and the current_size
     generated_data = generate.generate_data(requested_types, current_size)
     assert generated_data == expected_tuple
