@@ -1,6 +1,5 @@
 """Tests for the run module"""
 
-# pylint: disable=import-error
 from tada.util import run
 
 

@@ -2,6 +2,8 @@
 
 import argparse
 
+from . import constants
+
 
 def parse(args):
     """Use argparse to parse provided command-line arguments"""
@@ -45,12 +47,12 @@ def verify(args):
     """Verify the command-line arguments"""
     verified_arguments = False
     # CHECK: directory was specified and it is not ""
-    if args.directory is not "":
+    if args.directory is not constants.NONE:
         verified_arguments = True
     # CHECK: module was specified and it is not ""
-    if args.module is not "":
+    if args.module is not constants.NONE:
         verified_arguments = True
     # CHECK: function was specified and it is not ""
-    if args.function is not "":
+    if args.function is not constants.NONE:
         verified_arguments = True
     return verified_arguments

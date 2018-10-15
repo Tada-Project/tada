@@ -2,7 +2,6 @@
 
 import pytest
 
-# pylint: disable=import-error
 from tada.util import arguments
 from tada.util import configuration
 from tada.util import constants
