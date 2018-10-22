@@ -17,7 +17,7 @@ def save_directory(directory_file, directory_name):
         file_pointer.write(directory_name)
 
 
-def save_bencmark_results(current_benchmark, current_experiment_name):
+def save_benchmark_results(current_benchmark, current_experiment_name):
     """Save the benchmark results to disk in a perf-formatted JSON file"""
     if not os.path.exists(constants.RESULTS):
         os.makedirs(constants.RESULTS)
