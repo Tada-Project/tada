@@ -43,7 +43,8 @@ def test_generate_char_makes_letter_default():
     # generate the data for the requested_types and the current_size
     generated_data = generate.generate_data(requested_types, current_size)
     assert generated_data == expected_tuple
-    
+
+
 def test_generate_float_makes_size_default():
     """Checks that requesting a generated float returns one"""
     # request a single tuple with an float in it
@@ -55,6 +56,7 @@ def test_generate_float_makes_size_default():
     # generate the data for the requested_types and the current_size
     generated_data = generate.generate_data(requested_types, current_size)
     assert generated_data == expected_tuple
+
 
 def test_generate_floats_makes_size_default():
     """Checks that requesting a generated float returns one"""
