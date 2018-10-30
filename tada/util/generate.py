@@ -7,6 +7,7 @@ GENERATE = sys.modules[__name__]
 DEFAULT_VALUE_INT = 0
 DEFAULT_VALUE_CHAR = "C"
 DEFAULT_VALUE_TEXT = "TEXT"
+DEFAULT_VALUE_BOOLEAN = "BOOLEAN"
 
 
 def generate_data(chosen_types, chosen_size):
@@ -29,3 +30,9 @@ def generate_int(chosen_size):
 def generate_char(chosen_size):
     """Generate a char value"""
     return DEFAULT_VALUE_CHAR
+
+
+# pylint: disable=unused-argument
+def generate_boolean(chosen_size):
+    """Generate a boolean value"""
+    return DEFAULT_VALUE_BOOLEAN
