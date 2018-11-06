@@ -7,7 +7,7 @@ GENERATE = sys.modules[__name__]
 DEFAULT_VALUE_INT = 0
 DEFAULT_VALUE_CHAR = "C"
 DEFAULT_VALUE_TEXT = "TEXT"
-DEFAULT_VALUE_BOOLEAN = "BOOLEAN"
+DEFAULT_VALUE_BOOLEAN = True
 
 
 def generate_data(chosen_types, chosen_size):
