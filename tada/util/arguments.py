@@ -10,7 +10,9 @@ def parse(args):
     # create the parser with the default help formatter
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-        epilog="Sample usage: python3 tada_a_bigoh.py --directory /Users/myname/projectdirectory --module modulename.file --function function_name --types int"
+        epilog='''Sample usage: python3 tada_a_bigoh.py --directory
+            /Users/myname/projectdirectory
+            --module modulename.file --function function_name --types int"'''
     )
 
     # add all of the arguments to the command-line interface
