@@ -44,6 +44,7 @@ def test_generate_char_makes_letter_default():
     generated_data = generate.generate_data(requested_types, current_size)
     assert generated_data == expected_tuple
 
+
 # pylint: disable=invalid-name
 def test_generate_string_makes_string_default():
     """Checks that requesting a generated string returns one"""
