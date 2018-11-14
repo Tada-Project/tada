@@ -47,7 +47,7 @@ def test_generate_char_makes_letter_default():
 
 # pylint: disable=invalid-name
 def test_generate_boolean_makes_boolean_default():
-    """Checks that requesting a generated char returns one"""
+    """Checks that requesting a generated bolean returns one"""
     # request a single tuple with an int in it
     requested_types = ["boolean"]
     # assume the doubling experiment is at 100; not needed for this test
