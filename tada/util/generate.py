@@ -30,6 +30,7 @@ def generate_char(chosen_size):
     """Generate a char value"""
     return DEFAULT_VALUE_CHAR
 
+
 def generate_string(chosen_size):
     """Generate a string value"""
     return DEFAULT_VALUE_TEXT
