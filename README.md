@@ -41,9 +41,26 @@ If you want to run the tool, then you can run:
 - `tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
                        FUNCTION [--types TYPES [TYPES ...]]`
 
-If you want to open the help menu, then you can run:
+You can learn about GatorGrader's checks and defaults by typing python3 `tada_a_bigoh.py -h` in your terminal window and then reviewing the following output.
 
-- `python3 tada_a_bigoh.py -h`
+```
+usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
+                       FUNCTION [--types TYPES [TYPES ...]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --directory DIRECTORY
+                        Package directory with functions to analyze (default:
+                        None)
+  --module MODULE       Module name with functions to analyze (default: None)
+  --function FUNCTION   Name of the module's function to analyze (default:
+                        None)
+  --types TYPES [TYPES ...]
+                        Parameter types for function to analyze (default: [])
+```
+
+## Tada in Action
+
 
 ## Adding New Features to Tada
 
