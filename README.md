@@ -36,6 +36,15 @@ complete. In the future, its documentation will feature examples of how to run
 the tool to automatically suggest the likely worst-case order-of-growth function
 for a provided Python function.
 
+If you want to run the tool, then you can run:
+
+- `tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
+                       FUNCTION [--types TYPES [TYPES ...]]`
+
+If you want to open the help menu, then you can run:
+
+- `python3 tada_a_bigoh.py -h`
+
 ## Adding New Features to Tada
 
 You can follow these steps to add a new feature if you are already a
