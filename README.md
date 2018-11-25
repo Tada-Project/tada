@@ -38,10 +38,11 @@ for a provided Python function.
 
 If you want to run the tool, then you can run:
 
-- `tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
-                       FUNCTION [--types TYPES [TYPES ...]]`
+- `tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION [--types TYPES [TYPES ...]]`
 
-You can learn about GatorGrader's checks and defaults by typing python3 `tada_a_bigoh.py -h` in your terminal window and then reviewing the following output.
+You can learn about GatorGrader's checks and defaults by typing python3
+`tada_a_bigoh.py -h` in your terminal window and then reviewing the following
+output.
 
 ```
 usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
@@ -59,7 +60,11 @@ optional arguments:
                         Parameter types for function to analyze (default: [])
 ```
 
-## Tada in Action
+When completed, Tada will be used to estimate the worst-case time complexity for
+Python functions.
+
+Here is an example of Tada being used in conjunction with functions in the
+[Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
 
 ## Adding New Features to Tada
