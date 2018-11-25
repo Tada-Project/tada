@@ -66,6 +66,33 @@ Python functions.
 Here is an example of Tada being used in conjunction with functions in the
 [Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
+```
+$ python3 tada_a_bigoh.py --directory /Users/~/speed-surprises/ --module speedsurprises.numbers.factorial --function compute_factorial --types int
+
+🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
+    https://github.com/gkapfham/tada
+❓  For Help Information Type: python3 tada_a_bigoh.py -h  ❓
+
+Start running experiment for size 100 →
+
+.....................
+tada_speedsurprisesnumbersfactorial_computefactorial_100: Mean +- std dev: 24.3 us +- 1.1 us
+
+Mean 2.4285669765218098e-05
+Median 2.381323712158203e-05
+
+→ Done running experiment for size 100
+
+Start running experiment for size 200 →
+
+.....................
+tada_speedsurprisesnumbersfactorial_computefactorial_200: Mean +- std dev: 60.3 us +- 5.9 us
+
+Mean 6.0340462410481774e-05
+Median 5.978153637695312e-05
+
+→ Done running experiment for size 200
+```
 
 ## Adding New Features to Tada
 
