@@ -31,6 +31,7 @@ def generate_char(chosen_size):
     return DEFAULT_VALUE_CHAR
 
 
+# pylint: disable=unused-argument
 def generate_string(chosen_size):
     """Generate a string value"""
     return DEFAULT_VALUE_TEXT
