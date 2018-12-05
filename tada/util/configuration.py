@@ -56,3 +56,12 @@ def get_experiment_name(current_dictionary, chosen_size):
         + constants.UNDERSCORE
         + str(chosen_size)
     )
+
+
+def is_json(potential_json):
+    """Determines if a string is in JSON format"""
+    try:
+        json.loads(potential_json)
+    except ValueError:
+        return False
+    return True
