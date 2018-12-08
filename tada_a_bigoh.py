@@ -10,6 +10,7 @@ from tada.util import display
 from tada.util import package
 from tada.util import run
 from tada.util import save
+from tada.util import results
 
 if __name__ == "__main__":
     current_size = constants.SIZE_START
