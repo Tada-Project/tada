@@ -18,6 +18,7 @@ if __name__ == "__main__":
     # read and verify the command-line arguments
     tada_arguments = arguments.parse(sys.argv[1:])
     did_verify_arguments = arguments.verify(tada_arguments)
+    resultstable = PrettyTable(['Size', 'Mean', 'Median'])
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -54,11 +55,15 @@ if __name__ == "__main__":
             )
             # perform additional analysis of the results
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
-            print("Mean {0}".format(current_benchmark.mean()))
-            print("Median {0}".format(current_benchmark.median()))
+            mean = "Mean {0}".format(current_benchmark.mean())
+            print(mean)
+            median = "Median {0}".format(current_benchmark.median())
+            print(median)
+            results.add_resultstable(resultstable, current_size, mean, median)
             # show that we are done running for a size
             display.display_end_message(current_size)
             # go to the next size for the doubling experiment
             current_size = current_size * constants.FACTOR
             # write the next doubling experiment size to the file
             save.save_experiment_size(constants.SIZE, current_size)
+        results.display_resultstable(resultstable)
