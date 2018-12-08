@@ -1,5 +1,7 @@
 """Configuration for Tada and perf"""
 
+import json
+
 from . import constants
 
 WRITE = "w"
