@@ -19,8 +19,10 @@ before_install:
 install:
   - pip install --upgrade pip
   - pip install pipenv --upgrade
+  - pip install prettytable
   - pipenv install --dev --three
 
+  - pip install 
 # use a cache to improve performance
 cache: pip
 
