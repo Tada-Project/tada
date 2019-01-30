@@ -31,10 +31,9 @@ def test_add_resultstable_value():
     assert data4 == "1"
     assert data5 == "1"
 
+    
 def test_display_resultstable():
     """Test to see if display_resulstable works"""
     resultstable1 = resultstable
-    resultstable2 = resultstable
     results.add_resultstable(resultstable1, 1, 1, 1, 1)
-    results.add_resultstable(resultstable2, 1, 1, 1, 1)
-    results.display_resultstable(resultstable1) == resultstable2
+    results.display_resultstable(resultstable1) != " "
