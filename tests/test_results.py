@@ -26,7 +26,7 @@ def test_add_resultstable_value():
         data3 = row.get_string(fields=["Mean"]).strip()
         data4 = row.get_string(fields=["Median"]).strip()
         data5 = row.get_string(fields=["Ratio"]).strip()
-    assertEqual(data2, "1")
-    assertEqual(data3, "1")
-    assertEqual(data4, "1")
-    assertEqual(data5, "1")
+    assert data2 == "1"
+    assert data3 == "1"
+    assert data4 == "1"
+    assert data5 == "1"
