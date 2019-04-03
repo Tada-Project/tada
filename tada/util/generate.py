@@ -1,10 +1,11 @@
 """Generate data for Tada"""
 
+import random
 import sys
 
 GENERATE = sys.modules[__name__]
 
-DEFAULT_VALUE_INT = 0
+DEFAULT_VALUE_INT = random.randint(0, 100)
 DEFAULT_VALUE_CHAR = "C"
 DEFAULT_VALUE_TEXT = "TEXT"
 
