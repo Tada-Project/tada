@@ -32,7 +32,6 @@ def generate_int(chosen_size):
 
 def generate_int_list(chosen_size):
     """Generate an int list"""
-    random.seed(0)
     output = [random.random() for _ in range(int(chosen_size))]
     print(output)
     return output
@@ -41,7 +40,6 @@ def generate_int_list(chosen_size):
 # pylint: disable=unused-argument
 def generate_char(chosen_size):
     """Generate a char value"""
-    print(chosen_size)
     output = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(int(chosen_size))])
     print(output)
     return output
