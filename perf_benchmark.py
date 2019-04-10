@@ -43,5 +43,8 @@ if __name__ == "__main__":
             configuration.get_types(tada_configuration_dict), chosen_size
         ),
     )
+    print("bench", *generate.generate_data(
+        configuration.get_types(tada_configuration_dict), chosen_size
+    ))
     # save the perf results from running the benchmark
     save.save_bencmark_results(current_benchmark, current_experiment_name)

@@ -83,7 +83,7 @@ if __name__ == "__main__":
             # write the next doubling experiment size to the file
             save.save_experiment_size(constants.SIZE, current_size)
             current_runningtime = time.time() - start_time
-            if (current_runningtime > 300):
+            if (current_runningtime > 200):
                 break
         results.display_resultstable(resultstable)
         if (0 <= ratio < 1.5):
