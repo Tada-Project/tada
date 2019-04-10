@@ -1,10 +1,11 @@
 """Generate data for Tada"""
 
+import random
 import sys
 
 GENERATE = sys.modules[__name__]
 
-DEFAULT_VALUE_INT = 0
+DEFAULT_VALUE_INT = random.randint(0, 100)
 DEFAULT_VALUE_CHAR = "C"
 DEFAULT_VALUE_TEXT = "TEXT"
 
@@ -22,7 +23,10 @@ def generate_data(chosen_types, chosen_size):
 
 def generate_int(chosen_size):
     """Generate an int value"""
-    return int(chosen_size)
+    # for i in chosen_size:
+    #     rand = random.randint(0, 100)
+    #     i += 1
+    return DEFAULT_VALUE_INT
 
 
 # pylint: disable=unused-argument
