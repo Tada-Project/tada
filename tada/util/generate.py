@@ -38,8 +38,8 @@ def generate_int_list(chosen_size):
 
 
 # pylint: disable=unused-argument
-def generate_char(chosen_size):
-    """Generate a char value"""
-    output = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(int(chosen_size))])
+def generate_char_list(chosen_size):
+    """Generate a char list"""
+    output = [random.choice(string.ascii_letters + string.digits) for _ in range(int(chosen_size))]
     print(output)
     return output
