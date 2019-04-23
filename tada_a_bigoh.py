@@ -3,6 +3,7 @@
 import sys
 import perf
 
+from prettytable import PrettyTable
 from tada.util import arguments
 from tada.util import configuration
 from tada.util import constants
@@ -10,6 +11,7 @@ from tada.util import display
 from tada.util import package
 from tada.util import run
 from tada.util import save
+from tada.util import results
 
 if __name__ == "__main__":
     current_size = constants.SIZE_START
@@ -18,6 +20,8 @@ if __name__ == "__main__":
     # read and verify the command-line arguments
     tada_arguments = arguments.parse(sys.argv[1:])
     did_verify_arguments = arguments.verify(tada_arguments)
+    resultstable = PrettyTable(['Size', 'Mean', 'Median', 'Ratio'])
+    meanlastround = 0
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -54,11 +58,20 @@ if __name__ == "__main__":
             )
             # perform additional analysis of the results
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
-            print("Mean {0}".format(current_benchmark.mean()))
-            print("Median {0}".format(current_benchmark.median()))
+            mean = current_benchmark.mean()
+            print("Mean {0}".format(mean))
+            median = current_benchmark.median()
+            print("Median {0}".format(median))
+            if (meanlastround == 0):
+                ratio = 0
+            else :
+                ratio = mean / meanlastround
+            results.add_resultstable(resultstable, current_size, mean, median, ratio)
             # show that we are done running for a size
             display.display_end_message(current_size)
+            meanlastround = mean
             # go to the next size for the doubling experiment
             current_size = current_size * constants.FACTOR
             # write the next doubling experiment size to the file
             save.save_experiment_size(constants.SIZE, current_size)
+        results.display_resultstable(resultstable)

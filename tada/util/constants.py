@@ -5,8 +5,8 @@ import os
 # Parameters
 SIZE_START = 100
 FACTOR = 2
-STEPS = 1
-SIZE_STOP = SIZE_START * STEPS * FACTOR
+STEPS = 5
+SIZE_STOP = SIZE_START * FACTOR**STEPS
 
 # Names
 TADA = "tada"
