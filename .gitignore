@@ -152,6 +152,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+.idea
 env/
 build/
 develop-eggs/
