@@ -6,7 +6,8 @@ This repository contains the source code and usage instructions for a tool
 called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in the
 Python 3 language. The tool systematically runs a doubling experiment to
 ascertain the likely worst-case order-of-growth function for an arbitrary Python
-function. This documentation provides a brief overview about how to run the tool, its provided test suite, and more.
+function. This documentation provides a brief overview about how to run the tool, 
+its provided test suite, and more.
 
 ## Installing and Testing Tada
 
@@ -39,7 +40,7 @@ If you want to run the tool, then you can run:
 
 - `tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION [--types TYPES [TYPES ...]]`
 
-You can learn about GatorGrader's checks and defaults by typing python3
+You can learn about Tada's checks and defaults by typing python3
 `tada_a_bigoh.py -h` in your terminal window and then reviewing the following
 output.
 
