@@ -40,7 +40,7 @@ def test_generate_int_list__makes_size_default():
     current_size = 100
     # generate the data for the requested_types and the current_size
     generated_data = generate.generate_data(requested_types, current_size)
-    assert generated_data != None
+    assert generated_data is not None
 
 
 # pylint: disable=invalid-name
@@ -52,4 +52,4 @@ def test_generate_char_list_makes_letter_default():
     current_size = 100
     # generate the data for the requested_types and the current_size
     generated_data = generate.generate_data(requested_types, current_size)
-    assert generated_data != None
+    assert generated_data is not None
