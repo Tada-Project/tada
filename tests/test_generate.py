@@ -64,10 +64,8 @@ def test_generate_char_makes_letter_default():
     current_size = 100
     # the default generator will return a tuple with the default character in it
     expected_tuple = (generate.generate_char(current_size),)
-    # print("expected_tuple: ", expected_tuple)
     # generate the data for the requested_types and the current_size
     generated_data = generate.generate_data(requested_types, current_size)
-    # print("generated_data: ", generated_data)
     assert generated_data == expected_tuple
 
 
