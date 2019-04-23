@@ -15,7 +15,7 @@ This program uses [Pipenv](https://github.com/pypa/pipenv) for installation.
 Once you have installed `pipenv` you can run the test suite for Tada's functions
 by typing the following in your terminal window:
 
-- `pipenv install`
+- `pipenv install --dev`
 - `pipenv shell`
 - `pipenv run pytest`
 
