@@ -1,6 +1,5 @@
 """Generate data for Tada"""
 
-import random
 import sys
 import random
 import string
