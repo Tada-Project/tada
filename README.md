@@ -6,8 +6,8 @@ This repository contains the source code and usage instructions for a tool
 called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in the
 Python 3 language. The tool systematically runs a doubling experiment to
 ascertain the likely worst-case order-of-growth function for an arbitrary Python
-function. This documentation provides a brief overview about how to run the tool
-and its provided test suite.
+function. This documentation provides a brief overview about how to run the tool,
+its provided test suite, and more.
 
 ## Installing and Testing Tada
 
@@ -35,6 +35,64 @@ Since the Tada tool is currently under heavy development, it is not yet feature
 complete. In the future, its documentation will feature examples of how to run
 the tool to automatically suggest the likely worst-case order-of-growth function
 for a provided Python function.
+
+If you want to run the tool, then you can run:
+
+- `tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION [--types TYPES [TYPES ...]]`
+
+You can learn about Tada's checks and defaults by typing python3
+`tada_a_bigoh.py -h` in your terminal window and then reviewing the following
+output.
+
+```
+usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
+                       FUNCTION [--types TYPES [TYPES ...]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --directory DIRECTORY
+                        Package directory with functions to analyze (default:
+                        None)
+  --module MODULE       Module name with functions to analyze (default: None)
+  --function FUNCTION   Name of the module's function to analyze (default:
+                        None)
+  --types TYPES [TYPES ...]
+                        Parameter types for function to analyze (default: [])
+```
+
+When completed, Tada will be used to estimate the worst-case time complexity for
+Python functions.
+
+Here is an example of Tada being used in conjunction with functions in the
+[Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
+
+```
+$ python3 tada_a_bigoh.py --directory /Users/~/speed-surprises/ --module speedsurprises.numbers.factorial --function compute_factorial --types int
+
+🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
+    https://github.com/gkapfham/tada
+❓  For Help Information Type: python3 tada_a_bigoh.py -h  ❓
+
+Start running experiment for size 100 →
+
+.....................
+tada_speedsurprisesnumbersfactorial_computefactorial_100: Mean +- std dev: 24.3 us +- 1.1 us
+
+Mean 2.4285669765218098e-05
+Median 2.381323712158203e-05
+
+→ Done running experiment for size 100
+
+Start running experiment for size 200 →
+
+.....................
+tada_speedsurprisesnumbersfactorial_computefactorial_200: Mean +- std dev: 60.3 us +- 5.9 us
+
+Mean 6.0340462410481774e-05
+Median 5.978153637695312e-05
+
+→ Done running experiment for size 200
+```
 
 ## Adding New Features to Tada
 
