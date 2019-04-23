@@ -45,6 +45,20 @@ def test_generate_char_makes_letter_default():
     assert generated_data == expected_tuple
 
 
+# pylint: disable=invalid-name
+def test_generate_boolean_makes_boolean_default():
+    """Checks that requesting a generated bolean returns one"""
+    # request a single tuple with an int in it
+    requested_types = ["boolean"]
+    # assume the doubling experiment is at 100; not needed for this test
+    current_size = 100
+    # the default generator will return a tuple with the default character in it
+    expected_tuple = (generate.DEFAULT_VALUE_BOOLEAN,)
+    # generate the data for the requested_types and the current_size
+    generated_data = generate.generate_data(requested_types, current_size)
+    assert generated_data == expected_tuple
+
+
 def test_generate_float_makes_size_default():
     """Checks that requesting a generated float returns one"""
     # request a single tuple with an float in it
