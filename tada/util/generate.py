@@ -21,6 +21,7 @@ def generate_data(chosen_types, chosen_size):
     return generated_values
 
 
+# pylint: disable=unused-argument
 def generate_int(chosen_size):
     """Generate an int value"""
     return int(chosen_size)
@@ -36,3 +37,9 @@ def generate_char(chosen_size):
 def generate_boolean(chosen_size):
     """Generate a boolean value"""
     return DEFAULT_VALUE_BOOLEAN
+
+
+# pylint: disable=unused-argument
+def generate_float(chosen_size):
+    """Generate an float value"""
+    return float(chosen_size)
