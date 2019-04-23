@@ -230,6 +230,7 @@ tags.tmp
 *.xmi
 *.sync
 *.jekyll-metadata
+.DS_Store
 
 # Results director and data files #
 ######################
