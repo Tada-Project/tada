@@ -1,14 +1,16 @@
 """Generate data for Tada"""
 
+import random
 import sys
 import random
 import string
 
 GENERATE = sys.modules[__name__]
 
-DEFAULT_VALUE_INT = 0
+DEFAULT_VALUE_INT = random.randint(0, 100)
 DEFAULT_VALUE_CHAR = "C"
 DEFAULT_VALUE_TEXT = "TEXT"
+DEFAULT_VALUE_BOOLEAN = True
 
 
 def generate_data(chosen_types, chosen_size):
@@ -25,9 +27,10 @@ def generate_data(chosen_types, chosen_size):
     return generated_values
 
 
+# pylint: disable=unused-argument
 def generate_int(chosen_size):
     """Generate an int value"""
-    return int(chosen_size)
+    return DEFAULT_VALUE_INT
 
 
 def generate_int_list(chosen_size):
@@ -37,9 +40,31 @@ def generate_int_list(chosen_size):
     return output
 
 
-# pylint: disable=unused-argument
 def generate_char_list(chosen_size):
     """Generate a char list"""
     output = [random.choice(string.ascii_letters + string.digits) for _ in range(int(chosen_size))]
     # print(output)
     return output
+
+
+# pylint: disable=unused-argument
+def generate_char(chosen_size):
+    """Generate a char value"""
+    return DEFAULT_VALUE_CHAR
+
+
+# pylint: disable=unused-argument
+def generate_string(chosen_size):
+    """Generate a string value"""
+    return DEFAULT_VALUE_TEXT
+
+
+# pylint: disable=unused-argument
+def generate_boolean(chosen_size):
+    """Generate a boolean value"""
+    return DEFAULT_VALUE_BOOLEAN
+
+
+def generate_float(chosen_size):
+    """Generate an float value"""
+    return float(chosen_size)
