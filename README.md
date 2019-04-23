@@ -6,7 +6,7 @@ This repository contains the source code and usage instructions for a tool
 called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in the
 Python 3 language. The tool systematically runs a doubling experiment to
 ascertain the likely worst-case order-of-growth function for an arbitrary Python
-function. This documentation provides a brief overview about how to run the tool, 
+function. This documentation provides a brief overview about how to run the tool,
 its provided test suite, and more.
 
 ## Installing and Testing Tada
