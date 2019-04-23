@@ -2,6 +2,7 @@
 
 import sys
 import perf
+import time
 
 from prettytable import PrettyTable
 from tada.util import arguments
@@ -14,6 +15,7 @@ from tada.util import save
 from tada.util import results
 
 if __name__ == "__main__":
+    start_time = time.time()
     current_size = constants.SIZE_START
     # display the welcome message
     display.display_welcome_message()
@@ -22,6 +24,8 @@ if __name__ == "__main__":
     did_verify_arguments = arguments.verify(tada_arguments)
     resultstable = PrettyTable(['Size', 'Mean', 'Median', 'Ratio'])
     meanlastround = 0
+    indicator = 0.1
+    last_last_size = 0
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -37,7 +41,7 @@ if __name__ == "__main__":
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
-        while current_size <= constants.SIZE_STOP:
+        while indicator >= 0.1 and last_last_size != current_size:
             # run the benchmark by using it through python
             display.display_start_message(current_size)
             current_output, current_error = run.run_command(
@@ -64,14 +68,58 @@ if __name__ == "__main__":
             print("Median {0}".format(median))
             if (meanlastround == 0):
                 ratio = 0
+                indicator = 0.1
+                end_time = mean
+                last_size = 0
+                last_end_time = end_time
+                last_end_time_rate = 1
+                end_time_rate = 1
             else :
-                ratio = mean / meanlastround
+                if current_size > last_size:
+                    ratio = mean / meanlastround
+                    avg = (mean + meanlastround) / 2
+                    std = mean - avg
+                    indicator = std / avg
+                    end_time = (mean - 0.01 * meanlastround) / 0.99
+                    last_end_time_rate = end_time_rate
+                    end_time_rate = (end_time - last_end_time) / last_end_time
+                else:
+                    ratio = meanlastround / mean
+                    avg = (mean + meanlastround) / 2
+                    std = meanlastround - avg
+                    indicator = std / avg
+                    end_time = (meanlastround - 0.01 * mean) / 0.99
+                    last_end_time_rate = end_time_rate
+                    end_time_rate = (end_time - last_end_time) / last_end_time
+                print("last_end_time", last_end_time)
+                last_end_time = end_time
+            print("current indicator:", indicator)
+            print("expected end time:", end_time)
             results.add_resultstable(resultstable, current_size, mean, median, ratio)
             # show that we are done running for a size
             display.display_end_message(current_size)
-            meanlastround = mean
             # go to the next size for the doubling experiment
-            current_size = current_size * constants.FACTOR
-            # write the next doubling experiment size to the file
+            last_last_size = last_size
+            last_size = current_size
+            print("end time rate:", end_time_rate)
+            print("last end time rate:", last_end_time_rate)
+            if last_end_time_rate > end_time_rate:
+                current_size = int(current_size / constants.FACTOR)
+            else:
+                current_size = current_size * constants.FACTOR
             save.save_experiment_size(constants.SIZE, current_size)
+            meanlastround = mean
+            current_runningtime = time.time() - start_time
+            if (current_runningtime > 200):
+                break
         results.display_resultstable(resultstable)
+        if (0 <= ratio < 1.5):
+            print("constant or logarithmic")
+        elif (1.5 <= ratio < 3):
+            print("linear or linearithmic")
+        elif (3 <= ratio < 5):
+            print("quadratic")
+        elif (5<= ratio < 10):
+            print("cubic")
+        else:
+            print("exponential")

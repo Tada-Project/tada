@@ -1,7 +1,8 @@
 """Generate data for Tada"""
 
-import random
 import sys
+import random
+import string
 
 GENERATE = sys.modules[__name__]
 
@@ -26,6 +27,18 @@ def generate_data(chosen_types, chosen_size):
 def generate_int(chosen_size):
     """Generate an int value"""
     return DEFAULT_VALUE_INT
+
+
+def generate_int_list(chosen_size):
+    """Generate an int list"""
+    output = [random.random() for _ in range(int(chosen_size))]
+    return output
+
+
+def generate_char_list(chosen_size):
+    """Generate a char list"""
+    output = [random.choice(string.ascii_letters + string.digits) for _ in range(int(chosen_size))]
+    return output
 
 
 # pylint: disable=unused-argument
