@@ -124,7 +124,7 @@ and then create a pull request.
   - Consider separating the analysis features into separate functions.
 - Allow the user to decide input size for the doubling experiment.
 - Clean up and reformat the output from the program to make it more readable
-and user friendly.
+  and user friendly.
 
 ## Problems or Praise
 
