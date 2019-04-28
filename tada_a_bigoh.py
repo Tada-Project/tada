@@ -116,7 +116,7 @@ if __name__ == "__main__":
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
-            if (current_runningtime > 300):
+            if (current_runningtime > 200):
                 print("out of time:", current_runningtime)
                 break
         results.display_resultstable(resultstable)
