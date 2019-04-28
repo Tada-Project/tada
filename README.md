@@ -6,8 +6,10 @@ This repository contains the source code and usage instructions for a tool
 called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in the
 Python 3 language. The tool systematically runs a doubling experiment to
 ascertain the likely worst-case order-of-growth function for an arbitrary Python
-function. This documentation provides a brief overview about how to run the tool,
-its provided test suite, and more.
+function. This documentation provides a brief overview about how to run the
+tool, its provided test suite, and more. Please note that this is a work in
+progress tool and potential future works are detailed in the `Future Works`
+section below.
 
 ## Installing and Testing Tada
 
@@ -112,6 +114,17 @@ that you are adding and give examples of how to run it on the command line. Of
 course, if you are not a collaborator on this project, then you will need to
 fork the repository, add your new feature, document and test it as appropriate,
 and then create a pull request.
+
+## Future Works
+
+- Generate randomized data with fuzzing tools and/or hypothesis.
+- Improve functionality of current analysis functions.
+- Refactor code, specifically `tada_a_bigoh.py` file.
+  - Consider making the functionality of generating the Results Table a class.
+  - Consider separating the analysis features into separate functions.
+- Allow the user to decide input size for the doubling experiment.
+- Clean up and reformat the output from the program to make it more readable
+  and user friendly.
 
 ## Problems or Praise
 
