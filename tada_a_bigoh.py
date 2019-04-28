@@ -26,6 +26,7 @@ if __name__ == "__main__":
     meanlastround = 0
     indicator = 0.1
     last_last_size = 0
+    count = 0
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -41,8 +42,13 @@ if __name__ == "__main__":
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
-        while indicator >= 0.1 and last_last_size != current_size:
+        while indicator >= 0.1:
             # run the benchmark by using it through python
+            if (last_last_size == current_size):
+                count = count + 1
+                print("count:", count)
+            if (count == 2):
+                break
             display.display_start_message(current_size)
             current_output, current_error = run.run_command(
                 constants.PYTHON_EXEC
@@ -110,7 +116,8 @@ if __name__ == "__main__":
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
-            if (current_runningtime > 200):
+            if (current_runningtime > 300):
+                print("out of time:", current_runningtime)
                 break
         results.display_resultstable(resultstable)
         if (0 <= ratio < 1.5):
