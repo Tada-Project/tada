@@ -45,10 +45,7 @@ if __name__ == "__main__":
         # perform the small doubling experiment
         while indicator >= 0.1:
             # run the benchmark by using it through python
-            if (last_last_size == current_size):
-                print("lastlast:", last_last_size, "current:", current_size)
-                count = count + 1
-                print("count:", count)
+            analysis.backfill_checker(last_last_size, current_size, count)
             if (count == 2):
                 break
             display.display_start_message(current_size)
