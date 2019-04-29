@@ -45,6 +45,7 @@ if __name__ == "__main__":
         while indicator >= 0.1:
             # run the benchmark by using it through python
             if (last_last_size == current_size):
+                print("lastlast:", last_last_size, "current:", current_size)
                 count = count + 1
                 print("count:", count)
             if (count == 2):
