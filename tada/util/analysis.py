@@ -8,7 +8,7 @@ def analyze_big_oh(ratio):
         print("linear or linearithmic")
     elif (3 <= ratio < 5):
         print("quadratic")
-    elif (5<= ratio < 10):
+    elif (5 <= ratio < 10):
         print("cubic")
     else:
         print("exponential")
