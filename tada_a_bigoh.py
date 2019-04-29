@@ -5,6 +5,7 @@ import perf
 import time
 
 from prettytable import PrettyTable
+from tada.util import analysis
 from tada.util import arguments
 from tada.util import configuration
 from tada.util import constants
@@ -120,13 +121,4 @@ if __name__ == "__main__":
                 print("out of time:", current_runningtime)
                 break
         results.display_resultstable(resultstable)
-        if (0 <= ratio < 1.5):
-            print("constant or logarithmic")
-        elif (1.5 <= ratio < 3):
-            print("linear or linearithmic")
-        elif (3 <= ratio < 5):
-            print("quadratic")
-        elif (5<= ratio < 10):
-            print("cubic")
-        else:
-            print("exponential")
+        analysis.analyze_big_oh(ratio)
