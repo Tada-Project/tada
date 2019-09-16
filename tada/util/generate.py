@@ -26,7 +26,7 @@ def generate_data(chosen_types, chosen_size):
 # pylint: disable=unused-argument
 def generate_int(chosen_size):
     """Generate an int value"""
-    return DEFAULT_VALUE_INT
+    return int(chosen_size)
 
 
 def generate_int_list(chosen_size):
