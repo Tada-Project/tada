@@ -6,13 +6,14 @@ name = "pypi"
 [packages]
 
 [dev-packages]
+PrettyTable = "*"
 pylint = "*"
 neovim = "*"
 black = "*"
 pytest = "*"
 pytest-benchmark = "*"
 hypothesis = "*"
-perf = "*"
+pyperf = "*"
 codecov = "*"
 "flake8" = "*"
 pytest-cov = "*"
