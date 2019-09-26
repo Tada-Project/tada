@@ -42,6 +42,22 @@ def parse(args):
         default=[],
         help="Parameter types for function to analyze",
     )
+    parser.add_argument(
+        "--startsize",
+        required=False,
+        type=int,
+        nargs="+",
+        default=constants.SIZE_START,
+        help="The starting size of doubling experiment",
+    )
+    parser.add_argument(
+        "--steps",
+        required=False,
+        type=int,
+        nargs="+",
+        default=constants.STEPS,
+        help="The maximum rounds of experiment",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
