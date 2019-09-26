@@ -39,7 +39,7 @@ if __name__ == "__main__":
         # create and save a configuration dictionary from the arguments
         configuration.save(constants.CONFIGURATION, vars(tada_arguments))
         # save the size of the experiment in the constants.file
-        save.save_experiment_size(constants.SIZE, current_size)
+        save.save_experiment_size(tada_arguments.startsize, current_size)
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
@@ -112,7 +112,7 @@ if __name__ == "__main__":
                 current_size = int(current_size / constants.FACTOR)
             else:
                 current_size = current_size * constants.FACTOR
-            save.save_experiment_size(constants.SIZE, current_size)
+            save.save_experiment_size(tada_arguments.startsize, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
             if (current_runningtime > 200):
