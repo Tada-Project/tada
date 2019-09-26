@@ -37,7 +37,7 @@ JSON_EXT = ".json"
 PYTHON_EXT = ".py"
 
 # Commands
-PYTHON_EXEC = "python3"
+PYTHON_EXEC = "python"
 
 # Perf
 DESCRIPTION_METANAME = "description"
