@@ -17,7 +17,7 @@ from tada.util import results
 
 if __name__ == "__main__":
     start_time = time.time()
-    current_size = constants.SIZE_START
+
     # display the welcome message
     display.display_welcome_message()
     # read and verify the command-line arguments
@@ -28,6 +28,7 @@ if __name__ == "__main__":
     indicator = 0.1
     last_last_size = 0
     count = 0
+    current_size = tada_arguments.startsize
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
