@@ -58,6 +58,14 @@ def parse(args):
         default=constants.STEPS,
         help="The maximum rounds of experiment",
     )
+    parser.add_argument(
+        "--runningtime",
+        required=False,
+        type=int,
+        nargs="+",
+        default=constants.RUNNINGTIME,
+        help="The maximum running time",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
