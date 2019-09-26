@@ -1,7 +1,7 @@
 """Run doubling experiments and 'Tada!' you get the time complexity"""
 
 import sys
-import perf
+import pyperf
 import time
 
 from prettytable import PrettyTable
@@ -59,7 +59,7 @@ if __name__ == "__main__":
             display.display_output(current_output.decode(constants.UTF8))
             display.display_output(current_error.decode(constants.UTF8))
             # read the JSON file containing the results
-            current_benchmark = perf.Benchmark.load(
+            current_benchmark = pyperf.Benchmark.load(
                 constants.RESULTS
                 + constants.SEPARATOR
                 + configuration.get_experiment_name(vars(tada_arguments), current_size)
