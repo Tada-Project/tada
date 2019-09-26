@@ -1,10 +1,11 @@
 """Run doubling experiments and 'Tada!' you get the time complexity"""
 
 import sys
-import perf
 import time
-
 from prettytable import PrettyTable
+import perf
+
+
 from tada.util import analysis
 from tada.util import arguments
 from tada.util import configuration
@@ -45,10 +46,10 @@ if __name__ == "__main__":
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
-        while indicator >= 0.1 && steps <= tada_arguments.steps:
+        while indicator >= 0.1 and steps <= tada_arguments.steps:
             # run the benchmark by using it through python
             analysis.backfill_checker(last_last_size, current_size, count)
-            if (count == 2):
+            if count == 2:
                 break
             display.display_start_message(current_size)
             current_output, current_error = run.run_command(
@@ -73,7 +74,7 @@ if __name__ == "__main__":
             print("Mean {0}".format(mean))
             median = current_benchmark.median()
             print("Median {0}".format(median))
-            if (meanlastround == 0):
+            if meanlastround == 0:
                 ratio = 0
                 indicator = 0.1
                 end_time = mean
@@ -81,7 +82,7 @@ if __name__ == "__main__":
                 last_end_time = end_time
                 last_end_time_rate = 1
                 end_time_rate = 1
-            else :
+            else:
                 if current_size > last_size:
                     ratio = mean / meanlastround
                     avg = (mean + meanlastround) / 2
@@ -117,9 +118,9 @@ if __name__ == "__main__":
             save.save_experiment_size(tada_arguments.startsize, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
-            if (current_runningtime > tada_arguments.runningtime):
+            if current_runningtime > tada_arguments.runningtime:
                 print("out of time:", current_runningtime)
                 break
-            ++steps
+            steps += 1
         results.display_resultstable(resultstable)
         analysis.analyze_big_oh(ratio)
