@@ -25,7 +25,8 @@ if __name__ == "__main__":
     did_verify_arguments = arguments.verify(tada_arguments)
     resultstable = PrettyTable(['Size', 'Mean', 'Median', 'Ratio'])
     meanlastround = 0
-    indicator = 0.1
+    indicator = constants.INDICATOR
+    steps = constants.STEP_START
     last_last_size = 0
     count = 0
     current_size = tada_arguments.startsize
@@ -44,7 +45,7 @@ if __name__ == "__main__":
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
-        while indicator >= 0.1:
+        while indicator >= 0.1 && steps <= tada_arguments.steps:
             # run the benchmark by using it through python
             analysis.backfill_checker(last_last_size, current_size, count)
             if (count == 2):
@@ -116,8 +117,9 @@ if __name__ == "__main__":
             save.save_experiment_size(tada_arguments.startsize, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
-            if (current_runningtime > 200):
+            if (current_runningtime > tada_arguments.runningtime):
                 print("out of time:", current_runningtime)
                 break
+            ++steps
         results.display_resultstable(resultstable)
         analysis.analyze_big_oh(ratio)
