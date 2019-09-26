@@ -3,7 +3,7 @@
 import os
 
 # Parameters
-SIZE_START = 100
+SIZE_START = 1
 FACTOR = 2
 STEPS = 5
 SIZE_STOP = SIZE_START * FACTOR**STEPS
