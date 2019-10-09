@@ -46,7 +46,6 @@ def parse(args):
         "--startsize",
         required=False,
         type=int,
-        nargs="+",
         default=constants.SIZE_START,
         help="The starting size of doubling experiment",
     )
@@ -54,7 +53,6 @@ def parse(args):
         "--steps",
         required=False,
         type=int,
-        nargs="+",
         default=constants.STEPS,
         help="The maximum rounds of experiment",
     )
@@ -62,7 +60,6 @@ def parse(args):
         "--runningtime",
         required=False,
         type=int,
-        nargs="+",
         default=constants.RUNNINGTIME,
         help="The maximum running time",
     )

@@ -29,7 +29,7 @@ if __name__ == "__main__":
     steps = constants.STEP_START
     last_last_size = 0
     count = 0
-    current_size = tada_arguments.startsize[0]
+    current_size = tada_arguments.startsize
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -45,7 +45,7 @@ if __name__ == "__main__":
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
-        while indicator >= 0.1 and steps <= tada_arguments.steps[0]:
+        while indicator >= 0.1 and steps <= tada_arguments.steps:
             # run the benchmark by using it through python
             analysis.backfill_checker(last_last_size, current_size, count)
             if count == 2:
