@@ -26,7 +26,10 @@ def generate_data(chosen_types, chosen_size):
 # pylint: disable=unused-argument
 def generate_int(chosen_size):
     """Generate an int value"""
-    return int(chosen_size)
+    lowerbound = 10**(int(chosen_size)-1)
+    upperbound = (10**int(chosen_size))-1
+    return random.randint(lowerbound, upperbound)
+    # return 10**(int(chosen_size))
 
 
 def generate_int_list(chosen_size):
