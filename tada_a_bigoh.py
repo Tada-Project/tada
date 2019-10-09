@@ -114,7 +114,7 @@ if __name__ == "__main__":
                 current_size = int(current_size / constants.FACTOR)
             else:
                 current_size = current_size * constants.FACTOR
-            save.save_experiment_size(tada_arguments.startsize, current_size)
+            save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
             if current_runningtime > tada_arguments.runningtime:
