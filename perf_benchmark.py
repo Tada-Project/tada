@@ -1,7 +1,7 @@
 """Benchmarks with perf for the function under analysis"""
 
 import importlib
-import perf
+import pyperf
 
 from tada.util import configuration
 from tada.util import constants
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     # read the chosen_size
     chosen_size = read.read_experiment_size()
     # configure perf
-    runner = perf.Runner()
+    runner = pyperf.Runner()
     # give a by-configuration name to the experiment
     current_experiment_name = configuration.get_experiment_name(
         tada_configuration_dict, chosen_size
