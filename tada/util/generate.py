@@ -3,7 +3,6 @@
 import sys
 import random
 import string
-import math
 
 GENERATE = sys.modules[__name__]
 
