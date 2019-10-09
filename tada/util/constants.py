@@ -3,13 +3,10 @@
 import os
 
 # Parameters
-SIZE_START = 1
+SIZE_START = 100
 FACTOR = 2
 STEPS = 5
 SIZE_STOP = SIZE_START * FACTOR**STEPS
-RUNNINGTIME = 200
-INDICATOR = 0.1
-STEP_START = 0
 
 # Names
 TADA = "tada"
@@ -40,7 +37,7 @@ JSON_EXT = ".json"
 PYTHON_EXT = ".py"
 
 # Commands
-PYTHON_EXEC = "python"
+PYTHON_EXEC = "python3"
 
 # Perf
 DESCRIPTION_METANAME = "description"
