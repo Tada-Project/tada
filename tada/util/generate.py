@@ -17,7 +17,8 @@ DEFAULT_VALUE_BOOLEAN = True
 def generate_strategy(json_path):
     """Generate a hypothesis strategy from the given jsonschema"""
     with open(json_path) as json_file:
-        strategy = json.load(json_file)
+        json_dict = json.load(json_file)
+        strategy = from_schema(json_dict)
     return strategy
 
 
