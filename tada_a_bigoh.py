@@ -5,11 +5,13 @@ import time
 import pyperf
 from prettytable import PrettyTable
 
+
 from tada.util import analysis
 from tada.util import arguments
 from tada.util import configuration
 from tada.util import constants
 from tada.util import display
+from tada.util import generate
 from tada.util import package
 from tada.util import run
 from tada.util import save
@@ -42,6 +44,9 @@ if __name__ == "__main__":
         configuration.save(constants.CONFIGURATION, vars(tada_arguments))
         # save the size of the experiment in the constants.file
         save.save_experiment_size(constants.SIZE, current_size)
+        # read jsonschema to generate strategy if given
+        if tada_arguments.strategy:
+            strategy = generate.generate_strategy(tada_arguments)
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
