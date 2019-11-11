@@ -3,7 +3,7 @@
 from prettytable import PrettyTable
 from tada.util import results
 
-resultstable = PrettyTable(['Size', 'Mean', 'Median', 'Ratio'])
+resultstable = PrettyTable(["Size", "Mean", "Median", "Ratio"])
 data = resultstable.get_string()
 
 

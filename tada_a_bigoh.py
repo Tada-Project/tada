@@ -25,7 +25,7 @@ if __name__ == "__main__":
     # read and verify the command-line arguments
     tada_arguments = arguments.parse(sys.argv[1:])
     did_verify_arguments = arguments.verify(tada_arguments)
-    resultstable = PrettyTable(['Size', 'Mean', 'Median', 'Ratio'])
+    resultstable = PrettyTable(["Size", "Mean", "Median", "Ratio"])
     meanlastround = 0
     indicator = constants.INDICATOR
     steps = constants.STEP_START

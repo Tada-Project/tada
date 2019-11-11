@@ -12,7 +12,7 @@ def parse(args):
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         epilog='''Sample usage: python3 tada_a_bigoh.py --directory
             /Users/myname/projectdirectory
-            --module modulename.file --function function_name --types int"'''
+            --module modulename.file --function function_name --types int"''',
     )
 
     # add all of the arguments to the command-line interface
@@ -64,10 +64,7 @@ def parse(args):
         help="The maximum running time",
     )
     parser.add_argument(
-        "--strategy",
-        required=False,
-        type=str,
-        help="The path to the jsonschema",
+        "--strategy", required=False, type=str, help="The path to the jsonschema"
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)

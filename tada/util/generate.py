@@ -40,8 +40,8 @@ def generate_data(chosen_types, chosen_size):
 # pylint: disable=unused-argument
 def generate_int(chosen_size):
     """Generate an int value"""
-    lowerbound = 10**(int(chosen_size) - 1)
-    upperbound = (10**int(chosen_size)) - 1
+    lowerbound = 10 ** (int(chosen_size) - 1)
+    upperbound = (10 ** int(chosen_size)) - 1
     return random.randint(lowerbound, upperbound)
     # return 10**(int(chosen_size))
 
@@ -54,7 +54,10 @@ def generate_int_list(chosen_size):
 
 def generate_char_list(chosen_size):
     """Generate a char list"""
-    output = [random.choice(string.ascii_letters + string.digits) for _ in range(int(chosen_size))]
+    output = [
+        random.choice(string.ascii_letters + string.digits)
+        for _ in range(int(chosen_size))
+    ]
     return output
 
 
