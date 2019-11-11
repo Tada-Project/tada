@@ -63,6 +63,12 @@ def parse(args):
         default=constants.RUNNINGTIME,
         help="The maximum running time",
     )
+    parser.add_argument(
+        "--strategy",
+        required=False,
+        type=str,
+        help="The path to the jsonschema",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
