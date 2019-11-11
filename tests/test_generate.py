@@ -126,12 +126,13 @@ def test_generate_strategy_with_one_json(tmpdir):
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write("{\"type\": \"array\", \"items\": {\"type\": \"number\"}}")
     strategy = generate.generate_strategy(path)
-    assert str(strategy) == "one_of(lists(elements=one_of(one_of(nothing(), floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))"
+    assert str(strategy[0]) == "one_of(lists(elements=one_of(one_of(nothing(), floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))"
 
 
 def test_generate_strategy_multiple_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
     path = tmpdir.mkdir("sub").join("hello.txt")
-    path.write("{\"type\": \"array\", \"items\": {\"type\": \"number\"}}")
+    path.write("{\"type\": \"array\", \"items\": {\"type\": \"number\"}}\n{\"type\": \"array\", \"items\": {\"type\": \"number\"}}")
     strategy = generate.generate_strategy(path)
-    assert str(strategy) == "one_of(lists(elements=one_of(one_of(nothing(), floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))"
+    assert str(strategy[0]) == "one_of(lists(elements=one_of(one_of(nothing(), floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))"
+    assert str(strategy[1]) == "one_of(lists(elements=one_of(one_of(nothing(), floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))"
