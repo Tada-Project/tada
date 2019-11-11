@@ -119,3 +119,35 @@ def test_generate_floats_makes_size_default():
     # generate the data for the requested_types and the current_size
     generated_data = generate.generate_data(requested_types, current_size)
     assert generated_data is not None
+
+
+def test_generate_strategy_with_one_json(tmpdir):
+    """Checks that generate strategy works for one json object in file"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write('{"type": "array", "items": {"type": "number"}}')
+    strategy = generate.generate_strategy(path)
+    assert (
+        str(strategy[0])
+        == 'one_of(lists(elements=one_of(one_of(nothing(), \
+floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))'
+    )
+
+
+def test_generate_strategy_multiple_json(tmpdir):
+    """Checks that generate strategy works for one json object in file"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write(
+        '{"type": "array", "items": {"type": "number"}}\n\
+        {"type": "array", "items": {"type": "number"}}'
+    )
+    strategy = generate.generate_strategy(path)
+    assert (
+        str(strategy[0])
+        == 'one_of(lists(elements=one_of(one_of(nothing(), \
+floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))'''
+    )
+    assert (
+        str(strategy[1])
+        == 'one_of(lists(elements=one_of(one_of(nothing(), \
+floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))'''
+    )

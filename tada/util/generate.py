@@ -1,8 +1,10 @@
 """Generate data for Tada"""
 
+import json
 import sys
 import random
 import string
+from hypothesis_jsonschema import from_schema
 
 GENERATE = sys.modules[__name__]
 
@@ -10,6 +12,18 @@ DEFAULT_VALUE_INT = random.randint(0, 100)
 DEFAULT_VALUE_CHAR = "C"
 DEFAULT_VALUE_TEXT = "TEXT"
 DEFAULT_VALUE_BOOLEAN = True
+
+
+def generate_strategy(json_path):
+    """Generate a hypothesis strategy list from the given jsonschema"""
+    with open(json_path) as json_file:
+        json_list = []
+        for line in json_file:
+            json_list.append(line)
+    strategy = []
+    for j in json_list:
+        strategy.append(from_schema(json.loads(j)))
+    return strategy
 
 
 def generate_data(chosen_types, chosen_size):
@@ -26,8 +40,8 @@ def generate_data(chosen_types, chosen_size):
 # pylint: disable=unused-argument
 def generate_int(chosen_size):
     """Generate an int value"""
-    lowerbound = 10**(int(chosen_size)-1)
-    upperbound = (10**int(chosen_size))-1
+    lowerbound = 10 ** (int(chosen_size) - 1)
+    upperbound = (10 ** int(chosen_size)) - 1
     return random.randint(lowerbound, upperbound)
     # return 10**(int(chosen_size))
 
@@ -40,7 +54,10 @@ def generate_int_list(chosen_size):
 
 def generate_char_list(chosen_size):
     """Generate a char list"""
-    output = [random.choice(string.ascii_letters + string.digits) for _ in range(int(chosen_size))]
+    output = [
+        random.choice(string.ascii_letters + string.digits)
+        for _ in range(int(chosen_size))
+    ]
     return output
 
 
