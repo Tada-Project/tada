@@ -20,3 +20,11 @@ def read_directory():
     """Read the directory from the constants.file"""
     filepath = constants.DIRECTORY
     return read_value(filepath)
+
+
+def read_schema(json_path):
+    with open(json_path) as json_file:
+        json_list = []
+        for line in json_file:
+            json_list.append(line)
+    return json_list
