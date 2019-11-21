@@ -4,6 +4,8 @@ import sys
 import random
 import string
 from hypothesis_jsonschema import from_schema
+from . import read
+from hypothesis import given, settings
 
 GENERATE = sys.modules[__name__]
 
@@ -13,15 +15,18 @@ DEFAULT_VALUE_TEXT = "TEXT"
 DEFAULT_VALUE_BOOLEAN = True
 
 
-def generate_strategy(json_list):
-    """Generate a hypothesis strategy list from the given jsonschema"""
+def generate_strategy(function, path, size):
+    json_schema = read.read_schema(path)
+    for schema in json_schema:
+        schema["maxItems"] = int(size)
+        schema["minItems"] = int(size)
     strategy = []
-    for j in json_list:
+    for j in json_schema:
         strategy.append(from_schema(j))
-    return strategy
-
-
-# print(generate_strategy("tada/util/schema.json"))
+    # strategy = generate_strategy(json_schema)
+    function = given(*strategy)(function)
+    function = settings(max_examples=1)(function)
+    return function
 
 
 def generate_data(chosen_types, chosen_size):
