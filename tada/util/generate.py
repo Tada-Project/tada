@@ -1,6 +1,5 @@
 """Generate data for Tada"""
 
-import json
 import sys
 import random
 import string
@@ -18,7 +17,7 @@ def generate_strategy(json_list):
     """Generate a hypothesis strategy list from the given jsonschema"""
     strategy = []
     for j in json_list:
-        strategy.append(from_schema(json.loads(j)))
+        strategy.append(from_schema(j))
     return strategy
 
 
@@ -36,7 +35,6 @@ def generate_data(chosen_types, chosen_size):
     return generated_values
 
 
-# pylint: disable=unused-argument
 def generate_int(chosen_size):
     """Generate an int value"""
     lowerbound = 10 ** (int(chosen_size) - 1)

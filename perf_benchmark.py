@@ -27,23 +27,19 @@ if __name__ == "__main__":
     analyzed_function = getattr(
         analyzed_module, configuration.get_function(tada_configuration_dict)
     )
-    # read in the json_schema and generate strategy
+
     # read the chosen_size
     chosen_size = read.read_experiment_size()
-    json_schema = read.read_schema(configuration.get_schema_path(tada_configuration_dict))
-    newschema = []
-    for str in json_schema:
-    #     schema = json.loads(str)
-        newschema.append(str.replace("int(chosen_size)", f"{int(chosen_size)}"))
-    #     for key in schema.keys():
-    #         if key == "minItems":
-    #             schema[key] = int(chosen_size)
-    #         if key == "maxItems":
-    #             schema[key] = int(chosen_size)
-            # schema["minItems"] = int(chosen_size)
-            # schema["maxItems"] = int(chosen_size)
+    # read in the json_schema and generate strategy
+    json_schema = read.read_schema(
+        configuration.get_schema_path(tada_configuration_dict)
+    )
+    for schema in json_schema:
+        schema["maxItems"] = int(chosen_size)
+        schema["minItems"] = int(chosen_size)
 
-    print(newschema)
+    strategy = generate.generate_strategy(json_schema)
+
     list_example = {"type": "array",
     "items": {
     "type": "number"},
@@ -51,8 +47,9 @@ if __name__ == "__main__":
     "maxItems": int(chosen_size),
     "minItems": int(chosen_size),
     }
-    strategy = generate.generate_strategy(newschema)
+
     print(strategy)
+
     callingfunction = given(*strategy)(analyzed_function)
     callingfunction2 = settings(max_examples=1)(callingfunction)
     # read the chosen_size
@@ -66,9 +63,7 @@ if __name__ == "__main__":
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # run the benchmark using the bench_func from perf
     current_benchmark = runner.bench_func(
-        current_experiment_name,
-        run.run_benchmark,
-        callingfunction2,
+        current_experiment_name, run.run_benchmark, callingfunction2
     )
     # save the perf results from running the benchmark
     save.save_benchmark_results(current_benchmark, current_experiment_name)
