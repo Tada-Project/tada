@@ -10,6 +10,7 @@ DIRECTORY = "directory"
 FUNCTION = "function"
 MODULE = "module"
 TYPES = "types"
+SCHEMA = "schema"
 
 
 def save(configuration_filename, tada_configuration):
@@ -43,6 +44,10 @@ def get_module(current_dictionary):
 def get_types(current_dictionary):
     """Return the types argument from the provided dictionary"""
     return current_dictionary[TYPES]
+
+
+def get_schema_path(current_dictionary):
+    return current_dictionary[SCHEMA]
 
 
 def get_experiment_name(current_dictionary, chosen_size):
