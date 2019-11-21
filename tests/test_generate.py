@@ -1,7 +1,6 @@
 """Tests for the generate module"""
 
 from tada.util import generate
-from tada.util import read
 
 
 # pylint: disable=invalid-name
@@ -124,21 +123,25 @@ def test_generate_floats_makes_size_default():
 
 def test_generate_strategy_with_one_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
+
     def foo(a):
         """A sample function"""
         type(a)
+
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write('[{"type": "array", "items": {"type": "number"}}]')
     size = "50"
     function = generate.generate_strategy(foo, path, size)
-    assert str(type(function)) == '<class \'function\'>'
+    assert str(type(function)) == "<class 'function'>"
 
 
 def test_generate_strategy_multiple_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
+
     def foo(a):
         """A sample function"""
         type(a)
+
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write(
         '[{"type": "array", "items": {"type": "number"}}\n\
@@ -146,4 +149,4 @@ def test_generate_strategy_multiple_json(tmpdir):
     )
     size = "50"
     function = generate.generate_strategy(foo, path, size)
-    assert str(type(function)) == '<class \'function\'>'
+    assert str(type(function)) == "<class 'function'>"
