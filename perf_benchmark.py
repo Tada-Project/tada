@@ -10,6 +10,8 @@ from tada.util import package
 from tada.util import read
 from tada.util import run
 from tada.util import save
+from hypothesis import given, settings
+from hypothesis_jsonschema import from_schema
 
 if __name__ == "__main__":
     # read the configuration file to access the configuration dictionary
@@ -24,8 +26,22 @@ if __name__ == "__main__":
     analyzed_function = getattr(
         analyzed_module, configuration.get_function(tada_configuration_dict)
     )
-    # read the chosen_size
     chosen_size = read.read_experiment_size()
+    list_example = {"type": "array",
+    "items": {
+    "type": "number"},
+    "uniqueItems": True,
+    "maxItems": int(chosen_size),
+    "minItems": int(chosen_size),
+    }
+    list_example2 = {"type": "integer",
+    "uniqueItems": True,
+    "maxItems": 1,
+    "minItems": 1,
+    }
+    callingfunction = given((from_schema(list_example)))(analyzed_function)
+    callingfunction2 = settings(max_examples=1)(callingfunction)
+    # read the chosen_size
     # configure perf
     runner = pyperf.Runner()
     # give a by-configuration name to the experiment
@@ -38,10 +54,7 @@ if __name__ == "__main__":
     current_benchmark = runner.bench_func(
         current_experiment_name,
         run.run_benchmark,
-        analyzed_function,
-        *generate.generate_data(
-            configuration.get_types(tada_configuration_dict), chosen_size
-        ),
+        callingfunction2,
     )
     # save the perf results from running the benchmark
     save.save_benchmark_results(current_benchmark, current_experiment_name)
