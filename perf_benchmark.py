@@ -26,6 +26,9 @@ if __name__ == "__main__":
     )
     # read in the json_schema and generate strategy
     json_schema = read.read_schema(configuration.get_schema_path(tada_configuration_dict))
+    for schema in json_schema:
+        schema["maxItems"] = int(chosen_size)
+        schema["minItems"] = int(chosen_size)
     strategy = generate.generate_strategy(json_schema)
 
     # read the chosen_size
