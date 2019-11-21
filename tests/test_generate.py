@@ -1,6 +1,7 @@
 """Tests for the generate module"""
 
 from tada.util import generate
+from tada.util import read
 
 
 # pylint: disable=invalid-name
@@ -125,7 +126,8 @@ def test_generate_strategy_with_one_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write('{"type": "array", "items": {"type": "number"}}')
-    strategy = generate.generate_strategy(path)
+    json_schema = read.read_schema(path)
+    strategy = generate.generate_strategy(json_schema)
     assert (
         str(strategy[0])
         == 'one_of(lists(elements=one_of(one_of(nothing(), \
@@ -140,7 +142,8 @@ def test_generate_strategy_multiple_json(tmpdir):
         '{"type": "array", "items": {"type": "number"}}\n\
         {"type": "array", "items": {"type": "number"}}'
     )
-    strategy = generate.generate_strategy(path)
+    json_schema = read.read_schema(path)
+    strategy = generate.generate_strategy(json_schema)
     assert (
         str(strategy[0])
         == 'one_of(lists(elements=one_of(one_of(nothing(), \
