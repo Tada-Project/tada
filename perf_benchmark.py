@@ -35,7 +35,7 @@ if __name__ == "__main__":
         schema["minItems"] = int(chosen_size)
 
     strategy = generate.generate_strategy(json_schema)
-    callingfunction = given(strategy)(analyzed_function)
+    callingfunction = given(*strategy)(analyzed_function)
     callingfunction2 = settings(max_examples=1)(callingfunction)
     # read the chosen_size
     # configure perf
