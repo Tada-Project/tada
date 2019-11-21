@@ -2,6 +2,7 @@
 
 import importlib
 import pyperf
+import json
 
 from tada.util import configuration
 from tada.util import constants
@@ -27,9 +28,22 @@ if __name__ == "__main__":
         analyzed_module, configuration.get_function(tada_configuration_dict)
     )
     # read in the json_schema and generate strategy
-    json_schema = read.read_schema(configuration.get_schema_path(tada_configuration_dict))
     # read the chosen_size
     chosen_size = read.read_experiment_size()
+    json_schema = read.read_schema(configuration.get_schema_path(tada_configuration_dict))
+    newschema = []
+    for str in json_schema:
+    #     schema = json.loads(str)
+        newschema.append(str.replace("int(chosen_size)", f"{int(chosen_size)}"))
+    #     for key in schema.keys():
+    #         if key == "minItems":
+    #             schema[key] = int(chosen_size)
+    #         if key == "maxItems":
+    #             schema[key] = int(chosen_size)
+            # schema["minItems"] = int(chosen_size)
+            # schema["maxItems"] = int(chosen_size)
+
+    print(newschema)
     list_example = {"type": "array",
     "items": {
     "type": "number"},
@@ -37,13 +51,9 @@ if __name__ == "__main__":
     "maxItems": int(chosen_size),
     "minItems": int(chosen_size),
     }
-    list_example2 = {"type": "integer",
-    "uniqueItems": True,
-    "maxItems": 1,
-    "minItems": 1,
-    }
-    strategy = generate.generate_strategy(json_schema)
-    callingfunction = given(strategy)(analyzed_function)
+    strategy = generate.generate_strategy(newschema)
+    print(strategy)
+    callingfunction = given(*strategy)(analyzed_function)
     callingfunction2 = settings(max_examples=1)(callingfunction)
     # read the chosen_size
     # configure perf
