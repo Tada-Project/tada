@@ -130,8 +130,8 @@ def test_generate_strategy_with_one_json(tmpdir):
     strategy = generate.generate_strategy(json_schema)
     assert (
         str(strategy[0])
-        == 'one_of(lists(elements=one_of(one_of(nothing(), \
-floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))'
+        == "one_of(lists(elements=one_of(one_of(nothing(), \
+floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))"
     )
 
 
@@ -146,11 +146,13 @@ def test_generate_strategy_multiple_json(tmpdir):
     strategy = generate.generate_strategy(json_schema)
     assert (
         str(strategy[0])
-        == 'one_of(lists(elements=one_of(one_of(nothing(), \
-floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))'''
+        == "one_of(lists(elements=one_of(one_of(nothing(), \
+floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))"
+        ""
     )
     assert (
         str(strategy[1])
-        == 'one_of(lists(elements=one_of(one_of(nothing(), \
-floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))'''
+        == "one_of(lists(elements=one_of(one_of(nothing(), \
+floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))"
+        ""
     )

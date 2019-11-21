@@ -1,7 +1,7 @@
 """Read entities for Tada"""
 
-from . import constants
 import json
+from . import constants
 
 
 def read_value(filepath):
