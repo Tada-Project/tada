@@ -23,6 +23,7 @@ def read_directory():
 
 
 def read_schema(json_path):
+    """Read the schema from the schema path"""
     with open(json_path) as json_file:
         json_list = []
         for line in json_file:

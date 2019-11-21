@@ -47,6 +47,7 @@ def get_types(current_dictionary):
 
 
 def get_schema_path(current_dictionary):
+    """Return the schema path argument from the provided dictionary"""
     return current_dictionary[SCHEMA]
 
 

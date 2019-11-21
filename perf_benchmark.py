@@ -24,7 +24,7 @@ if __name__ == "__main__":
     analyzed_function = getattr(
         analyzed_module, configuration.get_function(tada_configuration_dict)
     )
-    # read in the json_schema
+    # read in the json_schema and generate strategy
     json_schema = read.read_schema(configuration.get_schema_path(tada_configuration_dict))
     strategy = generate.generate_strategy(json_schema)
 
