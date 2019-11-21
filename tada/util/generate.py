@@ -4,8 +4,9 @@ import sys
 import random
 import string
 from hypothesis_jsonschema import from_schema
-from . import read
 from hypothesis import given, settings
+from . import read
+
 
 GENERATE = sys.modules[__name__]
 
@@ -16,6 +17,7 @@ DEFAULT_VALUE_BOOLEAN = True
 
 
 def generate_strategy(function, path, size):
+    """generate a function with strategy from path and size"""
     json_schema = read.read_schema(path)
     for schema in json_schema:
         schema["maxItems"] = int(size)

@@ -123,7 +123,7 @@ def test_generate_floats_makes_size_default():
 
 def test_generate_strategy_with_one_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
-
+    # pylint: disable=blacklisted-name
     def foo(a):
         """A sample function"""
         type(a)
@@ -137,7 +137,7 @@ def test_generate_strategy_with_one_json(tmpdir):
 
 def test_generate_strategy_multiple_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
-
+    # pylint: disable=blacklisted-name
     def foo(a):
         """A sample function"""
         type(a)
