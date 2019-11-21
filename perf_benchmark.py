@@ -26,6 +26,9 @@ if __name__ == "__main__":
     analyzed_function = getattr(
         analyzed_module, configuration.get_function(tada_configuration_dict)
     )
+    # read in the json_schema and generate strategy
+    json_schema = read.read_schema(configuration.get_schema_path(tada_configuration_dict))
+    # read the chosen_size
     chosen_size = read.read_experiment_size()
     list_example = {"type": "array",
     "items": {
@@ -39,7 +42,8 @@ if __name__ == "__main__":
     "maxItems": 1,
     "minItems": 1,
     }
-    callingfunction = given((from_schema(list_example)))(analyzed_function)
+    strategy = generate.generate_strategy(json_schema)
+    callingfunction = given(strategy)(analyzed_function)
     callingfunction2 = settings(max_examples=1)(callingfunction)
     # read the chosen_size
     # configure perf
