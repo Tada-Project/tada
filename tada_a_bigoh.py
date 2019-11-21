@@ -44,9 +44,6 @@ if __name__ == "__main__":
         configuration.save(constants.CONFIGURATION, vars(tada_arguments))
         # save the size of the experiment in the constants.file
         save.save_experiment_size(constants.SIZE, current_size)
-        # read jsonschema to generate strategy if given
-        if tada_arguments.strategy:
-            strategy = generate.generate_strategy(tada_arguments)
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
