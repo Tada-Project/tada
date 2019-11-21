@@ -2,6 +2,7 @@
 
 import importlib
 import pyperf
+import json
 
 from tada.util import configuration
 from tada.util import constants
@@ -26,9 +27,10 @@ if __name__ == "__main__":
     analyzed_function = getattr(
         analyzed_module, configuration.get_function(tada_configuration_dict)
     )
+
     # read the chosen_size
     chosen_size = read.read_experiment_size()
-    # wrap the function with given
+    # wrap the function with given and strategy
     function = generate.generate_strategy(
         analyzed_function,
         configuration.get_schema_path(tada_configuration_dict),
