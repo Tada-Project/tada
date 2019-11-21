@@ -18,7 +18,7 @@ def generate_strategy(json_list):
     """Generate a hypothesis strategy list from the given jsonschema"""
     strategy = []
     for j in json_list:
-        strategy.append(from_schema(json.loads(j)))
+        strategy.append(from_schema(j))
     return strategy
 
 
