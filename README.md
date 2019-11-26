@@ -40,7 +40,7 @@ for a provided Python function.
 
 If you want to run the tool, then you can run:
 
-- `tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION [--types TYPES [TYPES ...]]`
+- `tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --startsize STARTSIZE [--schema SCHEMA]`
 
 You can learn about Tada's checks and defaults by typing python3
 `tada_a_bigoh.py -h` in your terminal window and then reviewing the following
@@ -70,6 +70,17 @@ optional arguments:
   --schema SCHEMA       The path to the jsonschema (default: None)
 ```
 
+Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
+provided Python function. Therefore, we encourage you to create a file of
+a JSON array that contains JSON schemas for each parameter passed into the provided
+function. Also, `Hypothesis` will raise warnings when generating data for functions
+with `return` statements. In this version of Tada, we also encourage you remove the
+`return` statements temporarily for the purpose of the experiment.
+
+A sample of JSON schema for array can be found here: (speed-surprises)[https://github.com/Tada-Project/speed-surprises/blob/master/schema.json]
+For further usage of JSON schemas and how to write them for various data types:
+please refer to [JSON schema](https://json-schema.org/understanding-json-schema/reference/type.html)
+
 When completed, Tada will be used to estimate the worst-case time complexity for
 Python functions.
 
@@ -77,7 +88,7 @@ Here is an example of Tada being used in conjunction with functions in the
 [Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
 ```
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --startsize 50 --schema schema.json
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --startsize 50 --schema ../speed-surprises/schema.json
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
     https://github.com/gkapfhatm/tada
@@ -121,12 +132,10 @@ and then create a pull request.
 
 ## Future Works
 
-- Generate randomized data with fuzzing tools and/or hypothesis.
 - Improve functionality of current analysis functions.
 - Refactor code, specifically `tada_a_bigoh.py` file.
   - Consider making the functionality of generating the Results Table a class.
   - Consider separating the analysis features into separate functions.
-- Allow the user to decide input size for the doubling experiment.
 - Clean up and reformat the output from the program to make it more readable
   and user friendly.
 
