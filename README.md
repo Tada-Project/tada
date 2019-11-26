@@ -49,6 +49,8 @@ output.
 ```
 usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
                        FUNCTION [--types TYPES [TYPES ...]]
+                       [--startsize STARTSIZE] [--steps STEPS]
+                       [--runningtime RUNNINGTIME] [--schema SCHEMA]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -60,6 +62,12 @@ optional arguments:
                         None)
   --types TYPES [TYPES ...]
                         Parameter types for function to analyze (default: [])
+  --startsize STARTSIZE
+                        The starting size of doubling experiment (default: 1)
+  --steps STEPS         The maximum rounds of experiment (default: 5)
+  --runningtime RUNNINGTIME
+                        The maximum running time (default: 200)
+  --schema SCHEMA       The path to the jsonschema (default: None)
 ```
 
 When completed, Tada will be used to estimate the worst-case time complexity for
@@ -69,31 +77,27 @@ Here is an example of Tada being used in conjunction with functions in the
 [Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
 ```
-$ python3 tada_a_bigoh.py --directory /Users/~/speed-surprises/ --module speedsurprises.numbers.factorial --function compute_factorial --types int
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --startsize 50 --schema schema.json
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
-    https://github.com/gkapfham/tada
+    https://github.com/gkapfhatm/tada
 ❓  For Help Information Type: python3 tada_a_bigoh.py -h  ❓
 
+Start running experiment for size 50 →
+
+.....................
+tada_speedsurpriseslistssorting_insertionsort_50: Mean +- std dev: 6.07 ms +- 0.14 ms
+
+Mean 0.006067049913023463
+Median 0.006053275281374226
+current indicator: 0.1
+expected end time: 0.006067049913023463
+
+→ Done running experiment for size 50
+
+end time rate: 1
+last end time rate: 1
 Start running experiment for size 100 →
-
-.....................
-tada_speedsurprisesnumbersfactorial_computefactorial_100: Mean +- std dev: 24.3 us +- 1.1 us
-
-Mean 2.4285669765218098e-05
-Median 2.381323712158203e-05
-
-→ Done running experiment for size 100
-
-Start running experiment for size 200 →
-
-.....................
-tada_speedsurprisesnumbersfactorial_computefactorial_200: Mean +- std dev: 60.3 us +- 5.9 us
-
-Mean 6.0340462410481774e-05
-Median 5.978153637695312e-05
-
-→ Done running experiment for size 200
 ```
 
 ## Adding New Features to Tada
