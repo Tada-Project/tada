@@ -1,10 +1,12 @@
 """Generate data for Tada"""
 
-import json
 import sys
 import random
 import string
 from hypothesis_jsonschema import from_schema
+from hypothesis import given, settings
+from . import read
+
 
 GENERATE = sys.modules[__name__]
 
@@ -14,16 +16,19 @@ DEFAULT_VALUE_TEXT = "TEXT"
 DEFAULT_VALUE_BOOLEAN = True
 
 
-def generate_strategy(json_path):
-    """Generate a hypothesis strategy list from the given jsonschema"""
-    with open(json_path) as json_file:
-        json_list = []
-        for line in json_file:
-            json_list.append(line)
+def generate_strategy(function, path, size):
+    """generate a function with strategy from path and size"""
+    json_schema = read.read_schema(path)
+    for schema in json_schema:
+        schema["maxItems"] = int(size)
+        schema["minItems"] = int(size)
     strategy = []
-    for j in json_list:
-        strategy.append(from_schema(json.loads(j)))
-    return strategy
+    for j in json_schema:
+        strategy.append(from_schema(j))
+    # strategy = generate_strategy(json_schema)
+    function = given(*strategy)(function)
+    function = settings(max_examples=1)(function)
+    return function
 
 
 def generate_data(chosen_types, chosen_size):
@@ -37,7 +42,6 @@ def generate_data(chosen_types, chosen_size):
     return generated_values
 
 
-# pylint: disable=unused-argument
 def generate_int(chosen_size):
     """Generate an int value"""
     lowerbound = 10 ** (int(chosen_size) - 1)

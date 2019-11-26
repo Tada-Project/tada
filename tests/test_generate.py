@@ -123,31 +123,30 @@ def test_generate_floats_makes_size_default():
 
 def test_generate_strategy_with_one_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
+    # pylint: disable=blacklisted-name
+    def foo(a):
+        """A sample function"""
+        type(a)
+
     path = tmpdir.mkdir("sub").join("hello.txt")
-    path.write('{"type": "array", "items": {"type": "number"}}')
-    strategy = generate.generate_strategy(path)
-    assert (
-        str(strategy[0])
-        == 'one_of(lists(elements=one_of(one_of(nothing(), \
-floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))'
-    )
+    path.write('[{"type": "array", "items": {"type": "number"}}]')
+    size = "50"
+    function = generate.generate_strategy(foo, path, size)
+    assert str(type(function)) == "<class 'function'>"
 
 
 def test_generate_strategy_multiple_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
+    # pylint: disable=blacklisted-name
+    def foo(a):
+        """A sample function"""
+        type(a)
+
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write(
-        '{"type": "array", "items": {"type": "number"}}\n\
-        {"type": "array", "items": {"type": "number"}}'
+        '[{"type": "array", "items": {"type": "number"}}\n\
+        ,{"type": "array", "items": {"type": "number"}}]'
     )
-    strategy = generate.generate_strategy(path)
-    assert (
-        str(strategy[0])
-        == 'one_of(lists(elements=one_of(one_of(nothing(), \
-floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))'''
-    )
-    assert (
-        str(strategy[1])
-        == 'one_of(lists(elements=one_of(one_of(nothing(), \
-floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)))))'''
-    )
+    size = "50"
+    function = generate.generate_strategy(foo, path, size)
+    assert str(type(function)) == "<class 'function'>"

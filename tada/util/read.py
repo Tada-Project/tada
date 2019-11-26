@@ -1,5 +1,6 @@
 """Read entities for Tada"""
 
+import json
 from . import constants
 
 
@@ -20,3 +21,10 @@ def read_directory():
     """Read the directory from the constants.file"""
     filepath = constants.DIRECTORY
     return read_value(filepath)
+
+
+def read_schema(json_path):
+    """Read the schema from the schema path"""
+    with open(json_path) as json_file:
+        json_list = json.load(json_file)
+    return json_list
