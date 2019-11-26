@@ -77,7 +77,12 @@ function. Also, `Hypothesis` will raise warnings when generating data for functi
 with `return` statements. In this version of Tada, we also encourage you remove the
 `return` statements temporarily for the purpose of the experiment.
 
-A sample of JSON schema for array can be found here: (speed-surprises)[https://github.com/Tada-Project/speed-surprises/blob/master/schema.json]
+A sample JSON schema for array can be found here:
+[speed-surprises](https://github.com/Tada-Project/speed-surprises/blob/master/schema.json).
+Specify the `maxItems` and `minItems` with the start size in JSON schema.
+Use the command line checks `--startsize STARTSIZE` as well, for this will be the
+starting size of the doubling experiment.
+
 For further usage of JSON schemas and how to write them for various data types:
 please refer to [JSON schema](https://json-schema.org/understanding-json-schema/reference/type.html)
 
