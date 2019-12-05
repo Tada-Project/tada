@@ -5,6 +5,7 @@ import random
 import string
 from hypothesis_jsonschema import from_schema
 from hypothesis import given, settings
+from hypothesis import HealthCheck
 from . import read
 
 
@@ -27,7 +28,7 @@ def generate_strategy(function, path, size):
         strategy.append(from_schema(j))
     # strategy = generate_strategy(json_schema)
     function = given(*strategy)(function)
-    function = settings(max_examples=1)(function)
+    function = settings(max_examples=1, suppress_health_check=[HealthCheck.large_base_example, HealthCheck.too_slow,HealthCheck.data_too_large,HealthCheck.filter_too_much])(function)
     return function
 
 
@@ -40,6 +41,13 @@ def generate_data(chosen_types, chosen_size):
         generated_value = generator_to_invoke(chosen_size)
         generated_values = generated_values + (generated_value,)
     return generated_values
+
+
+def generate_fake_hypothesis(a):
+    """ use tool to test foo function """
+    f = open("data.txt", "w+")
+    f.write(str(a))
+    f.close()
 
 
 def generate_int(chosen_size):

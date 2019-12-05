@@ -30,14 +30,19 @@ if __name__ == "__main__":
 
     # read the chosen_size
     chosen_size = read.read_experiment_size()
-    # wrap the function with given and strategy
-    function = generate.generate_strategy(
-        analyzed_function,
+    # configure perf
+    runner = pyperf.Runner()
+
+    fakefunction = generate.generate_strategy(
+        generate.generate_fake_hypothesis,
         configuration.get_schema_path(tada_configuration_dict),
         chosen_size,
     )
-    # configure perf
-    runner = pyperf.Runner()
+
+    fakefunction()
+    f = open("data.txt", "r")
+    data = f.read()
+
     # give a by-configuration name to the experiment
     current_experiment_name = configuration.get_experiment_name(
         tada_configuration_dict, chosen_size
@@ -46,7 +51,7 @@ if __name__ == "__main__":
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # run the benchmark using the bench_func from perf
     current_benchmark = runner.bench_func(
-        current_experiment_name, run.run_benchmark, function
+        current_experiment_name, run.run_benchmark, analyzed_function, data
     )
     # save the perf results from running the benchmark
     save.save_benchmark_results(current_benchmark, current_experiment_name)
