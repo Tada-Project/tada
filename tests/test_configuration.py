@@ -107,7 +107,7 @@ def test_configuration_file_correct_types(correct_arguments, correct_types, tmpd
 )
 # pylint: disable=invalid-name
 def test_configuration_file_correct_schema_path(
-        correct_arguments, correct_schema, tmpdir
+    correct_arguments, correct_schema, tmpdir
 ):
     """Checks that the configuration file was saved to the directory"""
     parsed_arguments = arguments.parse(correct_arguments)

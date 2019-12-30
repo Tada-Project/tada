@@ -28,7 +28,15 @@ def generate_strategy(function, path, size):
         strategy.append(from_schema(j))
     # strategy = generate_strategy(json_schema)
     function = given(*strategy)(function)
-    function = settings(max_examples=1, suppress_health_check=[HealthCheck.large_base_example, HealthCheck.too_slow,HealthCheck.data_too_large,HealthCheck.filter_too_much])(function)
+    function = settings(
+        max_examples=1,
+        suppress_health_check=[
+            HealthCheck.large_base_example,
+            HealthCheck.too_slow,
+            HealthCheck.data_too_large,
+            HealthCheck.filter_too_much,
+        ],
+    )(function)
     return function
 
 
