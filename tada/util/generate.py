@@ -58,6 +58,22 @@ def generate_fake_hypothesis(a):
     f.close()
 
 
+def generate_hypothesis_data(schema_path, chosen_size):
+    """ use tool to test foo function """
+    fakefunction = generate_strategy(
+        generate_fake_hypothesis,
+        schema_path,
+        chosen_size,
+    )
+
+    fakefunction()
+    f = open("data.txt", "r")
+    raw_data = f.read()
+    formatted_data = raw_data[1:-1]
+    data = list(formatted_data.split(","))
+    return data
+
+
 def generate_int(chosen_size):
     """Generate an int value"""
     lowerbound = 10 ** (int(chosen_size) - 1)
