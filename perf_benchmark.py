@@ -41,9 +41,9 @@ if __name__ == "__main__":
 
     fakefunction()
     f = open("data.txt", "r")
-    data1 = f.read()
-
-    data = list(data1.split(","))
+    oridata = f.read()
+    formatteddata = oridata[1:-1]
+    data = list(formatteddata.split(","))
 
     # give a by-configuration name to the experiment
     current_experiment_name = configuration.get_experiment_name(
