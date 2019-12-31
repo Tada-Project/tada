@@ -142,24 +142,4 @@ if __name__ == "__main__":
             "PYPERF_AVG_EXPERIMENT_ROUNDS": constants.PYPERF_AVG_EXPERIMENT_ROUNDS,
             "NAME_OF_EXPERIMENT": constants.NAME_OF_EXPERIMENT,
         }, index = [1])
-        # , index=False, columns=("EXPERIMENT_RELIABILITY", "CPU_TYPE", "CPU_TEMP", "TOTAL_RUNNING_TIME", "QUIT_BY_MAX_RUNTIME", "QUIT_BY_INDICATOR",
-        # "QUIT_BY_BACKFILL", "MEM_MAX_RSS", "OS", "INDICATOR_VALUE", "BACKFILL_TIMES", "PYPERF_AVG_EXPERIMENT_ROUNDS", "NAME_OF_EXPERIMENT")
-        # df.append(
-        #     {
-        #         "EXPERIMENT_RELIABILITY": constants.RESULT,
-        #         "CPU_TYPE": constants.CPU_TYPE,
-        #         "CPU_TEMP": constants.CPU_TEMP,
-        #         "TOTAL_RUNNING_TIME": constants.TOTAL_RUNNING_TIME,
-        #         "QUIT_BY_MAX_RUNTIME": constants.QUIT_BY_MAX_RUNTIME,
-        #         "QUIT_BY_INDICATOR": constants.QUIT_BY_INDICATOR,
-        #         "QUIT_BY_BACKFILL": constants.QUIT_BY_BACKFILL,
-        #         "MEM_MAX_RSS": constants.MEM_MAX_RSS,
-        #         "OS": constants.OS,
-        #         "INDICATOR_VALUE": constants.INDICATOR_VALUE,
-        #         "BACKFILL_TIMES": constants.BACKFILL_TIMES,
-        #         "PYPERF_AVG_EXPERIMENT_ROUNDS": constants.PYPERF_AVG_EXPERIMENT_ROUNDS,
-        #         "NAME_OF_EXPERIMENT": constants.NAME_OF_EXPERIMENT,
-        #     },
-        #     ignore_index=True,
-        # )
         df_new.to_csv("experiment_data.csv", index = False, header = False, mode='a')
