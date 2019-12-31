@@ -22,7 +22,7 @@ local.properties
 *.jar
 *.rar
 *.tar
-*.zi
+*.zip
 
 # LaTeX #
 ######################
