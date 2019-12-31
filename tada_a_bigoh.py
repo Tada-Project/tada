@@ -145,3 +145,4 @@ if __name__ == "__main__":
             },
             ignore_index=True,
         )
+        df.to_csv("experiment_data.csv", header=True, encoding='utf-8')
