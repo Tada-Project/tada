@@ -38,7 +38,7 @@ if __name__ == "__main__":
     # read the chosen types
     func_type = configuration.get_types(tada_configuration_dict)
     # using hypothesis and read data
-    if func_type[0] == "hypothesis_clean":
+    if func_type[0] == "hypothesis-clean":
         func_type = configuration.get_schema_path(tada_configuration_dict)
     # using hypothesis without reading data
     if func_type[0] == "hypothesis":
