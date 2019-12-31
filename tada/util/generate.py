@@ -49,8 +49,8 @@ def generate_data(chosen_types, chosen_size):
         store_function = generate_strategy(store_hypothesis, chosen_types, chosen_size,)
 
         store_function()
-        f = open("data.txt", "r")
-        raw_data = f.read()
+        with open("data.txt", "r") as f:
+            raw_data = f.read()
         formatted_data = raw_data[1:-1]
         data = formatted_data.split(", ")
         generated_values = generated_values + (data,)
@@ -65,9 +65,8 @@ def generate_data(chosen_types, chosen_size):
 
 def store_hypothesis(a):
     """ A dummy function to store the data for experiment """
-    f = open("data.txt", "w+")
-    f.write(str(a))
-    f.close()
+    with open("data.txt", "w+") as f:
+        f.write(str(a))
 
 
 def generate_int(chosen_size):
