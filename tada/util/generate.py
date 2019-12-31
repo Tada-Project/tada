@@ -52,7 +52,7 @@ def generate_data(chosen_types, chosen_size):
         f = open("data.txt", "r")
         raw_data = f.read()
         formatted_data = raw_data[1:-1]
-        data = list(int(num) for num in formatted_data.split(" ,"))
+        data = formatted_data.split(", ")
         generated_values = generated_values + (data,)
     else:
         # call a generate function for each type
