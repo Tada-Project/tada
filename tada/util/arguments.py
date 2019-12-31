@@ -39,7 +39,6 @@ def parse(args):
         required=True,
         type=str,
         nargs="+",
-        default=[],
         help="Parameter types for function to analyze",
     )
     parser.add_argument(
@@ -85,6 +84,9 @@ def verify(args):
     if args.module is not constants.NONE:
         verified_arguments = True
     # CHECK: function was specified and it is not ""
+    if args.function is not constants.NONE:
+        verified_arguments = True
+    # CHECK: type was specified and it is not ""
     if args.function is not constants.NONE:
         verified_arguments = True
     return verified_arguments
