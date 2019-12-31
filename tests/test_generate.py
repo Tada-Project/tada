@@ -121,6 +121,17 @@ def test_generate_floats_makes_size_default():
     assert generated_data is not None
 
 
+def test_generate_data_with_hypothesis(tmpdir):
+    """Checks that requesting a generated float returns one"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write('[{"type": "array", "items": {"type": "integer"}}]')
+    # assume the doubling experiment is at 100
+    current_size = 100
+    requested_types = str(path)
+    generated_data = generate.generate_data(requested_types, current_size)
+    assert generated_data is not None
+
+
 def test_generate_strategy_with_one_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
     # pylint: disable=blacklisted-name
