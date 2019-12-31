@@ -16,6 +16,8 @@ DEFAULT_VALUE_CHAR = "C"
 DEFAULT_VALUE_TEXT = "TEXT"
 DEFAULT_VALUE_BOOLEAN = True
 
+TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
+
 
 def generate_strategy(function, path, size):
     """generate a function with strategy from path and size"""
@@ -43,7 +45,7 @@ def generate_strategy(function, path, size):
 def generate_data(chosen_types, chosen_size):
     """Generate a list of data values"""
     generated_values = ()
-    if chosen_types == "hypothesis_save":
+    if chosen_types[0] not in TYPES:
         store_function = generate_strategy(
             store_hypothesis, chosen_types, chosen_size,
         )
