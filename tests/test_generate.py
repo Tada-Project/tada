@@ -122,7 +122,7 @@ def test_generate_floats_makes_size_default():
 
 
 def test_generate_data_with_hypothesis(tmpdir):
-    """Checks that requesting a generated float returns one"""
+    """Checks that requesting a generated hypothesis data returns one"""
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write('[{"type": "array", "items": {"type": "integer"}}]')
     # assume the doubling experiment is at 100

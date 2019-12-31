@@ -20,8 +20,9 @@ TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 
 
 def generate_strategy(function, path, size):
-    """generate a function with strategy from path and size"""
+    """generate a function with strategy from schema path and current input size"""
     json_schema = read.read_schema(path)
+    # change the size as the experiment doubles
     for schema in json_schema:
         schema["maxItems"] = int(size)
         schema["minItems"] = int(size)
@@ -30,6 +31,7 @@ def generate_strategy(function, path, size):
         strategy.append(from_schema(j))
     # strategy = generate_strategy(json_schema)
     function = given(*strategy)(function)
+    # configure hypothesis
     function = settings(
         max_examples=1,
         suppress_health_check=[
@@ -51,7 +53,7 @@ def generate_data(chosen_types, chosen_size):
         store_function()
         with open("data.txt", "r") as f:
             raw_data = f.read()
-        # remove bracket at convert elements to numbers
+        # remove brackets at convert elements to numbers
         formatted_data = raw_data[1:-1]
         data = [int(num) for num in formatted_data.split(", ")]
         generated_values = generated_values + (data,)
