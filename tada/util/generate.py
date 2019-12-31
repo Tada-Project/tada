@@ -47,12 +47,13 @@ def generate_data(chosen_types, chosen_size):
     generated_values = ()
     if chosen_types[0] not in TYPES:
         store_function = generate_strategy(store_hypothesis, chosen_types, chosen_size,)
-
+        # call function to store data
         store_function()
         with open("data.txt", "r") as f:
             raw_data = f.read()
+        # remove bracket at convert elements to numbers
         formatted_data = raw_data[1:-1]
-        data = formatted_data.split(", ")
+        data = [int(num) for num in formatted_data.split(", ")]
         generated_values = generated_values + (data,)
     else:
         # call a generate function for each type
