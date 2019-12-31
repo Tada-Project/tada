@@ -126,4 +126,5 @@ if __name__ == "__main__":
         results.display_resultstable(resultstable)
         analysis.analyze_big_oh(ratio)
         df = pd.read_csv("experiment_data.csv")
+        # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
         
