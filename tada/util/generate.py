@@ -46,9 +46,7 @@ def generate_data(chosen_types, chosen_size):
     """Generate a list of data values"""
     generated_values = ()
     if chosen_types[0] not in TYPES:
-        store_function = generate_strategy(
-            store_hypothesis, chosen_types, chosen_size,
-        )
+        store_function = generate_strategy(store_hypothesis, chosen_types, chosen_size,)
 
         store_function()
         f = open("data.txt", "r")
@@ -66,7 +64,7 @@ def generate_data(chosen_types, chosen_size):
 
 
 def store_hypothesis(a):
-    """ use tool to test foo function """
+    """ A dummy function to store the data for experiment """
     f = open("data.txt", "w+")
     f.write(str(a))
     f.close()
