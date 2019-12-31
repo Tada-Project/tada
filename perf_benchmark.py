@@ -55,10 +55,7 @@ if __name__ == "__main__":
         # generate data
         data = generate.generate_data(func_type, chosen_size,)
         current_benchmark = runner.bench_func(
-            current_experiment_name,
-            run.run_benchmark,
-            analyzed_function,
-            *data,
+            current_experiment_name, run.run_benchmark, analyzed_function, *data,
         )
     # save the perf results from running the benchmark
     save.save_benchmark_results(current_benchmark, current_experiment_name)
