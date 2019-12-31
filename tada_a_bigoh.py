@@ -2,6 +2,7 @@
 
 import sys
 import time
+import pandas as pd
 import pyperf
 from prettytable import PrettyTable
 
@@ -124,3 +125,5 @@ if __name__ == "__main__":
             steps += 1
         results.display_resultstable(resultstable)
         analysis.analyze_big_oh(ratio)
+        df = pd.read_csv("experiment_data.csv")
+        
