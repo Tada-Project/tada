@@ -12,8 +12,30 @@ from tada.util import constants
     [
         (["--directory", "D", "--module", "M", "--function", "F", "--types", "T"]),
         (["--directory", "d", "--module", "m", "--function", "f", "--types", "t"]),
-        (["--directory", "/d/", "--module", "m.a", "--function", "fullname", "--types", "type"]),
-        (["--directory", "/a/b/c/", "--module", "m.a.a", "--function", "full_name", "--types", "int_type"]),
+        (
+            [
+                "--directory",
+                "/d/",
+                "--module",
+                "m.a",
+                "--function",
+                "fullname",
+                "--types",
+                "type",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full_name",
+                "--types",
+                "int_type",
+            ]
+        ),
         (["--dir", "/a/", "--mod", "m", "--func", "f", "--types", "t"]),
     ],
 )
@@ -31,8 +53,30 @@ def test_configuration_file_saved(correct_arguments, tmpdir):
     [
         (["--directory", "D", "--module", "M", "--function", "F", "--types", "T"]),
         (["--directory", "d", "--module", "m", "--function", "f", "--types", "t"]),
-        (["--directory", "/d/", "--module", "m.a", "--function", "fullname", "--types", "type"]),
-        (["--directory", "/a/b/c/", "--module", "m.a.a", "--function", "full_name", "--types", "int_type"]),
+        (
+            [
+                "--directory",
+                "/d/",
+                "--module",
+                "m.a",
+                "--function",
+                "fullname",
+                "--types",
+                "type",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full_name",
+                "--types",
+                "int_type",
+            ]
+        ),
         (["--dir", "/a/", "--mod", "m", "--func", "f", "--types", "t"]),
     ],
 )
