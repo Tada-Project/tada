@@ -45,9 +45,7 @@ def generate_data(chosen_types, chosen_size):
     generated_values = ()
     if chosen_types == "hypothesis_save":
         fakefunction = generate_strategy(
-            generate_fake_hypothesis,
-            chosen_types,
-            chosen_size,
+            generate_fake_hypothesis, chosen_types, chosen_size,
         )
 
         fakefunction()
