@@ -43,11 +43,25 @@ def generate_strategy(function, path, size):
 def generate_data(chosen_types, chosen_size):
     """Generate a list of data values"""
     generated_values = ()
-    # call a generate function for each type
-    for current_type in chosen_types:
-        generator_to_invoke = getattr(GENERATE, "generate_" + str(current_type))
-        generated_value = generator_to_invoke(chosen_size)
-        generated_values = generated_values + (generated_value,)
+    if chosen_types == "hypothesis_save":
+        fakefunction = generate_strategy(
+            generate_fake_hypothesis,
+            chosen_types,
+            chosen_size,
+        )
+
+        fakefunction()
+        f = open("data.txt", "r")
+        raw_data = f.read()
+        formatted_data = raw_data[1:-1]
+        data = list(formatted_data.split(","))
+        generated_values = generated_values + (data,)
+    else:
+        # call a generate function for each type
+        for current_type in chosen_types:
+            generator_to_invoke = getattr(GENERATE, "generate_" + str(current_type))
+            generated_value = generator_to_invoke(chosen_size)
+            generated_values = generated_values + (generated_value,)
     return generated_values
 
 
@@ -56,22 +70,6 @@ def generate_fake_hypothesis(a):
     f = open("data.txt", "w+")
     f.write(str(a))
     f.close()
-
-
-def generate_hypothesis_data(schema_path, chosen_size):
-    """ use tool to test foo function """
-    fakefunction = generate_strategy(
-        generate_fake_hypothesis,
-        schema_path,
-        chosen_size,
-    )
-
-    fakefunction()
-    f = open("data.txt", "r")
-    raw_data = f.read()
-    formatted_data = raw_data[1:-1]
-    data = list(formatted_data.split(","))
-    return data
 
 
 def generate_int(chosen_size):
