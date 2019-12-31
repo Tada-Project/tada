@@ -21,7 +21,7 @@ from tada.util import constants
                 "--function",
                 "fullname",
                 "--types",
-                "type",
+                "t",
             ]
         ),
         (
@@ -33,7 +33,7 @@ from tada.util import constants
                 "--function",
                 "full_name",
                 "--types",
-                "int_type",
+                "char_list",
             ]
         ),
         (["--dir", "/a/", "--mod", "m", "--func", "f", "--types", "t"]),

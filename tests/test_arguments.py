@@ -35,8 +35,8 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
 @pytest.mark.parametrize(
     "correct_arguments",
     [
-        (["--directory", "D", "--module", "M", "--function", "F", "--types", "T"]),
         (["--directory", "d", "--module", "m", "--function", "f", "--types", "t"]),
+        (["--directory", "D", "--module", "M", "--function", "F", "--types", "T"]),
         (
             [
                 "--directory",
@@ -46,7 +46,7 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
                 "--function",
                 "fullname",
                 "--types",
-                "type",
+                "int",
             ]
         ),
         (
@@ -56,9 +56,9 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
                 "--module",
                 "m.a.a",
                 "--function",
-                "full_name",
+                "full.name",
                 "--types",
-                "int_type",
+                "int_list",
             ]
         ),
         (["--dir", "/a/", "--mod", "m", "--func", "f", "--types", "t"]),
