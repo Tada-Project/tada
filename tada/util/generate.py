@@ -44,11 +44,11 @@ def generate_data(chosen_types, chosen_size):
     """Generate a list of data values"""
     generated_values = ()
     if chosen_types == "hypothesis_save":
-        fakefunction = generate_strategy(
-            generate_fake_hypothesis, chosen_types, chosen_size,
+        store_function = generate_strategy(
+            store_hypothesis, chosen_types, chosen_size,
         )
 
-        fakefunction()
+        store_function()
         f = open("data.txt", "r")
         raw_data = f.read()
         formatted_data = raw_data[1:-1]
@@ -63,7 +63,7 @@ def generate_data(chosen_types, chosen_size):
     return generated_values
 
 
-def generate_fake_hypothesis(a):
+def store_hypothesis(a):
     """ use tool to test foo function """
     f = open("data.txt", "w+")
     f.write(str(a))
