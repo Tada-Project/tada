@@ -36,7 +36,7 @@ def parse(args):
     )
     parser.add_argument(
         "--types",
-        required=False,
+        required=True,
         type=str,
         nargs="+",
         default=[],
