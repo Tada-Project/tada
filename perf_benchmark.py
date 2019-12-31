@@ -2,7 +2,6 @@
 
 import importlib
 import pyperf
-import json
 
 from tada.util import configuration
 from tada.util import constants
@@ -11,8 +10,7 @@ from tada.util import package
 from tada.util import read
 from tada.util import run
 from tada.util import save
-from hypothesis import given, settings
-from hypothesis_jsonschema import from_schema
+
 
 if __name__ == "__main__":
     # read the configuration file to access the configuration dictionary
@@ -37,10 +35,12 @@ if __name__ == "__main__":
     )
     # set the name of the experiment for perf
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
-    # Get type
+    # read the chosen types
     func_type = configuration.get_types(tada_configuration_dict)
-    if func_type[0] == "hypothesis_save":
+    # using hypothesis and read data
+    if func_type[0] == "hypothesis_clean":
         func_type = configuration.get_schema_path(tada_configuration_dict)
+    # using hypothesis without reading data
     if func_type[0] == "hypothesis":
         analyzed_function = generate.generate_strategy(
             analyzed_function,
@@ -54,6 +54,7 @@ if __name__ == "__main__":
             analyzed_function,
         )
     else:
+        # generate data
         current_benchmark = runner.bench_func(
             current_experiment_name,
             run.run_benchmark,
