@@ -8,6 +8,7 @@ python:
 env:
   global:
     - PIPENV_VENV_IN_PROJECT=1
+    - PIPENV_IGNORE_VIRTUALENVS=1
     - secure: EbJlDqO/ML+GduwYO323DLT5RP+9cijUcWfsAt5xz4C2eo5VSY41aOwCIyH9SErlx1/U7Hzm2huW2AE2u7UbSg5eDm4X7t6tk13keIqgwkuyUp2VsG+YH1FcDMj0d0KV32zdXIqXDczwFttTOTBfrYKMDeRuEZ4cWgnhMAJYeB6nQLtjGyc7Zzzn7rU9E4KmmGWm72MWpNAbeMlgZg2FwkgnrcJ1G4iuEXo7LKMWet+Im7Sa9tmLt9EOAuhfeBbvv2Mtg+UHwL2rQophRSFmVHHrceAAQO8USVtBM/DKGxbkqsRw0fAlV/Gx15+IHPu17YcWNDJrKEd6Ggm77mEox48fTGp2OAuF9znnpamcbkWIIh+Lver3UomRZaJ2IBGguNZnwQmhoE2eDIRK2mfGPR6L/XCbzdaCMoyKZhkbUmYoBVWdRi3LY+/KunP5eWTQ8Ec99nwT5xeXBUsNf7PShsCBlzm9xDQu0BHU56na5skXEelWUVtimSK2fjxLEJBZg48Pi64mrMiuUSVKjQiwl4vt7wySzNeR9uv3S5gUk74EQSiggjReVA4xcbB35TBRQVTBTK2qDmSc2l6JMfwUfhpYZE9KC5n+HMJyyZbiDF/gTGQRxioCZeFfgi5l/XZtMtfoJAU/ClKFxjuL8LUgGIyBphJgMD1HFNeCOg3U1v8=
 
 # install mdl for checking Markdown
@@ -20,7 +21,7 @@ install:
   - pip install pipenv --upgrade
   - pip install prettytable
   - pipenv install --dev --three
-  
+
 # use a cache to improve performance
 cache: pip
 
