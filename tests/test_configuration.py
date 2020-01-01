@@ -272,7 +272,7 @@ def test_configuration_file_correct_experiment_name(
 # pylint: disable=invalid-name
 # pylint: disable=bad-continuation
 def test_configuration_file_correct_experiment_info(
-    correct_arguments, correct_experiment_name, tmpdir
+    correct_arguments, correct_experiment_info, tmpdir
 ):
     """Checks that the configuration file was saved to the directory"""
     parsed_arguments = arguments.parse(correct_arguments)
