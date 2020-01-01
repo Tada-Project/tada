@@ -40,34 +40,38 @@ for a provided Python function.
 
 If you want to run the tool, then you can run:
 
-- `tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --startsize STARTSIZE [--schema SCHEMA]`
+```bash
+tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
+                       [TYPES ...] [--schema SCHEMA] --startsize STARTSIZE
+```
 
 You can learn about Tada's checks and defaults by typing python3
 `tada_a_bigoh.py -h` in your terminal window and then reviewing the following
 output.
 
 ```
-usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
-                       FUNCTION [--types TYPES [TYPES ...]]
-                       [--startsize STARTSIZE] [--steps STEPS]
-                       [--runningtime RUNNINGTIME] [--schema SCHEMA]
+usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
+                       [TYPES ...] [--schema SCHEMA] [--startsize STARTSIZE] [--steps STEPS]
+                       [--runningtime RUNNINGTIME]
 
 optional arguments:
   -h, --help            show this help message and exit
   --directory DIRECTORY
-                        Package directory with functions to analyze (default:
-                        None)
+                        Package directory with functions to analyze (default: None)
   --module MODULE       Module name with functions to analyze (default: None)
-  --function FUNCTION   Name of the module's function to analyze (default:
-                        None)
+  --function FUNCTION   Name of the module's function to analyze (default: None)
   --types TYPES [TYPES ...]
-                        Parameter types for function to analyze (default: [])
-  --startsize STARTSIZE
-                        The starting size of doubling experiment (default: 1)
-  --steps STEPS         The maximum rounds of experiment (default: 5)
-  --runningtime RUNNINGTIME
-                        The maximum running time (default: 200)
+                        Parameter types for function to analyze, hypothesis, or hypothesis-clean
+                        (default: None)
   --schema SCHEMA       The path to the jsonschema (default: None)
+  --startsize STARTSIZE
+                        Starting size of the doubling experiment (default: 1)
+  --steps STEPS         Maximum rounds of experiment (default: 5)
+  --runningtime RUNNINGTIME
+                        Maximum running time (default: 200)
+
+Sample usage: python3 tada_a_bigoh.py --directory /Users/myname/projectdirectory --module
+modulename.file --function function_name --types int"
 ```
 
 Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
@@ -77,7 +81,13 @@ function. Also, `Hypothesis` will raise warnings when generating data for functi
 with `return` statements. In this version of Tada, we also encourage you remove the
 `return` statements temporarily for the purpose of the experiment.
 
-A sample JSON schema for array can be found here:
+To specify the data generation strategy, we encourage you to specify `--types TYPES [TYPES ...]`
+with `hypothesis-clean`, `hypothesis`, or one of the generate types:
+`int, int_list, char, char_list, boolean, string, float`. `hypothesis-clean` works
+best for function has a single integer list argument; `hypothesis` handles all types
+while the data generation time is counted into the experiment.
+
+A sample JSON schema for a list of integers can be found here:
 [speed-surprises](https://github.com/Tada-Project/speed-surprises/blob/master/schema.json).
 Specify the `maxItems` and `minItems` with the start size in JSON schema.
 Use the command line checks `--startsize STARTSIZE` as well, for this will be the
@@ -92,22 +102,22 @@ Python functions.
 Here is an example of Tada being used in conjunction with functions in the
 [Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
-```
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --startsize 50 --schema ../speed-surprises/schema.json
+```bash
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
-    https://github.com/gkapfhatm/tada
+    https://github.com/gkapfham/tada
 ❓  For Help Information Type: python3 tada_a_bigoh.py -h  ❓
 
 Start running experiment for size 50 →
 
 .....................
-tada_speedsurpriseslistssorting_insertionsort_50: Mean +- std dev: 6.07 ms +- 0.14 ms
+tada_speedsurpriseslistssorting_insertionsort_50: Mean +- std dev: 6.76 us +- 0.38 us
 
-Mean 0.006067049913023463
-Median 0.006053275281374226
+Mean 6.756377457682293e-06
+Median 6.655228393554689e-06
 current indicator: 0.1
-expected end time: 0.006067049913023463
+expected end time: 6.756377457682293e-06
 
 → Done running experiment for size 50
 

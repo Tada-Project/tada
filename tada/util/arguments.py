@@ -36,36 +36,36 @@ def parse(args):
     )
     parser.add_argument(
         "--types",
-        required=False,
+        required=True,
         type=str,
         nargs="+",
-        default=[],
-        help="Parameter types for function to analyze",
+        help="Parameter types for function to analyze, hypothesis, or hypothesis-clean",
+    )
+    parser.add_argument(
+        "--schema", required=False, type=str, help="The path to the jsonschema",
     )
     parser.add_argument(
         "--startsize",
         required=False,
         type=int,
         default=constants.SIZE_START,
-        help="The starting size of doubling experiment",
+        help="Starting size of the doubling experiment",
     )
     parser.add_argument(
         "--steps",
         required=False,
         type=int,
         default=constants.STEPS,
-        help="The maximum rounds of experiment",
+        help="Maximum rounds of experiment",
     )
     parser.add_argument(
         "--runningtime",
         required=False,
         type=int,
         default=constants.RUNNINGTIME,
-        help="The maximum running time",
+        help="Maximum running time",
     )
-    parser.add_argument(
-        "--schema", required=False, type=str, help="The path to the jsonschema"
-    )
+
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
@@ -81,6 +81,9 @@ def verify(args):
     if args.module is not constants.NONE:
         verified_arguments = True
     # CHECK: function was specified and it is not ""
+    if args.function is not constants.NONE:
+        verified_arguments = True
+    # CHECK: type was specified and it is not ""
     if args.function is not constants.NONE:
         verified_arguments = True
     return verified_arguments

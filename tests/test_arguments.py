@@ -35,11 +35,33 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
 @pytest.mark.parametrize(
     "correct_arguments",
     [
-        (["--directory", "D", "--module", "M", "--function", "F"]),
-        (["--directory", "d", "--module", "m", "--function", "f"]),
-        (["--directory", "/d/", "--module", "m.a", "--function", "fullname"]),
-        (["--directory", "/a/b/c/", "--module", "m.a.a", "--function", "full_name"]),
-        (["--dir", "/a/", "--mod", "m", "--func", "f"]),
+        (["--directory", "d", "--module", "m", "--function", "f", "--types", "t"]),
+        (["--directory", "D", "--module", "M", "--function", "F", "--types", "T"]),
+        (
+            [
+                "--directory",
+                "/d/",
+                "--module",
+                "m.a",
+                "--function",
+                "fullname",
+                "--types",
+                "int",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full.name",
+                "--types",
+                "int_list",
+            ]
+        ),
+        (["--dir", "/a/", "--mod", "m", "--func", "f", "--types", "t"]),
     ],
 )
 def test_directory_argument_verifiable(correct_arguments):
@@ -50,7 +72,8 @@ def test_directory_argument_verifiable(correct_arguments):
 
 
 @pytest.mark.parametrize(
-    "chosen_arguments", [(["--module", "", "--directory", "", "--function", ""])]
+    "chosen_arguments",
+    [(["--module", "", "--directory", "", "--function", "", "--types", ""])],
 )
 def test_module_argument_not_verifiable(chosen_arguments):
     """Check that not valid directory arguments will not verify correctly"""

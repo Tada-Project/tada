@@ -10,11 +10,33 @@ from tada.util import constants
 @pytest.mark.parametrize(
     "correct_arguments",
     [
-        (["--directory", "D", "--module", "M", "--function", "F"]),
-        (["--directory", "d", "--module", "m", "--function", "f"]),
-        (["--directory", "/d/", "--module", "m.a", "--function", "fullname"]),
-        (["--directory", "/a/b/c/", "--module", "m.a.a", "--function", "full_name"]),
-        (["--dir", "/a/", "--mod", "m", "--func", "f"]),
+        (["--directory", "D", "--module", "M", "--function", "F", "--types", "T"]),
+        (["--directory", "d", "--module", "m", "--function", "f", "--types", "t"]),
+        (
+            [
+                "--directory",
+                "/d/",
+                "--module",
+                "m.a",
+                "--function",
+                "fullname",
+                "--types",
+                "t",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full_name",
+                "--types",
+                "char_list",
+            ]
+        ),
+        (["--dir", "/a/", "--mod", "m", "--func", "f", "--types", "t"]),
     ],
 )
 def test_configuration_file_saved(correct_arguments, tmpdir):
@@ -29,11 +51,33 @@ def test_configuration_file_saved(correct_arguments, tmpdir):
 @pytest.mark.parametrize(
     "correct_arguments",
     [
-        (["--directory", "D", "--module", "M", "--function", "F"]),
-        (["--directory", "d", "--module", "m", "--function", "f"]),
-        (["--directory", "/d/", "--module", "m.a", "--function", "fullname"]),
-        (["--directory", "/a/b/c/", "--module", "m.a.a", "--function", "full_name"]),
-        (["--dir", "/a/", "--mod", "m", "--func", "f"]),
+        (["--directory", "D", "--module", "M", "--function", "F", "--types", "T"]),
+        (["--directory", "d", "--module", "m", "--function", "f", "--types", "t"]),
+        (
+            [
+                "--directory",
+                "/d/",
+                "--module",
+                "m.a",
+                "--function",
+                "fullname",
+                "--types",
+                "type",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full_name",
+                "--types",
+                "int_type",
+            ]
+        ),
+        (["--dir", "/a/", "--mod", "m", "--func", "f", "--types", "t"]),
     ],
 )
 # pylint: disable=invalid-name
@@ -98,6 +142,8 @@ def test_configuration_file_correct_types(correct_arguments, correct_types, tmpd
                 "M",
                 "--function",
                 "F",
+                "--types",
+                "hypothesis",
                 "--schema",
                 "../schema.json",
             ],
