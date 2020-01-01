@@ -5,7 +5,7 @@ def display_welcome_message():
     """Display a welcome message"""
     print()
     print("🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆 ")
-    print("    https://github.com/gkapfham/tada")
+    print("    https://github.com/Tada-Project/tada/")
     print("❓  For Help Information Type: python3 tada_a_bigoh.py -h  ❓")
     print()
 
