@@ -179,4 +179,4 @@ if __name__ == "__main__":
             },
             index=[1],
         )
-        # df_new.to_csv("experiment_data.csv", index=False, header=False, mode="a")
+        df_new.to_csv("experiment_data.csv", index=False, header=False, mode="a")
