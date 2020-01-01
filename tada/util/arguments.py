@@ -69,7 +69,7 @@ def parse(args):
         "--expect",
         required=False,
         type=str,
-        help="Expected Growth Ratio: O(1) or O(logn) or O(n) or O(nlogn) or O(n^2) or O(n^3) or O(c^n)",
+        help="Expected Growth Ratio: O(1) O(logn) O(n) O(nlogn) O(n^2) O(n^3) O(c^n)",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)

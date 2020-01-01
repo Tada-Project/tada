@@ -63,6 +63,7 @@ def get_experiment_name(current_dictionary, chosen_size):
         + str(chosen_size)
     )
 
+
 def get_experiment_info(current_dictionary):
     """Return the complete name of an experiment"""
     return (
