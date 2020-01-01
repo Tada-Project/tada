@@ -134,7 +134,7 @@ if __name__ == "__main__":
                 break
             steps += 1
         results.display_resultstable(resultstable)
-        analysis.analyze_big_oh(ratio)
+        print(analysis.analyze_big_oh(ratio))
         if indicator < 0.1:
             constants.QUIT_BY_INDICATOR = 1
         constants.INDICATOR_VALUE = constants.INDICATOR
@@ -155,6 +155,8 @@ if __name__ == "__main__":
         constants.PYPERF_AVG_EXPERIMENT_ROUNDS = sum_of_loops / len(total_loop_list)
         if len(total_loop_list) >= 2:
             constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS = total_loop_list[-1] / total_loop_list[-2]
+        if tada_arguments.expect is not None and tada_arguments.expect in analysis.analyze_big_oh(ratio):
+            constants.RESULT = 1
         df = pd.read_csv("experiment_data.csv")
         # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
         df_new = pd.DataFrame(
