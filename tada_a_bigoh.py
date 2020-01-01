@@ -187,4 +187,5 @@ if __name__ == "__main__":
             index=[1],
         )
         # store to csv
-        df_new.to_csv("experiment_data.csv", index=False, header=False, mode="a")
+        if tada_arguments.expect is not None:
+            df_new.to_csv("experiment_data.csv", index=False, header=False, mode="a")
