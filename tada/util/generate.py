@@ -16,10 +16,13 @@ DEFAULT_VALUE_CHAR = "C"
 DEFAULT_VALUE_TEXT = "TEXT"
 DEFAULT_VALUE_BOOLEAN = True
 
+TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
+
 
 def generate_strategy(function, path, size):
-    """generate a function with strategy from path and size"""
+    """generate a function with strategy from schema path and current input size"""
     json_schema = read.read_schema(path)
+    # change the size as the experiment doubles
     for schema in json_schema:
         schema["maxItems"] = int(size)
         schema["minItems"] = int(size)
@@ -28,6 +31,7 @@ def generate_strategy(function, path, size):
         strategy.append(from_schema(j))
     # strategy = generate_strategy(json_schema)
     function = given(*strategy)(function)
+    # configure hypothesis
     function = settings(
         max_examples=1,
         suppress_health_check=[
@@ -43,19 +47,29 @@ def generate_strategy(function, path, size):
 def generate_data(chosen_types, chosen_size):
     """Generate a list of data values"""
     generated_values = ()
-    # call a generate function for each type
-    for current_type in chosen_types:
-        generator_to_invoke = getattr(GENERATE, "generate_" + str(current_type))
-        generated_value = generator_to_invoke(chosen_size)
-        generated_values = generated_values + (generated_value,)
+    if chosen_types[0] not in TYPES:
+        store_function = generate_strategy(store_hypothesis, chosen_types, chosen_size,)
+        # call function to store data
+        store_function()
+        with open("data.txt", "r") as f:
+            raw_data = f.read()
+        # remove brackets at convert elements to numbers
+        formatted_data = raw_data[1:-1]
+        data = [int(num) for num in formatted_data.split(", ")]
+        generated_values = generated_values + (data,)
+    else:
+        # call a generate function for each type
+        for current_type in chosen_types:
+            generator_to_invoke = getattr(GENERATE, "generate_" + str(current_type))
+            generated_value = generator_to_invoke(chosen_size)
+            generated_values = generated_values + (generated_value,)
     return generated_values
 
 
-def generate_fake_hypothesis(a):
-    """ use tool to test foo function """
-    f = open("data.txt", "w+")
-    f.write(str(a))
-    f.close()
+def store_hypothesis(a):
+    """ A dummy function to store the data for experiment """
+    with open("data.txt", "w+") as f:
+        f.write(str(a))
 
 
 def generate_int(chosen_size):
