@@ -137,14 +137,18 @@ if __name__ == "__main__":
         print(analysis.analyze_big_oh(ratio))
         if indicator < 0.1:
             constants.QUIT_BY_INDICATOR = 1
+        # store indicator
         constants.INDICATOR_VALUE = constants.INDICATOR
+        # store runningtime
         constants.TOTAL_RUNNING_TIME = time.time() - start_time
         last_bench_meta = current_benchmark.get_metadata()
         name = last_bench_meta["name"]
+        # store benchmark metadata
         constants.NAME_OF_EXPERIMENT = configuration.get_experiment_info(vars(tada_arguments))
         constants.CPU_TYPE = last_bench_meta["cpu_model_name"]
         constants.OS = last_bench_meta["platform"]
         constants.PYTHON_VERSION = last_bench_meta["python_version"]
+        # store run metadata
         with open("_results" + constants.SEPARATOR + name + constants.JSON_EXT, 'r') as f:
             readlastjson = json.load(f)
         last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0]["metadata"]
@@ -152,9 +156,12 @@ if __name__ == "__main__":
         constants.MEM_MAX_RSS = last_exp_run_metadata["mem_max_rss"]
         for item in total_loop_list:
             sum_of_loops += item
+        # calculate avg total loops
         constants.PYPERF_AVG_EXPERIMENT_ROUNDS = sum_of_loops / len(total_loop_list)
+        # calculate last two loop growth ratio
         if len(total_loop_list) >= 2:
             constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS = total_loop_list[-1] / total_loop_list[-2]
+        # check if result is expected
         if tada_arguments.expect is not None and tada_arguments.expect in analysis.analyze_big_oh(ratio):
             constants.RESULT = 1
         df = pd.read_csv("experiment_data.csv")
@@ -179,4 +186,5 @@ if __name__ == "__main__":
             },
             index=[1],
         )
+        # store to csv
         df_new.to_csv("experiment_data.csv", index=False, header=False, mode="a")
