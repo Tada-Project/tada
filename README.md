@@ -136,25 +136,39 @@ variables to `experiment_data.csv`. The following variables suppose to be stored
 
 - `EXPERIMENT_RELIABILITY`:  dummy variable := 1 if the result provided by tada tool is
 what user expected.
+
 - `CPU_TYPE`: string := type information of CPU.
+
 - `CPU_TEMP`: string := temperature information of CPU.
+
 - `TOTAL_RUNNING_TIME`: int := total time spent on running experiment.
+
 - `QUIT_BY_MAX_RUNTIME`: dummy variable := 1 if the tool exits by reaching the
 max_runtime.
+
 - `QUIT_BY_INDICATOR`: dummy variable := 1 if the tool exits by having indicator larger
 than the indicator bound.
+
 - `QUIT_BY_BACKFILL`: dummy variable := 1 if the tool exits by having multiple times of
 back-filling.
+
 - `MEM_MAX_RSS`: int := track of current machine memory usage.
+
 - `OS`: string := information of current operating system.
+
 - `INDICATOR_VALUE`: int := the value of the indicator boundary user set.
+
 - `BACKFILL_TIMES`: int := the value of the back-fill time boundary user set.
+
 - `PYPERF_AVG_EXPERIMENT_ROUNDS`: int := the average loops of all benchmarks in the
 experiment, the measurement of difficulty for PyPerf to analyze the target algorithm.
+
 - `PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO`: int := the growth ratio of the total loops
 in the last two benchmarks, the total loops is usually decreasing when the input get
 larger, the measurement of reliability of the experiment analysis.
+
 - `NAME_OF_EXPERIMENT`: string := experiment information.
+
 - `PYTHON_VERSION`: string := current version of Python.
 
 ## Adding New Features to Tada
