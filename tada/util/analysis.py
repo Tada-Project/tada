@@ -13,7 +13,7 @@ def analyze_big_oh(ratio):
         output = "O(n^3) cubic"
     else:
         output = "O(c^n) exponential"
-    print(output)
+    return output
 
 
 def backfill_checker(last_last_size, current_size, count):

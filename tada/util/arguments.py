@@ -65,7 +65,12 @@ def parse(args):
         default=constants.RUNNINGTIME,
         help="Maximum running time",
     )
-
+    parser.add_argument(
+        "--expect",
+        required=False,
+        type=str,
+        help="Expected Growth Ratio: O(1) O(logn) O(n) O(nlogn) O(n^2) O(n^3) O(c^n)",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished

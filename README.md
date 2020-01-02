@@ -42,7 +42,7 @@ If you want to run the tool, then you can run:
 
 ```bash
 tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
-                       [TYPES ...] [--schema SCHEMA] --startsize STARTSIZE
+                       [TYPES ...] [--schema SCHEMA] --startsize STARTSIZE [--expect EXPECTEDBIGOH]
 ```
 
 You can learn about Tada's checks and defaults by typing python3
@@ -52,7 +52,7 @@ output.
 ```
 usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
                        [TYPES ...] [--schema SCHEMA] [--startsize STARTSIZE] [--steps STEPS]
-                       [--runningtime RUNNINGTIME]
+                       [--runningtime RUNNINGTIME] [--expect EXPECTEDBIGOH]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -69,9 +69,12 @@ optional arguments:
   --steps STEPS         Maximum rounds of experiment (default: 5)
   --runningtime RUNNINGTIME
                         Maximum running time (default: 200)
+  --expect EXPECTEDBIGOH
+                        Expected Result comparing to the result provided by TADA tool, then store
+                        important variables to experiment_data.csv
 
 Sample usage: python3 tada_a_bigoh.py --directory /Users/myname/projectdirectory --module
-modulename.file --function function_name --types int"
+modulename.file --function function_name --types int
 ```
 
 Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
@@ -103,10 +106,10 @@ Here is an example of Tada being used in conjunction with functions in the
 [Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
 ```bash
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
-    https://github.com/gkapfham/tada
+    https://github.com/Tada-Project/tada/
 ❓  For Help Information Type: python3 tada_a_bigoh.py -h  ❓
 
 Start running experiment for size 50 →
@@ -125,6 +128,36 @@ end time rate: 1
 last end time rate: 1
 Start running experiment for size 100 →
 ```
+
+## Recording Multiple Tada Experiments' Result
+
+The command argument `--expect EXPECTEDBIGOH` is needed for storing important
+variables to `experiment_data.csv`. A string of the expected Big-Oh growth ratio should
+be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be stored:
+
+- `EXPERIMENT_RELIABILITY`:  dummy variable := 1 if the result provided by tada tool is
+  what user expected.
+- `CPU_TYPE`: string := type information of CPU.
+- `CPU_TEMP`: string := temperature information of CPU.
+- `TOTAL_RUNNING_TIME`: int := total time spent on running experiment.
+- `QUIT_BY_MAX_RUNTIME`: dummy variable := 1 if the tool exits by reaching the
+  max_runtime.
+- `QUIT_BY_INDICATOR`: dummy variable := 1 if the tool exits by having indicator larger
+  than the indicator bound.
+- `QUIT_BY_BACKFILL`: dummy variable := 1 if the tool exits by having multiple times of
+  back-filling.
+- `MEM_MAX_RSS`: int := track of current machine memory usage.
+- `OS`: string := information of current operating system.
+- `INDICATOR_VALUE`: int := the value of the indicator boundary user set.
+- `BACKFILL_TIMES`: int := the value of the back-fill time boundary user set.
+- `PYPERF_AVG_EXPERIMENT_ROUNDS`: int := the average loops of all benchmarks in the
+  experiment, the measurement of difficulty for PyPerf to analyze the target algorithm.
+- `PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO`: int := the growth ratio of the total loops
+  in the last two benchmarks, the total loops is usually decreasing when the input get
+  larger, the measurement of reliability of the experiment analysis.
+- `NAME_OF_EXPERIMENT`: string := experiment information.
+- `PYTHON_VERSION`: string := current version of Python.
+- `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
 
 ## Adding New Features to Tada
 

@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 pyperf = "*"
 hypothesis-jsonschema = "*"
+pandas = "*"
 
 [dev-packages]
 PrettyTable = "*"

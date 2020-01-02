@@ -62,3 +62,14 @@ def get_experiment_name(current_dictionary, chosen_size):
         + constants.UNDERSCORE
         + str(chosen_size)
     )
+
+
+def get_experiment_info(current_dictionary):
+    """Return the complete name of an experiment"""
+    return (
+        constants.TADA
+        + constants.UNDERSCORE
+        + get_module(current_dictionary).replace(constants.PERIOD, constants.NONE)
+        + constants.UNDERSCORE
+        + get_function(current_dictionary).replace(constants.UNDERSCORE, constants.NONE)
+    )
