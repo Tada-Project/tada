@@ -74,7 +74,7 @@ optional arguments:
                         important variables to experiment_data.csv
 
 Sample usage: python3 tada_a_bigoh.py --directory /Users/myname/projectdirectory --module
-modulename.file --function function_name --types int"
+modulename.file --function function_name --types int
 ```
 
 Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
@@ -132,7 +132,8 @@ Start running experiment for size 100 →
 ## Recording Multiple Tada Experiments' Result
 
 The command argument `--expect EXPECTEDBIGOH` is needed for storing important
- variables to `experiment_data.csv`. The following variables suppose to be stored:
+variables to `experiment_data.csv`. A string of the expected Big-Oh growth ratio should
+be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be stored:
 
 - `EXPERIMENT_RELIABILITY`:  dummy variable := 1 if the result provided by tada tool is
   what user expected.
@@ -156,6 +157,7 @@ The command argument `--expect EXPECTEDBIGOH` is needed for storing important
   larger, the measurement of reliability of the experiment analysis.
 - `NAME_OF_EXPERIMENT`: string := experiment information.
 - `PYTHON_VERSION`: string := current version of Python.
+- `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
 
 ## Adding New Features to Tada
 
