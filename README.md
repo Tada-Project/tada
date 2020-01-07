@@ -158,6 +158,7 @@ be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be st
 - `NAME_OF_EXPERIMENT`: string := experiment information.
 - `PYTHON_VERSION`: string := current version of Python.
 - `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
+- `START_SIZE`: int := initial size of doubling experiments
 
 ## Adding New Features to Tada
 
