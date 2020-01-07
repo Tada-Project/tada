@@ -139,6 +139,7 @@ be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be st
   what user expected.
 - `CPU_TYPE`: string := type information of CPU.
 - `CPU_TEMP`: string := temperature information of CPU.
+- `CPU_COUNT`: int := the number of physical CPUs.
 - `TOTAL_RUNNING_TIME`: int := total time spent on running experiment.
 - `QUIT_BY_MAX_RUNTIME`: dummy variable := 1 if the tool exits by reaching the
   max_runtime.
@@ -147,6 +148,7 @@ be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be st
 - `QUIT_BY_BACKFILL`: dummy variable := 1 if the tool exits by having multiple times of
   back-filling.
 - `MEM_MAX_RSS`: int := track of current machine memory usage.
+- `MEM_PEAK_PAGEFILE_USAGE`: int := track of current machine memory usage (windows).
 - `OS`: string := information of current operating system.
 - `INDICATOR_VALUE`: int := the value of the indicator boundary user set.
 - `BACKFILL_TIMES`: int := the value of the back-fill time boundary user set.
