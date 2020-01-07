@@ -51,9 +51,8 @@ if __name__ == "__main__":
         # perform the small doubling experiment
         while indicator >= 0.1 and steps <= tada_arguments.steps:
             # run the benchmark by using it through python
-            analysis.backfill_checker(last_last_size, current_size, count)
-            if count == 2:
-                constants.BACKFILL_TIMES = count
+            analysis.backfill_checker(last_last_size, current_size)
+            if constants.BACKFILL_TIMES  == 2:
                 constants.QUIT_BY_BACKFILL = 1
                 break
             display.display_start_message(current_size)
@@ -171,6 +170,7 @@ if __name__ == "__main__":
         if tada_arguments.expect is not None and tada_arguments.expect in analysis.analyze_big_oh(ratio):
             constants.RESULT = 1
         constants.DATA_GEN_STRATEGY = tada_arguments.types
+        constants.START_SIZE = tada_arguments.startsize
         df = pd.read_csv("experiment_data.csv")
         # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
         df_new = pd.DataFrame(
@@ -193,6 +193,7 @@ if __name__ == "__main__":
                 "NAME_OF_EXPERIMENT": constants.NAME_OF_EXPERIMENT,
                 "PYTHON_VERSION": constants.PYTHON_VERSION,
                 "DATA_GEN_STRATEGY": constants.DATA_GEN_STRATEGY,
+                "START_SIZE": constants.START_SIZE,
             },
             index=[1],
         )

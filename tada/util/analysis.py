@@ -1,5 +1,7 @@
 """Analysis experiments for Tada"""
 
+from . import constants
+
 
 def analyze_big_oh(ratio):
     """analyze big oh"""
@@ -16,9 +18,9 @@ def analyze_big_oh(ratio):
     return output
 
 
-def backfill_checker(last_last_size, current_size, count):
+def backfill_checker(last_last_size, current_size):
     """check if the backfill happended repeatedly"""
     if last_last_size == current_size:
         print("lastlast:", last_last_size, "current:", current_size)
-        count = count + 1
-        print("count:", count)
+        constants.BACKFILL_TIMES = constants.BACKFILL_TIMES + 1
+        print("count:", constants.BACKFILL_TIMES)
