@@ -145,15 +145,21 @@ if __name__ == "__main__":
         name = last_bench_meta["name"]
         # store benchmark metadata
         constants.NAME_OF_EXPERIMENT = configuration.get_experiment_info(vars(tada_arguments))
-        constants.CPU_TYPE = last_bench_meta["cpu_model_name"]
+        if "cpu_model_name" in last_bench_meta:
+            constants.CPU_TYPE = last_bench_meta["cpu_model_name"]
+        constants.CPU_COUNT = last_bench_meta["cpu_count"]
         constants.OS = last_bench_meta["platform"]
         constants.PYTHON_VERSION = last_bench_meta["python_version"]
         # store run metadata
         with open("_results" + constants.SEPARATOR + name + constants.JSON_EXT, 'r') as f:
             readlastjson = json.load(f)
         last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0]["metadata"]
-        constants.CPU_TEMP = last_exp_run_metadata["cpu_temp"]
-        constants.MEM_MAX_RSS = last_exp_run_metadata["mem_max_rss"]
+        if "cpu_temp" in last_exp_run_metadata:
+            constants.CPU_TEMP = last_exp_run_metadata["cpu_temp"]
+        if "mem_max_rss" in last_exp_run_metadata:
+            constants.MEM_MAX_RSS = last_exp_run_metadata["mem_max_rss"]
+        else:
+            constants.MEM_PEAK_PAGEFILE_USAGE = last_exp_run_metadata["mem_peak_pagefile_usage"]
         for item in total_loop_list:
             sum_of_loops += item
         # calculate avg total loops
@@ -172,11 +178,13 @@ if __name__ == "__main__":
                 "EXPERIMENT_RELIABILITY": constants.RESULT,
                 "CPU_TYPE": constants.CPU_TYPE,
                 "CPU_TEMP": constants.CPU_TEMP,
+                "CPU_COUNT": constants.CPU_COUNT,
                 "TOTAL_RUNNING_TIME": constants.TOTAL_RUNNING_TIME,
                 "QUIT_BY_MAX_RUNTIME": constants.QUIT_BY_MAX_RUNTIME,
                 "QUIT_BY_INDICATOR": constants.QUIT_BY_INDICATOR,
                 "QUIT_BY_BACKFILL": constants.QUIT_BY_BACKFILL,
                 "MEM_MAX_RSS": constants.MEM_MAX_RSS,
+                "MEM_PEAK_PAGEFILE_USAGE": constants.MEM_PEAK_PAGEFILE_USAGE,
                 "OS": constants.OS,
                 "INDICATOR_VALUE": constants.INDICATOR_VALUE,
                 "BACKFILL_TIMES": constants.BACKFILL_TIMES,
