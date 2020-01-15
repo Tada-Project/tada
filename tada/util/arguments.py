@@ -79,14 +79,14 @@ def parse(args):
         required=False,
         type=int,
         default=constants.BACKFILL,
-        help="1 if decide to use backfill, otherwise not",
+        help="Backfill if value equals 1",
     )
     parser.add_argument(
         "--indicator",
         required=False,
         type=float,
         default=constants.INDICATOR,
-        help="1 if decide to use backfill, otherwise not",
+        help="Indicator value",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
