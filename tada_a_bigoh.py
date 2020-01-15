@@ -27,7 +27,7 @@ if __name__ == "__main__":
     did_verify_arguments = arguments.verify(tada_arguments)
     resultstable = PrettyTable(["Size", "Mean", "Median", "Ratio"])
     meanlastround = 0
-    indicator = constants.INDICATOR
+    indicator = tada_arguments.indicator
     steps = constants.STEP_START
     last_last_size = 0
     count = 0
