@@ -34,7 +34,7 @@ if __name__ == "__main__":
     current_size = tada_arguments.startsize
     total_loop_list = []
     sum_of_loops = 0
-    used_backfill = 0
+    used_backfill = tada_arguments.backfill
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -51,11 +51,11 @@ if __name__ == "__main__":
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
         while indicator >= 0.1 and steps <= tada_arguments.steps:
-            if tada_arguments.backfill == 1:
+            if used_backfill == 1:
                 # run the benchmark by using it through python
                 used_backfill = 1
                 analysis.backfill_checker(last_last_size, current_size)
-                if constants.BACKFILL_TIMES  == 2:
+                if constants.BACKFILL_TIMES == 2:
                     constants.QUIT_BY_BACKFILL = 1
                     break
             display.display_start_message(current_size)
@@ -103,7 +103,7 @@ if __name__ == "__main__":
                     end_time = (mean - 0.01 * meanlastround) / 0.99
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
-                else:
+                else:  # backfill
                     ratio = meanlastround / mean
                     avg = (mean + meanlastround) / 2
                     std = meanlastround - avg
@@ -123,7 +123,7 @@ if __name__ == "__main__":
             last_size = current_size
             print("end time rate:", end_time_rate)
             print("last end time rate:", last_end_time_rate)
-            if last_end_time_rate > end_time_rate:
+            if last_end_time_rate > end_time_rate and used_backfill == 1:
                 current_size = int(current_size / constants.FACTOR)
             else:
                 current_size = current_size * constants.FACTOR
