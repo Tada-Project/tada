@@ -52,7 +52,7 @@ output.
 ```
 usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
                        [TYPES ...] [--schema SCHEMA] [--startsize STARTSIZE] [--steps STEPS]
-                       [--runningtime RUNNINGTIME] [--expect EXPECTEDBIGOH]
+                       [--runningtime RUNNINGTIME] [--expect EXPECTEDBIGOH] [--backfill 1or0]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -106,7 +106,7 @@ Here is an example of Tada being used in conjunction with functions in the
 [Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
 ```bash
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)" --backfill 1
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
     https://github.com/Tada-Project/tada/
