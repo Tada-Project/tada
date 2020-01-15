@@ -84,7 +84,7 @@ def parse(args):
     parser.add_argument(
         "--indicator",
         required=False,
-        type=int,
+        type=float,
         default=constants.INDICATOR,
         help="1 if decide to use backfill, otherwise not",
     )
