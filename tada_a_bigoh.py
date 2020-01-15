@@ -34,6 +34,7 @@ if __name__ == "__main__":
     current_size = tada_arguments.startsize
     total_loop_list = []
     sum_of_loops = 0
+    used_backfill = 0
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -50,11 +51,13 @@ if __name__ == "__main__":
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
         while indicator >= 0.1 and steps <= tada_arguments.steps:
-            # run the benchmark by using it through python
-            analysis.backfill_checker(last_last_size, current_size)
-            if constants.BACKFILL_TIMES  == 2:
-                constants.QUIT_BY_BACKFILL = 1
-                break
+            if tada_arguments.backfill == 1:
+                # run the benchmark by using it through python
+                used_backfill = 1
+                analysis.backfill_checker(last_last_size, current_size)
+                if constants.BACKFILL_TIMES  == 2:
+                    constants.QUIT_BY_BACKFILL = 1
+                    break
             display.display_start_message(current_size)
             current_output, current_error = run.run_command(
                 constants.PYTHON_EXEC
@@ -194,6 +197,7 @@ if __name__ == "__main__":
                 "PYTHON_VERSION": constants.PYTHON_VERSION,
                 "DATA_GEN_STRATEGY": constants.DATA_GEN_STRATEGY,
                 "START_SIZE": constants.START_SIZE,
+                "USED_BACKFILL": used_backfill,
             },
             index=[1],
         )
