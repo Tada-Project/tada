@@ -57,6 +57,7 @@ if __name__ == "__main__":
                 analysis.backfill_checker(last_last_size, current_size)
                 if constants.BACKFILL_TIMES == 2:
                     constants.QUIT_BY_BACKFILL = 1
+                    print("Quit due to two backfills")
                     break
             display.display_start_message(current_size)
             current_output, current_error = run.run_command(
@@ -127,11 +128,14 @@ if __name__ == "__main__":
                 current_size = int(current_size / constants.FACTOR)
             else:
                 current_size = current_size * constants.FACTOR
+            if indicator < 0.1:
+                print("Quit due to indicator")
+                break
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
             if current_runningtime > tada_arguments.runningtime:
-                print("out of time:", current_runningtime)
+                print("Quit due to over maximum time:", current_runningtime)
                 constants.QUIT_BY_MAX_RUNTIME = 1
                 break
             steps += 1
