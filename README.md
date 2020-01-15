@@ -129,12 +129,6 @@ last end time rate: 1
 Start running experiment for size 100 →
 ```
 
-To run with collecting experiment data, add `expect` like this:
-
-```bash
-pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
-```
-
 ## Recording Multiple Tada Experiments' Result
 
 The command argument `--expect EXPECTEDBIGOH` is needed for storing important
@@ -167,6 +161,12 @@ be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be st
 - `PYTHON_VERSION`: string := current version of Python.
 - `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
 - `START_SIZE`: int := initial size of doubling experiments
+
+To run with collecting experiment data, add `expect` like this:
+
+```bash
+pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
+```
 
 ## Adding New Features to Tada
 
