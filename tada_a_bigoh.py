@@ -27,13 +27,14 @@ if __name__ == "__main__":
     did_verify_arguments = arguments.verify(tada_arguments)
     resultstable = PrettyTable(["Size", "Mean", "Median", "Ratio"])
     meanlastround = 0
-    indicator = constants.INDICATOR
+    indicator = 0
     steps = constants.STEP_START
     last_last_size = 0
     count = 0
     current_size = tada_arguments.startsize
     total_loop_list = []
     sum_of_loops = 0
+    used_backfill = tada_arguments.backfill
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -49,12 +50,15 @@ if __name__ == "__main__":
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
-        while indicator >= 0.1 and steps <= tada_arguments.steps:
-            # run the benchmark by using it through python
-            analysis.backfill_checker(last_last_size, current_size)
-            if constants.BACKFILL_TIMES  == 2:
-                constants.QUIT_BY_BACKFILL = 1
-                break
+        while True:
+            if used_backfill == 1:
+                # run the benchmark by using it through python
+                used_backfill = 1
+                analysis.backfill_checker(last_last_size, current_size)
+                if constants.BACKFILL_TIMES == 2:
+                    constants.QUIT_BY_BACKFILL = 1
+                    print("Quit due to two backfills")
+                    break
             display.display_start_message(current_size)
             current_output, current_error = run.run_command(
                 constants.PYTHON_EXEC
@@ -85,7 +89,7 @@ if __name__ == "__main__":
             print("Median {0}".format(median))
             if meanlastround == 0:
                 ratio = 0
-                indicator = 0.1
+                indicator = tada_arguments.indicator
                 end_time = mean
                 last_size = 0
                 last_end_time = end_time
@@ -100,7 +104,7 @@ if __name__ == "__main__":
                     end_time = (mean - 0.01 * meanlastround) / 0.99
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
-                else:
+                else:  # backfill
                     ratio = meanlastround / mean
                     avg = (mean + meanlastround) / 2
                     std = meanlastround - avg
@@ -120,24 +124,32 @@ if __name__ == "__main__":
             last_size = current_size
             print("end time rate:", end_time_rate)
             print("last end time rate:", last_end_time_rate)
-            if last_end_time_rate > end_time_rate:
+            if last_end_time_rate > end_time_rate and used_backfill == 1:
                 current_size = int(current_size / constants.FACTOR)
             else:
                 current_size = current_size * constants.FACTOR
+            # check indicator and quit if smaller than decided indicator
+            if indicator < tada_arguments.indicator:
+                print("Quit due to indicator: ", indicator)
+                break
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
             if current_runningtime > tada_arguments.runningtime:
-                print("out of time:", current_runningtime)
+                print("Quit due to over maximum time:", current_runningtime)
                 constants.QUIT_BY_MAX_RUNTIME = 1
                 break
             steps += 1
+            if steps > tada_arguments.steps:
+                print("Quit due to end of rounds: ", steps)
+                constants.QUIT_BY_STEPS = 1
+                break
         results.display_resultstable(resultstable)
         print(analysis.analyze_big_oh(ratio))
-        if indicator < 0.1:
+        if indicator < tada_arguments.indicator:
             constants.QUIT_BY_INDICATOR = 1
         # store indicator
-        constants.INDICATOR_VALUE = constants.INDICATOR
+        constants.INDICATOR_VALUE = tada_arguments.indicator
         # store runningtime
         constants.TOTAL_RUNNING_TIME = time.time() - start_time
         last_bench_meta = current_benchmark.get_metadata()
@@ -171,6 +183,7 @@ if __name__ == "__main__":
             constants.RESULT = 1
         constants.DATA_GEN_STRATEGY = tada_arguments.types
         constants.START_SIZE = tada_arguments.startsize
+        constants.INDICATOR_VALUE = tada_arguments.indicator
         df = pd.read_csv("experiment_data.csv")
         # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
         df_new = pd.DataFrame(
@@ -183,6 +196,7 @@ if __name__ == "__main__":
                 "QUIT_BY_MAX_RUNTIME": constants.QUIT_BY_MAX_RUNTIME,
                 "QUIT_BY_INDICATOR": constants.QUIT_BY_INDICATOR,
                 "QUIT_BY_BACKFILL": constants.QUIT_BY_BACKFILL,
+                "QUIT_BY_STEPS": constants.QUIT_BY_STEPS,
                 "MEM_MAX_RSS": constants.MEM_MAX_RSS,
                 "MEM_PEAK_PAGEFILE_USAGE": constants.MEM_PEAK_PAGEFILE_USAGE,
                 "OS": constants.OS,
@@ -194,6 +208,7 @@ if __name__ == "__main__":
                 "PYTHON_VERSION": constants.PYTHON_VERSION,
                 "DATA_GEN_STRATEGY": constants.DATA_GEN_STRATEGY,
                 "START_SIZE": constants.START_SIZE,
+                "USED_BACKFILL": used_backfill,
             },
             index=[1],
         )

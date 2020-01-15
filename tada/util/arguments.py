@@ -42,7 +42,10 @@ def parse(args):
         help="Parameter types for function to analyze, hypothesis, or hypothesis-clean",
     )
     parser.add_argument(
-        "--schema", required=False, type=str, help="The path to the jsonschema",
+        "--schema",
+        required=False,
+        type=str,
+        help="The path to the jsonschema",
     )
     parser.add_argument(
         "--startsize",
@@ -70,6 +73,20 @@ def parse(args):
         required=False,
         type=str,
         help="Expected Growth Ratio: O(1) O(logn) O(n) O(nlogn) O(n^2) O(n^3) O(c^n)",
+    )
+    parser.add_argument(
+        "--backfill",
+        required=False,
+        type=int,
+        default=constants.BACKFILL,
+        help="Backfill if value equals 1",
+    )
+    parser.add_argument(
+        "--indicator",
+        required=False,
+        type=float,
+        default=constants.INDICATOR,
+        help="Indicator value",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
