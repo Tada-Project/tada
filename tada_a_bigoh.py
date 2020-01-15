@@ -142,6 +142,7 @@ if __name__ == "__main__":
             steps += 1
             if steps > tada_arguments.steps:
                 print("Quit due to end of rounds: ", steps)
+                constants.QUIT_BY_STEPS = 1
                 break
         results.display_resultstable(resultstable)
         print(analysis.analyze_big_oh(ratio))
@@ -195,6 +196,7 @@ if __name__ == "__main__":
                 "QUIT_BY_MAX_RUNTIME": constants.QUIT_BY_MAX_RUNTIME,
                 "QUIT_BY_INDICATOR": constants.QUIT_BY_INDICATOR,
                 "QUIT_BY_BACKFILL": constants.QUIT_BY_BACKFILL,
+                "QUIT_BY_STEPS": constants.QUIT_BY_STEPS,
                 "MEM_MAX_RSS": constants.MEM_MAX_RSS,
                 "MEM_PEAK_PAGEFILE_USAGE": constants.MEM_PEAK_PAGEFILE_USAGE,
                 "OS": constants.OS,
