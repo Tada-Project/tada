@@ -42,7 +42,10 @@ def parse(args):
         help="Parameter types for function to analyze, hypothesis, or hypothesis-clean",
     )
     parser.add_argument(
-        "--schema", required=False, type=str, help="The path to the jsonschema",
+        "--schema",
+        required=False,
+        type=str,
+        help="The path to the jsonschema",
     )
     parser.add_argument(
         "--startsize",
