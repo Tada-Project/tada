@@ -78,8 +78,8 @@ def parse(args):
         "--backfill",
         required=False,
         type=int,
-        default=0,
-        help="is 1 if decide to use backfill, otherwise 0",
+        default=constants.BACKFILL,
+        help="1 if decide to use backfill, otherwise not",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
