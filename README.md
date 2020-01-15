@@ -42,7 +42,7 @@ If you want to run the tool, then you can run:
 
 ```bash
 tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
-                       [TYPES ...] [--schema SCHEMA] --startsize STARTSIZE [--expect EXPECTEDBIGOH]
+                       [TYPES ...] [--schema SCHEMA]
 ```
 
 You can learn about Tada's checks and defaults by typing python3
@@ -50,9 +50,9 @@ You can learn about Tada's checks and defaults by typing python3
 output.
 
 ```
-usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
-                       [TYPES ...] [--schema SCHEMA] [--startsize STARTSIZE] [--steps STEPS]
-                       [--runningtime RUNNINGTIME] [--expect EXPECTEDBIGOH] [--backfill 1or0]
+usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
+                       [--schema SCHEMA] [--startsize STARTSIZE] [--steps STEPS] [--runningtime RUNNINGTIME]
+                       [--expect EXPECT] [--backfill BACKFILL] [--indicator INDICATOR]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -61,20 +61,20 @@ optional arguments:
   --module MODULE       Module name with functions to analyze (default: None)
   --function FUNCTION   Name of the module's function to analyze (default: None)
   --types TYPES [TYPES ...]
-                        Parameter types for function to analyze, hypothesis, or hypothesis-clean
-                        (default: None)
+                        Parameter types for function to analyze, hypothesis, or hypothesis-clean (default: None)
   --schema SCHEMA       The path to the jsonschema (default: None)
   --startsize STARTSIZE
                         Starting size of the doubling experiment (default: 1)
-  --steps STEPS         Maximum rounds of experiment (default: 5)
+  --steps STEPS         Maximum rounds of experiment (default: 10)
   --runningtime RUNNINGTIME
                         Maximum running time (default: 200)
-  --expect EXPECTEDBIGOH
-                        Expected Result comparing to the result provided by TADA tool, then store
-                        important variables to experiment_data.csv
+  --expect EXPECT       Expected Growth Ratio: O(1) O(logn) O(n) O(nlogn) O(n^2) O(n^3) O(c^n) (default: None)
+  --backfill BACKFILL   Backfill if value equals 1 (default: 0)
+  --indicator INDICATOR
+                        Indicator value (default: 0.1)
 
-Sample usage: python3 tada_a_bigoh.py --directory /Users/myname/projectdirectory --module
-modulename.file --function function_name --types int
+Sample usage: python3 tada_a_bigoh.py --directory /Users/myname/projectdirectory --module modulename.file
+--function function_name --types int"
 ```
 
 Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
@@ -106,7 +106,7 @@ Here is an example of Tada being used in conjunction with functions in the
 [Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
 ```bash
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)" --backfill 1
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
     https://github.com/Tada-Project/tada/
@@ -127,6 +127,12 @@ expected end time: 6.756377457682293e-06
 end time rate: 1
 last end time rate: 1
 Start running experiment for size 100 →
+```
+
+To run with collecting experiment data, add `expect` like this:
+
+```bash
+pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
 ```
 
 ## Recording Multiple Tada Experiments' Result
