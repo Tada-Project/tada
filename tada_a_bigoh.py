@@ -50,7 +50,7 @@ if __name__ == "__main__":
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
-        while indicator >= 0.1 and steps <= tada_arguments.steps:
+        while steps <= tada_arguments.steps:
             if used_backfill == 1:
                 # run the benchmark by using it through python
                 used_backfill = 1
