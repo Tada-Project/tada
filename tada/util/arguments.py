@@ -71,6 +71,12 @@ def parse(args):
         type=str,
         help="Expected Growth Ratio: O(1) O(logn) O(n) O(nlogn) O(n^2) O(n^3) O(c^n)",
     )
+    parser.add_argument(
+        "--backfill",
+        required=False,
+        type=int,
+        help="is 1 if decide to use backfill, otherwise 0",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
