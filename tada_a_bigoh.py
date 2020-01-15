@@ -50,7 +50,7 @@ if __name__ == "__main__":
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
-        while steps <= tada_arguments.steps:
+        while True:
             if used_backfill == 1:
                 # run the benchmark by using it through python
                 used_backfill = 1
@@ -89,7 +89,7 @@ if __name__ == "__main__":
             print("Median {0}".format(median))
             if meanlastround == 0:
                 ratio = 0
-                indicator = 0.1
+                indicator = tada_arguments.indicator
                 end_time = mean
                 last_size = 0
                 last_end_time = end_time
@@ -128,8 +128,9 @@ if __name__ == "__main__":
                 current_size = int(current_size / constants.FACTOR)
             else:
                 current_size = current_size * constants.FACTOR
+            # check indicator and quit if smaller than decided indicator
             if indicator < tada_arguments.indicator:
-                print("Quit due to indicator")
+                print("Quit due to indicator: ", indicator)
                 break
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
@@ -139,6 +140,9 @@ if __name__ == "__main__":
                 constants.QUIT_BY_MAX_RUNTIME = 1
                 break
             steps += 1
+            if steps > tada_arguments.steps:
+                print("Quit due to end of rounds: ", steps)
+                break
         results.display_resultstable(resultstable)
         print(analysis.analyze_big_oh(ratio))
         if indicator < tada_arguments.indicator:
@@ -178,6 +182,7 @@ if __name__ == "__main__":
             constants.RESULT = 1
         constants.DATA_GEN_STRATEGY = tada_arguments.types
         constants.START_SIZE = tada_arguments.startsize
+        constants.INDICATOR_VALUE = tada_arguments.indicator
         df = pd.read_csv("experiment_data.csv")
         # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
         df_new = pd.DataFrame(
