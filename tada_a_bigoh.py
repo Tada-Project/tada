@@ -27,7 +27,7 @@ if __name__ == "__main__":
     did_verify_arguments = arguments.verify(tada_arguments)
     resultstable = PrettyTable(["Size", "Mean", "Median", "Ratio"])
     meanlastround = 0
-    indicator = tada_arguments.indicator
+    indicator = 0
     steps = constants.STEP_START
     last_last_size = 0
     count = 0
@@ -128,7 +128,7 @@ if __name__ == "__main__":
                 current_size = int(current_size / constants.FACTOR)
             else:
                 current_size = current_size * constants.FACTOR
-            if indicator < 0.1:
+            if indicator < tada_arguments.indicator:
                 print("Quit due to indicator")
                 break
             save.save_experiment_size(constants.SIZE, current_size)
@@ -141,10 +141,10 @@ if __name__ == "__main__":
             steps += 1
         results.display_resultstable(resultstable)
         print(analysis.analyze_big_oh(ratio))
-        if indicator < 0.1:
+        if indicator < tada_arguments.indicator:
             constants.QUIT_BY_INDICATOR = 1
         # store indicator
-        constants.INDICATOR_VALUE = constants.INDICATOR
+        constants.INDICATOR_VALUE = tada_arguments.indicator
         # store runningtime
         constants.TOTAL_RUNNING_TIME = time.time() - start_time
         last_bench_meta = current_benchmark.get_metadata()
