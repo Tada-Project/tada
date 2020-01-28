@@ -84,13 +84,18 @@ if __name__ == "__main__":
             total_loop_list.append(current_benchmark.get_total_loops())
             # perform additional analysis of the results
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
-            if meanlastround == 0:
-                mean = current_benchmark.mean()
+            if tada_arguments.types == "hypothesis":
+                mean = current_benchmark.mean() - constants.GEN_TIME
+                print("Hypothesis Generation Time: ", constants.GEN_TIME)
                 print("Mean {0}".format(mean))
-                median = current_benchmark.median()
+                median = current_benchmark.median() - constants.GEN_TIME
                 print("Median {0}".format(median))
-                first_mean = mean
-                first_median = median
+            else:
+                mean = current_benchmark.mean()
+                median = current_benchmark.median()
+                print("Mean {0}".format(mean))
+                print("Median {0}".format(median))
+            if meanlastround == 0:
                 ratio = 0
                 indicator = tada_arguments.indicator
                 end_time = mean
@@ -99,14 +104,6 @@ if __name__ == "__main__":
                 last_end_time_rate = 1
                 end_time_rate = 1
             else:
-                if tada_arguments.types == "hypothesis":
-                    mean = current_benchmark.mean() - first_mean * steps
-                    median = current_benchmark.median() - first_median * steps
-                else:
-                    mean = current_benchmark.mean()
-                    median = current_benchmark.median()
-                print("Mean {0}".format(mean))
-                print("Median {0}".format(median))
                 if current_size > last_size:
                     ratio = mean / meanlastround
                     avg = (mean + meanlastround) / 2
