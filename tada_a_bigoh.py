@@ -91,26 +91,31 @@ if __name__ == "__main__":
             total_loop_list.append(current_benchmark.get_total_loops())
             # perform additional analysis of the results
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
-            if meanlastround == 0:
-                if tada_arguments.types[0] == "hypothesis":
-                    # with open("data.txt", "r") as f:
-                    #     hypothesis_runtime = float(f.read())
-                    tada_configuration_dict = configuration.read(constants.CONFIGURATION)
-                    first_round_size = current_size
+            if tada_arguments.types[0] == "hypothesis":
+                # with open("data.txt", "r") as f:
+                #     hypothesis_runtime = float(f.read())
+                tada_configuration_dict = configuration.read(constants.CONFIGURATION)
+                hypothesis_gen_start = time.time()
+                temp_analyzed_function = generate.generate_strategy(
+                    generate.time_generation,
+                    configuration.get_schema_path(tada_configuration_dict),
+                    current_size,
+                )
+                i = 0
+                total_gen_time = 0
+                while i < 11:
                     hypothesis_gen_start = time.time()
-                    temp_analyzed_function = generate.generate_strategy(
-                        generate.time_generation,
-                        configuration.get_schema_path(tada_configuration_dict),
-                        first_round_size,
-                    )
-                    constants.GEN_TIME = time.time() - hypothesis_gen_start
-                # generate.store_hypothesis(constants.GEN_TIME)
-                data_gen_time = current_size / first_round_size * constants.GEN_TIME
-                mean = current_benchmark.mean() - data_gen_time
-                print("Hypothesis Generation Time: ", data_gen_time)
-                print("Mean {0}".format(mean))
-                median = current_benchmark.median() - data_gen_time
-                print("Median {0}".format(median))
+                    temp_analyzed_function()
+                    total_gen_time += time.time() - hypothesis_gen_start
+                    i += 1
+                constants.GEN_TIME = total_gen_time / 10
+            # generate.store_hypothesis(constants.GEN_TIME)
+            mean = current_benchmark.mean() - constants.GEN_TIME
+            print("Hypothesis Generation Time: ", constants.GEN_TIME)
+            print("Mean {0}".format(mean))
+            median = current_benchmark.median() - constants.GEN_TIME
+            print("Median {0}".format(median))
+            if meanlastround == 0:
                 ratio = 0
                 indicator = tada_arguments.indicator
                 end_time = mean
@@ -119,17 +124,11 @@ if __name__ == "__main__":
                 last_end_time_rate = 1
                 end_time_rate = 1
             else:
-                data_gen_time = current_size / first_round_size * constants.GEN_TIME
-                mean = current_benchmark.mean() - data_gen_time
-                print("Hypothesis Generation Time: ", data_gen_time)
-                print("Mean {0}".format(mean))
-                median = current_benchmark.median() - data_gen_time
-                print("Median {0}".format(median))
                 if current_size > last_size:
                     ratio = mean / meanlastround
                     avg = (mean + meanlastround) / 2
                     std = abs(mean - avg)
-                    indicator = std / avg
+                    indicator = std / abs(avg)
                     end_time = (mean - 0.01 * meanlastround) / 0.99
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
@@ -137,7 +136,7 @@ if __name__ == "__main__":
                     ratio = meanlastround / mean
                     avg = (mean + meanlastround) / 2
                     std = abs(meanlastround - avg)
-                    indicator = std / avg
+                    indicator = std / abs(avg)
                     end_time = (meanlastround - 0.01 * mean) / 0.99
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
