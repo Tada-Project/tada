@@ -13,7 +13,9 @@ from tada.util import arguments
 from tada.util import configuration
 from tada.util import constants
 from tada.util import display
+from tada.util import generate
 from tada.util import package
+from tada.util import read
 from tada.util import run
 from tada.util import save
 from tada.util import results
@@ -60,6 +62,11 @@ if __name__ == "__main__":
                     constants.QUIT_BY_BACKFILL = 1
                     print("Quit due to two backfills")
                     break
+            if tada_arguments.types[0] == "hypothesis":
+                if current_size >= 1000:
+                    constants.QUIT_BY_MAX_SIZE = 1
+                    print("Quit due to researched max size")
+                    break
             display.display_start_message(current_size)
             current_output, current_error = run.run_command(
                 constants.PYTHON_EXEC
@@ -84,18 +91,26 @@ if __name__ == "__main__":
             total_loop_list.append(current_benchmark.get_total_loops())
             # perform additional analysis of the results
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
-            if tada_arguments.types == "hypothesis":
-                mean = current_benchmark.mean() - constants.GEN_TIME
-                print("Hypothesis Generation Time: ", constants.GEN_TIME)
-                print("Mean {0}".format(mean))
-                median = current_benchmark.median() - constants.GEN_TIME
-                print("Median {0}".format(median))
-            else:
-                mean = current_benchmark.mean()
-                median = current_benchmark.median()
-                print("Mean {0}".format(mean))
-                print("Median {0}".format(median))
             if meanlastround == 0:
+                if tada_arguments.types[0] == "hypothesis":
+                    # with open("data.txt", "r") as f:
+                    #     hypothesis_runtime = float(f.read())
+                    tada_configuration_dict = configuration.read(constants.CONFIGURATION)
+                    first_round_size = current_size
+                    hypothesis_gen_start = time.time()
+                    temp_analyzed_function = generate.generate_strategy(
+                        generate.time_generation,
+                        configuration.get_schema_path(tada_configuration_dict),
+                        first_round_size,
+                    )
+                    constants.GEN_TIME = time.time() - hypothesis_gen_start
+                # generate.store_hypothesis(constants.GEN_TIME)
+                data_gen_time = current_size / first_round_size * constants.GEN_TIME
+                mean = current_benchmark.mean() - data_gen_time
+                print("Hypothesis Generation Time: ", data_gen_time)
+                print("Mean {0}".format(mean))
+                median = current_benchmark.median() - data_gen_time
+                print("Median {0}".format(median))
                 ratio = 0
                 indicator = tada_arguments.indicator
                 end_time = mean
@@ -104,6 +119,12 @@ if __name__ == "__main__":
                 last_end_time_rate = 1
                 end_time_rate = 1
             else:
+                data_gen_time = current_size / first_round_size * constants.GEN_TIME
+                mean = current_benchmark.mean() - data_gen_time
+                print("Hypothesis Generation Time: ", data_gen_time)
+                print("Mean {0}".format(mean))
+                median = current_benchmark.median() - data_gen_time
+                print("Median {0}".format(median))
                 if current_size > last_size:
                     ratio = mean / meanlastround
                     avg = (mean + meanlastround) / 2
@@ -206,6 +227,7 @@ if __name__ == "__main__":
                 "QUIT_BY_INDICATOR": constants.QUIT_BY_INDICATOR,
                 "QUIT_BY_BACKFILL": constants.QUIT_BY_BACKFILL,
                 "QUIT_BY_STEPS": constants.QUIT_BY_STEPS,
+                "QUIT_BY_MAX_SIZE": constants.QUIT_BY_MAX_SIZE,
                 "MEM_MAX_RSS": constants.MEM_MAX_RSS,
                 "MEM_PEAK_PAGEFILE_USAGE": constants.MEM_PEAK_PAGEFILE_USAGE,
                 "OS": constants.OS,

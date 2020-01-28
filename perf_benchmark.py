@@ -43,13 +43,6 @@ if __name__ == "__main__":
         func_type = configuration.get_schema_path(tada_configuration_dict)
     # using hypothesis without reading data
     if func_type[0] == "hypothesis":
-        hypothesis_gen_start = time.time()
-        temp_analyzed_function = generate.generate_strategy(
-            generate.time_generation,
-            configuration.get_schema_path(tada_configuration_dict),
-            chosen_size,
-        )
-        constants.GEN_TIME = hypothesis_gen_start - time.time()
         analyzed_function = generate.generate_strategy(
             analyzed_function,
             configuration.get_schema_path(tada_configuration_dict),
