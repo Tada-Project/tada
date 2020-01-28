@@ -35,6 +35,7 @@ if __name__ == "__main__":
     total_loop_list = []
     sum_of_loops = 0
     used_backfill = tada_arguments.backfill
+    steps = 1
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -83,11 +84,13 @@ if __name__ == "__main__":
             total_loop_list.append(current_benchmark.get_total_loops())
             # perform additional analysis of the results
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
-            mean = current_benchmark.mean()
-            print("Mean {0}".format(mean))
-            median = current_benchmark.median()
-            print("Median {0}".format(median))
             if meanlastround == 0:
+                mean = current_benchmark.mean()
+                print("Mean {0}".format(mean))
+                median = current_benchmark.median()
+                print("Median {0}".format(median))
+                first_mean = mean
+                first_median = median
                 ratio = 0
                 indicator = tada_arguments.indicator
                 end_time = mean
@@ -96,6 +99,14 @@ if __name__ == "__main__":
                 last_end_time_rate = 1
                 end_time_rate = 1
             else:
+                if tada_arguments.types == "hypothesis":
+                    mean = current_benchmark.mean() - first_mean * steps
+                    median = current_benchmark.median() - first_median * steps
+                else:
+                    mean = current_benchmark.mean()
+                    median = current_benchmark.median()
+                print("Mean {0}".format(mean))
+                print("Median {0}".format(median))
                 if current_size > last_size:
                     ratio = mean / meanlastround
                     avg = (mean + meanlastround) / 2
