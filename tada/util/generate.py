@@ -44,6 +44,7 @@ def generate_strategy(function, path, size):
     return function
 
 
+# pylint: disable=unused-argument
 def time_generation(chosen_types, chosen_size):
     """empty function for timing hypothesis data generation"""
     print()
