@@ -152,6 +152,7 @@ if __name__ == "__main__":
         constants.INDICATOR_VALUE = tada_arguments.indicator
         # store runningtime
         constants.TOTAL_RUNNING_TIME = time.time() - start_time
+        constants.AVG_RUN_TIME = constants.TOTAL_RUNNING_TIME / steps
         last_bench_meta = current_benchmark.get_metadata()
         name = last_bench_meta["name"]
         # store benchmark metadata
@@ -209,6 +210,8 @@ if __name__ == "__main__":
                 "DATA_GEN_STRATEGY": constants.DATA_GEN_STRATEGY,
                 "START_SIZE": constants.START_SIZE,
                 "USED_BACKFILL": used_backfill,
+                "AVG_RUN_TIME": constants.AVG_RUN_TIME,
+                "STEPS": steps,
             },
             index=[1],
         )
