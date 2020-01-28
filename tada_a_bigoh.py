@@ -99,7 +99,7 @@ if __name__ == "__main__":
                 if current_size > last_size:
                     ratio = mean / meanlastround
                     avg = (mean + meanlastround) / 2
-                    std = mean - avg
+                    std = abs(mean - avg)
                     indicator = std / avg
                     end_time = (mean - 0.01 * meanlastround) / 0.99
                     last_end_time_rate = end_time_rate
@@ -107,7 +107,7 @@ if __name__ == "__main__":
                 else:  # backfill
                     ratio = meanlastround / mean
                     avg = (mean + meanlastround) / 2
-                    std = meanlastround - avg
+                    std = abs(meanlastround - avg)
                     indicator = std / avg
                     end_time = (meanlastround - 0.01 * mean) / 0.99
                     last_end_time_rate = end_time_rate
