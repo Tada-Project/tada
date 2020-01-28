@@ -46,7 +46,7 @@ def generate_strategy(function, path, size):
 
 def time_generation(chosen_types, chosen_size):
     """empty function for timing hypothesis data generation"""
-    x = 0
+    print()
 
 
 def generate_data(chosen_types, chosen_size):
