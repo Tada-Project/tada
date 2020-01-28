@@ -63,7 +63,7 @@ if __name__ == "__main__":
                     print("Quit due to two backfills")
                     break
             if tada_arguments.types[0] == "hypothesis":
-                if current_size >= 1000:
+                if current_size >= constants.MAX_SIZE:
                     constants.QUIT_BY_MAX_SIZE = 1
                     print("Quit due to researched max size")
                     break
