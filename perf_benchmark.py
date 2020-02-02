@@ -64,12 +64,11 @@ if __name__ == "__main__":
             configuration.get_schema_path(tada_configuration_dict),
             chosen_size,
         )
-        func_type = configuration.get_schema_path(tada_configuration_dict)
         current_benchmark = runner.bench_func(
             current_experiment_name, run.run_benchmark, analyzed_function,
         )
     else:
-        # generate data
+        # generate data for hypothesis-clean or generate function
         data = generate.generate_data(func_type, chosen_size,)
         current_benchmark = runner.bench_func(
             current_experiment_name, run.run_benchmark, analyzed_function, *data,
