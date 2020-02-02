@@ -37,25 +37,28 @@ if __name__ == "__main__":
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # read the chosen types
     func_type = configuration.get_types(tada_configuration_dict)
-    # using hypothesis and read data
+    # using hypothesis and read data from file
     if func_type[0] == "hypothesis-clean":
         func_type = configuration.get_schema_path(tada_configuration_dict)
     # using hypothesis reading from global variable
+    data = ()
     if func_type[0] == "hypothesis-gen":
 
         def store(a):
             """To store data generated into global variable for experiment"""
             global data
-            data = a
+            data = data + (a,)
 
-        gen_func = generate.generate_strategy(
-            store, configuration.get_schema_path(tada_configuration_dict), chosen_size,
+        strategies = generate.gen_st(
+            configuration.get_schema_path(tada_configuration_dict), chosen_size
         )
-        # run generate function to store data
-        gen_func()
+        # store data based on the amount of parameters
+        for st in strategies:
+            gen = generate.gen_single_func(store, st)
+            gen()
 
         current_benchmark = runner.bench_func(
-            current_experiment_name, run.run_benchmark, analyzed_function, data
+            current_experiment_name, run.run_benchmark, analyzed_function, *data
         )
     # using hypothesis including data generation time
     elif func_type[0] == "hypothesis":
