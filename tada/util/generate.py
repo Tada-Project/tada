@@ -20,6 +20,7 @@ TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 
 
 def gen_st(path, size):
+    """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
     # change the size as the experiment doubles
     for schema in json_schema:
@@ -49,6 +50,7 @@ def generate_func(function, path, size):
 
 
 def gen_single_func(function, strategy):
+    """generate function from a single strategy"""
     function = given(strategy)(function)
     # configure hypothesis
     function = settings(
