@@ -134,7 +134,7 @@ def test_generate_data_with_hypothesis(tmpdir):
 
 
 def test_generate_function_with_one_json(tmpdir):
-    """Checks that generate strategy works for one json object in file"""
+    """Checks that generate function works for one json object in file"""
     # pylint: disable=blacklisted-name
     def foo(a):
         """A sample function"""
@@ -148,7 +148,7 @@ def test_generate_function_with_one_json(tmpdir):
 
 
 def test_generate_function_multiple_json(tmpdir):
-    """Checks that generate strategy works for one json object in file"""
+    """Checks that generate function works for two json objects in file"""
     # pylint: disable=blacklisted-name
     def foo(a):
         """A sample function"""
@@ -177,7 +177,7 @@ def test_generate_strategy_with_one_json(tmpdir):
 
 
 def test_generate_strategy_multiple_json(tmpdir):
-    """Checks that generate strategy works for one json object in file"""
+    """Checks that generate strategy works for two json objects in file"""
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write(
         '[{"type": "array", "items": {"type": "number"}}\n\
@@ -198,7 +198,7 @@ allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
 
 
 def test_generate_single_func():
-    """Checks that generate strategy works for one json object in file"""
+    """Checks that generate function from single strategy works"""
     # pylint: disable=blacklisted-name
     def foo(a):
         """A sample function"""
