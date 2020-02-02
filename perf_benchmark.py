@@ -62,7 +62,7 @@ if __name__ == "__main__":
         )
     # using hypothesis including data generation time
     elif func_type[0] == "hypothesis":
-        analyzed_function = generate.generate_strategy(
+        analyzed_function = generate.generate_func(
             analyzed_function,
             configuration.get_schema_path(tada_configuration_dict),
             chosen_size,
