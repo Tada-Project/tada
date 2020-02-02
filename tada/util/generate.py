@@ -19,8 +19,7 @@ DEFAULT_VALUE_BOOLEAN = True
 TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 
 
-def generate_strategy(function, path, size):
-    """generate a function with strategy from schema path and current input size"""
+def gen_st(path, size):
     json_schema = read.read_schema(path)
     # change the size as the experiment doubles
     for schema in json_schema:
@@ -29,8 +28,28 @@ def generate_strategy(function, path, size):
     strategy = []
     for j in json_schema:
         strategy.append(from_schema(j))
-    # strategy = generate_strategy(json_schema)
+    return strategy
+
+
+def generate_func(function, path, size):
+    """generate a function with strategy from schema path and current input size"""
+    strategy = gen_st(path, size)
     function = given(*strategy)(function)
+    # configure hypothesis
+    function = settings(
+        max_examples=1,
+        suppress_health_check=[
+            HealthCheck.large_base_example,
+            HealthCheck.too_slow,
+            HealthCheck.data_too_large,
+            HealthCheck.filter_too_much,
+        ],
+    )(function)
+    return function
+
+
+def gen_single_func(function, strategy):
+    function = given(strategy)(function)
     # configure hypothesis
     function = settings(
         max_examples=1,
