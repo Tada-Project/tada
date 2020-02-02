@@ -142,7 +142,7 @@ def test_generate_strategy_with_one_json(tmpdir):
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write('[{"type": "array", "items": {"type": "number"}}]')
     size = "50"
-    function = generate.generate_strategy(foo, path, size)
+    function = generate.generate_func(foo, path, size)
     assert str(type(function)) == "<class 'function'>"
 
 
@@ -159,5 +159,5 @@ def test_generate_strategy_multiple_json(tmpdir):
         ,{"type": "array", "items": {"type": "number"}}]'
     )
     size = "50"
-    function = generate.generate_strategy(foo, path, size)
+    function = generate.generate_func(foo, path, size)
     assert str(type(function)) == "<class 'function'>"
