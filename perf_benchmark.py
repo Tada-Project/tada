@@ -61,16 +61,17 @@ if __name__ == "__main__":
                 global data
                 data = data + (a,)
 
-            strategies = generate.gen_st(
+            strategies = generate.generate_strategy(
                 configuration.get_schema_path(tada_configuration_dict), chosen_size
             )
             # store data based on the amount of parameters
             for st in strategies:
-                gen = generate.gen_single_func(store, st)
+                gen = generate.generate_single_func(store, st)
                 gen()
         # using hypothesis-clean or generation function
         else:
             data = generate.generate_data(func_type, chosen_size,)
+        # run benchmark
         current_benchmark = runner.bench_func(
             current_experiment_name, run.run_benchmark, analyzed_function, *data,
         )
