@@ -1,5 +1,6 @@
 """Tests for the generate module"""
 
+from hypothesis_jsonschema import from_schema
 from tada.util import generate
 
 
@@ -132,7 +133,7 @@ def test_generate_data_with_hypothesis(tmpdir):
     assert generated_data is not None
 
 
-def test_generate_strategy_with_one_json(tmpdir):
+def test_generate_function_with_one_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
     # pylint: disable=blacklisted-name
     def foo(a):
@@ -146,7 +147,7 @@ def test_generate_strategy_with_one_json(tmpdir):
     assert str(type(function)) == "<class 'function'>"
 
 
-def test_generate_strategy_multiple_json(tmpdir):
+def test_generate_function_multiple_json(tmpdir):
     """Checks that generate strategy works for one json object in file"""
     # pylint: disable=blacklisted-name
     def foo(a):
@@ -160,4 +161,50 @@ def test_generate_strategy_multiple_json(tmpdir):
     )
     size = "50"
     function = generate.generate_func(foo, path, size)
+    assert str(type(function)) == "<class 'function'>"
+
+
+def test_generate_strategy_with_one_json(tmpdir):
+    """Checks that generate strategy works for one json object in file"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write('[{"type": "array", "items": {"type": "number"}}]')
+    size = "50"
+    strategy = generate.generate_strategy(path, size)
+    assert (
+        str(strategy[0])
+        == "one_of(lists(elements=one_of(floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+    )
+
+
+def test_generate_strategy_multiple_json(tmpdir):
+    """Checks that generate strategy works for one json object in file"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write(
+        '[{"type": "array", "items": {"type": "number"}}\n\
+        ,{"type": "array", "items": {"type": "number"}}]'
+    )
+    size = "50"
+    strategy = generate.generate_strategy(path, size)
+    assert (
+        str(strategy[0])
+        == "one_of(lists(elements=one_of(floats(allow_nan=False, \
+allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+    )
+    assert (
+        str(strategy[1])
+        == "one_of(lists(elements=one_of(floats(allow_nan=False, \
+allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+    )
+
+
+def test_generate_single_func():
+    """Checks that generate strategy works for one json object in file"""
+    # pylint: disable=blacklisted-name
+    def foo(a):
+        """A sample function"""
+        type(a)
+
+    schema = {"type": "array", "items": {"type": "number"}}
+    strategy = from_schema(schema)
+    function = generate.generate_single_func(foo, strategy)
     assert str(type(function)) == "<class 'function'>"
