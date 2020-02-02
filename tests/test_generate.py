@@ -172,7 +172,8 @@ def test_generate_strategy_with_one_json(tmpdir):
     strategy = generate.generate_strategy(path, size)
     assert (
         str(strategy[0])
-        == "one_of(lists(elements=one_of(floats(allow_nan=False, allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+        == "one_of(lists(elements=one_of(floats(allow_nan=False, \
+allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
     )
 
 
