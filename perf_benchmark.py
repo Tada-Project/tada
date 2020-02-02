@@ -40,35 +40,40 @@ if __name__ == "__main__":
     # using hypothesis and read data
     if func_type[0] == "hypothesis-clean":
         func_type = configuration.get_schema_path(tada_configuration_dict)
-    # using hypothesis without reading data
-    # if func_type[0] == "hypothesis":
-    #     analyzed_function = generate.generate_strategy(
-    #         analyzed_function,
-    #         configuration.get_schema_path(tada_configuration_dict),
-    #         chosen_size,
-    #     )
-    #     func_type = configuration.get_schema_path(tada_configuration_dict)
-    #     current_benchmark = runner.bench_func(
-    #         current_experiment_name, run.run_benchmark, analyzed_function,
-    #     )
-    # else:
-    #     # generate data
-    #     data = generate.generate_data(func_type, chosen_size,)
-    #     current_benchmark = runner.bench_func(
-    #         current_experiment_name, run.run_benchmark, analyzed_function, *data,
-    #     )
+    # using hypothesis reading from global variable
     if func_type[0] == "hypothesis-gen":
 
-        def foo(a):
+        def store(a):
+            """To store data generated into global variable for experiment"""
             global data
             data = a
 
         gen_func = generate.generate_strategy(
-            foo, configuration.get_schema_path(tada_configuration_dict), chosen_size,
+            store, configuration.get_schema_path(tada_configuration_dict), chosen_size,
         )
+        # run generate function to store data
         gen_func()
+
         current_benchmark = runner.bench_func(
             current_experiment_name, run.run_benchmark, analyzed_function, data
         )
+    # using hypothesis including data generation time
+    elif func_type[0] == "hypothesis":
+        analyzed_function = generate.generate_strategy(
+            analyzed_function,
+            configuration.get_schema_path(tada_configuration_dict),
+            chosen_size,
+        )
+        func_type = configuration.get_schema_path(tada_configuration_dict)
+        current_benchmark = runner.bench_func(
+            current_experiment_name, run.run_benchmark, analyzed_function,
+        )
+    else:
+        # generate data
+        data = generate.generate_data(func_type, chosen_size,)
+        current_benchmark = runner.bench_func(
+            current_experiment_name, run.run_benchmark, analyzed_function, *data,
+        )
+
     # save the perf results from running the benchmark
     save.save_benchmark_results(current_benchmark, current_experiment_name)
