@@ -215,7 +215,7 @@ allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
     )
 
 
-def test_generate_single_func():
+def test_generate_func_from_single_st():
     """Checks that generate function from single strategy works"""
     # pylint: disable=blacklisted-name
     def foo(a):
@@ -224,5 +224,5 @@ def test_generate_single_func():
 
     schema = {"type": "array", "items": {"type": "number"}}
     strategy = from_schema(schema)
-    function = generate.generate_single_func(foo, strategy)
+    function = generate.generate_func_from_single_st(foo, strategy)
     assert str(type(function)) == "<class 'function'>"

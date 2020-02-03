@@ -33,7 +33,7 @@ def store_data_to_global(path, chosen_size):
     strategies = generate_experiment_strategy(path, chosen_size)
     # store data based on the amount of parameters
     for st in strategies:
-        gen = generate_single_func(store_global, st)
+        gen = generate_func_from_single_st(store_global, st)
         gen()
     return global_data
 
@@ -74,7 +74,7 @@ def generate_func(function, path, size):
     return function
 
 
-def generate_single_func(function, strategy):
+def generate_func_from_single_st(function, strategy):
     """generate function from a single strategy"""
     function = given(strategy)(function)
     # configure hypothesis
