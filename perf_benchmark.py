@@ -45,7 +45,6 @@ if __name__ == "__main__":
         path = configuration.get_schema_path(tada_configuration_dict)
     # generate data
     data = generate.generate_data(func_type, chosen_size, path)
-    print(data)
     # run benchmark
     current_benchmark = runner.bench_func(
         current_experiment_name, run.run_benchmark, analyzed_function, *data,
