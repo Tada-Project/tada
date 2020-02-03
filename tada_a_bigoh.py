@@ -62,7 +62,11 @@ if __name__ == "__main__":
                     constants.QUIT_BY_BACKFILL = 1
                     print("Quit due to two backfills")
                     break
-            if tada_arguments.types[0] == "hypothesis" or tada_arguments.types[0] == "hypothesis-clean" or tada_arguments.types[0] == "hypothesis-sub":
+            if (
+                tada_arguments.types[0] == "hypothesis"
+                or tada_arguments.types[0] == "hypothesis-clean"
+                or tada_arguments.types[0] == "hypothesis-sub"
+            ):
                 if current_size >= tada_arguments.maxsize:
                     constants.QUIT_BY_MAX_SIZE = 1
                     print("Quit due to researched max size")
@@ -184,14 +188,18 @@ if __name__ == "__main__":
         last_bench_meta = current_benchmark.get_metadata()
         name = last_bench_meta["name"]
         # store benchmark metadata
-        constants.NAME_OF_EXPERIMENT = configuration.get_experiment_info(vars(tada_arguments))
+        constants.NAME_OF_EXPERIMENT = configuration.get_experiment_info(
+            vars(tada_arguments)
+        )
         if "cpu_model_name" in last_bench_meta:
             constants.CPU_TYPE = last_bench_meta["cpu_model_name"]
         constants.CPU_COUNT = last_bench_meta["cpu_count"]
         constants.OS = last_bench_meta["platform"]
         constants.PYTHON_VERSION = last_bench_meta["python_version"]
         # store run metadata
-        with open("_results" + constants.SEPARATOR + name + constants.JSON_EXT, 'r') as f:
+        with open(
+            "_results" + constants.SEPARATOR + name + constants.JSON_EXT, "r"
+        ) as f:
             readlastjson = json.load(f)
         last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0]["metadata"]
         if "cpu_temp" in last_exp_run_metadata:
@@ -199,16 +207,23 @@ if __name__ == "__main__":
         if "mem_max_rss" in last_exp_run_metadata:
             constants.MEM_MAX_RSS = last_exp_run_metadata["mem_max_rss"]
         else:
-            constants.MEM_PEAK_PAGEFILE_USAGE = last_exp_run_metadata["mem_peak_pagefile_usage"]
+            constants.MEM_PEAK_PAGEFILE_USAGE = last_exp_run_metadata[
+                "mem_peak_pagefile_usage"
+            ]
         for item in total_loop_list:
             sum_of_loops += item
         # calculate avg total loops
         constants.PYPERF_AVG_EXPERIMENT_ROUNDS = sum_of_loops / len(total_loop_list)
         # calculate last two loop growth ratio
         if len(total_loop_list) >= 2:
-            constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS = total_loop_list[-1] / total_loop_list[-2]
+            constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS = (
+                total_loop_list[-1] / total_loop_list[-2]
+            )
         # check if result is expected
-        if tada_arguments.expect is not None and tada_arguments.expect in analysis.analyze_big_oh(ratio):
+        if (
+            tada_arguments.expect is not None
+            and tada_arguments.expect in analysis.analyze_big_oh(ratio)
+        ):
             constants.RESULT = 1
         constants.DATA_GEN_STRATEGY = tada_arguments.types
         constants.START_SIZE = tada_arguments.startsize
