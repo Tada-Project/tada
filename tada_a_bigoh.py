@@ -62,7 +62,7 @@ if __name__ == "__main__":
                     constants.QUIT_BY_BACKFILL = 1
                     print("Quit due to two backfills")
                     break
-            if tada_arguments.types[0] == "hypothesis":
+            if tada_arguments.types[0] == "hypothesis" or tada_arguments.types[0] == "hypothesis-clean" or tada_arguments.types[0] == "hypothesis-sub":
                 if current_size >= constants.MAX_SIZE:
                     constants.QUIT_BY_MAX_SIZE = 1
                     print("Quit due to researched max size")
@@ -91,7 +91,7 @@ if __name__ == "__main__":
             total_loop_list.append(current_benchmark.get_total_loops())
             # perform additional analysis of the results
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
-            if tada_arguments.types[0] == "hypothesis":
+            if tada_arguments.types[0] == "hypothesis-sub":
                 # with open("data.txt", "r") as f:
                 #     hypothesis_runtime = float(f.read())
                 tada_configuration_dict = configuration.read(constants.CONFIGURATION)

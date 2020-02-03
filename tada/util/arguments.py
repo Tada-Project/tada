@@ -39,7 +39,7 @@ def parse(args):
         required=True,
         type=str,
         nargs="+",
-        help="Parameter types for function to analyze, hypothesis, or hypothesis-clean",
+        help="Parameter types for function to analyze, hypothesis, hypothesis-clean, or hypothesis-sub",
     )
     parser.add_argument(
         "--schema",
