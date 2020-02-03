@@ -136,6 +136,20 @@ def test_generate_data_with_hypothesis(tmpdir):
     assert generated_data is not None
 
 
+def test_generate_data_with_hypothesis_clean(tmpdir):
+    """Checks that requesting a generated hypothesis-clean data returns one"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write('[{"type": "array", "items": {"type": "integer"}}]')
+    # assume the doubling experiment is at 100
+    current_size = 100
+    requested_types = ["hypothesis-clean"]
+    requested_oath = str(path)
+    generated_data = generate.generate_data(
+        requested_types, current_size, requested_oath
+    )
+    assert generated_data is not None
+
+
 def test_generate_function_with_one_json(tmpdir):
     """Checks that generate function works for one json object in file"""
     # pylint: disable=blacklisted-name
