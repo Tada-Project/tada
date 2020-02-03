@@ -1,5 +1,6 @@
 """Tests for the generate module"""
 
+from hypothesis_jsonschema import from_schema
 from tada.util import generate
 
 
@@ -127,13 +128,30 @@ def test_generate_data_with_hypothesis(tmpdir):
     path.write('[{"type": "array", "items": {"type": "integer"}}]')
     # assume the doubling experiment is at 100
     current_size = 100
-    requested_types = str(path)
-    generated_data = generate.generate_data(requested_types, current_size)
+    requested_types = ["hypothesis"]
+    requested_oath = str(path)
+    generated_data = generate.generate_data(
+        requested_types, current_size, requested_oath
+    )
     assert generated_data is not None
 
 
-def test_generate_strategy_with_one_json(tmpdir):
-    """Checks that generate strategy works for one json object in file"""
+def test_generate_data_with_hypothesis_clean(tmpdir):
+    """Checks that requesting a generated hypothesis-clean data returns one"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write('[{"type": "array", "items": {"type": "integer"}}]')
+    # assume the doubling experiment is at 100
+    current_size = 100
+    requested_types = ["hypothesis-clean"]
+    requested_oath = str(path)
+    generated_data = generate.generate_data(
+        requested_types, current_size, requested_oath
+    )
+    assert generated_data is not None
+
+
+def test_generate_function_with_one_json(tmpdir):
+    """Checks that generate function works for one json object in file"""
     # pylint: disable=blacklisted-name
     def foo(a):
         """A sample function"""
@@ -142,12 +160,12 @@ def test_generate_strategy_with_one_json(tmpdir):
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write('[{"type": "array", "items": {"type": "number"}}]')
     size = "50"
-    function = generate.generate_strategy(foo, path, size)
+    function = generate.generate_func(foo, path, size)
     assert str(type(function)) == "<class 'function'>"
 
 
-def test_generate_strategy_multiple_json(tmpdir):
-    """Checks that generate strategy works for one json object in file"""
+def test_generate_function_multiple_json(tmpdir):
+    """Checks that generate function works for two json objects in file"""
     # pylint: disable=blacklisted-name
     def foo(a):
         """A sample function"""
@@ -159,5 +177,52 @@ def test_generate_strategy_multiple_json(tmpdir):
         ,{"type": "array", "items": {"type": "number"}}]'
     )
     size = "50"
-    function = generate.generate_strategy(foo, path, size)
+    function = generate.generate_func(foo, path, size)
+    assert str(type(function)) == "<class 'function'>"
+
+
+def test_generate_strategy_with_one_json(tmpdir):
+    """Checks that generate strategy works for one json object in file"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write('[{"type": "array", "items": {"type": "number"}}]')
+    size = "50"
+    strategy = generate.generate_experiment_strategy(path, size)
+    assert (
+        str(strategy[0])
+        == "one_of(lists(elements=one_of(floats(allow_nan=False, \
+allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+    )
+
+
+def test_generate_strategy_multiple_json(tmpdir):
+    """Checks that generate strategy works for two json objects in file"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write(
+        '[{"type": "array", "items": {"type": "number"}}\n\
+        ,{"type": "array", "items": {"type": "number"}}]'
+    )
+    size = "50"
+    strategy = generate.generate_experiment_strategy(path, size)
+    assert (
+        str(strategy[0])
+        == "one_of(lists(elements=one_of(floats(allow_nan=False, \
+allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+    )
+    assert (
+        str(strategy[1])
+        == "one_of(lists(elements=one_of(floats(allow_nan=False, \
+allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+    )
+
+
+def test_generate_func_from_single_st():
+    """Checks that generate function from single strategy works"""
+    # pylint: disable=blacklisted-name
+    def foo(a):
+        """A sample function"""
+        type(a)
+
+    schema = {"type": "array", "items": {"type": "number"}}
+    strategy = from_schema(schema)
+    function = generate.generate_func_from_single_st(foo, strategy)
     assert str(type(function)) == "<class 'function'>"
