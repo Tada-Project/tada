@@ -91,6 +91,12 @@ def generate_func_from_single_st(function, strategy):
     return function
 
 
+# pylint: disable=unused-argument
+def time_generation(list):
+    """empty function for timing hypothesis data generation"""
+    pass
+
+
 def generate_data(chosen_types, chosen_size, path=None):
     """Generate a list of data values"""
     generated_values = ()

@@ -13,7 +13,9 @@ from tada.util import arguments
 from tada.util import configuration
 from tada.util import constants
 from tada.util import display
+from tada.util import generate
 from tada.util import package
+from tada.util import read
 from tada.util import run
 from tada.util import save
 from tada.util import results
@@ -35,6 +37,7 @@ if __name__ == "__main__":
     total_loop_list = []
     sum_of_loops = 0
     used_backfill = tada_arguments.backfill
+    steps = 1
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -58,6 +61,11 @@ if __name__ == "__main__":
                 if constants.BACKFILL_TIMES == 2:
                     constants.QUIT_BY_BACKFILL = 1
                     print("Quit due to two backfills")
+                    break
+            if tada_arguments.types[0] == "hypothesis":
+                if current_size >= constants.MAX_SIZE:
+                    constants.QUIT_BY_MAX_SIZE = 1
+                    print("Quit due to researched max size")
                     break
             display.display_start_message(current_size)
             current_output, current_error = run.run_command(
@@ -83,9 +91,29 @@ if __name__ == "__main__":
             total_loop_list.append(current_benchmark.get_total_loops())
             # perform additional analysis of the results
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
-            mean = current_benchmark.mean()
+            if tada_arguments.types[0] == "hypothesis":
+                # with open("data.txt", "r") as f:
+                #     hypothesis_runtime = float(f.read())
+                tada_configuration_dict = configuration.read(constants.CONFIGURATION)
+                hypothesis_gen_start = time.time()
+                temp_analyzed_function = generate.generate_strategy(
+                    generate.time_generation,
+                    configuration.get_schema_path(tada_configuration_dict),
+                    current_size,
+                )
+                i = 0
+                total_gen_time = 0
+                while i < 11:
+                    hypothesis_gen_start = time.time()
+                    temp_analyzed_function()
+                    total_gen_time += time.time() - hypothesis_gen_start
+                    i += 1
+                constants.GEN_TIME = total_gen_time / 10
+            # generate.store_hypothesis(constants.GEN_TIME)
+            mean = current_benchmark.mean() - constants.GEN_TIME
+            print("Hypothesis Generation Time: ", constants.GEN_TIME)
             print("Mean {0}".format(mean))
-            median = current_benchmark.median()
+            median = current_benchmark.median() - constants.GEN_TIME
             print("Median {0}".format(median))
             if meanlastround == 0:
                 ratio = 0
@@ -100,7 +128,7 @@ if __name__ == "__main__":
                     ratio = mean / meanlastround
                     avg = (mean + meanlastround) / 2
                     std = abs(mean - avg)
-                    indicator = std / avg
+                    indicator = std / abs(avg)
                     end_time = (mean - 0.01 * meanlastround) / 0.99
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
@@ -108,7 +136,7 @@ if __name__ == "__main__":
                     ratio = meanlastround / mean
                     avg = (mean + meanlastround) / 2
                     std = abs(meanlastround - avg)
-                    indicator = std / avg
+                    indicator = std / abs(avg)
                     end_time = (meanlastround - 0.01 * mean) / 0.99
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
@@ -198,6 +226,7 @@ if __name__ == "__main__":
                 "QUIT_BY_INDICATOR": constants.QUIT_BY_INDICATOR,
                 "QUIT_BY_BACKFILL": constants.QUIT_BY_BACKFILL,
                 "QUIT_BY_STEPS": constants.QUIT_BY_STEPS,
+                "QUIT_BY_MAX_SIZE": constants.QUIT_BY_MAX_SIZE,
                 "MEM_MAX_RSS": constants.MEM_MAX_RSS,
                 "MEM_PEAK_PAGEFILE_USAGE": constants.MEM_PEAK_PAGEFILE_USAGE,
                 "OS": constants.OS,
