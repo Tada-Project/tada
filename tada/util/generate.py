@@ -22,20 +22,26 @@ TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 global_data = ()
 
 
-def store(a):
-    """To store data generated into global variable for experiment"""
-    global global_data
-    global_data = global_data + (a,)
-
-
 def store_data_to_global(path, chosen_size):
     """Generate data through global variable"""
+
+    def store_global(a):
+        """A dummy function to store the data to file for experiment"""
+        global global_data
+        global_data = global_data + (a,)
+
     strategies = generate_strategy(path, chosen_size)
     # store data based on the amount of parameters
     for st in strategies:
-        gen = generate_single_func(store, st)
+        gen = generate_single_func(store_global, st)
         gen()
     return global_data
+
+
+def store_data_to_file(a):
+    """A dummy function to store the data to file for experiment """
+    with open("data.txt", "w+") as f:
+        f.write(str(a))
 
 
 def generate_strategy(path, size):
@@ -96,7 +102,7 @@ def generate_data(chosen_types, chosen_size, path=None):
     elif chosen_types[0] == "hypothesis":
         generated_values = store_data_to_global(path, chosen_size)
     elif chosen_types[0] == "hypothesis-clean":
-        store_function = generate_func(store_hypothesis, path, chosen_size,)
+        store_function = generate_func(store_data_to_file, path, chosen_size,)
         # call function to store data
         store_function()
         with open("data.txt", "r") as f:
@@ -106,12 +112,6 @@ def generate_data(chosen_types, chosen_size, path=None):
         data = [int(num) for num in formatted_data.split(", ")]
         generated_values = generated_values + (data,)
     return generated_values
-
-
-def store_hypothesis(a):
-    """ A dummy function to store the data for experiment """
-    with open("data.txt", "w+") as f:
-        f.write(str(a))
 
 
 def generate_int(chosen_size):
