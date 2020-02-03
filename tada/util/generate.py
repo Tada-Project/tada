@@ -91,7 +91,7 @@ def generate_func_from_single_st(function, strategy):
     return function
 
 
-# pylint: disable=unnecessary-pass,redefined-builtin
+# pylint: disable=unnecessary-pass,redefined-builtin,unused-argument
 def time_generation(list):
     """empty function for timing hypothesis data generation"""
     pass
