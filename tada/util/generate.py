@@ -18,6 +18,25 @@ DEFAULT_VALUE_BOOLEAN = True
 
 TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 
+# initialize data as tuple
+data = ()
+
+
+def store(a):
+    """To store data generated into global variable for experiment"""
+    global data
+    data = data + (a,)
+
+
+def gen_data(path, chosen_size):
+    """Generate data through global variable"""
+    strategies = generate_strategy(path, chosen_size)
+    # store data based on the amount of parameters
+    for st in strategies:
+        gen = generate_single_func(store, st)
+        gen()
+    return data
+
 
 def generate_strategy(path, size):
     """generate strategies from a schema path and current input size"""
