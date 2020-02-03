@@ -37,20 +37,15 @@ if __name__ == "__main__":
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # read the chosen types
     func_type = configuration.get_types(tada_configuration_dict)
-    # using hypothesis and read data from file
-    if func_type[0] == "hypothesis-clean":
-        func_type = configuration.get_schema_path(tada_configuration_dict)
-
-    # using hypothesis reading from global variable
-    if func_type[0] == "hypothesis":
-
-        data = generate.gen_data(
-            configuration.get_schema_path(tada_configuration_dict), chosen_size
-        )
-        print(data)
-    # using hypothesis-clean or generation function
-    else:
-        data = generate.generate_data(func_type, chosen_size,)
+    # initialize path for schema
+    path = None
+    # using hypothesis to generate experiment data
+    if func_type[0] == "hypothesis" or func_type[0] == "hypothesis-clean":
+        # read path from arguments
+        path = configuration.get_schema_path(tada_configuration_dict)
+    # generate data
+    data = generate.generate_data(func_type, chosen_size, path)
+    print(data)
     # run benchmark
     current_benchmark = runner.bench_func(
         current_experiment_name, run.run_benchmark, analyzed_function, *data,
