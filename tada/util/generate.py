@@ -19,23 +19,23 @@ DEFAULT_VALUE_BOOLEAN = True
 TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 
 # initialize data as tuple
-data = ()
+global_data = ()
 
 
 def store(a):
     """To store data generated into global variable for experiment"""
-    global data
-    data = data + (a,)
+    global global_data
+    global_data = global_data + (a,)
 
 
-def gen_data(path, chosen_size):
+def store_data_to_global(path, chosen_size):
     """Generate data through global variable"""
     strategies = generate_strategy(path, chosen_size)
     # store data based on the amount of parameters
     for st in strategies:
         gen = generate_single_func(store, st)
         gen()
-    return data
+    return global_data
 
 
 def generate_strategy(path, size):
@@ -84,11 +84,19 @@ def generate_single_func(function, strategy):
     return function
 
 
-def generate_data(chosen_types, chosen_size):
+def generate_data(chosen_types, chosen_size, path=None):
     """Generate a list of data values"""
     generated_values = ()
-    if chosen_types[0] not in TYPES:
-        store_function = generate_func(store_hypothesis, chosen_types, chosen_size,)
+    if chosen_types[0] in TYPES:
+        # call a generate function for each type
+        for current_type in chosen_types:
+            generator_to_invoke = getattr(GENERATE, "generate_" + str(current_type))
+            generated_value = generator_to_invoke(chosen_size)
+            generated_values = generated_values + (generated_value,)
+    elif chosen_types[0] == "hypothesis":
+        generated_values = store_data_to_global(path, chosen_size)
+    elif chosen_types[0] == "hypothesis-clean":
+        store_function = generate_func(store_hypothesis, path, chosen_size,)
         # call function to store data
         store_function()
         with open("data.txt", "r") as f:
@@ -97,12 +105,6 @@ def generate_data(chosen_types, chosen_size):
         formatted_data = raw_data[1:-1]
         data = [int(num) for num in formatted_data.split(", ")]
         generated_values = generated_values + (data,)
-    else:
-        # call a generate function for each type
-        for current_type in chosen_types:
-            generator_to_invoke = getattr(GENERATE, "generate_" + str(current_type))
-            generated_value = generator_to_invoke(chosen_size)
-            generated_values = generated_values + (generated_value,)
     return generated_values
 
 
