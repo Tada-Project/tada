@@ -37,25 +37,18 @@ if __name__ == "__main__":
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # read the chosen types
     func_type = configuration.get_types(tada_configuration_dict)
-    # using hypothesis and read data
-    if func_type[0] == "hypothesis-clean":
-        func_type = configuration.get_schema_path(tada_configuration_dict)
-    # using hypothesis without reading data
-    if func_type[0] == "hypothesis":
-        analyzed_function = generate.generate_strategy(
-            analyzed_function,
-            configuration.get_schema_path(tada_configuration_dict),
-            chosen_size,
-        )
-        func_type = configuration.get_schema_path(tada_configuration_dict)
-        current_benchmark = runner.bench_func(
-            current_experiment_name, run.run_benchmark, analyzed_function,
-        )
-    else:
-        # generate data
-        data = generate.generate_data(func_type, chosen_size,)
-        current_benchmark = runner.bench_func(
-            current_experiment_name, run.run_benchmark, analyzed_function, *data,
-        )
+    # initialize path for schema
+    path = None
+    # using hypothesis to generate experiment data
+    if func_type[0] == "hypothesis" or func_type[0] == "hypothesis-clean":
+        # read path from arguments
+        path = configuration.get_schema_path(tada_configuration_dict)
+    # generate data
+    data = generate.generate_data(func_type, chosen_size, path)
+    # run benchmark
+    current_benchmark = runner.bench_func(
+        current_experiment_name, run.run_benchmark, analyzed_function, *data,
+    )
+
     # save the perf results from running the benchmark
     save.save_benchmark_results(current_benchmark, current_experiment_name)

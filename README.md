@@ -29,7 +29,7 @@ run:
 If you want to collect the coverage of the provided test suite and see what
 lines of code are not covered, then you can run:
 
-- `pytest --cov-config pytest.cov --cov --cov-report term-missing`
+- `pipenv run pytest --cov-config pytest.cov --cov --cov-report term-missing`
 
 ## Using Tada
 
@@ -85,10 +85,10 @@ with `return` statements. In this version of Tada, we also encourage you remove 
 `return` statements temporarily for the purpose of the experiment.
 
 To specify the data generation strategy, we encourage you to specify `--types TYPES [TYPES ...]`
-with `hypothesis-clean`, `hypothesis`, or one of the generate types:
-`int, int_list, char, char_list, boolean, string, float`. `hypothesis-clean` works
-best for function has a single integer list argument; `hypothesis` handles all types
-while the data generation time is counted into the experiment.
+with `hypothesis`, `hypothesis-clean` or one of the generate types:
+`int, int_list, char, char_list, boolean, string, float`. `hypothesis` handles all
+types of function arguments with JSON schema. `hypothesis-clean` works only for
+function has a single integer list argument;
 
 A sample JSON schema for a list of integers can be found here:
 [speed-surprises](https://github.com/Tada-Project/speed-surprises/blob/master/schema.json).
@@ -106,7 +106,7 @@ Here is an example of Tada being used in conjunction with functions in the
 [Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
 ```bash
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
     https://github.com/Tada-Project/tada/
