@@ -27,6 +27,7 @@ def store_data_to_global(path, chosen_size):
 
     def store_global(a):
         """A dummy function to store the data to file for experiment"""
+        # pylint: disable=global-statement
         global global_data
         global_data = global_data + (a,)
 
