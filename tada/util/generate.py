@@ -30,7 +30,7 @@ def store_data_to_global(path, chosen_size):
         global global_data
         global_data = global_data + (a,)
 
-    strategies = generate_strategy(path, chosen_size)
+    strategies = generate_experiment_strategy(path, chosen_size)
     # store data based on the amount of parameters
     for st in strategies:
         gen = generate_single_func(store_global, st)
@@ -44,7 +44,7 @@ def store_data_to_file(a):
         f.write(str(a))
 
 
-def generate_strategy(path, size):
+def generate_experiment_strategy(path, size):
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
     # change the size as the experiment doubles
@@ -59,7 +59,7 @@ def generate_strategy(path, size):
 
 def generate_func(function, path, size):
     """generate a function with strategy from schema path and current input size"""
-    strategy = generate_strategy(path, size)
+    strategy = generate_experiment_strategy(path, size)
     function = given(*strategy)(function)
     # configure hypothesis
     function = settings(
