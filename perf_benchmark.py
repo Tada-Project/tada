@@ -2,7 +2,6 @@
 
 import importlib
 import pyperf
-import time
 
 from tada.util import configuration
 from tada.util import constants
