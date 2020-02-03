@@ -128,8 +128,11 @@ def test_generate_data_with_hypothesis(tmpdir):
     path.write('[{"type": "array", "items": {"type": "integer"}}]')
     # assume the doubling experiment is at 100
     current_size = 100
-    requested_types = str(path)
-    generated_data = generate.generate_data(requested_types, current_size)
+    requested_types = ["hypothesis"]
+    requested_oath = str(path)
+    generated_data = generate.generate_data(
+        requested_types, current_size, requested_oath
+    )
     assert generated_data is not None
 
 
@@ -169,7 +172,7 @@ def test_generate_strategy_with_one_json(tmpdir):
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write('[{"type": "array", "items": {"type": "number"}}]')
     size = "50"
-    strategy = generate.generate_strategy(path, size)
+    strategy = generate.generate_experiment_strategy(path, size)
     assert (
         str(strategy[0])
         == "one_of(lists(elements=one_of(floats(allow_nan=False, \
@@ -185,7 +188,7 @@ def test_generate_strategy_multiple_json(tmpdir):
         ,{"type": "array", "items": {"type": "number"}}]'
     )
     size = "50"
-    strategy = generate.generate_strategy(path, size)
+    strategy = generate.generate_experiment_strategy(path, size)
     assert (
         str(strategy[0])
         == "one_of(lists(elements=one_of(floats(allow_nan=False, \
