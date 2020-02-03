@@ -43,21 +43,11 @@ if __name__ == "__main__":
 
     # using hypothesis reading from global variable
     if func_type[0] == "hypothesis":
-        # initialize data as tuple
-        data = ()
 
-        def store(a):
-            """To store data generated into global variable for experiment"""
-            global data
-            data = data + (a,)
-
-        strategies = generate.generate_strategy(
+        data = generate.gen_data(
             configuration.get_schema_path(tada_configuration_dict), chosen_size
         )
-        # store data based on the amount of parameters
-        for st in strategies:
-            gen = generate.generate_single_func(store, st)
-            gen()
+        print(data)
     # using hypothesis-clean or generation function
     else:
         data = generate.generate_data(func_type, chosen_size,)
