@@ -51,7 +51,7 @@ output.
 
 ```
 usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
-                       [--schema SCHEMA] [--startsize STARTSIZE] [--steps STEPS] [--runningtime RUNNINGTIME]
+                       [--schema SCHEMA] [--startsize STARTSIZE] [--maxsize MAXSIZE][--steps STEPS] [--runningtime RUNNINGTIME]
                        [--expect EXPECT] [--backfill BACKFILL] [--indicator INDICATOR]
 
 optional arguments:
@@ -65,6 +65,7 @@ optional arguments:
   --schema SCHEMA       The path to the jsonschema (default: None)
   --startsize STARTSIZE
                         Starting size of the doubling experiment (default: 1)
+  --maxsize MAXSIZE     Maximum size of the doubling experiment (default: 1500)
   --steps STEPS         Maximum rounds of experiment (default: 10)
   --runningtime RUNNINGTIME
                         Maximum running time (default: 200)
