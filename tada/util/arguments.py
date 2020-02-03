@@ -88,6 +88,13 @@ def parse(args):
         default=constants.INDICATOR,
         help="Indicator value",
     )
+    parser.add_argument(
+        "--maxsize",
+        required=False,
+        type=int,
+        default=constants.MAX_SIZE,
+        help="Largest size of the doubling experiment",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
