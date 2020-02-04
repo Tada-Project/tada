@@ -61,11 +61,7 @@ if __name__ == "__main__":
                     constants.QUIT_BY_BACKFILL = 1
                     print("Quit due to two backfills")
                     break
-            if (
-                tada_arguments.types[0] == "hypothesis"
-                or tada_arguments.types[0] == "hypothesis-clean"
-                or tada_arguments.types[0] == "hypothesis-sub"
-            ):
+            if "hypothesis" in tada_arguments.types[0]:
                 if current_size >= tada_arguments.maxsize:
                     constants.QUIT_BY_MAX_SIZE = 1
                     print("Quit due to researched max size")
