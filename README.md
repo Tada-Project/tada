@@ -146,7 +146,8 @@ be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be st
   max_runtime.
 - `QUIT_BY_INDICATOR`: dummy variable := 1 if the tool exits by having indicator larger
   than the indicator bound.
-- `QUIT_BY_BACKFILL`: dummy variable := 1 if the tool exits by having multiple times of
+- `QUIT_BY_BACKFILL`: dummy variable := 1 if the tool exits by having multiple times of backfills
+- `QUIT_BY_MAX_SIZE`: dummy variable := 1 if the tool exits by reaching the max_size
   back-filling.
 - `MEM_MAX_RSS`: int := track of current machine memory usage.
 - `MEM_PEAK_PAGEFILE_USAGE`: int := track of current machine memory usage (windows).
