@@ -13,7 +13,9 @@ from tada.util import arguments
 from tada.util import configuration
 from tada.util import constants
 from tada.util import display
+from tada.util import generate
 from tada.util import package
+from tada.util import read
 from tada.util import run
 from tada.util import save
 from tada.util import results
@@ -35,6 +37,7 @@ if __name__ == "__main__":
     total_loop_list = []
     sum_of_loops = 0
     used_backfill = tada_arguments.backfill
+    steps = 1
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
@@ -114,7 +117,7 @@ if __name__ == "__main__":
             mean = current_benchmark.mean() - constants.GEN_TIME
             print("Hypothesis Generation Time: ", constants.GEN_TIME)
             print("Mean {0}".format(mean))
-            median = current_benchmark.median()
+            median = current_benchmark.median() - constants.GEN_TIME
             print("Median {0}".format(median))
             if meanlastround == 0:
                 ratio = 0
@@ -129,7 +132,7 @@ if __name__ == "__main__":
                     ratio = mean / meanlastround
                     avg = (mean + meanlastround) / 2
                     std = abs(mean - avg)
-                    indicator = std / avg
+                    indicator = std / abs(avg)
                     end_time = (mean - 0.01 * meanlastround) / 0.99
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
@@ -137,7 +140,7 @@ if __name__ == "__main__":
                     ratio = meanlastround / mean
                     avg = (mean + meanlastround) / 2
                     std = abs(meanlastround - avg)
-                    indicator = std / avg
+                    indicator = std / abs(avg)
                     end_time = (meanlastround - 0.01 * mean) / 0.99
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
@@ -238,6 +241,7 @@ if __name__ == "__main__":
                 "QUIT_BY_INDICATOR": constants.QUIT_BY_INDICATOR,
                 "QUIT_BY_BACKFILL": constants.QUIT_BY_BACKFILL,
                 "QUIT_BY_STEPS": constants.QUIT_BY_STEPS,
+                "QUIT_BY_MAX_SIZE": constants.QUIT_BY_MAX_SIZE,
                 "MEM_MAX_RSS": constants.MEM_MAX_RSS,
                 "MEM_PEAK_PAGEFILE_USAGE": constants.MEM_PEAK_PAGEFILE_USAGE,
                 "OS": constants.OS,
