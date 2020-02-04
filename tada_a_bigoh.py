@@ -99,16 +99,15 @@ if __name__ == "__main__":
                 #     hypothesis_runtime = float(f.read())
                 tada_configuration_dict = configuration.read(constants.CONFIGURATION)
                 hypothesis_gen_start = time.time()
-                temp_analyzed_function = generate.generate_strategy(
-                    generate.time_generation,
-                    configuration.get_schema_path(tada_configuration_dict),
-                    current_size,
-                )
                 i = 0
                 total_gen_time = 0
                 while i < 11:
                     hypothesis_gen_start = time.time()
-                    temp_analyzed_function()
+                    temp_analyzed_function = generate.generate_func(
+                        generate.time_generation,
+                        configuration.get_schema_path(tada_configuration_dict),
+                        current_size,
+                    )
                     total_gen_time += time.time() - hypothesis_gen_start
                     i += 1
                 constants.GEN_TIME = total_gen_time / 10
