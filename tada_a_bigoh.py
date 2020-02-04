@@ -37,7 +37,6 @@ if __name__ == "__main__":
     total_loop_list = []
     sum_of_loops = 0
     used_backfill = tada_arguments.backfill
-    steps = 1
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         print("Incorrect command-line arguments.")
