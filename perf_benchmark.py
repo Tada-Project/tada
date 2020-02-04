@@ -40,8 +40,14 @@ if __name__ == "__main__":
     func_type = configuration.get_types(tada_configuration_dict)
     # initialize path for schema
     path = None
+    if func_type[0] == "hypothesis-sub":
+        analyzed_function = generate.generate_func(
+            analyzed_function,
+            configuration.get_schema_path(tada_configuration_dict),
+            chosen_size,
+        )
     # using hypothesis to generate experiment data
-    if func_type[0] == "hypothesis" or func_type[0] == "hypothesis-clean":
+    elif func_type[0] == "hypothesis" or func_type[0] == "hypothesis-clean":
         # read path from arguments
         path = configuration.get_schema_path(tada_configuration_dict)
     # generate data
