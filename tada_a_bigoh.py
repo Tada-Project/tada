@@ -90,28 +90,9 @@ if __name__ == "__main__":
             total_loop_list.append(current_benchmark.get_total_loops())
             # perform additional analysis of the results
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
-            if tada_arguments.types[0] == "hypothesis-sub":
-                # with open("data.txt", "r") as f:
-                #     hypothesis_runtime = float(f.read())
-                tada_configuration_dict = configuration.read(constants.CONFIGURATION)
-                hypothesis_gen_start = time.time()
-                i = 0
-                total_gen_time = 0
-                while i < 11:
-                    hypothesis_gen_start = time.time()
-                    temp_analyzed_function = generate.generate_func(
-                        generate.time_generation,
-                        configuration.get_schema_path(tada_configuration_dict),
-                        current_size,
-                    )
-                    total_gen_time += time.time() - hypothesis_gen_start
-                    i += 1
-                constants.GEN_TIME = total_gen_time / 10
-            # generate.store_hypothesis(constants.GEN_TIME)
-            mean = current_benchmark.mean() - constants.GEN_TIME
-            print("Hypothesis Generation Time: ", constants.GEN_TIME)
+            mean = current_benchmark.mean()
             print("Mean {0}".format(mean))
-            median = current_benchmark.median() - constants.GEN_TIME
+            median = current_benchmark.median()
             print("Median {0}".format(median))
             if meanlastround == 0:
                 ratio = 0

@@ -40,7 +40,7 @@ def parse(args):
         type=str,
         nargs="+",
         help="""Parameter types for function to analyze, hypothesis,
-            hypothesis-clean, or hypothesis-sub""",
+            hypothesis-clean""",
     )
     parser.add_argument(
         "--schema", required=False, type=str, help="The path to the jsonschema",
