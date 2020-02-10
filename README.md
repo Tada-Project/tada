@@ -61,7 +61,7 @@ optional arguments:
   --module MODULE       Module name with functions to analyze (default: None)
   --function FUNCTION   Name of the module's function to analyze (default: None)
   --types TYPES [TYPES ...]
-                        Parameter types for function to analyze, hypothesis, or hypothesis-clean (default: None)
+                        Parameter types for function to analyze, or hypothesis(default: None)
   --schema SCHEMA       The path to the jsonschema (default: None)
   --startsize STARTSIZE
                         Starting size of the doubling experiment (default: 1)
@@ -86,10 +86,9 @@ with `return` statements. In this version of Tada, we also encourage you remove 
 `return` statements temporarily for the purpose of the experiment.
 
 To specify the data generation strategy, we encourage you to specify `--types TYPES [TYPES ...]`
-with `hypothesis`, `hypothesis-clean` or one of the generate types:
+with `hypothesis` or one of the generate types:
 `int, int_list, char, char_list, boolean, string, float`. `hypothesis` handles all
-types of function arguments with JSON schema. `hypothesis-clean` works only for
-function has a single integer list argument;
+types of function arguments with JSON schema.
 
 A sample JSON schema for a list of integers can be found here:
 [speed-surprises](https://github.com/Tada-Project/speed-surprises/blob/master/schema.json).
@@ -167,7 +166,7 @@ be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be st
 To run with collecting experiment data, add `expect` like this:
 
 ```bash
-pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis-clean --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
+pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
 ```
 
 ## Adding New Features to Tada
