@@ -40,7 +40,7 @@ if __name__ == "__main__":
     # initialize path for schema
     path = None
     # using hypothesis to generate experiment data
-    if func_type[0] == "hypothesis" or func_type[0] == "hypothesis-clean":
+    if func_type[0] == "hypothesis":
         # read path from arguments
         path = configuration.get_schema_path(tada_configuration_dict)
     # generate data

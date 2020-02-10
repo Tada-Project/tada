@@ -102,16 +102,6 @@ def generate_data(chosen_types, chosen_size, path=None):
             generated_values = generated_values + (generated_value,)
     elif chosen_types[0] == "hypothesis":
         generated_values = store_data_to_global(path, chosen_size)
-    elif chosen_types[0] == "hypothesis-clean":
-        store_function = generate_func(store_data_to_file, path, chosen_size,)
-        # call function to store data
-        store_function()
-        with open("data.txt", "r") as f:
-            raw_data = f.read()
-        # remove brackets at convert elements to numbers
-        formatted_data = raw_data[1:-1]
-        data = [int(num) for num in formatted_data.split(", ")]
-        generated_values = generated_values + (data,)
     return generated_values
 
 
