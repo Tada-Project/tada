@@ -39,13 +39,11 @@ def parse(args):
         required=True,
         type=str,
         nargs="+",
-        help="Parameter types for function to analyze, hypothesis, or hypothesis-clean",
+        help="""Parameter types for function to analyze, hypothesis,
+            hypothesis-clean""",
     )
     parser.add_argument(
-        "--schema",
-        required=False,
-        type=str,
-        help="The path to the jsonschema",
+        "--schema", required=False, type=str, help="The path to the jsonschema",
     )
     parser.add_argument(
         "--startsize",
@@ -87,6 +85,13 @@ def parse(args):
         type=float,
         default=constants.INDICATOR,
         help="Indicator value",
+    )
+    parser.add_argument(
+        "--maxsize",
+        required=False,
+        type=int,
+        default=constants.MAX_SIZE,
+        help="Largest size of the doubling experiment",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
