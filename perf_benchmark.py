@@ -46,8 +46,16 @@ if __name__ == "__main__":
     # generate data
     data = generate.generate_data(func_type, chosen_size, path)
     # run benchmark
-    if constants.SORT == 1:
-        print("1")
+    if tada_configuration_dict.get("sortinput") == 1:
+        data = list(data)
+        for t in data:
+            if type(t) is list:
+                print(type(t))
+                t.sort()
+                print(t)
+        print("list", data)
+        data = tuple(data)
+    print(data)
     current_benchmark = runner.bench_func(
         current_experiment_name, run.run_benchmark, analyzed_function, *data,
     )
