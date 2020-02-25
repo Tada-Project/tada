@@ -50,12 +50,8 @@ if __name__ == "__main__":
         data = list(data)
         for t in data:
             if type(t) is list:
-                print(type(t))
                 t.sort()
-                print(t)
-        print("list", data)
         data = tuple(data)
-    print(data)
     current_benchmark = runner.bench_func(
         current_experiment_name, run.run_benchmark, analyzed_function, *data,
     )

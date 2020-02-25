@@ -103,9 +103,6 @@ def generate_data(chosen_types, chosen_size, path=None):
             generated_values = generated_values + (generated_value,)
     elif chosen_types[0] == "hypothesis":
         generated_values = store_data_to_global(path, chosen_size)
-        if constants.SORT == 1:
-            print("gotit")
-            generated_values.sort()
     return generated_values
 
 
