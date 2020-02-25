@@ -50,6 +50,8 @@ if __name__ == "__main__":
         # save the directory containing functions to be analyzed
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
+        if tada_arguments.sortinput == 1:
+            constants.SORT = 1
         while True:
             if used_backfill == 1:
                 # run the benchmark by using it through python

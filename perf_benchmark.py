@@ -46,6 +46,8 @@ if __name__ == "__main__":
     # generate data
     data = generate.generate_data(func_type, chosen_size, path)
     # run benchmark
+    if constants.SORT == 1:
+        print("1")
     current_benchmark = runner.bench_func(
         current_experiment_name, run.run_benchmark, analyzed_function, *data,
     )

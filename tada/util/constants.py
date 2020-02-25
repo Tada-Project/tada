@@ -12,6 +12,8 @@ INDICATOR = 0.1
 STEP_START = 1
 BACKFILL = 0
 MAX_SIZE = 1500
+global SORT
+SORT = 0
 
 # Names
 TADA = "tada"
