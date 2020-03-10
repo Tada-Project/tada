@@ -43,8 +43,9 @@ if __name__ == "__main__":
     if func_type[0] == "hypothesis":
         # read path from arguments
         path = configuration.get_schema_path(tada_configuration_dict)
+    level = configuration.get("level")
     # generate data
-    data = generate.generate_data(func_type, chosen_size, path)
+    data = generate.generate_data(func_type, chosen_size, path, level)
     # run benchmark
     if tada_configuration_dict.get("sortinput") == 1:
         for t in data:
