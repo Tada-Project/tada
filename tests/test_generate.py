@@ -188,8 +188,8 @@ def test_generate_strategy_with_one_json(tmpdir):
     strategy = generate.generate_experiment_strategy(path, size, level)
     assert (
         str(strategy[0])
-        == "one_of(lists(elements=one_of(floats(allow_nan=False, \
-allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+        == "lists(floats(allow_infinity=False, \
+allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
     )
 
 
@@ -205,8 +205,8 @@ def test_generate_strategy_multiple_json(tmpdir):
     strategy = generate.generate_experiment_strategy(path, size, level)
     assert (
         str(strategy[0])
-        == "one_of(lists(elements=one_of(floats(allow_nan=False, \
-allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+        == "lists(floats(allow_infinity=False, \
+allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
     )
     assert (
         str(strategy[1])
