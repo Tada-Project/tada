@@ -11,10 +11,11 @@ def test_generate_int_makes_size_default():
     requested_types = ["int"]
     # assume the doubling experiment is at 100
     current_size = 100
+    level = 1
     # the default generator will return a tuple with 100 in it
     # expected_tuple = (generate.generate_int(current_size),)
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(requested_types, current_size)
+    generated_data = generate.generate_data(requested_types, current_size, level)
     assert generated_data is not None
 
 
@@ -25,10 +26,11 @@ def test_generate_ints_makes_size_default():
     requested_types = ["int", "int"]
     # assume the doubling experiment is at 100
     current_size = 100
+    level = 1
     # the default generator will return a tuple with two 100 in it
     # expected_tuple = (generate.generate_int(current_size), generate.generate_int(current_size),)
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(requested_types, current_size)
+    generated_data = generate.generate_data(requested_types, current_size, level)
     assert generated_data is not None
 
 
@@ -39,8 +41,9 @@ def test_generate_int_list__makes_size_default():
     requested_types = ["int_list"]
     # assume the doubling experiment is at 100
     current_size = 100
+    level = 1
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(requested_types, current_size)
+    generated_data = generate.generate_data(requested_types, current_size, level)
     assert generated_data is not None
 
 
@@ -51,8 +54,9 @@ def test_generate_char_list_makes_letter_default():
     requested_types = ["char_list"]
     # assume the doubling experiment is at 100; not needed for this test
     current_size = 100
+    level = 1
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(requested_types, current_size)
+    generated_data = generate.generate_data(requested_types, current_size, level)
     assert generated_data is not None
 
 
@@ -63,10 +67,11 @@ def test_generate_char_makes_letter_default():
     requested_types = ["char"]
     # assume the doubling experiment is at 100; not needed for this test
     current_size = 100
+    level = 1
     # the default generator will return a tuple with the default character in it
     expected_tuple = (generate.generate_char(current_size),)
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(requested_types, current_size)
+    generated_data = generate.generate_data(requested_types, current_size, level)
     assert generated_data == expected_tuple
 
 
@@ -77,10 +82,11 @@ def test_generate_string_makes_string_default():
     requested_types = ["string"]
     # assume the doubling experiment is at 100; not needed for this test
     current_size = 100
+    level = 1
     # the default generator will return a tuple with the default string in it
     expected_tuple = (generate.generate_string(current_size),)
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(requested_types, current_size)
+    generated_data = generate.generate_data(requested_types, current_size, level)
     assert generated_data == expected_tuple
 
 
@@ -91,10 +97,11 @@ def test_generate_boolean_makes_boolean_default():
     requested_types = ["boolean"]
     # assume the doubling experiment is at 100; not needed for this test
     current_size = 100
+    level = 1
     # the default generator will return a tuple with the default character in it
     expected_tuple = (generate.DEFAULT_VALUE_BOOLEAN,)
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(requested_types, current_size)
+    generated_data = generate.generate_data(requested_types, current_size, level)
     assert generated_data == expected_tuple
 
 
@@ -104,10 +111,11 @@ def test_generate_float_makes_size_default():
     requested_types = ["float"]
     # assume the doubling experiment is at 100
     current_size = 100
+    level = 1
     # the default generator will return a tuple with 100 in it
     expected_tuple = (current_size,)
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(requested_types, current_size)
+    generated_data = generate.generate_data(requested_types, current_size, level)
     assert generated_data == expected_tuple
 
 
@@ -117,8 +125,9 @@ def test_generate_floats_makes_size_default():
     requested_types = ["float", "float"]
     # assume the doubling experiment is at 100
     current_size = 100
+    level = 1
     # generate the data for the requested_types and the current_size
-    generated_data = generate.generate_data(requested_types, current_size)
+    generated_data = generate.generate_data(requested_types, current_size, level)
     assert generated_data is not None
 
 
@@ -128,10 +137,11 @@ def test_generate_data_with_hypothesis(tmpdir):
     path.write('[{"type": "array", "items": {"type": "integer"}}]')
     # assume the doubling experiment is at 100
     current_size = 100
+    level = 1
     requested_types = ["hypothesis"]
     requested_oath = str(path)
     generated_data = generate.generate_data(
-        requested_types, current_size, requested_oath
+        requested_types, current_size, level, requested_oath
     )
     assert generated_data is not None
 
@@ -146,7 +156,8 @@ def test_generate_function_with_one_json(tmpdir):
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write('[{"type": "array", "items": {"type": "number"}}]')
     size = "50"
-    function = generate.generate_func(foo, path, size)
+    level = 1
+    function = generate.generate_func(foo, path, size, level)
     assert str(type(function)) == "<class 'function'>"
 
 
@@ -163,7 +174,8 @@ def test_generate_function_multiple_json(tmpdir):
         ,{"type": "array", "items": {"type": "number"}}]'
     )
     size = "50"
-    function = generate.generate_func(foo, path, size)
+    level = 1
+    function = generate.generate_func(foo, path, size, level)
     assert str(type(function)) == "<class 'function'>"
 
 
@@ -172,7 +184,8 @@ def test_generate_strategy_with_one_json(tmpdir):
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write('[{"type": "array", "items": {"type": "number"}}]')
     size = "50"
-    strategy = generate.generate_experiment_strategy(path, size)
+    level = 1
+    strategy = generate.generate_experiment_strategy(path, size, level)
     assert (
         str(strategy[0])
         == "one_of(lists(elements=one_of(floats(allow_nan=False, \
@@ -188,7 +201,8 @@ def test_generate_strategy_multiple_json(tmpdir):
         ,{"type": "array", "items": {"type": "number"}}]'
     )
     size = "50"
-    strategy = generate.generate_experiment_strategy(path, size)
+    level = 1
+    strategy = generate.generate_experiment_strategy(path, size, level)
     assert (
         str(strategy[0])
         == "one_of(lists(elements=one_of(floats(allow_nan=False, \
