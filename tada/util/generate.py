@@ -50,14 +50,14 @@ def generate_experiment_strategy(path, size, level):
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
     # change the size as the experiment doubles
-    if level is 1:
+    if level == 1:
         for schema in json_schema:
             double_experiment_size(schema, size)
-    elif level is 2:
+    elif level == 2:
         for schema in json_schema:
             for schema2 in schema:
                 double_experiment_size(schema2, size)
-    elif level is 3:
+    elif level == 3:
         for schema in json_schema:
             for schema2 in schema:
                 for schema3 in schema2:
@@ -84,9 +84,9 @@ def double_experiment_size(schema, size):
         schema["minimum"] = int(size)
 
 
-def generate_func(function, path, size):
+def generate_func(function, path, size, level):
     """generate a function with strategy from schema path and current input size"""
-    strategy = generate_experiment_strategy(path, size)
+    strategy = generate_experiment_strategy(path, size, level)
     function = given(*strategy)(function)
     # configure hypothesis
     function = settings(
