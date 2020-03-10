@@ -78,10 +78,6 @@ def double_experiment_size(schema, size):
         schema["maxProperties"] = int(size)
         schema["minProperties"] = int(size)
     else:
-        # print(type(schema.get("type")))
-        # print(type("array"))
-        # print(schema.get("type"))
-        # print("array")
         print("didn't recognize array or object")
         schema["maximum"] = int(size)
         schema["minimum"] = int(size)
