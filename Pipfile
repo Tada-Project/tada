@@ -8,6 +8,7 @@ pyperf = "*"
 hypothesis-jsonschema = "*"
 pandas = "*"
 python-constraint = "*"
+deap = "*"
 
 [dev-packages]
 PrettyTable = "*"

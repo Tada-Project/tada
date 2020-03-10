@@ -132,6 +132,12 @@ def generate_data(chosen_types, chosen_size, level, path=None):
 
 def generate_int(chosen_size):
     """Generate an int value"""
+    return int(chosen_size)
+    # return 10**(int(chosen_size))
+
+
+def generate_bitdepth(chosen_size):
+    """Generate an int value"""
     lowerbound = 10 ** (int(chosen_size) - 1)
     upperbound = (10 ** int(chosen_size)) - 1
     return random.randint(lowerbound, upperbound)
