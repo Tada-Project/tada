@@ -6,7 +6,6 @@ import string
 from hypothesis_jsonschema import from_schema
 from hypothesis import given, settings
 from hypothesis import HealthCheck
-from . import constants
 from . import read
 
 
