@@ -71,13 +71,17 @@ def generate_experiment_strategy(path, size, level):
 
 
 def double_experiment_size(schema, size):
-    if schema.get("type") is "array":
+    if schema.get("type") == "array":
         schema["maxItems"] = int(size)
         schema["minItems"] = int(size)
-    elif schema.get("type") is "object":
+    elif schema.get("type") == "object":
         schema["maxProperties"] = int(size)
         schema["minProperties"] = int(size)
     else:
+        # print(type(schema.get("type")))
+        # print(type("array"))
+        # print(schema.get("type"))
+        # print("array")
         print("didn't recognize array or object")
         schema["maximum"] = int(size)
         schema["minimum"] = int(size)
