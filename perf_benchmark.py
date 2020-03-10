@@ -47,11 +47,9 @@ if __name__ == "__main__":
     data = generate.generate_data(func_type, chosen_size, path)
     # run benchmark
     if tada_configuration_dict.get("sortinput") == 1:
-        data = list(data)
         for t in data:
             if type(t) is list:
                 t.sort()
-        data = tuple(data)
     current_benchmark = runner.bench_func(
         current_experiment_name, run.run_benchmark, analyzed_function, *data,
     )
