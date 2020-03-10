@@ -71,6 +71,7 @@ def generate_experiment_strategy(path, size, level):
 
 
 def double_experiment_size(schema, size):
+    """modify the input data size for doubling experiment"""
     if schema.get("type") == "array":
         schema["maxItems"] = int(size)
         schema["minItems"] = int(size)
