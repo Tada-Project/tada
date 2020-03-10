@@ -210,8 +210,8 @@ allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
     )
     assert (
         str(strategy[1])
-        == "one_of(lists(elements=one_of(floats(allow_nan=False, \
-allow_infinity=False).filter(lambda n: <unknown>)), min_size=50, max_size=50))"
+        == "lists(floats(allow_infinity=False, \
+allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
     )
 
 
