@@ -18,6 +18,7 @@ from tada.util import run
 from tada.util import save
 from tada.util import results
 
+
 if __name__ == "__main__":
     start_time = time.time()
     # display the welcome message

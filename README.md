@@ -73,6 +73,9 @@ optional arguments:
   --backfill BACKFILL   Backfill if value equals 1 (default: 0)
   --indicator INDICATOR
                         Indicator value (default: 0.1)
+  --maxsize MAX_SIZE    Maximum experiment size (default: 1500)
+  --sortinput SORT      Sort the input data if value equals 1 (default: 0)
+  --level LEVEL         The level of data which is doubling (default: 1)
 
 Sample usage: python3 tada_a_bigoh.py --directory /Users/myname/projectdirectory --module modulename.file
 --function function_name --types int"

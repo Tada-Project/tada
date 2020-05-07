@@ -92,6 +92,20 @@ def parse(args):
         default=constants.MAX_SIZE,
         help="Largest size of the doubling experiment",
     )
+    parser.add_argument(
+        "--sortinput",
+        required=False,
+        type=int,
+        default=constants.SORT,
+        help="Sort input if value equals 1",
+    )
+    parser.add_argument(
+        "--level",
+        required=False,
+        type=int,
+        default=constants.LEVEL,
+        help="The level of data to apply doubling experiment",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished

@@ -11,6 +11,8 @@ FUNCTION = "function"
 MODULE = "module"
 TYPES = "types"
 SCHEMA = "schema"
+LEVEL = "level"
+SORTINPUT = "sortinput"
 
 
 def save(configuration_filename, tada_configuration):
@@ -24,6 +26,16 @@ def read(configuration_filename):
     with open(configuration_filename) as json_data_file:
         tada_configuration = json.load(json_data_file)
     return tada_configuration
+
+
+def get_level(current_dictionary):
+    """Return the level argument from the provided dictionary"""
+    return current_dictionary[LEVEL]
+
+
+def get_sortinput(current_dictionary):
+    """Return the sortinput argument from the provided dictionary"""
+    return current_dictionary[SORTINPUT]
 
 
 def get_directory(current_dictionary):

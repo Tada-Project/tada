@@ -22,7 +22,7 @@ TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 global_data = ()
 
 
-def store_data_to_global(path, chosen_size):
+def store_data_to_global(path, chosen_size, level=1):
     """Generate data through global variable"""
 
     def store_global(a):
@@ -31,7 +31,7 @@ def store_data_to_global(path, chosen_size):
         global global_data
         global_data = global_data + (a,)
 
-    strategies = generate_experiment_strategy(path, chosen_size)
+    strategies = generate_experiment_strategy(path, chosen_size, level)
     # store data based on the amount of parameters
     for st in strategies:
         gen = generate_func_from_single_st(store_global, st)
@@ -45,22 +45,47 @@ def store_data_to_file(a):
         f.write(str(a))
 
 
-def generate_experiment_strategy(path, size):
+def generate_experiment_strategy(path, size, level=1):
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
     # change the size as the experiment doubles
-    for schema in json_schema:
-        schema["maxItems"] = int(size)
-        schema["minItems"] = int(size)
+    if level == 1:
+        for schema in json_schema:
+            double_experiment_size(schema, size)
+    elif level == 2:
+        for schema in json_schema:
+            for schema2 in schema:
+                double_experiment_size(schema2, size)
+    elif level == 3:
+        for schema in json_schema:
+            for schema2 in schema:
+                for schema3 in schema2:
+                    double_experiment_size(schema3, size)
+    else:
+        print("More levels need to be handled")
     strategy = []
     for j in json_schema:
         strategy.append(from_schema(j))
     return strategy
 
 
-def generate_func(function, path, size):
+def double_experiment_size(schema, size):
+    """modify the input data size for doubling experiment"""
+    if schema.get("type") == "array":
+        schema["maxItems"] = int(size)
+        schema["minItems"] = int(size)
+    elif schema.get("type") == "object":
+        schema["maxProperties"] = int(size)
+        schema["minProperties"] = int(size)
+    else:
+        print("didn't recognize array or object")
+        schema["maximum"] = int(size)
+        schema["minimum"] = int(size)
+
+
+def generate_func(function, path, size, level=1):
     """generate a function with strategy from schema path and current input size"""
-    strategy = generate_experiment_strategy(path, size)
+    strategy = generate_experiment_strategy(path, size, level)
     function = given(*strategy)(function)
     # configure hypothesis
     function = settings(
@@ -91,7 +116,7 @@ def generate_func_from_single_st(function, strategy):
     return function
 
 
-def generate_data(chosen_types, chosen_size, path=None):
+def generate_data(chosen_types, chosen_size, level=1, path=None):
     """Generate a list of data values"""
     generated_values = ()
     if chosen_types[0] in TYPES:
@@ -101,11 +126,17 @@ def generate_data(chosen_types, chosen_size, path=None):
             generated_value = generator_to_invoke(chosen_size)
             generated_values = generated_values + (generated_value,)
     elif chosen_types[0] == "hypothesis":
-        generated_values = store_data_to_global(path, chosen_size)
+        generated_values = store_data_to_global(path, chosen_size, level)
     return generated_values
 
 
 def generate_int(chosen_size):
+    """Generate an int value"""
+    return int(chosen_size)
+    # return 10**(int(chosen_size))
+
+
+def generate_bitdepth(chosen_size):
     """Generate an int value"""
     lowerbound = 10 ** (int(chosen_size) - 1)
     upperbound = (10 ** int(chosen_size)) - 1
