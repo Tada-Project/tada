@@ -21,8 +21,5 @@ codecov = "*"
 "flake8" = "*"
 pytest-cov = "*"
 
-[requires]
-python_version = ">=python 3.6"
-
 [pipenv]
 allow_prereleases = true

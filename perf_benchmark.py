@@ -43,11 +43,11 @@ if __name__ == "__main__":
     if func_type[0] == "hypothesis":
         # read path from arguments
         path = configuration.get_schema_path(tada_configuration_dict)
-    level = tada_configuration_dict.get("level")
+    level = configuration.get_level(tada_configuration_dict)
     # generate data
     data = generate.generate_data(func_type, chosen_size, level, path)
     # run benchmark
-    if tada_configuration_dict.get("sortinput") == 1:
+    if configuration.get_sortinput(tada_configuration_dict) == 1:
         for t in data:
             if type(t) is list:
                 t.sort()

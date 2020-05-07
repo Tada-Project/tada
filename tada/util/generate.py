@@ -22,7 +22,7 @@ TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 global_data = ()
 
 
-def store_data_to_global(path, chosen_size, level):
+def store_data_to_global(path, chosen_size, level=1):
     """Generate data through global variable"""
 
     def store_global(a):
@@ -45,7 +45,7 @@ def store_data_to_file(a):
         f.write(str(a))
 
 
-def generate_experiment_strategy(path, size, level):
+def generate_experiment_strategy(path, size, level=1):
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
     # change the size as the experiment doubles
@@ -83,7 +83,7 @@ def double_experiment_size(schema, size):
         schema["minimum"] = int(size)
 
 
-def generate_func(function, path, size, level):
+def generate_func(function, path, size, level=1):
     """generate a function with strategy from schema path and current input size"""
     strategy = generate_experiment_strategy(path, size, level)
     function = given(*strategy)(function)
@@ -116,7 +116,7 @@ def generate_func_from_single_st(function, strategy):
     return function
 
 
-def generate_data(chosen_types, chosen_size, level, path=None):
+def generate_data(chosen_types, chosen_size, level=1, path=None):
     """Generate a list of data values"""
     generated_values = ()
     if chosen_types[0] in TYPES:
