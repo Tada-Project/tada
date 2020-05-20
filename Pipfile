@@ -5,18 +5,17 @@ name = "pypi"
 
 [packages]
 pyperf = "*"
+hypothesis = "*"
 hypothesis-jsonschema = "*"
 pandas = "*"
+PrettyTable = "*"
 
 [dev-packages]
-PrettyTable = "*"
 pylint = "*"
 neovim = "*"
 black = "*"
 pytest = "*"
 pytest-benchmark = "*"
-hypothesis = "*"
-pyperf = "*"
 codecov = "*"
 "flake8" = "*"
 pytest-cov = "*"
