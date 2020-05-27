@@ -17,8 +17,10 @@ black = "*"
 pytest = "*"
 pytest-benchmark = "*"
 codecov = "*"
-"flake8" = "*"
+flake8 = "*"
 pytest-cov = "*"
+deap = "*"
+python-constraint = "*"
 
 [pipenv]
 allow_prereleases = true
