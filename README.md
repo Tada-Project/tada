@@ -42,8 +42,7 @@ for a provided Python function.
 If you want to run the tool, then you can run:
 
 ```bash
-pipenv run python tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
-                       [TYPES ...] [--schema SCHEMA]
+pipenv run python tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
 ```
 
 You can learn about Tada's checks and defaults by typing
@@ -95,12 +94,6 @@ with `hypothesis` or one of the generate types:
 `int, int_list, char, char_list, boolean, string, float`. `hypothesis` handles all
 types of function arguments with JSON schema.
 
-A sample JSON schema for a list of integers can be found here:
-[speed-surprises](https://github.com/Tada-Project/speed-surprises/blob/master/schema.json).
-Specify the `maxItems` and `minItems` with the start size in JSON schema.
-Use the command line checks `--startsize STARTSIZE` as well, for this will be the
-starting size of the doubling experiment.
-
 For further usage of JSON schemas and how to write them for various data types:
 please refer to [JSON schema](https://json-schema.org/understanding-json-schema/reference/type.html)
 
@@ -110,12 +103,18 @@ Python functions.
 Here is an example of Tada being used in conjunction with functions in the
 [Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
 
+We have also provided some samples of JSON schema here:
+[speed-surprises](https://github.com/Tada-Project/speed-surprises/tree/master/speedsurprises/jsonschema).
+Specify the `maxItems` and `minItems` with the start size in JSON schema.
+Use the command line checks `--startsize STARTSIZE` as well, for this will be the
+starting size of the doubling experiment.
+
 ```bash
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/jsonschema/single_int_list.json --startsize 50
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
     https://github.com/Tada-Project/tada/
-❓  For Help Information Type: python3 tada_a_bigoh.py -h  ❓
+❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓
 
 Start running experiment for size 50 →
 
@@ -186,7 +185,7 @@ command, substituting the name of your feature for the word `featurename`.
 - `git checkout master`
 - `git push -u origin new-featurename`
 
-To install development dependencies, type in the following command:
+To install development dependencies, type the following command in the terminal:
 
 - `pipenv install --dev`
 
