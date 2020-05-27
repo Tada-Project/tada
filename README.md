@@ -17,9 +17,10 @@ This program uses [Pipenv](https://github.com/pypa/pipenv) for installation.
 Once you have installed `pipenv` you can run the test suite for Tada's functions
 by typing the following in your terminal window:
 
-- `pipenv install --dev`
-- `pipenv shell`
+- `pipenv install`
 - `pipenv run pytest`
+
+You can also activate the `pipenv` shell by running this command: `pipenv shell`
 
 If you want to collect the coverage of the provided test suite, then you can
 run:
@@ -41,18 +42,19 @@ for a provided Python function.
 If you want to run the tool, then you can run:
 
 ```bash
-tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
+pipenv run python tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES
                        [TYPES ...] [--schema SCHEMA]
 ```
 
-You can learn about Tada's checks and defaults by typing python3
-`tada_a_bigoh.py -h` in your terminal window and then reviewing the following
-output.
+You can learn about Tada's checks and defaults by typing
+`pipenv run python tada_a_bigoh.py -h` in your terminal window and then
+reviewing the following output.
 
 ```
 usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
-                       [--schema SCHEMA] [--startsize STARTSIZE] [--maxsize MAXSIZE][--steps STEPS] [--runningtime RUNNINGTIME]
-                       [--expect EXPECT] [--backfill BACKFILL] [--indicator INDICATOR]
+                       [--schema SCHEMA] [--startsize STARTSIZE] [--steps STEPS] [--runningtime RUNNINGTIME]
+                       [--expect EXPECT] [--backfill BACKFILL] [--indicator INDICATOR] [--maxsize MAXSIZE]
+                       [--sortinput SORTINPUT] [--level LEVEL]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -61,11 +63,10 @@ optional arguments:
   --module MODULE       Module name with functions to analyze (default: None)
   --function FUNCTION   Name of the module's function to analyze (default: None)
   --types TYPES [TYPES ...]
-                        Parameter types for function to analyze, or hypothesis(default: None)
+                        Parameter types for function to analyze, hypothesis (default: None)
   --schema SCHEMA       The path to the jsonschema (default: None)
   --startsize STARTSIZE
                         Starting size of the doubling experiment (default: 1)
-  --maxsize MAXSIZE     Maximum size of the doubling experiment (default: 1500)
   --steps STEPS         Maximum rounds of experiment (default: 10)
   --runningtime RUNNINGTIME
                         Maximum running time (default: 200)
@@ -73,12 +74,13 @@ optional arguments:
   --backfill BACKFILL   Backfill if value equals 1 (default: 0)
   --indicator INDICATOR
                         Indicator value (default: 0.1)
-  --maxsize MAX_SIZE    Maximum experiment size (default: 1500)
-  --sortinput SORT      Sort the input data if value equals 1 (default: 0)
-  --level LEVEL         The level of data which is doubling (default: 1)
+  --maxsize MAXSIZE     Largest size of the doubling experiment (default: 1500)
+  --sortinput SORTINPUT
+                        Sort input if value equals 1 (default: 0)
+  --level LEVEL         The level of data to apply doubling experiment (default: 1)
 
-Sample usage: python3 tada_a_bigoh.py --directory /Users/myname/projectdirectory --module modulename.file
---function function_name --types int"
+Sample usage: pipenv run python tada_a_bigoh.py --directory /Users/myname/projectdirectory --module modulename.file
+--function function_name --types hypothesis
 ```
 
 Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
@@ -183,6 +185,10 @@ command, substituting the name of your feature for the word `featurename`.
 - `git checkout -b new-featurename`
 - `git checkout master`
 - `git push -u origin new-featurename`
+
+To install development dependencies, type in the following command:
+
+- `pipenv install --dev`
 
 Finally, you should open a pull request on the GitHub repository for the new
 branch that you have created. This pull request should describe the new feature
