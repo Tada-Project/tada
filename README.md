@@ -34,10 +34,13 @@ lines of code are not covered, then you can run:
 
 ## Using Tada
 
-Since the Tada tool is currently under heavy development, it is not yet feature
-complete. In the future, its documentation will feature examples of how to run
-the tool to automatically suggest the likely worst-case order-of-growth function
-for a provided Python function.
+### Checks
+
+Tada is currently under continuous development, it is not yet feature
+complete. However, the documentation here and in
+[Speed-Surprises](https://github.com/Tada-Project/speed-surprises) have featured
+some examples on how to run the tool to automatically suggest the likely
+worst-case order-of-growth function for various types of provided Python function.
 
 If you want to run the tool, then you can run:
 
@@ -50,67 +53,86 @@ You can learn about Tada's checks and defaults by typing
 reviewing the following output.
 
 ```
-usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
-                       [--schema SCHEMA] [--startsize STARTSIZE] [--steps STEPS] [--runningtime RUNNINGTIME]
-                       [--expect EXPECT] [--backfill BACKFILL] [--indicator INDICATOR] [--maxsize MAXSIZE]
-                       [--sortinput SORTINPUT] [--level LEVEL]
+usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
+                       FUNCTION --types TYPES [TYPES ...] [--schema SCHEMA]
+                       [--startsize STARTSIZE] [--steps STEPS]
+                       [--runningtime RUNNINGTIME] [--expect EXPECT]
+                       [--backfill BACKFILL] [--indicator INDICATOR]
+                       [--maxsize MAXSIZE] [--sorted SORTED] [--level LEVEL]
 
 optional arguments:
   -h, --help            show this help message and exit
   --directory DIRECTORY
-                        Package directory with functions to analyze (default: None)
+                        Path to the package directory with functions to
+                        analyze (default: None)
   --module MODULE       Module name with functions to analyze (default: None)
-  --function FUNCTION   Name of the module's function to analyze (default: None)
+  --function FUNCTION   Name of the function to analyze (default: None)
   --types TYPES [TYPES ...]
-                        Parameter types for function to analyze, hypothesis (default: None)
-  --schema SCHEMA       The path to the jsonschema (default: None)
+                        Data generation type: hypothesis or parameter types of
+                        the function (default: None)
+  --schema SCHEMA       The path to the JSON schema that describes the data
+                        format (default: None)
   --startsize STARTSIZE
                         Starting size of the doubling experiment (default: 1)
-  --steps STEPS         Maximum rounds of experiment (default: 10)
+  --steps STEPS         Maximum rounds of the doubling experiment (default:
+                        10)
   --runningtime RUNNINGTIME
-                        Maximum running time (default: 200)
-  --expect EXPECT       Expected Growth Ratio: O(1) O(logn) O(n) O(nlogn) O(n^2) O(n^3) O(c^n) (default: None)
-  --backfill BACKFILL   Backfill if value equals 1 (default: 0)
+                        Maximum running time of the doubling experiment
+                        (default: 200)
+  --expect EXPECT       Expected Growth Ratio:O(1) | O(logn) | O(n) | O(nlogn)
+                        | O(n^2) | O(n^3) | O(c^n). By using this argument,
+                        the experiment result will be stored in a csv file
+                        (default: None)
+  --backfill BACKFILL   Enable backfill to shrink experiments size according
+                        to the Predicted True Value: (0|1) (default: 0)
   --indicator INDICATOR
                         Indicator value (default: 0.1)
-  --maxsize MAXSIZE     Largest size of the doubling experiment (default: 1500)
-  --sortinput SORTINPUT
-                        Sort input if value equals 1 (default: 0)
-  --level LEVEL         The level of data to apply doubling experiment (default: 1)
+  --maxsize MAXSIZE     Maximum size of the doubling experiment (default:
+                        1500)
+  --sorted SORTED       Enable input data to be sorted: (0|1) (default: 0)
+  --level LEVEL         The level of nested data structure to apply doubling
+                        experiment (default: 1)
 
-Sample usage: pipenv run python tada_a_bigoh.py --directory /Users/myname/projectdirectory --module modulename.file
---function function_name --types hypothesis
+Sample usage: pipenv run python tada_a_bigoh.py --directory
+/Users/myname/projectdirectory --module modulename.file --function
+function_name --types hypothesis
 ```
+
+### Data Generation
 
 Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
 provided Python function. Therefore, we encourage you to create a file of
-a JSON array that contains JSON schemas for each parameter passed into the provided
-function. Also, `Hypothesis` will raise warnings when generating data for functions
-with `return` statements. In this version of Tada, we also encourage you remove the
-`return` statements temporarily for the purpose of the experiment.
+a JSON array that contains JSON schemas of each parameter passed into the provided
+function. Tada also supports data generation through our builtin
+[data generation functions](https://github.com/Tada-Project/tada/blob/master/tada/util/generate.py)
+including these following types:
+`int, int_list, char, char_list, boolean, string, float, bitdepth`
 
-To specify the data generation strategy, we encourage you to specify `--types TYPES [TYPES ...]`
-with `hypothesis` or one of the generate types:
-`int, int_list, char, char_list, boolean, string, float`. `hypothesis` handles all
-types of function arguments with JSON schema.
+To specify the data generation strategy, we encourage you to set argument
+`--types TYPES [TYPES ...]` with `hypothesis` or one of the aforementioned
+generation types. When using `hypothesis` to generate experiment data, you can
+simply set the `maxItems` and `minItems` in the json schema to zero. The size
+doubling will be enabled through the command line check `--startsize STARTSIZE`,
+which will be the starting size of the doubling experiment.
 
 For further usage of JSON schemas and how to write them for various data types:
 please refer to [JSON schema](https://json-schema.org/understanding-json-schema/reference/type.html)
+and
+[sample JSON schemas](https://github.com/Tada-Project/speed-surprises/tree/master/speedsurprises/jsonschema).
 
 When completed, Tada will be used to estimate the worst-case time complexity for
 Python functions.
 
-Here is an example of Tada being used in conjunction with functions in the
-[Speed-Surprises repository](https://github.com/gkapfham/speed-surprises).
+### Speed-Surprises
 
-We have also provided some samples of JSON schema here:
-[speed-surprises](https://github.com/Tada-Project/speed-surprises/tree/master/speedsurprises/jsonschema).
-Specify the `maxItems` and `minItems` with the start size in JSON schema.
-Use the command line checks `--startsize STARTSIZE` as well, for this will be the
-starting size of the doubling experiment.
+We have provided an extensive library of functions and sample JSON schemas in
+[Speed-Surprises repository](https://github.com/Tada-Project/speed-surprises).
+You can use or test Tada in conjunction with functions in this repository.
+
+### Sample Output
 
 ```bash
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/jsonschema/single_int_list.json --startsize 50
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
     https://github.com/Tada-Project/tada/
@@ -131,13 +153,32 @@ expected end time: 6.756377457682293e-06
 end time rate: 1
 last end time rate: 1
 Start running experiment for size 100 →
+.
+.
+.
+→ Done running experiment for size 800
+
+end time rate: 1.0977868448462222
+last end time rate: 1.0104045516442501
+Quit due to researched max size
++------+------------------------+------------------------+--------------------+
+| Size |          Mean          |         Median         |       Ratio        |
++------+------------------------+------------------------+--------------------+
+|  50  | 6.860612288411459e-06  | 6.584678009033201e-06  |         0          |
+| 100  | 1.3285847186279297e-05 | 1.2845127746582033e-05 | 1.9365395722362808 |
+| 200  | 2.7495347680664065e-05 | 2.698630590820313e-05  | 2.069521596564753  |
+| 400  | 5.5284626326497395e-05 |  5.4273513671875e-05   | 2.010690207251897  |
+| 800  | 0.00011595141430664063 | 0.00011436475048828127 | 2.0973536769853545 |
++------+------------------------+------------------------+--------------------+
+O(n) linear or O(nlogn) linearithmic
 ```
 
-## Recording Multiple Tada Experiments' Result
+### Recording Tada Experiment Result(s)
 
-The command argument `--expect EXPECTEDBIGOH` is needed for storing important
-variables to `experiment_data.csv`. A string of the expected Big-Oh growth ratio should
-be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be stored:
+If you would like to record the results of the doubling experiment, you can use
+the command line argument `--expect` by specifying with a string of the expected
+Big-Oh growth ratio of the provided function (e.g. `"O(1)"`, `"O(n^2)"`). The
+following variables will be stored and exported to `experiment_data.csv`. :
 
 - `EXPERIMENT_RELIABILITY`:  dummy variable := 1 if the result provided by tada tool is
   what user expected.
@@ -167,7 +208,7 @@ be followed. (ie. `"O(1)"`, `"O(n^2)"`) The following variables suppose to be st
 - `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
 - `START_SIZE`: int := initial size of doubling experiments
 
-To run with collecting experiment data, add `expect` like this:
+To run with experiment data collected, add `expect` into the commannd like this:
 
 ```bash
 pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
@@ -198,12 +239,7 @@ and then create a pull request.
 
 ## Future Works
 
-- Improve functionality of current analysis functions.
-- Refactor code, specifically `tada_a_bigoh.py` file.
-  - Consider making the functionality of generating the Results Table a class.
-  - Consider separating the analysis features into separate functions.
-- Clean up and reformat the output from the program to make it more readable
-  and user friendly.
+- Further verification of the accuracy and efficiency of the tool
 
 ## Problems or Praise
 
