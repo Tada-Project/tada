@@ -7,9 +7,7 @@ called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in the
 Python 3 language. The tool systematically runs a doubling experiment to
 ascertain the likely worst-case order-of-growth function for an arbitrary Python
 function. This documentation provides a brief overview about how to run the
-tool, its provided test suite, and more. Please note that this is a work in
-progress tool and potential future works are detailed in the `Future Works`
-section below.
+tool, its provided test suite, and more.
 
 ## Installing and Testing Tada
 
@@ -211,7 +209,7 @@ following variables will be stored and exported to `experiment_data.csv`. :
 To run with experiment data collected, add `expect` into the commannd like this:
 
 ```bash
-pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/schema.json --startsize 50 --expect "O(n)"
+pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --expect "O(n)"
 ```
 
 ## Adding New Features to Tada
@@ -228,7 +226,9 @@ command, substituting the name of your feature for the word `featurename`.
 
 To install development dependencies, type the following command in the terminal:
 
-- `pipenv install --dev`
+```
+pipenv install --dev
+```
 
 Finally, you should open a pull request on the GitHub repository for the new
 branch that you have created. This pull request should describe the new feature
