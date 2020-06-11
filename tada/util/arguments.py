@@ -72,16 +72,17 @@ def parse(args):
         "--expect",
         required=False,
         type=str,
-        help="""Expected Growth Ratio:O(1) O(logn) O(n) O(nlogn) O(n^2) O(n^3)
-        O(c^n). By using this argument, the experiment result will be stored
-        in a csv file""",
+        help="""Expected Growth Ratio: O(1) | O(logn) | O(n) | O(nlogn) | O(n^2)
+        | O(n^3) | O(c^n). By using this argument, the experiment result will be
+        stored in a csv file""",
     )
     parser.add_argument(
         "--backfill",
         required=False,
         type=int,
         default=constants.BACKFILL,
-        help="Enable backfill by setting to 1",
+        help="""Enable backfill to shrink experiments size according to the
+        Predicted True Value: (0|1)""",
     )
     parser.add_argument(
         "--indicator",
@@ -102,7 +103,7 @@ def parse(args):
         required=False,
         type=int,
         default=constants.SORT,
-        help="Enable input data to be sorted by setting to 1",
+        help="Enable input data to be sorted: (0|1)",
     )
     parser.add_argument(
         "--level",
