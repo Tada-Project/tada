@@ -12,7 +12,7 @@ MODULE = "module"
 TYPES = "types"
 SCHEMA = "schema"
 LEVEL = "level"
-SORTINPUT = "sortinput"
+SORTINPUT = "sorted"
 
 
 def save(configuration_filename, tada_configuration):
