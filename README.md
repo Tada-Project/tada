@@ -96,6 +96,14 @@ Sample usage: pipenv run python tada_a_bigoh.py --directory
 function_name --types hypothesis
 ```
 
+It is worth noting that when the provided function is relied on an external Python
+library, it is likely that Tada might not have this dependency, and thus, it might
+cause to an error when running the experiment. You can simply resolve this issue
+by installing the required dependencies to run the function by this following
+command:
+
+- `pipenv install <library-name>`
+
 ### Data Generation
 
 Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
