@@ -13,6 +13,7 @@ TYPES = "types"
 SCHEMA = "schema"
 LEVEL = "level"
 SORTED = "sorted"
+POSITION = "position"
 
 
 def save(configuration_filename, tada_configuration):
