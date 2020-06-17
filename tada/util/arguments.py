@@ -20,7 +20,7 @@ def parse(args):
         "--directory",
         required=True,
         type=str,
-        help="Package directory with functions to analyze",
+        help="Path to the package directory with functions to analyze",
     )
     parser.add_argument(
         "--module",
@@ -32,17 +32,20 @@ def parse(args):
         "--function",
         required=True,
         type=str,
-        help="Name of the module's function to analyze",
+        help="Name of the function to analyze",
     )
     parser.add_argument(
         "--types",
         required=True,
         type=str,
         nargs="+",
-        help="""Parameter types for function to analyze, hypothesis""",
+        help="""Data generation type: hypothesis or parameter types of the function""",
     )
     parser.add_argument(
-        "--schema", required=False, type=str, help="The path to the jsonschema",
+        "--schema",
+        required=False,
+        type=str,
+        help="The path to the JSON schema that describes the data format",
     )
     parser.add_argument(
         "--startsize",
@@ -56,27 +59,30 @@ def parse(args):
         required=False,
         type=int,
         default=constants.STEPS,
-        help="Maximum rounds of experiment",
+        help="Maximum rounds of the doubling experiment",
     )
     parser.add_argument(
         "--runningtime",
         required=False,
         type=int,
         default=constants.RUNNINGTIME,
-        help="Maximum running time",
+        help="Maximum running time of the doubling experiment",
     )
     parser.add_argument(
         "--expect",
         required=False,
         type=str,
-        help="Expected Growth Ratio: O(1) O(logn) O(n) O(nlogn) O(n^2) O(n^3) O(c^n)",
+        help="""Expected Growth Ratio: O(1) | O(logn) | O(n) | O(nlogn) | O(n^2)
+        | O(n^3) | O(c^n). By using this argument, the experiment result will be
+        stored in a csv file""",
     )
     parser.add_argument(
         "--backfill",
         required=False,
         type=int,
         default=constants.BACKFILL,
-        help="Backfill if value equals 1",
+        help="""Enable backfill to shrink experiments size according to the
+        Predicted True Value: (0|1)""",
     )
     parser.add_argument(
         "--indicator",
@@ -90,21 +96,21 @@ def parse(args):
         required=False,
         type=int,
         default=constants.MAX_SIZE,
-        help="Largest size of the doubling experiment",
+        help="Maximum size of the doubling experiment",
     )
     parser.add_argument(
-        "--sortinput",
+        "--sorted",
         required=False,
         type=int,
         default=constants.SORT,
-        help="Sort input if value equals 1",
+        help="Enable input data to be sorted: (0|1)",
     )
     parser.add_argument(
         "--level",
         required=False,
         type=int,
         default=constants.LEVEL,
-        help="The level of data to apply doubling experiment",
+        help="The level of nested data structure to apply doubling experiment",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)

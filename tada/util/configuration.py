@@ -12,7 +12,7 @@ MODULE = "module"
 TYPES = "types"
 SCHEMA = "schema"
 LEVEL = "level"
-SORTINPUT = "sortinput"
+SORTED = "sorted"
 
 
 def save(configuration_filename, tada_configuration):
@@ -35,7 +35,7 @@ def get_level(current_dictionary):
 
 def get_sortinput(current_dictionary):
     """Return the sortinput argument from the provided dictionary"""
-    return current_dictionary[SORTINPUT]
+    return current_dictionary[SORTED]
 
 
 def get_directory(current_dictionary):
