@@ -22,6 +22,7 @@ TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 global_data = ()
 
 
+# pylint: disable=W0102
 def store_data_to_global(path, chosen_size, level=1, position=[0]):
     """Generate data through global variable"""
 
@@ -45,10 +46,12 @@ def store_data_to_file(a):
         f.write(str(a))
 
 
+# pylint: disable=W0102
 def generate_experiment_strategy(path, size, level=1, position=[0]):
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
 
+    # pylint: disable=W0102
     def detect_level_and_position(json_schema, size, level=1, position=[0], index_position=0):
         """A dummy function to store the data to file for experiment"""
         schema = json_schema[position[index_position]]
@@ -82,6 +85,7 @@ def double_experiment_size(schema, size):
         schema["minimum"] = int(size)
 
 
+# pylint: disable=W0102
 def generate_func(function, path, size, level=1, position=[0]):
     """generate a function with strategy from schema path and current input size"""
     strategy = generate_experiment_strategy(path, size, level, position)
@@ -115,6 +119,7 @@ def generate_func_from_single_st(function, strategy):
     return function
 
 
+# pylint: disable=W0102
 def generate_data(chosen_types, chosen_size, level=1, position=[0], path=None):
     """Generate a list of data values"""
     generated_values = ()
