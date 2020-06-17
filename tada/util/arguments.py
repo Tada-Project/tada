@@ -112,6 +112,13 @@ def parse(args):
         default=constants.LEVEL,
         help="The level of nested data structure to apply doubling experiment",
     )
+    parser.add_argument(
+        "--position",
+        required=False,
+        type=list,
+        default=constants.POSITION,
+        help="The position of nested data structure to apply doubling experiment",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
