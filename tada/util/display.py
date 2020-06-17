@@ -6,7 +6,7 @@ def display_welcome_message():
     print()
     print("🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆 ")
     print("    https://github.com/Tada-Project/tada/")
-    print("❓  For Help Information Type: python3 tada_a_bigoh.py -h  ❓")
+    print("❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓")
     print()
 
 
