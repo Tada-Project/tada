@@ -84,7 +84,7 @@ def double_experiment_size(schema, size):
 
 def generate_func(function, path, size, level=1, position=[0]):
     """generate a function with strategy from schema path and current input size"""
-    strategy = generate_experiment_strategy(json_schema, size, level, position)
+    strategy = generate_experiment_strategy(path, size, level, position)
     function = given(*strategy)(function)
     # configure hypothesis
     function = settings(

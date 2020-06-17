@@ -129,10 +129,11 @@ def test_generate_data_with_hypothesis(tmpdir):
     # assume the doubling experiment is at 100
     current_size = 100
     level = 1
+    position = [0]
     requested_types = ["hypothesis"]
     requested_oath = str(path)
     generated_data = generate.generate_data(
-        requested_types, current_size, level, requested_oath
+        requested_types, current_size, level, position, requested_oath
     )
     assert generated_data is not None
 
