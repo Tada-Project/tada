@@ -90,6 +90,8 @@ optional arguments:
   --sorted SORTED       Enable input data to be sorted: (0|1) (default: 0)
   --level LEVEL         The level of nested data structure to apply doubling
                         experiment (default: 1)
+  --position POSITION   The position of nested data structure to apply doubling
+                        experiment (default: [0])
 
 Sample usage: pipenv run python tada_a_bigoh.py --directory
 /Users/myname/projectdirectory --module modulename.file --function
