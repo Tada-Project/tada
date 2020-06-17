@@ -33,6 +33,11 @@ def get_level(current_dictionary):
     return current_dictionary[LEVEL]
 
 
+def get_position(current_dictionary):
+    """Return the position argument from the provided dictionary"""
+    return current_dictionary[POSITION]
+
+
 def get_sortinput(current_dictionary):
     """Return the sortinput argument from the provided dictionary"""
     return current_dictionary[SORTED]
