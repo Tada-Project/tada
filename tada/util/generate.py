@@ -45,24 +45,21 @@ def store_data_to_file(a):
         f.write(str(a))
 
 
-def generate_experiment_strategy(path, size, level=1):
+def generate_experiment_strategy(path, size, level=1, position=[0]):
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
-    # change the size as the experiment doubles
-    if level == 1:
-        for schema in json_schema:
+
+    def detect_level_and_position(json_schema, size, level=1, position=[0], index_position=0):
+        """A dummy function to store the data to file for experiment"""
+        schema = json_schema[position[index_position]]
+        level -= 1
+        index_position += 1
+        if level == 0:
             double_experiment_size(schema, size)
-    elif level == 2:
-        for schema in json_schema:
-            for schema2 in schema:
-                double_experiment_size(schema2, size)
-    elif level == 3:
-        for schema in json_schema:
-            for schema2 in schema:
-                for schema3 in schema2:
-                    double_experiment_size(schema3, size)
-    else:
-        print("More levels need to be handled")
+        while level > 0:
+            detect_level_and_position(schema, size, level, position, index_position)
+
+    detect_level_and_position(json_schema, size, level, position)
     strategy = []
     for j in json_schema:
         strategy.append(from_schema(j))
@@ -87,7 +84,7 @@ def double_experiment_size(schema, size):
 
 def generate_func(function, path, size, level=1):
     """generate a function with strategy from schema path and current input size"""
-    strategy = generate_experiment_strategy(path, size, level)
+    strategy = generate_experiment_strategy(json_schema, size, level)
     function = given(*strategy)(function)
     # configure hypothesis
     function = settings(
