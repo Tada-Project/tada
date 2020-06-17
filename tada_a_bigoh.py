@@ -63,7 +63,7 @@ if __name__ == "__main__":
             if "hypothesis" in tada_arguments.types[0]:
                 if current_size >= tada_arguments.maxsize:
                     constants.QUIT_BY_MAX_SIZE = 1
-                    print("Quit due to researched max size")
+                    print("Quit due to reached max size")
                     break
             display.display_start_message(current_size)
             current_output, current_error = run.run_command(
