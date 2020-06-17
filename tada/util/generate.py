@@ -46,8 +46,7 @@ def store_data_to_file(a):
         f.write(str(a))
 
 
-# pylint: disable=W0102
-def generate_experiment_strategy(path, size, level=1, position=[0]):
+def generate_experiment_strategy(path, size, level=1, position=[0]):  # pylint: disable=W0102
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
 
