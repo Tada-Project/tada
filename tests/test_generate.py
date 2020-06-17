@@ -198,7 +198,7 @@ allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
     )
     assert (
         str(strategy[1])
-        == "lists(floats(allow_infinity=False, \
+        != "lists(floats(allow_infinity=False, \
 allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
     )
 
