@@ -61,31 +61,34 @@ usage: tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function
 optional arguments:
   -h, --help            show this help message and exit
   --directory DIRECTORY
-                        Path to the package directory with functions to analyze (default: None)
+                        Path to the package directory with functions to
+                        analyze (default: None)
   --module MODULE       Module name with functions to analyze (default: None)
   --function FUNCTION   Name of the function to analyze (default: None)
   --types TYPES [TYPES ...]
-                        Data generation type: hypothesis or parameter types of the function
-                        (default: None)
-  --schema SCHEMA       The path to the JSON schema that describes the data format (default: None)
+                        Data generation type: hypothesis or parameter types of
+                        the function (default: None)
+  --schema SCHEMA       The path to the JSON schema that describes the data
+                        format (default: None)
   --startsize STARTSIZE
                         Starting size of the doubling experiment (default: 1)
   --steps STEPS         Maximum rounds of the doubling experiment (default: 10)
   --runningtime RUNNINGTIME
                         Maximum running time of the doubling experiment (default: 200)
-  --expect EXPECT       Expected Growth Ratio: O(1) | O(logn) | O(n) | O(nlogn) | O(n^2) | O(n^3) |
-                        O(c^n). By using this argument, the experiment result will be stored in a
-                        csv file (default: None)
-  --backfill            Enable backfill to shrink experiments size according to the Predicted True
-                        Value (default: False)
+  --expect EXPECT       Expected Growth Ratio: O(1) | O(logn) | O(n) | O(nlogn)
+                        | O(n^2) | O(n^3) | O(c^n). By using this argument, the
+                        experiment result will be stored in a csv file (default: None)
+  --backfill            Enable backfill to shrink experiments size according to
+                        the Predicted True Value (default: False)
   --indicator INDICATOR
                         Indicator value (default: 0.1)
   --maxsize MAXSIZE     Maximum size of the doubling experiment (default: 1500)
   --sorted              Enable input data to be sorted (default: False)
-  --level LEVEL         The level of nested data structure to apply doubling experiment (default:
-                        1)
+  --level LEVEL         The level of nested data structure to apply doubling
+                        experiment (default: 1)
   --position POSITION [POSITION ...]
-                        The position of input data to double in the multivariable doubling experiment (default: 0)
+                        The position of input data to double in the multivariable
+                        doubling experiment (default: 0)
   --log                 Show log/debug/diagnostic output (default: False)
   --md                  Show results table in markdown format (default: False)
 
