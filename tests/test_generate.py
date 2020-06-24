@@ -224,7 +224,6 @@ allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
     )
 
 
-
 def test_generate_func_from_single_st():
     """Checks that generate function from single strategy works"""
     # pylint: disable=blacklisted-name

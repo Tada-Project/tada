@@ -118,7 +118,8 @@ def parse(args):
         nargs="+",
         type=int,
         default=constants.POSITION,
-        help="The position of nested data structure to apply doubling experiment",
+        help="""The position of input data to double in the multivariable
+        doubling experiment""",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
