@@ -54,7 +54,11 @@ def main():
         while True:
             if use_backfill:
                 # run the benchmark by using it through python
-                analysis.backfill_checker(last_last_size, current_size)
+                # backfill checker
+                if last_last_size == current_size:
+                    display.display_output(f"lastlast: {last_last_size} \ncurrent: {current_size}", to_print)
+                    constants.BACKFILL_TIMES = constants.BACKFILL_TIMES + 1
+                    display.display_output(f"count: {display.display_output}", to_print)
                 if constants.BACKFILL_TIMES == 2:
                     constants.QUIT_BY_BACKFILL = 1
                     display.display_output("Quit due to two backfills", to_print)
