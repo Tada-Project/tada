@@ -119,6 +119,13 @@ def parse(args):
         default=False,
         help="Show log/debug/diagnostic output",
     )
+    parser.add_argument(
+        "--md",
+        required=False,
+        action='store_true',
+        default=False,
+        help="Show results table in markdown format",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
