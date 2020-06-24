@@ -22,7 +22,8 @@ TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
 global_data = ()
 
 
-def store_data_to_global(path, chosen_size, level=1):
+# pylint: disable=W0102
+def store_data_to_global(path, chosen_size, level=1, position=[0]):
     """Generate data through global variable"""
 
     def store_global(a):
@@ -31,7 +32,7 @@ def store_data_to_global(path, chosen_size, level=1):
         global global_data
         global_data = global_data + (a,)
 
-    strategies = generate_experiment_strategy(path, chosen_size, level)
+    strategies = generate_experiment_strategy(path, chosen_size, level, position)
     # store data based on the amount of parameters
     for st in strategies:
         gen = generate_func_from_single_st(store_global, st)
@@ -45,24 +46,27 @@ def store_data_to_file(a):
         f.write(str(a))
 
 
-def generate_experiment_strategy(path, size, level=1):
+def generate_experiment_strategy(path, size, level=1, position=[0]):  # pylint: disable=W0102
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
-    # change the size as the experiment doubles
-    if level == 1:
-        for schema in json_schema:
-            double_experiment_size(schema, size)
-    elif level == 2:
-        for schema in json_schema:
-            for schema2 in schema:
-                double_experiment_size(schema2, size)
-    elif level == 3:
-        for schema in json_schema:
-            for schema2 in schema:
-                for schema3 in schema2:
-                    double_experiment_size(schema3, size)
-    else:
-        print("More levels need to be handled")
+
+    # pylint: disable=W0102, R1705
+    def detect_level_and_position(schema, level=1, position=[0], index_position=0):
+        """A dummy function to store the data to file for experiment"""
+        if level == 0:
+            print(schema)
+            return schema
+        else:
+            if isinstance(schema, list):
+                subschema = schema[position[index_position]]
+            elif isinstance(schema, dict):
+                subschema = schema["items"][position[index_position]]
+            return detect_level_and_position(
+                subschema, level - 1, position, index_position + 1
+            )
+
+    js = detect_level_and_position(json_schema, level, position)
+    double_experiment_size(js, size)
     strategy = []
     for j in json_schema:
         strategy.append(from_schema(j))
@@ -77,15 +81,18 @@ def double_experiment_size(schema, size):
     elif schema.get("type") == "object":
         schema["maxProperties"] = int(size)
         schema["minProperties"] = int(size)
+    elif schema.get("type") == "string":
+        schema["maxLength"] = int(size)
+        schema["minLength"] = int(size)
     else:
-        print("didn't recognize array or object")
         schema["maximum"] = int(size)
         schema["minimum"] = int(size)
 
 
-def generate_func(function, path, size, level=1):
+# pylint: disable=W0102
+def generate_func(function, path, size, level=1, position=[0]):
     """generate a function with strategy from schema path and current input size"""
-    strategy = generate_experiment_strategy(path, size, level)
+    strategy = generate_experiment_strategy(path, size, level, position)
     function = given(*strategy)(function)
     # configure hypothesis
     function = settings(
@@ -116,7 +123,8 @@ def generate_func_from_single_st(function, strategy):
     return function
 
 
-def generate_data(chosen_types, chosen_size, level=1, path=None):
+# pylint: disable=W0102
+def generate_data(chosen_types, chosen_size, level=1, position=[0], path=None):
     """Generate a list of data values"""
     generated_values = ()
     if chosen_types[0] in TYPES:
@@ -126,7 +134,7 @@ def generate_data(chosen_types, chosen_size, level=1, path=None):
             generated_value = generator_to_invoke(chosen_size)
             generated_values = generated_values + (generated_value,)
     elif chosen_types[0] == "hypothesis":
-        generated_values = store_data_to_global(path, chosen_size, level)
+        generated_values = store_data_to_global(path, chosen_size, level, position)
     return generated_values
 
 

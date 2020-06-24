@@ -84,6 +84,9 @@ optional arguments:
   --sorted              Enable input data to be sorted (default: False)
   --level LEVEL         The level of nested data structure to apply doubling experiment (default:
                         1)
+  --position POSITION_FOR_FIRST_LEVEL POSITION_FOR_SECOND_LEVEL ETC
+                        The position of input data to double in the multivariable
+                        doubling experiment (default: "0")
   --log                 Show log/debug/diagnostic output (default: False)
   --md                  Show results table in markdown format (default: False)
 
