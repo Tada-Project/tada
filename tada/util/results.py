@@ -15,6 +15,7 @@ def display_resultstable(resultstable, to_md=False):
 
 
 def to_markdown_table(pt):
+    """Convert prettytable to markdown format"""
     _junc = pt.junction_char
     if _junc != "|":
         pt.junction_char = "|"
