@@ -35,6 +35,7 @@ RESULTS = "_results"
 SIZE = ".size.txt"
 DIRECTORY = ".directory.txt"
 CONFIGURATION = ".tada.json"
+EXPERIMENT = "experiment_data.csv"
 
 # Constants
 UTF8 = "utf-8"
