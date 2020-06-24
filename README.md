@@ -134,7 +134,31 @@ You can use or test Tada in conjunction with functions in this repository.
 ### Sample Output
 
 ```bash
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
+Start running experiment for size 50 →
+
+
+→ Done running experiment for size 50
+.
+.
+.
+→ Done running experiment for size 800
+
++------+------------------------+------------------------+--------------------+
+| Size |          Mean          |         Median         |       Ratio        |
++------+------------------------+------------------------+--------------------+
+|  50  | 6.651357379150391e-06  | 6.475323577880859e-06  |         0          |
+| 100  | 1.2518058905029296e-05 | 1.2485851135253904e-05 | 1.8820307181612135 |
+| 200  | 2.4886978169759115e-05 | 2.4602192504882815e-05 | 1.9880860410203407 |
+| 400  | 5.414438324381511e-05  | 5.275118505859373e-05  | 2.1756109911972965 |
+| 800  | 0.00012107856030273438 | 0.00011683380078125006 | 2.2362164466351206 |
++------+------------------------+------------------------+--------------------+
+O(n) linear or O(nlogn) linearithmic
+```
+
+#### Debug output with `--log`
+
+```bash
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
     https://github.com/Tada-Project/tada/
