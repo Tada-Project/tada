@@ -85,6 +85,7 @@ optional arguments:
   --level LEVEL         The level of nested data structure to apply doubling experiment (default:
                         1)
   --log                 Show log/debug/diagnostic output (default: False)
+  --md                  Show results table in markdown format (default: False)
 
 Sample usage: pipenv run python tada_a_bigoh.py --directory
 /Users/myname/projectdirectory --module modulename.file --function
