@@ -137,6 +137,12 @@ You can use or test Tada in conjunction with functions in this repository.
 ### Sample Output
 
 ```bash
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
+
+🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
+    https://github.com/Tada-Project/tada/
+❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓
+
 Start running experiment for size 50 →
 
 
