@@ -37,3 +37,23 @@ def test_display_resultstable():
     resultstable1 = resultstable
     results.add_resultstable(resultstable1, 1, 1, 1, 1)
     assert results.display_resultstable(resultstable1) != " "
+
+
+def test_to_markdown_table():
+    """Test to see if to_markdown_table functions properly."""
+    results_table = PrettyTable(["Size", "Mean", "Median", "Ratio"])
+    output = results.to_markdown_table(results_table)
+    expect = """ Size | Mean | Median | Ratio \n------|------|--------|-------"""
+    assert expect == output
+
+
+def test_display_resultstable_to_markdown(capsys):
+    """Test to see if display_resulstable functions properly when to_md is true."""
+    results_table = PrettyTable(["Size", "Mean", "Median", "Ratio"])
+    results.add_resultstable(results_table, 1, 1, 1, 1)
+    results.display_resultstable(results_table, to_md=True)
+    captured = capsys.readouterr()
+    expect = """ Size | Mean | Median | Ratio \n\
+------|------|--------|-------\n\
+  1   |  1   |   1    |   1   \n"""
+    assert captured.out == expect

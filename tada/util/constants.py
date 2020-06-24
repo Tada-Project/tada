@@ -10,9 +10,9 @@ SIZE_STOP = SIZE_START * FACTOR ** STEPS
 RUNNINGTIME = 200
 INDICATOR = 0.1
 STEP_START = 1
-BACKFILL = 0
+BACKFILL = False
 MAX_SIZE = 1500
-SORT = 0
+SORT = False
 LEVEL = 1
 POSITION = "0"
 
@@ -36,6 +36,7 @@ RESULTS = "_results"
 SIZE = ".size.txt"
 DIRECTORY = ".directory.txt"
 CONFIGURATION = ".tada.json"
+EXPERIMENT = "experiment_data.csv"
 
 # Constants
 UTF8 = "utf-8"

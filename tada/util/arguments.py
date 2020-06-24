@@ -79,10 +79,10 @@ def parse(args):
     parser.add_argument(
         "--backfill",
         required=False,
-        type=int,
+        action='store_true',
         default=constants.BACKFILL,
         help="""Enable backfill to shrink experiments size according to the
-        Predicted True Value: (0|1)""",
+        Predicted True Value""",
     )
     parser.add_argument(
         "--indicator",
@@ -101,9 +101,9 @@ def parse(args):
     parser.add_argument(
         "--sorted",
         required=False,
-        type=int,
+        action='store_true',
         default=constants.SORT,
-        help="Enable input data to be sorted: (0|1)",
+        help="Enable input data to be sorted",
     )
     parser.add_argument(
         "--level",
@@ -120,6 +120,20 @@ def parse(args):
         default=constants.POSITION,
         help="""The position of input data to double in the multivariable
         doubling experiment""",
+    )
+    parser.add_argument(
+        "--log",
+        required=False,
+        action='store_true',
+        default=False,
+        help="Show log/debug/diagnostic output",
+    )
+    parser.add_argument(
+        "--md",
+        required=False,
+        action='store_true',
+        default=False,
+        help="Show results table in markdown format",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)

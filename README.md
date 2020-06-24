@@ -72,27 +72,25 @@ optional arguments:
                         format (default: None)
   --startsize STARTSIZE
                         Starting size of the doubling experiment (default: 1)
-  --steps STEPS         Maximum rounds of the doubling experiment (default:
-                        10)
+  --steps STEPS         Maximum rounds of the doubling experiment (default: 10)
   --runningtime RUNNINGTIME
-                        Maximum running time of the doubling experiment
-                        (default: 200)
-  --expect EXPECT       Expected Growth Ratio:O(1) | O(logn) | O(n) | O(nlogn)
-                        | O(n^2) | O(n^3) | O(c^n). By using this argument,
-                        the experiment result will be stored in a csv file
-                        (default: None)
-  --backfill BACKFILL   Enable backfill to shrink experiments size according
-                        to the Predicted True Value: (0|1) (default: 0)
+                        Maximum running time of the doubling experiment (default: 200)
+  --expect EXPECT       Expected Growth Ratio: O(1) | O(logn) | O(n) | O(nlogn)
+                        | O(n^2) | O(n^3) | O(c^n). By using this argument, the
+                        experiment result will be stored in a csv file (default: None)
+  --backfill            Enable backfill to shrink experiments size according to
+                        the Predicted True Value (default: False)
   --indicator INDICATOR
                         Indicator value (default: 0.1)
-  --maxsize MAXSIZE     Maximum size of the doubling experiment (default:
-                        1500)
-  --sorted SORTED       Enable input data to be sorted: (0|1) (default: 0)
+  --maxsize MAXSIZE     Maximum size of the doubling experiment (default: 1500)
+  --sorted              Enable input data to be sorted (default: False)
   --level LEVEL         The level of nested data structure to apply doubling
                         experiment (default: 1)
-  --position POSITION_FOR_FIRST_LEVEL POSITION_FOR_SECOND_LEVEL ETC
+  --position POSITION [POSITION ...]
                         The position of input data to double in the multivariable
-                        doubling experiment (default: "0")
+                        doubling experiment (default: 0)
+  --log                 Show log/debug/diagnostic output (default: False)
+  --md                  Show results table in markdown format (default: False)
 
 Sample usage: pipenv run python tada_a_bigoh.py --directory
 /Users/myname/projectdirectory --module modulename.file --function
@@ -142,6 +140,36 @@ You can use or test Tada in conjunction with functions in this repository.
 
 ```bash
 $ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
+
+🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
+    https://github.com/Tada-Project/tada/
+❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓
+
+Start running experiment for size 50 →
+
+
+→ Done running experiment for size 50
+.
+.
+.
+→ Done running experiment for size 800
+
++------+------------------------+------------------------+--------------------+
+| Size |          Mean          |         Median         |       Ratio        |
++------+------------------------+------------------------+--------------------+
+|  50  | 6.651357379150391e-06  | 6.475323577880859e-06  |         0          |
+| 100  | 1.2518058905029296e-05 | 1.2485851135253904e-05 | 1.8820307181612135 |
+| 200  | 2.4886978169759115e-05 | 2.4602192504882815e-05 | 1.9880860410203407 |
+| 400  | 5.414438324381511e-05  | 5.275118505859373e-05  | 2.1756109911972965 |
+| 800  | 0.00012107856030273438 | 0.00011683380078125006 | 2.2362164466351206 |
++------+------------------------+------------------------+--------------------+
+O(n) linear or O(nlogn) linearithmic
+```
+
+#### Debug output with `--log`
+
+```bash
+$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
 
 🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
     https://github.com/Tada-Project/tada/

@@ -48,7 +48,7 @@ if __name__ == "__main__":
     # generate data
     data = generate.generate_data(func_type, chosen_size, level, position, path)
     # run benchmark
-    if configuration.get_sortinput(tada_configuration_dict) == 1:
+    if configuration.get_sortinput(tada_configuration_dict):
         for t in data:
             if type(t) is list:
                 t.sort()
