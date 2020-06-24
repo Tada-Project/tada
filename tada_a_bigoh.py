@@ -160,7 +160,7 @@ def main():
                 display.display_output(f"Quit due to end of rounds: {steps}", to_print)
                 constants.QUIT_BY_STEPS = 1
                 break
-        results.display_resultstable(display.to_markdown_table(resultstable), to_markdown)
+        results.display_resultstable(resultstable, to_markdown)
         print(analysis.analyze_big_oh(ratio))
         if tada_arguments.expect is not None:
             if indicator < tada_arguments.indicator:
