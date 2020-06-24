@@ -129,7 +129,9 @@ if __name__ == "__main__":
             last_last_size = last_size
             last_size = current_size
             display.display_output(f"end time rate: {end_time_rate}", to_print)
-            display.display_output(f"last end time rate: {last_end_time_rate}", to_print)
+            display.display_output(
+                f"last end time rate: {last_end_time_rate}", to_print
+            )
             if last_end_time_rate > end_time_rate and use_backfill:
                 current_size = int(current_size / constants.FACTOR)
             else:
@@ -142,7 +144,9 @@ if __name__ == "__main__":
             meanlastround = mean
             current_runningtime = time.time() - start_time
             if current_runningtime > tada_arguments.runningtime:
-                display.display_output(f"Quit due to over maximum time: {current_runningtime}", to_print)
+                display.display_output(
+                    f"Quit due to over maximum time: {current_runningtime}", to_print
+                )
                 constants.QUIT_BY_MAX_RUNTIME = 1
                 break
             steps += 1
@@ -194,47 +198,46 @@ if __name__ == "__main__":
                 total_loop_list[-1] / total_loop_list[-2]
             )
         # check if result is expected
-        if (
-            tada_arguments.expect is not None
-            and tada_arguments.expect in analysis.analyze_big_oh(ratio)
-        ):
-            constants.RESULT = 1
-        constants.DATA_GEN_STRATEGY = tada_arguments.types
-        constants.START_SIZE = tada_arguments.startsize
-        constants.INDICATOR_VALUE = tada_arguments.indicator
-        # set numerical value to backfill for result storing
-        use_backfill = 1 if use_backfill else 0
-        df = pd.read_csv("experiment_data.csv")
-        # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
-        df_new = pd.DataFrame(
-            {
-                "EXPERIMENT_RELIABILITY": constants.RESULT,
-                "CPU_TYPE": constants.CPU_TYPE,
-                "CPU_TEMP": constants.CPU_TEMP,
-                "CPU_COUNT": constants.CPU_COUNT,
-                "TOTAL_RUNNING_TIME": constants.TOTAL_RUNNING_TIME,
-                "QUIT_BY_MAX_RUNTIME": constants.QUIT_BY_MAX_RUNTIME,
-                "QUIT_BY_INDICATOR": constants.QUIT_BY_INDICATOR,
-                "QUIT_BY_BACKFILL": constants.QUIT_BY_BACKFILL,
-                "QUIT_BY_STEPS": constants.QUIT_BY_STEPS,
-                "QUIT_BY_MAX_SIZE": constants.QUIT_BY_MAX_SIZE,
-                "MEM_MAX_RSS": constants.MEM_MAX_RSS,
-                "MEM_PEAK_PAGEFILE_USAGE": constants.MEM_PEAK_PAGEFILE_USAGE,
-                "OS": constants.OS,
-                "INDICATOR_VALUE": constants.INDICATOR_VALUE,
-                "BACKFILL_TIMES": constants.BACKFILL_TIMES,
-                "PYPERF_AVG_EXPERIMENT_ROUNDS": constants.PYPERF_AVG_EXPERIMENT_ROUNDS,
-                "PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO": constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO,
-                "NAME_OF_EXPERIMENT": constants.NAME_OF_EXPERIMENT,
-                "PYTHON_VERSION": constants.PYTHON_VERSION,
-                "DATA_GEN_STRATEGY": constants.DATA_GEN_STRATEGY,
-                "START_SIZE": constants.START_SIZE,
-                "USED_BACKFILL": use_backfill,
-                "AVG_RUN_TIME": constants.AVG_RUN_TIME,
-                "STEPS": steps,
-            },
-            index=[1],
-        )
-        # store to csv
         if tada_arguments.expect is not None:
-            df_new.to_csv("experiment_data.csv", index=False, header=False, mode="a")
+            if tada_arguments.expect in analysis.analyze_big_oh(ratio):
+                constants.RESULT = 1
+            constants.DATA_GEN_STRATEGY = tada_arguments.types
+            constants.START_SIZE = tada_arguments.startsize
+            constants.INDICATOR_VALUE = tada_arguments.indicator
+            # set numerical value to backfill for result storing
+            use_backfill = 1 if use_backfill else 0
+            df = pd.read_csv("experiment_data.csv")
+            # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
+            df_new = pd.DataFrame(
+                {
+                    "EXPERIMENT_RELIABILITY": constants.RESULT,
+                    "CPU_TYPE": constants.CPU_TYPE,
+                    "CPU_TEMP": constants.CPU_TEMP,
+                    "CPU_COUNT": constants.CPU_COUNT,
+                    "TOTAL_RUNNING_TIME": constants.TOTAL_RUNNING_TIME,
+                    "QUIT_BY_MAX_RUNTIME": constants.QUIT_BY_MAX_RUNTIME,
+                    "QUIT_BY_INDICATOR": constants.QUIT_BY_INDICATOR,
+                    "QUIT_BY_BACKFILL": constants.QUIT_BY_BACKFILL,
+                    "QUIT_BY_STEPS": constants.QUIT_BY_STEPS,
+                    "QUIT_BY_MAX_SIZE": constants.QUIT_BY_MAX_SIZE,
+                    "MEM_MAX_RSS": constants.MEM_MAX_RSS,
+                    "MEM_PEAK_PAGEFILE_USAGE": constants.MEM_PEAK_PAGEFILE_USAGE,
+                    "OS": constants.OS,
+                    "INDICATOR_VALUE": constants.INDICATOR_VALUE,
+                    "BACKFILL_TIMES": constants.BACKFILL_TIMES,
+                    "PYPERF_AVG_EXPERIMENT_ROUNDS": constants.PYPERF_AVG_EXPERIMENT_ROUNDS,
+                    "PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO": constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO,
+                    "NAME_OF_EXPERIMENT": constants.NAME_OF_EXPERIMENT,
+                    "PYTHON_VERSION": constants.PYTHON_VERSION,
+                    "DATA_GEN_STRATEGY": constants.DATA_GEN_STRATEGY,
+                    "START_SIZE": constants.START_SIZE,
+                    "USED_BACKFILL": use_backfill,
+                    "AVG_RUN_TIME": constants.AVG_RUN_TIME,
+                    "STEPS": steps,
+                },
+                index=[1],
+            )
+            # store to csv
+            df_new.to_csv(
+                "experiment_data.csv", index=False, header=False, mode="a"
+            )
