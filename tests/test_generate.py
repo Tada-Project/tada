@@ -237,20 +237,8 @@ def test_detect_level_and_position(tmpdir):
     strategy = generate.generate_experiment_strategy(path, size, level,
                                                      position)
     assert (
-        str(strategy)
-        == '[builds(<function _operator.add>, tuples(floats(min_value=50.0, \
-max_value=50.0, allow_infinity=False, \
-allow_nan=False).filter(lambda n: <unknown>), floats(allow_infinity=False, \
-allow_nan=False).filter(lambda n: <unknown>)).map(list), \
-lists(recursive(one_of(one_of(one_of(one_of(none(), booleans()), integers()), \
-floats(allow_infinity=False, allow_nan=False).map(lambda x: <unknown>)), \
-text()), lambda strategy: st.lists(strategy, max_size=3), max_leaves=100))), \
-builds(<function _operator.add>, tuples(floats(allow_infinity=False, \
-allow_nan=False).filter(lambda n: <unknown>), floats(allow_infinity=False, \
-allow_nan=False).filter(lambda n: <unknown>)).map(list), \
-lists(recursive(one_of(one_of(one_of(one_of(none(), booleans()), integers()), \
-floats(allow_infinity=False, allow_nan=False).map(lambda x: <unknown>)), \
-text()), lambda strategy: st.lists(strategy, max_size=3), max_leaves=100)))]'
+        str(strategy[1])
+        == 'builds(<function _operator.add>, tuples(floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>), floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>)).map(list), lists(recursive(one_of(one_of(one_of(one_of(none(), booleans()), integers()), floats(allow_infinity=False, allow_nan=False).map(lambda x: <unknown>)), text()), lambda strategy: st.lists(strategy, max_size=3), max_leaves=100)))'  # pylint: disable=C0301
     )
 
 
