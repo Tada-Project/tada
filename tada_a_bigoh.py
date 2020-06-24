@@ -208,7 +208,6 @@ def main():
             constants.INDICATOR_VALUE = tada_arguments.indicator
             # set numerical value to backfill for result storing
             use_backfill = 1 if use_backfill else 0
-            df = pd.read_csv("experiment_data.csv")
             # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
             df_new = pd.DataFrame(
                 {
@@ -241,7 +240,7 @@ def main():
             )
             # store to csv
             df_new.to_csv(
-                "experiment_data.csv", index=False, header=False, mode="a"
+                constants.EXPERIMENT, index=False, header=False, mode="a"
             )
 
 
