@@ -112,6 +112,13 @@ def parse(args):
         default=constants.LEVEL,
         help="The level of nested data structure to apply doubling experiment",
     )
+    parser.add_argument(
+        "--log",
+        required=False,
+        action='store_true',
+        default=constants.LEVEL,
+        help="Show log/debug/diagnostic output",
+    )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)
     return arguments_finished
