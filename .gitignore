@@ -247,3 +247,6 @@ _results/
 ######################
 .extra.utf-8.add
 data.txt
+
+# Vscode settings #
+.vscode/settings.json
