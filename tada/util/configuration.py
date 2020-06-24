@@ -13,6 +13,7 @@ TYPES = "types"
 SCHEMA = "schema"
 LEVEL = "level"
 SORTED = "sorted"
+POSITION = "position"
 
 
 def save(configuration_filename, tada_configuration):
@@ -31,6 +32,11 @@ def read(configuration_filename):
 def get_level(current_dictionary):
     """Return the level argument from the provided dictionary"""
     return current_dictionary[LEVEL]
+
+
+def get_position(current_dictionary):
+    """Return the position argument from the provided dictionary"""
+    return current_dictionary[POSITION]
 
 
 def get_sortinput(current_dictionary):
