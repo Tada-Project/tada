@@ -202,7 +202,7 @@ if __name__ == "__main__":
         constants.DATA_GEN_STRATEGY = tada_arguments.types
         constants.START_SIZE = tada_arguments.startsize
         constants.INDICATOR_VALUE = tada_arguments.indicator
-        # set numerical value to backfill for result storing 
+        # set numerical value to backfill for result storing
         use_backfill = 1 if use_backfill else 0
         df = pd.read_csv("experiment_data.csv")
         # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
