@@ -35,7 +35,7 @@ if __name__ == "__main__":
     current_size = tada_arguments.startsize
     total_loop_list = []
     sum_of_loops = 0
-    used_backfill = tada_arguments.backfill
+    use_backfill = tada_arguments.backfill
     to_print = tada_arguments.log
     # incorrect arguments, exit program
     if did_verify_arguments is False:
@@ -53,9 +53,8 @@ if __name__ == "__main__":
         save.save_directory(constants.DIRECTORY, tada_arguments.directory)
         # perform the small doubling experiment
         while True:
-            if used_backfill == 1:
+            if use_backfill:
                 # run the benchmark by using it through python
-                used_backfill = 1
                 analysis.backfill_checker(last_last_size, current_size)
                 if constants.BACKFILL_TIMES == 2:
                     constants.QUIT_BY_BACKFILL = 1
@@ -131,7 +130,7 @@ if __name__ == "__main__":
             last_size = current_size
             display.display_output(f"end time rate: {end_time_rate}", to_print)
             display.display_output(f"last end time rate: {last_end_time_rate}", to_print)
-            if last_end_time_rate > end_time_rate and used_backfill == 1:
+            if last_end_time_rate > end_time_rate and use_backfill:
                 current_size = int(current_size / constants.FACTOR)
             else:
                 current_size = current_size * constants.FACTOR
@@ -203,6 +202,8 @@ if __name__ == "__main__":
         constants.DATA_GEN_STRATEGY = tada_arguments.types
         constants.START_SIZE = tada_arguments.startsize
         constants.INDICATOR_VALUE = tada_arguments.indicator
+        # set numerical value to backfill for result storing 
+        use_backfill = 1 if use_backfill else 0
         df = pd.read_csv("experiment_data.csv")
         # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
         df_new = pd.DataFrame(
@@ -228,7 +229,7 @@ if __name__ == "__main__":
                 "PYTHON_VERSION": constants.PYTHON_VERSION,
                 "DATA_GEN_STRATEGY": constants.DATA_GEN_STRATEGY,
                 "START_SIZE": constants.START_SIZE,
-                "USED_BACKFILL": used_backfill,
+                "USED_BACKFILL": use_backfill,
                 "AVG_RUN_TIME": constants.AVG_RUN_TIME,
                 "STEPS": steps,
             },

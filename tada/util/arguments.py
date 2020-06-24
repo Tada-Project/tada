@@ -79,10 +79,10 @@ def parse(args):
     parser.add_argument(
         "--backfill",
         required=False,
-        type=int,
+        action='store_true',
         default=constants.BACKFILL,
         help="""Enable backfill to shrink experiments size according to the
-        Predicted True Value: (0|1)""",
+        Predicted True Value""",
     )
     parser.add_argument(
         "--indicator",
@@ -101,9 +101,9 @@ def parse(args):
     parser.add_argument(
         "--sorted",
         required=False,
-        type=int,
+        action='store_true',
         default=constants.SORT,
-        help="Enable input data to be sorted: (0|1)",
+        help="Enable input data to be sorted",
     )
     parser.add_argument(
         "--level",
