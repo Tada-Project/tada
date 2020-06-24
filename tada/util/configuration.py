@@ -36,9 +36,7 @@ def get_level(current_dictionary):
 
 def get_position(current_dictionary):
     """Return the position argument from the provided dictionary"""
-    position_str = current_dictionary[POSITION][1:-1]
-    results = list(map(int, position_str))
-    return results
+    return current_dictionary[POSITION]
 
 
 def get_sortinput(current_dictionary):

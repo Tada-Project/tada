@@ -115,7 +115,8 @@ def parse(args):
     parser.add_argument(
         "--position",
         required=False,
-        type=list,
+        nargs="+",
+        type=int,
         default=constants.POSITION,
         help="The position of nested data structure to apply doubling experiment",
     )
