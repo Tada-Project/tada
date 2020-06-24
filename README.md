@@ -88,7 +88,7 @@ optional arguments:
                         experiment (default: 1)
   --position POSITION [POSITION ...]
                         The position of input data to double in the multivariable
-                        doubling experiment (default: 0)
+                        doubling experiment (default: [0])
   --log                 Show log/debug/diagnostic output (default: False)
   --md                  Show results table in markdown format (default: False)
 
