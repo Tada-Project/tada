@@ -6,6 +6,18 @@ def add_resultstable(resultstable, current_size, mean, median, ratio):
     resultstable.add_row([current_size, mean, median, ratio])
 
 
-def display_resultstable(resultstable):
+def display_resultstable(resultstable, to_md=False):
     """Print out the resultstable."""
-    print(resultstable)
+    if to_md:
+        print(to_markdown_table(resultstable))
+    else:
+        print(resultstable)
+
+
+def to_markdown_table(pt):
+    _junc = pt.junction_char
+    if _junc != "|":
+        pt.junction_char = "|"
+    markdown = [row[1:-1] for row in pt.get_string().split("\n")[1:-1]]
+    pt.junction_char = _junc
+    return "\n".join(markdown)
