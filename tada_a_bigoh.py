@@ -35,7 +35,10 @@ def main():
     total_loop_list = []
     sum_of_loops = 0
     use_backfill = tada_arguments.backfill
+    # display debug output
     to_print = tada_arguments.log
+    # print results table in markdown
+    to_markdown = tada_arguments.md
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         display.display_output("Incorrect command-line arguments.", to_print)
@@ -157,7 +160,7 @@ def main():
                 display.display_output(f"Quit due to end of rounds: {steps}", to_print)
                 constants.QUIT_BY_STEPS = 1
                 break
-        results.display_resultstable(resultstable)
+        results.display_resultstable(display.to_markdown_table(resultstable), to_markdown)
         print(analysis.analyze_big_oh(ratio))
         if tada_arguments.expect is not None:
             if indicator < tada_arguments.indicator:
