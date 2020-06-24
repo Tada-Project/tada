@@ -203,6 +203,28 @@ allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
     )
 
 
+def test_generate_strategy_multiple_json_2(tmpdir):
+    """Checks that generate strategy works for two json objects in file"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write(
+        '[{"type": "array", "items": {"type": "number"}}\n\
+        ,{"type": "array", "items": {"type": "number"}}]'
+    )
+    size = "50"
+    strategy = generate.generate_experiment_strategy(path, size)
+    assert (
+        str(strategy[1])
+        != "lists(floats(allow_infinity=False, \
+allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
+    )
+    assert (
+        str(strategy[0])
+        == "lists(floats(allow_infinity=False, \
+allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
+    )
+
+
+
 def test_generate_func_from_single_st():
     """Checks that generate function from single strategy works"""
     # pylint: disable=blacklisted-name
