@@ -50,18 +50,23 @@ def generate_experiment_strategy(path, size, level=1, position=[0]):  # pylint: 
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
 
-    # pylint: disable=W0102
-    def detect_level_and_position(json_schema, size, level=1, position=[0], index_position=0):
+    # pylint: disable=W0102, R1705
+    def detect_level_and_position(schema, level=1, position=[0], index_position=0):
         """A dummy function to store the data to file for experiment"""
-        schema = json_schema[position[index_position]]
-        level -= 1
-        index_position += 1
         if level == 0:
-            double_experiment_size(schema, size)
-        while level > 0:
-            detect_level_and_position(schema, size, level, position, index_position)
+            print(schema)
+            return schema
+        else:
+            if isinstance(schema, list):
+                subschema = schema[position[index_position]]
+            elif isinstance(schema, dict):
+                subschema = schema["items"][position[index_position]]
+            return detect_level_and_position(
+                subschema, level - 1, position, index_position + 1
+            )
 
-    detect_level_and_position(json_schema, size, level, position)
+    js = detect_level_and_position(json_schema, level, position)
+    double_experiment_size(js, size)
     strategy = []
     for j in json_schema:
         strategy.append(from_schema(j))
