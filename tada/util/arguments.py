@@ -113,6 +113,15 @@ def parse(args):
         help="The level of nested data structure to apply doubling experiment",
     )
     parser.add_argument(
+        "--position",
+        required=False,
+        nargs="+",
+        type=int,
+        default=constants.POSITION,
+        help="""The position of input data to double in the multivariable
+        doubling experiment""",
+    )
+    parser.add_argument(
         "--log",
         required=False,
         action='store_true',

@@ -44,8 +44,9 @@ if __name__ == "__main__":
         # read path from arguments
         path = configuration.get_schema_path(tada_configuration_dict)
     level = configuration.get_level(tada_configuration_dict)
+    position = configuration.get_position(tada_configuration_dict)
     # generate data
-    data = generate.generate_data(func_type, chosen_size, level, path)
+    data = generate.generate_data(func_type, chosen_size, level, position, path)
     # run benchmark
     if configuration.get_sortinput(tada_configuration_dict):
         for t in data:
