@@ -116,7 +116,7 @@ def parse(args):
         "--log",
         required=False,
         action='store_true',
-        default=constants.LEVEL,
+        default=False,
         help="Show log/debug/diagnostic output",
     )
     # parse the arguments and return the finished result
