@@ -183,7 +183,7 @@ def main():
             constants.PYTHON_VERSION = last_bench_meta.get("python_version")
             # store run metadata
             with open(
-                "_results" + constants.SEPARATOR + name + constants.JSON_EXT, "r"
+                constants.RESULTS + constants.SEPARATOR + name + constants.JSON_EXT, "r"
             ) as f:
                 readlastjson = json.load(f)
             last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0]["metadata"]
