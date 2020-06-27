@@ -54,7 +54,6 @@ def generate_experiment_strategy(path, size, level=1, position=[0]):  # pylint: 
     def detect_level_and_position(schema, level=1, position=[0], index_position=0):
         """A dummy function to store the data to file for experiment"""
         if level == 0:
-            print(schema)
             return schema
         else:
             if isinstance(schema, list):
