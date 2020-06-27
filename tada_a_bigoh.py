@@ -82,8 +82,8 @@ def main():
                 + constants.PYTHON_EXT
             )
             # display the standard output and error
-            dis.display_output(current_output.decode(constants.UTF8))
-            dis.display_output(current_error.decode(constants.UTF8))
+            dis.display_output(current_output.decode(constants.UTF8), to_print)
+            dis.display_output(current_error.decode(constants.UTF8), to_print=False)
             # read the JSON file containing the results
             current_benchmark = pyperf.Benchmark.load(
                 constants.RESULTS
