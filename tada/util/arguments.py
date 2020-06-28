@@ -164,6 +164,7 @@ def verify(args):
 
 def parse_args(cmd):
     """parse arguments with multiple experiments into seperate ones"""
+    # parse terminal input
     arguments = parse(cmd)
     args_dict = vars(arguments)
 
@@ -172,6 +173,8 @@ def parse_args(cmd):
     arg_1["directory"] = arguments.directory[0]
     arg_1["module"] = arguments.module[0]
     arg_1["function"] = arguments.function[0]
+    # return the argument object if only one function in one module
+    # of one directory provided
     if all(
         e == 1
         for e in [
@@ -181,6 +184,7 @@ def parse_args(cmd):
         ]
     ):
         return [argparse.Namespace(**arg_1)]
+    # assume the single argument is true for both experiments
     if len(arguments.directory) > 1:
         arg_2["directory"] = arguments.directory[1]
     else:
@@ -188,7 +192,7 @@ def parse_args(cmd):
     if len(arguments.module) > 1:
         arg_2["module"] = arguments.module[1]
     else:
-        arg_2["module"] = arguments.directory[0]
+        arg_2["module"] = arguments.module[0]
     if len(arguments.function) > 1:
         arg_2["function"] = arguments.function[1]
     else:
