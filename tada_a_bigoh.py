@@ -72,7 +72,7 @@ def main(tada_arguments):
                     constants.QUIT_BY_MAX_SIZE = 1
                     dis.display_output("Quit due to reaching max size", to_print)
                     break
-            dis.display_start_message(current_size)
+            dis.display_start_message(current_size, tada_arguments.function)
             current_output, current_error = run.run_command(
                 constants.PYTHON_EXEC
                 + constants.SPACE
@@ -145,7 +145,7 @@ def main(tada_arguments):
             )
             results.add_resultstable(resultstable, current_size, mean, median, ratio)
             # show that we are done running for a size
-            dis.display_end_message(current_size)
+            dis.display_end_message(current_size, tada_arguments.function)
             # go to the next size for the doubling experiment
             last_last_size = last_size
             last_size = current_size
@@ -174,7 +174,7 @@ def main(tada_arguments):
                 dis.display_output(f"Quit due to end of rounds: {steps}", to_print)
                 constants.QUIT_BY_STEPS = 1
                 break
-        results.display_resultstable(resultstable, to_markdown)
+        # results.display_resultstable(resultstable, to_markdown)
         print(analysis.analyze_big_oh(ratio))
         if tada_arguments.expect is not None:
             if indicator < tada_arguments.indicator:
@@ -257,11 +257,16 @@ def main(tada_arguments):
             )
             # store to csv
             df_new.to_csv(constants.EXPERIMENT, index=False, header=False, mode="a")
+        return resultstable
 
 
 if __name__ == "__main__":
     tada_arg_list = arguments.parse_args(sys.argv[1:])
+    resultstables = []
     # display the welcome message
     dis.display_welcome_message()
     for arg in tada_arg_list:
-        main(arg)
+        resultstables.append(main(arg))
+
+    for table in resultstables:
+        results.display_resultstable(table, tada_arg_list[0].md)
