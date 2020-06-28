@@ -1,6 +1,7 @@
 """Handle the arguments provided to Tada"""
 
 import argparse
+import copy
 
 from . import constants
 
@@ -159,3 +160,30 @@ def verify(args):
     if args.function is not constants.NONE:
         verified_arguments = True
     return verified_arguments
+
+
+def parse_args(cmd):
+    """parse arguments with multiple experiments into seperate ones"""
+    arguments = parse(cmd)
+    args_dict = vars(arguments)
+
+    arg_1 = copy.deepcopy(args_dict)
+    arg_2 = copy.deepcopy(args_dict)
+    arg_1["directory"] = arguments.directory[0]
+    arg_1["module"] = arguments.module[0]
+    arg_1["function"] = arguments.function[0]
+    if len(arguments.directory) > 1:
+        arg_2["directory"] = arguments.directory[1]
+    else:
+        arg_2["directory"] = arguments.directory[0]
+    if len(arguments.module) > 1:
+        arg_2["module"] = arguments.module[1]
+    else:
+        arg_2["module"] = arguments.directory[0]
+    if len(arguments.module) > 1:
+        arg_2["function"] = arguments.function[1]
+    else:
+        arg_2["function"] = arguments.function[0]
+
+    arg_lst = [argparse.Namespace(**arg_1), argparse.Namespace(**arg_2)]
+    return arg_lst
