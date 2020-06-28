@@ -11,9 +11,9 @@ def parse(args):
     # create the parser with the default help formatter
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-        epilog='''Sample usage: pipenv run python tada_a_bigoh.py --directory
+        epilog="""Sample usage: pipenv run python tada_a_bigoh.py --directory
             /Users/myname/projectdirectory
-            --module modulename.file --function function_name --types hypothesis''',
+            --module modulename.file --function function_name --types hypothesis""",
     )
 
     # add all of the arguments to the command-line interface
@@ -83,7 +83,7 @@ def parse(args):
     parser.add_argument(
         "--backfill",
         required=False,
-        action='store_true',
+        action="store_true",
         default=constants.BACKFILL,
         help="""Enable backfill to shrink experiments size according to the
         Predicted True Value""",
@@ -105,7 +105,7 @@ def parse(args):
     parser.add_argument(
         "--sorted",
         required=False,
-        action='store_true',
+        action="store_true",
         default=constants.SORT,
         help="Enable input data to be sorted",
     )
@@ -128,14 +128,14 @@ def parse(args):
     parser.add_argument(
         "--log",
         required=False,
-        action='store_true',
+        action="store_true",
         default=False,
         help="Show log/debug/diagnostic output",
     )
     parser.add_argument(
         "--md",
         required=False,
-        action='store_true',
+        action="store_true",
         default=False,
         help="Show results table in markdown format",
     )
@@ -172,6 +172,18 @@ def parse_args(cmd):
     arg_1["directory"] = arguments.directory[0]
     arg_1["module"] = arguments.module[0]
     arg_1["function"] = arguments.function[0]
+    if (
+        all(
+            (
+                len(arguments.directory),
+                len(arguments.module),
+                len(arguments.function),
+            )
+        )
+        == 1
+    ):
+        return [argparse.Namespace(**arg_1)]
+    print("hi")
     if len(arguments.directory) > 1:
         arg_2["directory"] = arguments.directory[1]
     else:
@@ -180,7 +192,7 @@ def parse_args(cmd):
         arg_2["module"] = arguments.module[1]
     else:
         arg_2["module"] = arguments.directory[0]
-    if len(arguments.module) > 1:
+    if len(arguments.function) > 1:
         arg_2["function"] = arguments.function[1]
     else:
         arg_2["function"] = arguments.function[0]
