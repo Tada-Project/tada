@@ -1,18 +1,16 @@
 """Display output for Tada"""
 
 
-def display_welcome_message():
+def display_welcome_message() -> None:
     """Display a welcome message"""
     print()
     print("🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆 ")
     print("    https://github.com/Tada-Project/tada/")
-    print(
-        "❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓"
-    )
+    print("❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓")
     print()
 
 
-def display_start_message(current_size, function):
+def display_start_message(current_size: int, function: str) -> None:
     """Display the start message for an experiment"""
     print(
         f"\nStart running experiment {blue(function)} for size \
@@ -20,7 +18,7 @@ def display_start_message(current_size, function):
     )
 
 
-def display_end_message(current_size, function):
+def display_end_message(current_size: int, function: str) -> None:
     """Display the end message for an experiment"""
     print(
         f"\n→ Done running experiment {blue(function)} for size \
@@ -28,23 +26,23 @@ def display_end_message(current_size, function):
     )
 
 
-def display_output(timing_output, to_print=False):
+def display_output(timing_output: str, to_print: bool = False) -> None:
     """Display the timing output as long as it is not empty"""
     if (timing_output != "") & (to_print is True):
         print(timing_output)
 
 
-def green(msg1):
+def green(msg1: str) -> str:
     """Display messages in green"""
     return f"{FontColor.Green}{msg1}{FontColor.Reset}"
 
 
-def blue(msg1):
+def blue(msg1: str) -> str:
     """Display messages in blue"""
     return f"{FontColor.Blue}{msg1}{FontColor.Reset}"
 
 
-def cyan(msg1):
+def cyan(msg1: int) -> str:
     """Display messages in cyan"""
     return f"{FontColor.Cyan}{msg1}{FontColor.Reset}"
 

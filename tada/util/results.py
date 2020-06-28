@@ -1,12 +1,21 @@
+from prettytable.prettytable import PrettyTable
+from typing import Union
+
 """Results Table for Tada and perf."""
 
 
-def add_resultstable(resultstable, current_size, mean, median, ratio):
+def add_resultstable(
+    resultstable: PrettyTable,
+    current_size: int,
+    mean: float,
+    median: float,
+    ratio: Union[int, float],
+) -> None:
     """Add elements into the resultstable."""
     resultstable.add_row([current_size, mean, median, ratio])
 
 
-def display_resultstable(resultstable, to_md=False):
+def display_resultstable(resultstable: PrettyTable, to_md: bool = False) -> None:
     """Print out the resultstable."""
     if to_md:
         print(to_markdown_table(resultstable))

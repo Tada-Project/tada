@@ -1,7 +1,7 @@
 """Analysis experiments for Tada"""
 
 
-def analyze_big_oh(ratio):
+def analyze_big_oh(ratio: float) -> str:
     """analyze big oh"""
     if 0 <= ratio < 1.5:
         output = "O(1) constant or O(logn) logarithmic"

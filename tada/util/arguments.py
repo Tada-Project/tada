@@ -4,9 +4,11 @@ import argparse
 import copy
 
 from . import constants
+from argparse import Namespace
+from typing import List
 
 
-def parse(args):
+def parse(args: List[str]) -> Namespace:
     """Use argparse to parse provided command-line arguments"""
     # create the parser with the default help formatter
     parser = argparse.ArgumentParser(
@@ -144,7 +146,7 @@ def parse(args):
     return arguments_finished
 
 
-def verify(args):
+def verify(args: Namespace) -> bool:
     """Verify the command-line arguments"""
     verified_arguments = False
     # CHECK: directory was specified and it is not ""
@@ -162,7 +164,7 @@ def verify(args):
     return verified_arguments
 
 
-def parse_args(cmd):
+def parse_args(cmd: List[str]) -> List[Namespace]:
     """parse arguments with multiple experiments into seperate ones"""
     # parse terminal input
     arguments = parse(cmd)
