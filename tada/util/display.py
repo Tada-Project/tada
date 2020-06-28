@@ -12,18 +12,20 @@ def display_welcome_message():
     print()
 
 
-def display_start_message(current_size):
+def display_start_message(current_size, function):
     """Display the start message for an experiment"""
     print(
-        f"\nStart running experiment for size \
+        f"\nStart running experiment \
+{FontColor.Blue}{function}{FontColor.Reset} for size \
 {FontColor.Cyan}{current_size}{FontColor.Reset} →\n"
     )
 
 
-def display_end_message(current_size):
+def display_end_message(current_size, function):
     """Display the end message for an experiment"""
     print(
-        f"\n→ Done running experiment for size \
+        f"\n→ Done running experiment \
+{FontColor.Blue}{function}{FontColor.Reset} for size \
 {FontColor.Cyan}{current_size}{FontColor.Reset} \n"
     )
 
