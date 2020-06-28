@@ -8,7 +8,7 @@ pyperf = "*"
 hypothesis = "*"
 hypothesis-jsonschema = "*"
 pandas = "*"
-PrettyTable = "*"
+ptable = "*"
 
 [dev-packages]
 pylint = "*"
