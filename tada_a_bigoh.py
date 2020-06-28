@@ -72,8 +72,7 @@ def main(tada_arguments):
                 if current_size >= tada_arguments.maxsize:
                     constants.QUIT_BY_MAX_SIZE = 1
                     dis.display_output(
-                        "Quit due to reaching max size: "
-                        + str(tada_arguments.maxsize),
+                        "Quit due to reaching max size: " + str(tada_arguments.maxsize),
                         to_print,
                     )
                     break
@@ -86,17 +85,13 @@ def main(tada_arguments):
             )
             # display the standard output and error
             dis.display_output(current_output.decode(constants.UTF8), to_print)
-            dis.display_output(
-                current_error.decode(constants.UTF8), to_print=False
-            )
+            dis.display_output(current_error.decode(constants.UTF8), to_print=False)
             # read the JSON file containing the results
 
             current_benchmark = pyperf.Benchmark.load(
                 constants.RESULTS
                 + constants.SEPARATOR
-                + configuration.get_experiment_name(
-                    vars(tada_arguments), current_size
-                )
+                + configuration.get_experiment_name(vars(tada_arguments), current_size)
                 + constants.JSON_EXT
             )
             # Numbers of benchmark run which include one warmup and twenty excution
@@ -149,9 +144,7 @@ def main(tada_arguments):
             dis.display_output(
                 dis.green("Expected end time: ") + str(end_time), to_print
             )
-            results.add_resultstable(
-                resultstable, current_size, mean, median, ratio
-            )
+            results.add_resultstable(resultstable, current_size, mean, median, ratio)
             # show that we are done running for a size
             dis.display_end_message(current_size, tada_arguments.function)
             # go to the next size for the doubling experiment
@@ -161,8 +154,7 @@ def main(tada_arguments):
                 dis.green("End time rate: ") + str(end_time_rate), to_print
             )
             dis.display_output(
-                dis.green("Last end time rate: ") + str(last_end_time_rate),
-                to_print,
+                dis.green("Last end time rate: ") + str(last_end_time_rate), to_print,
             )
             if last_end_time_rate > end_time_rate and use_backfill:
                 current_size = int(current_size / constants.FACTOR)
@@ -170,26 +162,21 @@ def main(tada_arguments):
                 current_size = current_size * constants.FACTOR
             # check indicator and quit if smaller than decided indicator
             if indicator < tada_arguments.indicator:
-                dis.display_output(
-                    f"Quit due to indicator: {indicator}", to_print
-                )
+                dis.display_output(f"Quit due to indicator: {indicator}", to_print)
                 break
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
             if current_runningtime > tada_arguments.runningtime:
                 dis.display_output(
-                    "Quit due to exceeding the max time limit: "
-                    + current_runningtime,
+                    "Quit due to exceeding the max time limit: " + current_runningtime,
                     to_print,
                 )
                 constants.QUIT_BY_MAX_RUNTIME = 1
                 break
             steps += 1
             if steps > tada_arguments.steps:
-                dis.display_output(
-                    f"Quit due to end of rounds: {steps}", to_print
-                )
+                dis.display_output(f"Quit due to end of rounds: {steps}", to_print)
                 constants.QUIT_BY_STEPS = 1
                 break
         # results.display_resultstable(resultstable, to_markdown)
@@ -215,16 +202,11 @@ def main(tada_arguments):
             constants.PYTHON_VERSION = last_bench_meta.get("python_version")
             # store run metadata
             with open(
-                constants.RESULTS
-                + constants.SEPARATOR
-                + name
-                + constants.JSON_EXT,
+                constants.RESULTS + constants.SEPARATOR + name + constants.JSON_EXT,
                 "r",
             ) as f:
                 readlastjson = json.load(f)
-            last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0][
-                "metadata"
-            ]
+            last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0]["metadata"]
             constants.CPU_TEMP = last_exp_run_metadata.get("cpu_temp")
             if "mem_max_rss" in last_exp_run_metadata:
                 constants.MEM_MAX_RSS = last_exp_run_metadata["mem_max_rss"]
@@ -235,9 +217,7 @@ def main(tada_arguments):
             for item in total_loop_list:
                 sum_of_loops += item
             # calculate avg total loops
-            constants.PYPERF_AVG_EXPERIMENT_ROUNDS = sum_of_loops / len(
-                total_loop_list
-            )
+            constants.PYPERF_AVG_EXPERIMENT_ROUNDS = sum_of_loops / len(total_loop_list)
             # calculate last two loop growth ratio
             if len(total_loop_list) >= 2:
                 constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS = (
@@ -282,9 +262,7 @@ def main(tada_arguments):
                 index=[1],
             )
             # store to csv
-            df_new.to_csv(
-                constants.EXPERIMENT, index=False, header=False, mode="a"
-            )
+            df_new.to_csv(constants.EXPERIMENT, index=False, header=False, mode="a")
         resultstable.title = dis.blue(f"{tada_arguments.function}: ") + big_oh
         return resultstable
 
@@ -299,4 +277,3 @@ if __name__ == "__main__":
 
     for table in resultstables:
         results.display_resultstable(table, tada_arg_list[0].md)
-
