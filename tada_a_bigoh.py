@@ -23,8 +23,9 @@ def main(tada_arguments):
     start_time = time.time()
     # read and verify the command-line arguments
     did_verify_arguments = arguments.verify(tada_arguments)
+    resultstable = PrettyTable()
 
-    resultstable = PrettyTable(["Size", "Mean", "Median", "Ratio"])
+    resultstable.field_names = ["Size", "Mean", "Median", "Ratio"]
     meanlastround = 0
     indicator = 0
     steps = constants.STEP_START
@@ -257,6 +258,7 @@ def main(tada_arguments):
             )
             # store to csv
             df_new.to_csv(constants.EXPERIMENT, index=False, header=False, mode="a")
+        resultstable.title = dis.FontColor.Blue + tada_arguments.function + dis.FontColor.Reset
         return resultstable
 
 
@@ -270,3 +272,4 @@ if __name__ == "__main__":
 
     for table in resultstables:
         results.display_resultstable(table, tada_arg_list[0].md)
+
