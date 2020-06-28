@@ -37,7 +37,7 @@ def main(tada_arguments):
     # display debug output
     to_print = tada_arguments.log
     # print results table in markdown
-    to_markdown = tada_arguments.md
+    # to_markdown = tada_arguments.md
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         dis.display_output("Incorrect command-line arguments.", to_print)
@@ -71,7 +71,9 @@ def main(tada_arguments):
             if "hypothesis" in tada_arguments.types[0]:
                 if current_size >= tada_arguments.maxsize:
                     constants.QUIT_BY_MAX_SIZE = 1
-                    dis.display_output("Quit due to reaching max size", to_print)
+                    dis.display_output(
+                        "Quit due to reaching max size", to_print
+                    )
                     break
             dis.display_start_message(current_size, tada_arguments.function)
             current_output, current_error = run.run_command(
@@ -82,13 +84,17 @@ def main(tada_arguments):
             )
             # display the standard output and error
             dis.display_output(current_output.decode(constants.UTF8), to_print)
-            dis.display_output(current_error.decode(constants.UTF8), to_print=False)
+            dis.display_output(
+                current_error.decode(constants.UTF8), to_print=False
+            )
             # read the JSON file containing the results
 
             current_benchmark = pyperf.Benchmark.load(
                 constants.RESULTS
                 + constants.SEPARATOR
-                + configuration.get_experiment_name(vars(tada_arguments), current_size)
+                + configuration.get_experiment_name(
+                    vars(tada_arguments), current_size
+                )
                 + constants.JSON_EXT
             )
             # Numbers of benchmark run which include one warmup and twenty excution
@@ -101,10 +107,10 @@ def main(tada_arguments):
             mean = current_benchmark.mean()
             median = current_benchmark.median()
             dis.display_output(
-                f"{dis.FontColor.Green}Mean:{dis.FontColor.Reset} {mean}", to_print
+                dis.green("Mean: ") + str(mean), to_print,
             )
             dis.display_output(
-                f"{dis.FontColor.Green}Median:{dis.FontColor.Reset} {median}", to_print
+                dis.green("Median: ") + str(median), to_print,
             )
             if meanlastround == 0:
                 ratio = 0
@@ -132,51 +138,60 @@ def main(tada_arguments):
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
                 dis.display_output(
-                    f"{dis.FontColor.Green}Last end time:{dis.FontColor.Reset} {last_end_time}",
-                    to_print,
+                    dis.green("Last end time: ") + str(last_end_time), to_print
                 )
                 last_end_time = end_time
             dis.display_output(
-                f"{dis.FontColor.Green}Current indicator:{dis.FontColor.Reset} {indicator}",
-                to_print,
+                dis.green("Current indicator: ") + str(indicator), to_print
             )
             dis.display_output(
-                f"{dis.FontColor.Green}Expected end time:{dis.FontColor.Reset} {end_time}",
-                to_print,
+                dis.green("Expected end time: ") + str(end_time), to_print
             )
-            results.add_resultstable(resultstable, current_size, mean, median, ratio)
+            results.add_resultstable(
+                resultstable, current_size, mean, median, ratio
+            )
             # show that we are done running for a size
             dis.display_end_message(current_size, tada_arguments.function)
             # go to the next size for the doubling experiment
             last_last_size = last_size
             last_size = current_size
-            dis.display_output(f"End time rate: {end_time_rate}", to_print)
-            dis.display_output(f"Last end time rate: {last_end_time_rate}", to_print)
+            dis.display_output(
+                dis.green("End time rate: ") + str(end_time_rate), to_print
+            )
+            dis.display_output(
+                dis.green("Last end time rate: ") + str(last_end_time_rate),
+                to_print,
+            )
             if last_end_time_rate > end_time_rate and use_backfill:
                 current_size = int(current_size / constants.FACTOR)
             else:
                 current_size = current_size * constants.FACTOR
             # check indicator and quit if smaller than decided indicator
             if indicator < tada_arguments.indicator:
-                dis.display_output(f"Quit due to indicator: {indicator}", to_print)
+                dis.display_output(
+                    f"Quit due to indicator: {indicator}", to_print
+                )
                 break
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
             if current_runningtime > tada_arguments.runningtime:
                 dis.display_output(
-                    f"Quit due to exceeding the maximum time limit: {current_runningtime}",
+                    f"Quit due to exceeding the maximum \
+time limit: {current_runningtime}",
                     to_print,
                 )
                 constants.QUIT_BY_MAX_RUNTIME = 1
                 break
             steps += 1
             if steps > tada_arguments.steps:
-                dis.display_output(f"Quit due to end of rounds: {steps}", to_print)
+                dis.display_output(
+                    f"Quit due to end of rounds: {steps}", to_print
+                )
                 constants.QUIT_BY_STEPS = 1
                 break
         # results.display_resultstable(resultstable, to_markdown)
-        print(analysis.analyze_big_oh(ratio))
+        big_oh = analysis.analyze_big_oh(ratio)
         if tada_arguments.expect is not None:
             if indicator < tada_arguments.indicator:
                 constants.QUIT_BY_INDICATOR = 1
@@ -198,10 +213,16 @@ def main(tada_arguments):
             constants.PYTHON_VERSION = last_bench_meta.get("python_version")
             # store run metadata
             with open(
-                constants.RESULTS + constants.SEPARATOR + name + constants.JSON_EXT, "r"
+                constants.RESULTS
+                + constants.SEPARATOR
+                + name
+                + constants.JSON_EXT,
+                "r",
             ) as f:
                 readlastjson = json.load(f)
-            last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0]["metadata"]
+            last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0][
+                "metadata"
+            ]
             constants.CPU_TEMP = last_exp_run_metadata.get("cpu_temp")
             if "mem_max_rss" in last_exp_run_metadata:
                 constants.MEM_MAX_RSS = last_exp_run_metadata["mem_max_rss"]
@@ -212,7 +233,9 @@ def main(tada_arguments):
             for item in total_loop_list:
                 sum_of_loops += item
             # calculate avg total loops
-            constants.PYPERF_AVG_EXPERIMENT_ROUNDS = sum_of_loops / len(total_loop_list)
+            constants.PYPERF_AVG_EXPERIMENT_ROUNDS = sum_of_loops / len(
+                total_loop_list
+            )
             # calculate last two loop growth ratio
             if len(total_loop_list) >= 2:
                 constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS = (
@@ -257,8 +280,10 @@ def main(tada_arguments):
                 index=[1],
             )
             # store to csv
-            df_new.to_csv(constants.EXPERIMENT, index=False, header=False, mode="a")
-        resultstable.title = dis.FontColor.Blue + tada_arguments.function + dis.FontColor.Reset
+            df_new.to_csv(
+                constants.EXPERIMENT, index=False, header=False, mode="a"
+            )
+        resultstable.title = dis.blue(f"{tada_arguments.function}: ") + big_oh
         return resultstable
 
 
