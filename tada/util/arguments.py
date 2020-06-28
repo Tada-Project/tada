@@ -172,18 +172,15 @@ def parse_args(cmd):
     arg_1["directory"] = arguments.directory[0]
     arg_1["module"] = arguments.module[0]
     arg_1["function"] = arguments.function[0]
-    if (
-        all(
-            (
-                len(arguments.directory),
-                len(arguments.module),
-                len(arguments.function),
-            )
-        )
-        == 1
+    if all(
+        e == 1
+        for e in [
+            len(arguments.directory),
+            len(arguments.module),
+            len(arguments.function),
+        ]
     ):
         return [argparse.Namespace(**arg_1)]
-    print("hi")
     if len(arguments.directory) > 1:
         arg_2["directory"] = arguments.directory[1]
     else:
