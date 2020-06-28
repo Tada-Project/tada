@@ -20,18 +20,21 @@ def parse(args):
         "--directory",
         required=True,
         type=str,
+        nargs="+",
         help="Path to the package directory with functions to analyze",
     )
     parser.add_argument(
         "--module",
         required=True,
         type=str,
+        nargs="+",
         help="Module name with functions to analyze",
     )
     parser.add_argument(
         "--function",
         required=True,
         type=str,
+        nargs="+",
         help="Name of the function to analyze",
     )
     parser.add_argument(
