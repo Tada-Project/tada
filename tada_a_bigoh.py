@@ -72,7 +72,9 @@ def main(tada_arguments):
                 if current_size >= tada_arguments.maxsize:
                     constants.QUIT_BY_MAX_SIZE = 1
                     dis.display_output(
-                        "Quit due to reaching max size", to_print
+                        "Quit due to reaching max size: "
+                        + str(tada_arguments.maxsize),
+                        to_print,
                     )
                     break
             dis.display_start_message(current_size, tada_arguments.function)
@@ -177,8 +179,8 @@ def main(tada_arguments):
             current_runningtime = time.time() - start_time
             if current_runningtime > tada_arguments.runningtime:
                 dis.display_output(
-                    f"Quit due to exceeding the maximum \
-time limit: {current_runningtime}",
+                    "Quit due to exceeding the max time limit: "
+                    + current_runningtime,
                     to_print,
                 )
                 constants.QUIT_BY_MAX_RUNTIME = 1
