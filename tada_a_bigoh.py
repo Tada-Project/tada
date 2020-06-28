@@ -19,13 +19,11 @@ from tada.util import save
 from tada.util import results
 
 
-def main():
+def main(tada_arguments):
     start_time = time.time()
-    # display the welcome message
-    dis.display_welcome_message()
     # read and verify the command-line arguments
-    tada_arguments = arguments.parse(sys.argv[1:])
     did_verify_arguments = arguments.verify(tada_arguments)
+
     resultstable = PrettyTable(["Size", "Mean", "Median", "Ratio"])
     meanlastround = 0
     indicator = 0
@@ -85,6 +83,7 @@ def main():
             dis.display_output(current_output.decode(constants.UTF8), to_print)
             dis.display_output(current_error.decode(constants.UTF8), to_print=False)
             # read the JSON file containing the results
+
             current_benchmark = pyperf.Benchmark.load(
                 constants.RESULTS
                 + constants.SEPARATOR
@@ -261,4 +260,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    tada_arg_list = arguments.parse_args(sys.argv[1:])
+    # display the welcome message
+    dis.display_welcome_message()
+    for arg in tada_arg_list:
+        main(arg)
