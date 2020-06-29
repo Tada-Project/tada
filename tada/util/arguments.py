@@ -177,14 +177,11 @@ def parse_args(cmd: List[str]) -> List[Namespace]:
     arg_1["function"] = arguments.function[0]
     # return the argument object if only one function in one module
     # of one directory provided
-    if all(
-        e == 1
-        for e in [
+    if all(e == 1 for e in [
             len(arguments.directory),
             len(arguments.module),
             len(arguments.function),
-        ]
-    ):
+    ]):
         return [argparse.Namespace(**arg_1)]
     # assume the single argument is true for both experiments
     if len(arguments.directory) > 1:
