@@ -48,11 +48,17 @@ def cyan(msg: int) -> str:
 
 
 def magenta(msg: str) -> str:
-    """Display messages in cyan"""
+    """Display messages in magenta"""
     return f"{FontColor.Magenta}{msg}{FontColor.Reset}"
 
 
+def red(msg: str) -> str:
+    """Display messages in red"""
+    return f"{FontColor.Red}{msg}{FontColor.Reset}"
+
+
 class FontColor:
+    """ansi code for color print"""
     Green = "\u001b[32m\u001b[1m"
     Blue = "\u001b[34m\u001b[1m"
     Magenta = "\u001b[35m\u001b[1m"
