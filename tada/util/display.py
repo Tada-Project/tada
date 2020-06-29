@@ -32,19 +32,24 @@ def display_output(timing_output: str, to_print: bool = False) -> None:
         print(timing_output)
 
 
-def green(msg1: str) -> str:
+def green(msg: str) -> str:
     """Display messages in green"""
-    return f"{FontColor.Green}{msg1}{FontColor.Reset}"
+    return f"{FontColor.Green}{msg}{FontColor.Reset}"
 
 
-def blue(msg1: str) -> str:
+def blue(msg: str) -> str:
     """Display messages in blue"""
-    return f"{FontColor.Blue}{msg1}{FontColor.Reset}"
+    return f"{FontColor.Blue}{msg}{FontColor.Reset}"
 
 
-def cyan(msg1: int) -> str:
+def cyan(msg: int) -> str:
     """Display messages in cyan"""
-    return f"{FontColor.Cyan}{msg1}{FontColor.Reset}"
+    return f"{FontColor.Cyan}{msg}{FontColor.Reset}"
+
+
+def magenta(msg: str) -> str:
+    """Display messages in cyan"""
+    return f"{FontColor.Magenta}{msg}{FontColor.Reset}"
 
 
 class FontColor:
