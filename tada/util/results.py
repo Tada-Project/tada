@@ -1,8 +1,8 @@
-from prettytable import PrettyTable
-from typing import Union, Dict, List
-from . import display as dis
-
 """Results Table for Tada and perf."""
+
+from typing import Union, Dict, List
+from prettytable import PrettyTable
+from . import display as dis
 
 
 def add_resultstable(
