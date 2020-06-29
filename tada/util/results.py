@@ -37,6 +37,7 @@ def to_markdown_table(pt):
 
 
 def greatest_common_size(results):
+    """Find the greatest common size of two experiments"""
     record_keys = list(results.keys())
     records = list(results.values())
     size = min(list(records[0].keys())[-1], list(records[1].keys())[-1])
