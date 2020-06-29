@@ -3,9 +3,9 @@
 import argparse
 import copy
 
-from . import constants
-from argparse import Namespace
 from typing import List
+from argparse import Namespace
+from . import constants
 
 
 def parse(args: List[str]) -> Namespace:
