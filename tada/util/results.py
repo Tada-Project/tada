@@ -36,6 +36,13 @@ def to_markdown_table(pt):
     return "\n".join(markdown)
 
 
+def greatest_common_size(results):
+    record_keys = list(results.keys())
+    records = list(results.values())
+    size = min(list(records[0].keys())[-1], list(records[1].keys())[-1])
+    return size, {record_keys[0] : records[0][size], record_keys[1] : records[1][size]}
+
+
 def compare(size, results: List[Dict[str, List[float]]]) -> None:
     """Compares the mean and median results of the two experiments"""
     # Get experiment names and results
