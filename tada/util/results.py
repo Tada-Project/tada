@@ -1,5 +1,6 @@
-from prettytable.prettytable import PrettyTable
-from typing import Union
+from prettytable import PrettyTable
+from typing import Union, Dict, List
+from . import display as dis
 
 """Results Table for Tada and perf."""
 
@@ -15,7 +16,9 @@ def add_resultstable(
     resultstable.add_row([current_size, mean, median, ratio])
 
 
-def display_resultstable(resultstable: PrettyTable, to_md: bool = False) -> None:
+def display_resultstable(
+    resultstable: PrettyTable, to_md: bool = False
+) -> None:
     """Print out the resultstable."""
     if to_md:
         print(to_markdown_table(resultstable))
@@ -31,3 +34,33 @@ def to_markdown_table(pt):
     markdown = [row[1:-1] for row in pt.get_string().split("\n")[1:-1]]
     pt.junction_char = _junc
     return "\n".join(markdown)
+
+
+def compare(size, results: List[Dict[str, List[float]]]) -> None:
+    """Compares the mean and median results of the two experiments"""
+    # Get experiment names and results
+    experiment_lst = list(results.keys())
+    result_lst = list(results.values())
+    mean_perc = (result_lst[0][0] / result_lst[1][0]) - 1
+    median_perc = (result_lst[0][1] / result_lst[1][1]) - 1
+    mean_result = dis.magenta("faster") if mean_perc < 0 else dis.red("slower")
+    median_result = (
+        dis.magenta("faster") if median_perc < 0 else dis.red("slower")
+    )
+    # Format to percentage
+    mean_perc = "{:.2%}".format(abs(mean_perc))
+    median_perc = "{:.2%}".format(abs(median_perc))
+    # Display
+    print("\nAt the greatest common size: " + dis.cyan(size))
+    print(
+        dis.green("Mean: ")
+        + f"{experiment_lst[0]} is {mean_perc} "
+        + mean_result
+        + f" than {experiment_lst[1]}"
+    )
+    print(
+        dis.green("Median: ")
+        + f"{experiment_lst[0]} is {median_perc} "
+        + median_result
+        + f" than {experiment_lst[1]}\n"
+    )
