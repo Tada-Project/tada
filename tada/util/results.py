@@ -16,9 +16,7 @@ def add_resultstable(
     resultstable.add_row([current_size, mean, median, ratio])
 
 
-def display_resultstable(
-    resultstable: PrettyTable, to_md: bool = False
-) -> None:
+def display_resultstable(resultstable: PrettyTable, to_md: bool = False) -> None:
     """Print out the resultstable."""
     if to_md:
         print(to_markdown_table(resultstable))
@@ -41,7 +39,7 @@ def greatest_common_size(results):
     record_keys = list(results.keys())
     records = list(results.values())
     size = min(list(records[0].keys())[-1], list(records[1].keys())[-1])
-    return size, {record_keys[0] : records[0][size], record_keys[1] : records[1][size]}
+    return size, {record_keys[0]: records[0][size], record_keys[1]: records[1][size]}
 
 
 def compare(size, results: List[Dict[str, List[float]]]) -> None:
@@ -52,9 +50,7 @@ def compare(size, results: List[Dict[str, List[float]]]) -> None:
     mean_perc = (result_lst[0][0] / result_lst[1][0]) - 1
     median_perc = (result_lst[0][1] / result_lst[1][1]) - 1
     mean_result = dis.magenta("faster") if mean_perc < 0 else dis.red("slower")
-    median_result = (
-        dis.magenta("faster") if median_perc < 0 else dis.red("slower")
-    )
+    median_result = dis.magenta("faster") if median_perc < 0 else dis.red("slower")
     # Format to percentage
     mean_perc = "{:.2%}".format(abs(mean_perc))
     median_perc = "{:.2%}".format(abs(median_perc))
