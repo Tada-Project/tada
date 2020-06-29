@@ -27,6 +27,7 @@ def main(tada_arguments):
 
     resultstable.field_names = ["Size", "Mean", "Median", "Ratio"]
     meanlastround = 0
+    result = {}
     indicator = 0
     steps = constants.STEP_START
     last_last_size = 0
@@ -103,6 +104,7 @@ def main(tada_arguments):
             # reminder: print('Values {0}'.format(current_benchmark.get_values()))
             mean = current_benchmark.mean()
             median = current_benchmark.median()
+            result.update({current_size: [mean, median]})
             dis.display_output(
                 dis.green("Mean: ") + str(mean), to_print,
             )
@@ -264,16 +266,22 @@ def main(tada_arguments):
             # store to csv
             df_new.to_csv(constants.EXPERIMENT, index=False, header=False, mode="a")
         resultstable.title = dis.blue(f"{tada_arguments.function}: ") + big_oh
-        return resultstable
+        return resultstable, {tada_arguments.function: result}
 
 
 if __name__ == "__main__":
     tada_arg_list = arguments.parse_args(sys.argv[1:])
     resultstables = []
+    tada_results = {}
     # display the welcome message
     dis.display_welcome_message()
+    # run experiments
     for arg in tada_arg_list:
-        resultstables.append(main(arg))
-
+        table, result = main(arg)
+        resultstables.append(table)
+        tada_results.update(result)
+    # display results
     for table in resultstables:
         results.display_resultstable(table, tada_arg_list[0].md)
+    if len(resultstables) > 1:
+        results.compare(*results.greatest_common_size(tada_results))
