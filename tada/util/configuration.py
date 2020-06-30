@@ -2,8 +2,8 @@
 
 import json
 
-from . import constants
 from typing import Any, Dict
+from . import constants
 
 WRITE = "w"
 

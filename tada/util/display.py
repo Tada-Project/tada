@@ -6,7 +6,9 @@ def display_welcome_message() -> None:
     print()
     print("🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆 ")
     print("    https://github.com/Tada-Project/tada/")
-    print("❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓")
+    print(
+        "❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓"
+    )
     print()
 
 
@@ -57,7 +59,7 @@ def red(msg: str) -> str:
     return f"{FontColor.Red}{msg}{FontColor.Reset}"
 
 
-class FontColor:
+class FontColor:  # pylint: disable=too-few-public-methods
     """ansi code for color print"""
 
     Green = "\u001b[32m\u001b[1m"
