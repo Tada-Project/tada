@@ -172,11 +172,11 @@ If you would like to run Tada to compare the performance of two functions, you
 will just need to specify the addtional function with it's directory and module
 (if it's different from the first function) like this:
 
-Start running experiment insertion_sort for size 50 →
-
 ```bash
 pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
+```
 
+```bash
 Start running experiment insertion_sort for size 25 →
 .
 .
