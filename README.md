@@ -174,9 +174,12 @@ will just need to specify the addtional function with it's directory and module
 
 ```bash
 pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
-```
 
-```bash
+🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
+    https://github.com/Tada-Project/tada/
+❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓
+
+
 Start running experiment insertion_sort for size 25 →
 .
 .
