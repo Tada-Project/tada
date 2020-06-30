@@ -64,7 +64,7 @@ def test_display_resultstable_to_markdown(capsys):
 def test_greatest_common_size():
     """Test if can find the greatest common size of two experiments"""
     input_data = {
-        "insertion_sort": {50: [7.928830701700847e-06, 6.951078582763674e-06],},
+        "insertion_sort": {50: [7.928830701700847e-06, 6.951078582763674e-06]},
         "bubble_sort": {
             50: [0.00012845424799804686, 0.00011387420361328127],
             100: [0.0004576137537760417, 0.00040870740234375],

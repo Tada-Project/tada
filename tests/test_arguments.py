@@ -35,8 +35,8 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
 @pytest.mark.parametrize(
     "correct_arguments",
     [
-        (["--directory", "d", "--module", "m", "--function", "f", "--types", "t",]),
-        (["--directory", "D", "--module", "M", "--function", "F", "--types", "T",]),
+        (["--directory", "d", "--module", "m", "--function", "f", "--types", "t"]),
+        (["--directory", "D", "--module", "M", "--function", "F", "--types", "T"]),
         (
             [
                 "--directory",
@@ -84,7 +84,7 @@ def test_module_argument_not_verifiable(chosen_arguments):
 
 @pytest.mark.parametrize(
     "chosen_arguments",
-    [(["--module", "", "--directory", "/d/", "--function", "f", "--types", "t",])],
+    [(["--module", "", "--directory", "/d/", "--function", "f", "--types", "t"])],
 )
 def test_only_module_argument_not_verifiable(chosen_arguments):
     """Check that not valid directory arguments will not verify correctly"""
@@ -95,7 +95,7 @@ def test_only_module_argument_not_verifiable(chosen_arguments):
 
 @pytest.mark.parametrize(
     "chosen_arguments",
-    [(["--module", "m", "--directory", "/d/", "--function", "", "--types", "t",])],
+    [(["--module", "m", "--directory", "/d/", "--function", "", "--types", "t"])],
 )
 def test_only_function_argument_not_verifiable(chosen_arguments):
     """Check that not valid directory arguments will not verify correctly"""
@@ -106,7 +106,7 @@ def test_only_function_argument_not_verifiable(chosen_arguments):
 
 @pytest.mark.parametrize(
     "chosen_arguments",
-    [(["--module", "m", "--directory", "/d/", "--function", "f", "--types", "",])],
+    [(["--module", "m", "--directory", "/d/", "--function", "f", "--types", ""])],
 )
 def test_only_type_argument_not_verifiable(chosen_arguments):
     """Check that not valid directory arguments will not verify correctly"""
@@ -219,7 +219,7 @@ def test_function_argument_not_verifiable_syserror(chosen_arguments, capsys):
                 "int_list",
             ]
         ),
-        (["--dir", "/a/", "/b/", "--mod", "m", "n", "--func", "f", "--types", "t",]),
+        (["--dir", "/a/", "/b/", "--mod", "m", "n", "--func", "f", "--types", "t"]),
         (
             [
                 "--directory",
