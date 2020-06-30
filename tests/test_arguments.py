@@ -219,7 +219,7 @@ def test_function_argument_not_verifiable_syserror(chosen_arguments, capsys):
                 "int_list",
             ]
         ),
-        (["--dir", "/a/", "/b/", "--mod", "m", "n", "--func", "f", "--types", "t"]),
+        (["--dir", "/a/", "/b/", "--mod", "m", "n", "--func", "f", "--types", "t",]),
         (
             [
                 "--directory",
