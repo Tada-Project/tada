@@ -43,7 +43,9 @@ def test_to_markdown_table():
     """Test to see if to_markdown_table functions properly."""
     results_table = PrettyTable(["Size", "Mean", "Median", "Ratio"])
     output = results.to_markdown_table(results_table)
-    expect = """ Size | Mean | Median | Ratio \n------|------|--------|-------"""
+    expect = (
+        """ Size | Mean | Median | Ratio \n------|------|--------|-------"""
+    )
     assert expect == output
 
 
