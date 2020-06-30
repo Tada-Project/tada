@@ -213,8 +213,6 @@ Mean: insertion_sort is 99.60% faster than bubble_sort
 Median: insertion_sort is 99.61% faster than bubble_sort
 ```
 
-
-
 #### Debug output with `--log`
 
 ```bash
