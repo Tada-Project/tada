@@ -19,7 +19,7 @@ from tada.util import save
 from tada.util import results
 
 
-def main(tada_arguments):
+def tada(tada_arguments):
     start_time = time.time()
     # read and verify the command-line arguments
     did_verify_arguments = arguments.verify(tada_arguments)
@@ -269,7 +269,8 @@ def main(tada_arguments):
         return resultstable, {tada_arguments.function: result}
 
 
-if __name__ == "__main__":
+def main():
+    """main"""
     tada_arg_list = arguments.parse_args(sys.argv[1:])
     resultstables = []
     tada_results = {}
@@ -277,7 +278,7 @@ if __name__ == "__main__":
     dis.display_welcome_message()
     # run experiments
     for arg in tada_arg_list:
-        table, result = main(arg)
+        table, result = tada(arg)
         resultstables.append(table)
         tada_results.update(result)
     # display results
@@ -285,3 +286,7 @@ if __name__ == "__main__":
         results.display_resultstable(table, tada_arg_list[0].md)
     if len(resultstables) > 1:
         results.compare(*results.greatest_common_size(tada_results))
+
+
+if __name__ == "__main__":
+    main()
