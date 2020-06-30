@@ -59,6 +59,7 @@ def red(msg: str) -> str:
 
 class FontColor:
     """ansi code for color print"""
+
     Green = "\u001b[32m\u001b[1m"
     Blue = "\u001b[34m\u001b[1m"
     Magenta = "\u001b[35m\u001b[1m"

@@ -35,30 +35,8 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
 @pytest.mark.parametrize(
     "correct_arguments",
     [
-        (
-            [
-                "--directory",
-                "d",
-                "--module",
-                "m",
-                "--function",
-                "f",
-                "--types",
-                "t",
-            ]
-        ),
-        (
-            [
-                "--directory",
-                "D",
-                "--module",
-                "M",
-                "--function",
-                "F",
-                "--types",
-                "T",
-            ]
-        ),
+        (["--directory", "d", "--module", "m", "--function", "f", "--types", "t",]),
+        (["--directory", "D", "--module", "M", "--function", "F", "--types", "T",]),
         (
             [
                 "--directory",
@@ -106,20 +84,7 @@ def test_module_argument_not_verifiable(chosen_arguments):
 
 @pytest.mark.parametrize(
     "chosen_arguments",
-    [
-        (
-            [
-                "--module",
-                "",
-                "--directory",
-                "/d/",
-                "--function",
-                "f",
-                "--types",
-                "t",
-            ]
-        )
-    ],
+    [(["--module", "", "--directory", "/d/", "--function", "f", "--types", "t",])],
 )
 def test_only_module_argument_not_verifiable(chosen_arguments):
     """Check that not valid directory arguments will not verify correctly"""
@@ -130,20 +95,7 @@ def test_only_module_argument_not_verifiable(chosen_arguments):
 
 @pytest.mark.parametrize(
     "chosen_arguments",
-    [
-        (
-            [
-                "--module",
-                "m",
-                "--directory",
-                "/d/",
-                "--function",
-                "",
-                "--types",
-                "t",
-            ]
-        )
-    ],
+    [(["--module", "m", "--directory", "/d/", "--function", "", "--types", "t",])],
 )
 def test_only_function_argument_not_verifiable(chosen_arguments):
     """Check that not valid directory arguments will not verify correctly"""
@@ -154,20 +106,7 @@ def test_only_function_argument_not_verifiable(chosen_arguments):
 
 @pytest.mark.parametrize(
     "chosen_arguments",
-    [
-        (
-            [
-                "--module",
-                "m",
-                "--directory",
-                "/d/",
-                "--function",
-                "f",
-                "--types",
-                "",
-            ]
-        )
-    ],
+    [(["--module", "m", "--directory", "/d/", "--function", "f", "--types", "",])],
 )
 def test_only_type_argument_not_verifiable(chosen_arguments):
     """Check that not valid directory arguments will not verify correctly"""
@@ -242,7 +181,8 @@ def test_function_argument_not_verifiable_syserror(chosen_arguments, capsys):
         (
             [
                 "--directory",
-                "/d/", "/a/",
+                "/d/",
+                "/a/",
                 "--module",
                 "m.a",
                 "--function",
@@ -254,7 +194,8 @@ def test_function_argument_not_verifiable_syserror(chosen_arguments, capsys):
         (
             [
                 "--directory",
-                "/a/b/c/", "/d/e/f",
+                "/a/b/c/",
+                "/d/e/f",
                 "--module",
                 "m.a.a",
                 "--function",
@@ -267,9 +208,11 @@ def test_function_argument_not_verifiable_syserror(chosen_arguments, capsys):
         (
             [
                 "--directory",
-                "/a/b/c/", "/d/e/f",
+                "/a/b/c/",
+                "/d/e/f",
                 "--module",
-                "m.a.a", "m.a.b",
+                "m.a.a",
+                "m.a.b",
                 "--function",
                 "full.name",
                 "--types",
@@ -282,7 +225,8 @@ def test_function_argument_not_verifiable_syserror(chosen_arguments, capsys):
                 "--directory",
                 "/a/b/c/",
                 "--module",
-                "m.a.a", "m.a.b",
+                "m.a.a",
+                "m.a.b",
                 "--function",
                 "full.name",
                 "--types",
@@ -298,7 +242,8 @@ def test_function_argument_not_verifiable_syserror(chosen_arguments, capsys):
                 "--module",
                 "m.a.a m.a.b",
                 "--function",
-                "full.name1", "full.name2",
+                "full.name1",
+                "full.name2",
                 "--types",
                 "int_list",
             ]
