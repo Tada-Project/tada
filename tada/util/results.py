@@ -56,7 +56,7 @@ def compare(size, results: List[Dict[str, List[float]]]) -> None:
     mean_perc = "{:.2%}".format(abs(mean_perc))
     median_perc = "{:.2%}".format(abs(median_perc))
     # Display
-    print("\nAt the greatest common size " + dis.cyan(size) + " :")
+    print("\nAt the greatest common size " + dis.cyan(size) + ":")
     print(
         dis.green("Mean: ")
         + f"{experiment_lst[0]} is {mean_perc} "

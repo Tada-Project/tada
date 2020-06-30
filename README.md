@@ -211,7 +211,7 @@ Start running experiment insertion_sort for size 25 →
 | 800  |  0.029292134683333335  |  0.028519337000000006  | 4.631604690038055  |
 +------+------------------------+------------------------+--------------------+
 
-At the greatest common size: 800
+At the greatest common size 800:
 Mean: insertion_sort is 99.60% faster than bubble_sort
 Median: insertion_sort is 99.61% faster than bubble_sort
 ```
