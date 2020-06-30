@@ -150,17 +150,18 @@ def verify(args: Namespace) -> bool:
     """Verify the command-line arguments"""
     verified_arguments = False
     # CHECK: directory was specified and it is not ""
-    if args.directory is not constants.NONE:
-        verified_arguments = True
+    if args.directory == constants.NONE_LIST:
+        return verified_arguments
     # CHECK: module was specified and it is not ""
-    if args.module is not constants.NONE:
-        verified_arguments = True
+    if args.module == constants.NONE_LIST:
+        return verified_arguments
     # CHECK: function was specified and it is not ""
-    if args.function is not constants.NONE:
-        verified_arguments = True
+    if args.function == constants.NONE_LIST:
+        return verified_arguments
     # CHECK: type was specified and it is not ""
-    if args.function is not constants.NONE:
-        verified_arguments = True
+    if args.types == constants.NONE_LIST:
+        return verified_arguments
+    verified_arguments = True
     return verified_arguments
 
 
