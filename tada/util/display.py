@@ -1,5 +1,8 @@
 """Display output for Tada"""
 
+from colorama import init, Fore, Style
+init(autoreset=True)
+
 
 def display_welcome_message() -> None:
     """Display a welcome message"""
@@ -36,40 +39,24 @@ def display_output(timing_output: str, to_print: bool = False) -> None:
 
 def green(msg: str) -> str:
     """Display messages in green"""
-    return f"{FontColor.Green}{msg}{FontColor.Reset}"
+    return f"{Fore.GREEN + Style.BRIGHT}{msg}{Style.RESET_ALL}"
 
 
 def blue(msg: str) -> str:
     """Display messages in blue"""
-    return f"{FontColor.Blue}{msg}{FontColor.Reset}"
+    return f"{Fore.BLUE + Style.BRIGHT}{msg}{Style.RESET_ALL}"
 
 
 def cyan(msg: int) -> str:
     """Display messages in cyan"""
-    return f"{FontColor.Cyan}{msg}{FontColor.Reset}"
+    return f"{Fore.CYAN + Style.BRIGHT}{msg}{Style.RESET_ALL}"
 
 
 def magenta(msg: str) -> str:
     """Display messages in magenta"""
-    return f"{FontColor.Magenta}{msg}{FontColor.Reset}"
+    return f"{Fore.MAGENTA + Style.BRIGHT}{msg}{Style.RESET_ALL}"
 
 
 def red(msg: str) -> str:
     """Display messages in red"""
-    return f"{FontColor.Red}{msg}{FontColor.Reset}"
-
-
-class FontColor:  # pylint: disable=too-few-public-methods
-    """ansi code for color print"""
-
-    Green = "\u001b[32m\u001b[1m"
-    Blue = "\u001b[34m\u001b[1m"
-    Magenta = "\u001b[35m\u001b[1m"
-    Cyan = "\u001b[36m\u001b[1m"
-    Black = "\u001b[30m"
-    Red = "\u001b[31m\u001b[1m"
-    Yellow = "\u001b[33m"
-    White = "\u001b[37m"
-    Reset = "\u001b[0m"
-    Bold = "\u001b[1m"
-    Underline = "\u001b[4m"
+    return f"{Fore.RED + Style.BRIGHT}{msg}{Style.RESET_ALL}"
