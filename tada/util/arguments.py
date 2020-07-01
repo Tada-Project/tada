@@ -1,5 +1,6 @@
 """Handle the arguments provided to Tada"""
 
+import sys
 import argparse
 import copy
 
@@ -179,6 +180,9 @@ def parse_args(cmd: List[str]) -> List[Namespace]:
     arg_1["function"] = arguments.function[0]
     # return the argument object if only one function in one module
     # of one directory provided
+    if any(len(arg) > 2 for arg in args_lst):
+        print("\nComparison feature can only take two functions now\n")
+        sys.exit()
     if all(len(arg) == 1 for arg in args_lst):
         return [argparse.Namespace(**arg_1)]
 
