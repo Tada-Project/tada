@@ -258,3 +258,60 @@ def test_two_sets_arguments(correct_arguments):
     verified_second = arguments.verify(parsed_arguments[1])
     assert verified_first is True
     assert verified_second is True
+
+
+
+
+@pytest.mark.parametrize(
+    "correct_arguments",
+    [
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "/d/e/f",
+                "g/h/i/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full.name",
+                "--types",
+                "int_list",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "m.a.b",
+                "m.a.c",
+                "--function",
+                "full.name",
+                "--types",
+                "int_list",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full.name1",
+                "full.name2",
+                "full.name3",
+                "--types",
+                "int_list",
+            ]
+        ),
+    ],
+)
+def test_multiple_sets_arguments(correct_arguments, capsys):
+    """Check that valid directory arguments will verify correctly"""
+    with pytest.raises(SystemExit):
+        arguments.parse_args(correct_arguments)
+    standard_out, _ = capsys.readouterr()
+    assert standard_out == "\nComparison feature can only take two functions now\n\n"
