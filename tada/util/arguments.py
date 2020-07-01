@@ -113,6 +113,20 @@ def parse(args: List[str]) -> Namespace:
         help="Enable input data to be sorted",
     )
     parser.add_argument(
+        "--log",
+        required=False,
+        action='store_true',
+        default=False,
+        help="Show log/debug/diagnostic output",
+    )
+    parser.add_argument(
+        "--md",
+        required=False,
+        action='store_true',
+        default=False,
+        help="Show results table in markdown format",
+    )
+    parser.add_argument(
         "--level",
         required=False,
         type=int,
@@ -126,21 +140,7 @@ def parse(args: List[str]) -> Namespace:
         type=int,
         default=constants.POSITION,
         help="""The position of input data to double in the multivariable
-        doubling experiment""",
-    )
-    parser.add_argument(
-        "--log",
-        required=False,
-        action="store_true",
-        default=False,
-        help="Show log/debug/diagnostic output",
-    )
-    parser.add_argument(
-        "--md",
-        required=False,
-        action="store_true",
-        default=False,
-        help="Show results table in markdown format",
+        doubling experiment. Must be the last argument""",
     )
     # parse the arguments and return the finished result
     arguments_finished = parser.parse_args(args)

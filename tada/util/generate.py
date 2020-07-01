@@ -60,7 +60,9 @@ def generate_experiment_strategy(
         else:
             if isinstance(schema, list):
                 subschema = schema[position[index_position]]
-            elif isinstance(schema, dict):
+            elif isinstance(schema["items"], dict):
+                subschema = schema["items"]
+            elif isinstance(schema["items"], list):
                 subschema = schema["items"][position[index_position]]
             return detect_level_and_position(
                 subschema, level - 1, position, index_position + 1
