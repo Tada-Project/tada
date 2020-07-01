@@ -67,13 +67,13 @@ def tada(tada_arguments):
                     dis.display_output(f"count: {dis.display_output}", to_print)
                 if constants.BACKFILL_TIMES == 2:
                     constants.QUIT_BY_BACKFILL = 1
-                    dis.display_output("Quit due to backfill twice", to_print)
+                    dis.display_output("\nQuit due to backfill twice", to_print)
                     break
             if "hypothesis" in tada_arguments.types[0]:
                 if current_size >= tada_arguments.maxsize:
                     constants.QUIT_BY_MAX_SIZE = 1
                     dis.display_output(
-                        "Quit due to reaching max size: " + str(tada_arguments.maxsize),
+                        "\nQuit due to reaching max size: " + str(tada_arguments.maxsize),
                         to_print,
                     )
                     break
@@ -164,21 +164,21 @@ def tada(tada_arguments):
                 current_size = current_size * constants.FACTOR
             # check indicator and quit if smaller than decided indicator
             if indicator < tada_arguments.indicator:
-                dis.display_output(f"Quit due to indicator: {indicator}", to_print)
+                dis.display_output(f"\nQuit due to indicator: {indicator}", to_print)
                 break
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
             if current_runningtime > tada_arguments.runningtime:
                 dis.display_output(
-                    "Quit due to exceeding the max time limit: " + current_runningtime,
+                    "\nQuit due to exceeding the max time limit: " + current_runningtime,
                     to_print,
                 )
                 constants.QUIT_BY_MAX_RUNTIME = 1
                 break
             steps += 1
             if steps > tada_arguments.steps:
-                dis.display_output(f"Quit due to end of rounds: {steps}", to_print)
+                dis.display_output(f"\nQuit due to end of rounds: {steps}", to_print)
                 constants.QUIT_BY_STEPS = 1
                 break
         # results.display_resultstable(resultstable, to_markdown)
