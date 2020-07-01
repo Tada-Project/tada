@@ -19,6 +19,20 @@ def test_generate_int_makes_size_default():
 
 
 # pylint: disable=invalid-name
+def test_generate_bit_depth_makes_size_default():
+    """Checks that requesting a generated int returns one"""
+    # request a single tuple with an int in it
+    requested_types = ["bitdepth"]
+    # assume the doubling experiment is at 100
+    current_size = 100
+    # the default generator will return a tuple with 100 in it
+    # expected_tuple = (generate.generate_int(current_size),)
+    # generate the data for the requested_types and the current_size
+    generated_data = generate.generate_data(requested_types, current_size)
+    assert generated_data is not None
+
+
+# pylint: disable=invalid-name
 def test_generate_ints_makes_size_default():
     """Checks that requesting generated ints returns them"""
     # request a single tuple with an int in it
@@ -182,6 +196,25 @@ allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
     )
 
 
+def test_generate_strategy_with_one_json_object(tmpdir):
+    """Checks that generate strategy works for one json object type in file"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write('[{"type": "object", "patternProperties": \
+{"^[0-9]+$": {"type": "integer"}},"minProperties": 0, "maxProperties": 0}]')
+    size = "50"
+    strategy = generate.generate_experiment_strategy(path, size)
+    assert len(strategy) != 0
+
+
+def test_generate_strategy_with_one_json_string(tmpdir):
+    """Checks that generate strategy works for one json string type in file"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write('[{"type": "string", "maxLength": 0, "minLength": 0}]')
+    size = "50"
+    strategy = generate.generate_experiment_strategy(path, size)
+    assert len(strategy) != 0
+
+
 def test_generate_strategy_multiple_json(tmpdir):
     """Checks that generate strategy works for two json objects in file"""
     path = tmpdir.mkdir("sub").join("hello.txt")
@@ -226,19 +259,18 @@ allow_nan=False).filter(lambda n: <unknown>), max_size=50, min_size=50)"
 
 def test_detect_level_and_position(tmpdir):
     """Checks that generate strategy works for multiple level"""
-    path = tmpdir.mkdir('sub').join('hello.txt')
+    path = tmpdir.mkdir("sub").join("hello.txt")
     path.write(
         '[{"type": "array", "items": [{"type": "number"}, {"type": "number"}]}\n\
         ,{"type": "array", "items": [{"type": "number"}, {"type": "number"}]}]'
     )
-    size = '50'
+    size = "50"
     level = 2
     position = [0, 0]
-    strategy = generate.generate_experiment_strategy(path, size, level,
-                                                     position)
+    strategy = generate.generate_experiment_strategy(path, size, level, position)
     assert (
         str(strategy[1])
-        == 'builds(<function _operator.add>, tuples(floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>), floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>)).map(list), lists(recursive(one_of(one_of(one_of(one_of(none(), booleans()), integers()), floats(allow_infinity=False, allow_nan=False).map(lambda x: <unknown>)), text()), lambda strategy: st.lists(strategy, max_size=3), max_leaves=100)))'  # pylint: disable=C0301
+        == "builds(<function _operator.add>, tuples(floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>), floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>)).map(list), lists(recursive(one_of(one_of(one_of(one_of(none(), booleans()), integers()), floats(allow_infinity=False, allow_nan=False).map(lambda x: <unknown>)), text()), lambda strategy: st.lists(strategy, max_size=3), max_leaves=100)))"  # pylint: disable=C0301
     )
 
 

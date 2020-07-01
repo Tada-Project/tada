@@ -84,6 +84,39 @@ def test_module_argument_not_verifiable(chosen_arguments):
 
 @pytest.mark.parametrize(
     "chosen_arguments",
+    [(["--module", "", "--directory", "/d/", "--function", "f", "--types", "t"])],
+)
+def test_only_module_argument_not_verifiable(chosen_arguments):
+    """Check that not valid directory arguments will not verify correctly"""
+    parsed_arguments = arguments.parse(chosen_arguments)
+    verified_arguments = arguments.verify(parsed_arguments)
+    assert verified_arguments is False
+
+
+@pytest.mark.parametrize(
+    "chosen_arguments",
+    [(["--module", "m", "--directory", "/d/", "--function", "", "--types", "t"])],
+)
+def test_only_function_argument_not_verifiable(chosen_arguments):
+    """Check that not valid directory arguments will not verify correctly"""
+    parsed_arguments = arguments.parse(chosen_arguments)
+    verified_arguments = arguments.verify(parsed_arguments)
+    assert verified_arguments is False
+
+
+@pytest.mark.parametrize(
+    "chosen_arguments",
+    [(["--module", "m", "--directory", "/d/", "--function", "f", "--types", ""])],
+)
+def test_only_type_argument_not_verifiable(chosen_arguments):
+    """Check that not valid directory arguments will not verify correctly"""
+    parsed_arguments = arguments.parse(chosen_arguments)
+    verified_arguments = arguments.verify(parsed_arguments)
+    assert verified_arguments is False
+
+
+@pytest.mark.parametrize(
+    "chosen_arguments",
     [
         (["--directories", "d"]),
         (["--dirs", "d"]),
@@ -140,3 +173,143 @@ def test_function_argument_not_verifiable_syserror(chosen_arguments, capsys):
     assert standard_out is EMPTY_STRING
     assert ERROR in standard_err
     assert MODULE in standard_err
+
+
+@pytest.mark.parametrize(
+    "correct_arguments",
+    [
+        (
+            [
+                "--directory",
+                "/d/",
+                "/a/",
+                "--module",
+                "m.a",
+                "--function",
+                "fullname",
+                "--types",
+                "int",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "/d/e/f",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full.name",
+                "--types",
+                "int_list",
+            ]
+        ),
+        (["--dir", "/a/", "/b/", "--mod", "m", "--func", "f", "--types", "t"]),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "/d/e/f",
+                "--module",
+                "m.a.a",
+                "m.a.b",
+                "--function",
+                "full.name",
+                "--types",
+                "int_list",
+            ]
+        ),
+        (["--dir", "/a/", "/b/", "--mod", "m", "n", "--func", "f", "--types", "t"]),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "m.a.b",
+                "--function",
+                "full.name",
+                "--types",
+                "int_list",
+            ]
+        ),
+        (["--dir", "/a/", "--mod", "m", "n", "--func", "f", "--types", "t"]),
+        (["--dir", "/a/", "--mod", "m", "--func", "f", "g", "--types", "t"]),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a m.a.b",
+                "--function",
+                "full.name1",
+                "full.name2",
+                "--types",
+                "int_list",
+            ]
+        ),
+        (["--dir", "/a/", "--mod", "m n", "--func", "f", "g", "--types", "t"]),
+    ],
+)
+def test_two_sets_arguments(correct_arguments):
+    """Check that valid directory arguments will verify correctly"""
+    parsed_arguments = arguments.parse_args(correct_arguments)
+    verified_first = arguments.verify(parsed_arguments[0])
+    verified_second = arguments.verify(parsed_arguments[1])
+    assert verified_first is True
+    assert verified_second is True
+
+
+@pytest.mark.parametrize(
+    "correct_arguments",
+    [
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "/d/e/f",
+                "g/h/i/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full.name",
+                "--types",
+                "int_list",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "m.a.b",
+                "m.a.c",
+                "--function",
+                "full.name",
+                "--types",
+                "int_list",
+            ]
+        ),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full.name1",
+                "full.name2",
+                "full.name3",
+                "--types",
+                "int_list",
+            ]
+        ),
+    ],
+)
+def test_multiple_sets_arguments(correct_arguments, capsys):
+    """Check program will exit when multiple functions being typed in"""
+    with pytest.raises(SystemExit):
+        arguments.parse_args(correct_arguments)
+    standard_out, _ = capsys.readouterr()
+    assert standard_out == "\nComparison feature can only take two functions now\n\n"

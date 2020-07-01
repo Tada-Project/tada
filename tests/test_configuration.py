@@ -41,9 +41,9 @@ from tada.util import constants
 )
 def test_configuration_file_saved(correct_arguments, tmpdir):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(correct_arguments)
+    parsed_arguments = arguments.parse_args(correct_arguments)
     configuration.save(
-        str(tmpdir) + "/" + constants.CONFIGURATION, vars(parsed_arguments)
+        str(tmpdir) + "/" + constants.CONFIGURATION, vars(parsed_arguments[0])
     )
     assert len(tmpdir.listdir()) == 1
 
@@ -83,10 +83,10 @@ def test_configuration_file_saved(correct_arguments, tmpdir):
 # pylint: disable=invalid-name
 def test_configuration_file_saved_retrieved(correct_arguments, tmpdir):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(correct_arguments)
+    parsed_arguments = arguments.parse_args(correct_arguments)
     directory_prefix = str(tmpdir) + "/"
     configuration.save(
-        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
     )
     assert len(tmpdir.listdir()) == 1
     tada_configuration_dict = configuration.read(
@@ -119,10 +119,10 @@ def test_configuration_file_saved_retrieved(correct_arguments, tmpdir):
 # pylint: disable=invalid-name
 def test_configuration_file_correct_types(correct_arguments, correct_types, tmpdir):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(correct_arguments)
+    parsed_arguments = arguments.parse_args(correct_arguments)
     directory_prefix = str(tmpdir) + "/"
     configuration.save(
-        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
     )
     assert len(tmpdir.listdir()) == 1
     tada_configuration_dict = configuration.read(
@@ -152,12 +152,14 @@ def test_configuration_file_correct_types(correct_arguments, correct_types, tmpd
     ],
 )
 # pylint: disable=invalid-name
-def test_configuration_file_correct_schema_path(correct_arguments, correct_schema, tmpdir):
+def test_configuration_file_correct_schema_path(
+        correct_arguments, correct_schema, tmpdir
+):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(correct_arguments)
+    parsed_arguments = arguments.parse_args(correct_arguments)
     directory_prefix = str(tmpdir) + "/"
     configuration.save(
-        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
     )
     assert len(tmpdir.listdir()) == 1
     tada_configuration_dict = configuration.read(
@@ -193,10 +195,10 @@ def test_configuration_file_correct_functions_modules(
     correct_arguments, correct_function, correct_module, tmpdir
 ):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(correct_arguments)
+    parsed_arguments = arguments.parse_args(correct_arguments)
     directory_prefix = str(tmpdir) + "/"
     configuration.save(
-        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
     )
     assert len(tmpdir.listdir()) == 1
     tada_configuration_dict = configuration.read(
@@ -232,10 +234,10 @@ def test_configuration_file_correct_experiment_name(
     correct_arguments, correct_experiment_name, tmpdir
 ):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(correct_arguments)
+    parsed_arguments = arguments.parse_args(correct_arguments)
     directory_prefix = str(tmpdir) + "/"
     configuration.save(
-        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
     )
     assert len(tmpdir.listdir()) == 1
     tada_configuration_dict = configuration.read(
@@ -273,10 +275,10 @@ def test_configuration_file_correct_experiment_info(
     correct_arguments, correct_experiment_info, tmpdir
 ):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(correct_arguments)
+    parsed_arguments = arguments.parse_args(correct_arguments)
     directory_prefix = str(tmpdir) + "/"
     configuration.save(
-        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
     )
     assert len(tmpdir.listdir()) == 1
     tada_configuration_dict = configuration.read(
@@ -313,12 +315,14 @@ def test_configuration_file_correct_experiment_info(
     ],
 )
 # pylint: disable=invalid-name
-def test_configuration_file_correct_position(correct_arguments, correct_position, tmpdir):
+def test_configuration_file_correct_position(
+        correct_arguments, correct_position, tmpdir
+):
     """Checks that the configuration file was saved to the directory"""
-    parsed_arguments = arguments.parse(correct_arguments)
+    parsed_arguments = arguments.parse_args(correct_arguments)
     directory_prefix = str(tmpdir) + "/"
     configuration.save(
-        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments)
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
     )
     assert len(tmpdir.listdir()) == 1
     tada_configuration_dict = configuration.read(
