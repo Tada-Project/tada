@@ -255,8 +255,7 @@ def test_detect_level_only(tmpdir):
     strategy = generate.generate_experiment_strategy(path, size, level,
                                                      position)
     assert (
-        str(strategy[0])
-        == 'lists(floats(min_value=50.0, max_value=50.0, allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>))'  # pylint: disable=C0301
+        str(strategy[0]) == 'lists(just(50))'
     )
 
 
