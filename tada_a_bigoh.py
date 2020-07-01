@@ -86,7 +86,7 @@ def tada(tada_arguments):
             )
             # display the standard output and error
             dis.display_output(current_output.decode(constants.UTF8), to_print)
-            dis.display_output(current_error.decode(constants.UTF8), to_print=False)
+            dis.display_output(current_error.decode(constants.UTF8), to_print=True)
             # read the JSON file containing the results
 
             current_benchmark = pyperf.Benchmark.load(
