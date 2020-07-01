@@ -9,6 +9,7 @@ hypothesis = "*"
 hypothesis-jsonschema = "*"
 pandas = "*"
 ptable = "*"
+colorama = "*"
 
 [dev-packages]
 pylint = "*"
