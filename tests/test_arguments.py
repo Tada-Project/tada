@@ -260,8 +260,6 @@ def test_two_sets_arguments(correct_arguments):
     assert verified_second is True
 
 
-
-
 @pytest.mark.parametrize(
     "correct_arguments",
     [
@@ -310,7 +308,7 @@ def test_two_sets_arguments(correct_arguments):
     ],
 )
 def test_multiple_sets_arguments(correct_arguments, capsys):
-    """Check that valid directory arguments will verify correctly"""
+    """Check program will exit when multiple functions being typed in"""
     with pytest.raises(SystemExit):
         arguments.parse_args(correct_arguments)
     standard_out, _ = capsys.readouterr()
