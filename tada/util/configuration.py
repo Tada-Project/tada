@@ -2,6 +2,7 @@
 
 import json
 
+from typing import Any, Dict
 from . import constants
 
 WRITE = "w"
@@ -16,7 +17,7 @@ SORTED = "sorted"
 POSITION = "position"
 
 
-def save(configuration_filename, tada_configuration):
+def save(configuration_filename: str, tada_configuration: Dict[str, Any]) -> None:
     """Save the JSON file of the dictionary in configuration_file"""
     with open(configuration_filename, WRITE) as json_output_file:
         json.dump(tada_configuration, json_output_file)
@@ -49,12 +50,12 @@ def get_directory(current_dictionary):
     return current_dictionary[DIRECTORY]
 
 
-def get_function(current_dictionary):
+def get_function(current_dictionary: Dict[str, Any]) -> str:
     """Return the function argument from the provided dictionary"""
     return current_dictionary[FUNCTION]
 
 
-def get_module(current_dictionary):
+def get_module(current_dictionary: Dict[str, Any]) -> str:
     """Return the module argument from the provided dictionary"""
     return current_dictionary[MODULE]
 
@@ -69,7 +70,7 @@ def get_schema_path(current_dictionary):
     return current_dictionary[SCHEMA]
 
 
-def get_experiment_name(current_dictionary, chosen_size):
+def get_experiment_name(current_dictionary: Dict[str, Any], chosen_size: int) -> str:
     """Return the complete name of an experiment"""
     return (
         constants.TADA

@@ -166,6 +166,56 @@ Start running experiment for size 50 →
 O(n) linear or O(nlogn) linearithmic
 ```
 
+#### Comparing two algorithms' performance with Tada
+
+If you would like to run Tada to compare the performance of two functions, you
+will just need to specify the addtional function with it's directory and module
+(if it's different from the first function) like this:
+
+```bash
+pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
+
+🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
+    https://github.com/Tada-Project/tada/
+❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓
+
+
+Start running experiment insertion_sort for size 25 →
+.
+.
+.
+→ Done running experiment bubble_sort for size 800
+
++-----------------------------------------------------------------------------+
+|             insertion_sort: O(n) linear or O(nlogn) linearithmic            |
++------+------------------------+------------------------+--------------------+
+| Size |          Mean          |         Median         |       Ratio        |
++------+------------------------+------------------------+--------------------+
+|  25  | 3.644364811706543e-06  | 3.498709533691405e-06  |         0          |
+|  50  | 6.535123836263021e-06  | 6.483351989746092e-06  | 1.793213405878218  |
+| 100  | 1.2902192108154296e-05 | 1.2540842590332028e-05 | 1.9742842571032526 |
+| 200  | 2.5023900944010416e-05 | 2.4608139038085928e-05 | 1.9395077002608803 |
+| 400  | 5.526396857910156e-05  | 5.3515207031250005e-05 | 2.2084473840729952 |
+| 800  | 0.00011801120257161459 |  0.00011251379296875   | 2.1354094829925283 |
++------+------------------------+------------------------+--------------------+
++-----------------------------------------------------------------------------+
+|                        bubble_sort: O(n^2) quadratic                        |
++------+------------------------+------------------------+--------------------+
+| Size |          Mean          |         Median         |       Ratio        |
++------+------------------------+------------------------+--------------------+
+|  25  | 2.8776128824869792e-05 | 2.846207250976562e-05  |         0          |
+|  50  | 0.00010703222574869792 | 0.00010308191601562499 | 3.7194796562140504 |
+| 100  | 0.0004109644687825521  | 0.00039437410449218743 | 3.8396330255474633 |
+| 200  |   0.0015730586140625   | 0.0015326660937500002  | 3.8277241308051635 |
+| 400  |    0.00632440301875    |  0.006229572156249999  | 4.020449690947576  |
+| 800  |  0.029292134683333335  |  0.028519337000000006  | 4.631604690038055  |
++------+------------------------+------------------------+--------------------+
+
+At the greatest common size 800:
+Mean: insertion_sort is 99.60% faster than bubble_sort
+Median: insertion_sort is 99.61% faster than bubble_sort
+```
+
 #### Debug output with `--log`
 
 ```bash

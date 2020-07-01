@@ -21,6 +21,7 @@ TADA = "tada"
 
 # Separators
 NONE = ""
+NONE_LIST = [""]
 PERIOD = "."
 SEPARATOR = os.sep
 SPACE = " "
