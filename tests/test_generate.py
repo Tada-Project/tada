@@ -276,19 +276,16 @@ def test_detect_level_and_position(tmpdir):
 
 def test_detect_level_only(tmpdir):
     """Checks that generate strategy works for multiple level"""
-    path = tmpdir.mkdir('sub').join('hello.txt')
+    path = tmpdir.mkdir('sub').join("hello.txt")
     path.write(
         '[{"type": "array", "items": {"type": "number"}}\n\
         ,{"type": "array", "items": {"type": "number"}}]'
     )
-    size = '50'
+    size = "50"
     level = 2
     position = [0, 0]
-    strategy = generate.generate_experiment_strategy(path, size, level,
-                                                     position)
-    assert (
-        str(strategy[0]) == 'lists(just(50))'
-    )
+    strategy = generate.generate_experiment_strategy(path, size, level, position)
+    assert str(strategy[0]) == "lists(just(50))"
 
 
 def test_generate_func_from_single_st():
