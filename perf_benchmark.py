@@ -46,7 +46,7 @@ if __name__ == "__main__":
         path = configuration.get_schema_path(tada_configuration_dict)
     if func_type[0] == "custom":
         data_directory = configuration.get_data_directory(tada_configuration_dict)
-        if data_directory is not "":
+        if data_directory != "":
             package.add_data_sys_path(configuration.get_data_directory(tada_configuration_dict))
         data_module = importlib.import_module(
             configuration.get_data_module(tada_configuration_dict)
