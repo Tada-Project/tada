@@ -287,8 +287,8 @@ def main():
         results.display_resultstable(table, tada_arg_list[0].md)
     if len(resultstables) > 1:
         results.compare(*results.greatest_common_size(tada_results))
-    if contrast_flag is True:
-        results.contrast(tada_results)
+        if contrast_flag is True:
+            results.contrast(tada_results)
 
 
 if __name__ == "__main__":
