@@ -179,7 +179,7 @@ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speed
 
   Tada!: auTomAtic orDer-of-growth Analysis!
     https://github.com/Tada-Project/tada/
-  For Help Information Type: pipenv run python tada_a_bigoh.py -h  
+  For Help Information Type: pipenv run python tada_a_bigoh.py -h
 
 
 Start running experiment insertion_sort for size 25 →
@@ -231,7 +231,7 @@ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module=speed
 
 Tada!: auTomAtic orDer-of-growth Analysis!
   https://github.com/Tada-Project/tada/
-For Help Information Type: pipenv run python tada_a_bigoh.py -h  
+For Help Information Type: pipenv run python tada_a_bigoh.py -h
 
 
 Start running experiment graph_gen for size 25 →
@@ -287,7 +287,7 @@ $ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module spe
 
   Tada!: auTomAtic orDer-of-growth Analysis!
     https://github.com/Tada-Project/tada/
-  For Help Information Type: pipenv run python tada_a_bigoh.py -h  
+  For Help Information Type: pipenv run python tada_a_bigoh.py -h
 
 Start running experiment for size 50 →
 
