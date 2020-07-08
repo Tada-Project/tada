@@ -38,8 +38,6 @@ def tada(tada_arguments):
     use_backfill = tada_arguments.backfill
     # display debug output
     to_print = tada_arguments.log
-    # print results table in markdown
-    # to_markdown = tada_arguments.md
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         dis.output_message("Incorrect command-line arguments.", to_print)
@@ -201,7 +199,6 @@ def tada(tada_arguments):
                 )
                 constants.QUIT_BY_STEPS = 1
                 break
-        # results.display_resultstable(resultstable, to_markdown)
         big_oh = analysis.analyze_big_oh(ratio)
         if tada_arguments.expect is not None:
             if indicator < tada_arguments.indicator:
