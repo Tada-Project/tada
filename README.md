@@ -91,6 +91,8 @@ optional arguments:
                         doubling experiment (default: [0])
   --log                 Show log/debug/diagnostic output (default: False)
   --md                  Show results table in markdown format (default: False)
+  --contrast            Show contrast result table for multiple function analysis
+                        (default: False)
 
 Sample usage: pipenv run python tada_a_bigoh.py --directory
 /Users/myname/projectdirectory --module modulename.file --function
@@ -175,9 +177,9 @@ will just need to specify the addtional function with it's directory and module
 ```bash
 pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
 
-🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
+  Tada!: auTomAtic orDer-of-growth Analysis!
     https://github.com/Tada-Project/tada/
-❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓
+  For Help Information Type: pipenv run python tada_a_bigoh.py -h
 
 
 Start running experiment insertion_sort for size 25 →
@@ -216,14 +218,76 @@ Mean: insertion_sort is 99.60% faster than bubble_sort
 Median: insertion_sort is 99.61% faster than bubble_sort
 ```
 
+##### Contrast result tables of two algorithms' performance with Tada
+
+If you would like to contrast run time of two different algorithms where the run
+time of one might be included in another, you can use the `--contrast` feature
+to get the result table generated based on the subtraction of the two algorithms
+with the growth ratio analysis of the run time difference:
+
+```bash
+pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function  graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --sta rtsize=50  --max=1000 --position 0 --contrast
+
+
+Tada!: auTomAtic orDer-of-growth Analysis!
+  https://github.com/Tada-Project/tada/
+For Help Information Type: pipenv run python tada_a_bigoh.py -h
+
+
+Start running experiment graph_gen for size 25 →
+.
+.
+.
+→ Done running experiment graph_gen_BFS for size 800
+
++-----------------------------------------------------------------------------+
+|               graph_gen: O(n) linear or O(nlogn) linearithmic               |
++------+------------------------+------------------------+--------------------+
+| Size |          Mean          |         Median         |       Ratio        |
++------+------------------------+------------------------+--------------------+
+|  50  |  9.94538065592448e-06  | 9.501693725585938e-06  |         0          |
+| 100  | 1.8558588460286458e-05 | 1.8363348388671875e-05 | 1.8660510947090876 |
+| 200  | 3.7122855631510415e-05 | 3.560983886718751e-05  | 2.000305988300223  |
+| 400  | 7.208413248697916e-05  | 7.197658691406252e-05  | 1.9417722925871337 |
+| 800  | 0.00015173049479166666 | 0.00014575283203125002 | 2.104908383534675  |
++------+------------------------+------------------------+--------------------+
++-------------------------------------------------------------------------+
+|                     graph_gen_BFS: O(n^2) quadratic                     |
++------+-----------------------+---------------------+--------------------+
+| Size |          Mean         |        Median       |       Ratio        |
++------+-----------------------+---------------------+--------------------+
+|  50  |   0.0010322848828125  |  0.000936182421875  |         0          |
+| 100  | 0.0037961446354166668 |   0.0036485609375   | 3.6774195753733445 |
+| 200  |  0.014912410624999999 |    0.01433645625    | 3.928304123576473  |
+| 400  |  0.06095087833333333  | 0.05791582499999999 | 4.087258583877236  |
+| 800  |      0.252504645      | 0.23859980000000003 | 4.1427564606875915 |
++------+-----------------------+---------------------+--------------------+
+
+At the greatest common size 800:
+Mean: graph_gen is 99.94% faster than graph_gen_BFS
+Median: graph_gen is 99.94% faster than graph_gen_BFS
+
++----------------------------------------------------------------------------------------+
+|               Contrast for graph_gen and graph_gen_BFS: O(n^2) quadratic               |
++-------+---------------------------+---------------------------+------------------------+
+|  Size |            Mean           |           Median          |         Ratio          |
++-------+---------------------------+---------------------------+------------------------+
+|   50  |   0.0010223395021565756   |   0.0009266807281494141   |           0            |
+|  100  |   0.0037775860469563805   |    0.003630197589111328   |   3.6950406777667753   |
+|  200  |    0.014875287769368488   |    0.014300846411132813   |   3.9377760253412575   |
+|  400  |    0.06087879420084635    |    0.05784384841308593    |   4.092612872082332    |
+|  800  |    0.25235291450520836    |    0.23845404716796878    |   4.145169394660909    |
++-------+---------------------------+---------------------------+------------------------+
+```
+
 #### Debug output with `--log`
 
 ```bash
 $ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
 
-🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
+  Tada!: auTomAtic orDer-of-growth Analysis!
     https://github.com/Tada-Project/tada/
-❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓
+  For Help Information Type: pipenv run python tada_a_bigoh.py -h
 
 Start running experiment for size 50 →
 

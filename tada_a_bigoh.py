@@ -281,11 +281,14 @@ def main():
         table, result = tada(arg)
         resultstables.append(table)
         tada_results.update(result)
+        contrast_flag = arg.contrast
     # display results
     for table in resultstables:
         results.display_resultstable(table, tada_arg_list[0].md)
     if len(resultstables) > 1:
         results.compare(*results.greatest_common_size(tada_results))
+        if contrast_flag is True:
+            results.contrast(tada_results)
 
 
 if __name__ == "__main__":
