@@ -1,5 +1,6 @@
 """Run doubling experiments and 'Tada!' you get the time complexity"""
 
+from __future__ import division
 import sys
 import time
 import pandas as pd
