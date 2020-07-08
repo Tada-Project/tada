@@ -127,7 +127,9 @@ def generate_func_from_single_st(function, strategy):
 
 
 # pylint: disable=W0102
-def generate_data(chosen_types, chosen_size, level=1, position=[0], path=None, gen_func=None):
+def generate_data(
+    chosen_types, chosen_size, level=1, position=[0], path=None, gen_func=None
+    ):
     """Generate a list of data values"""
     generated_values = ()
     if chosen_types[0] in TYPES:
