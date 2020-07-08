@@ -23,8 +23,11 @@ def end_message(current_size: int, function: str) -> None:
 
 def output_message(timing_output: str, to_print: bool = False) -> None:
     """Display the timing output as long as it is not empty"""
-    if (timing_output is not None) & (to_print is True):
-        return timing_output
+    if (timing_output != "") & (to_print is True):
+        print(timing_output)
+        return True
+    else:
+        return False
 
 
 def green(msg: str) -> str:
