@@ -7,10 +7,10 @@ init(autoreset=True)
 def display_welcome_message() -> None:
     """Display a welcome message"""
     print()
-    print("🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆 ")
+    print("  Tada!: auTomAtic orDer-of-growth Analysis!  ")
     print("    https://github.com/Tada-Project/tada/")
     print(
-        "❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓"
+        "  For Help Information Type: pipenv run python tada_a_bigoh.py -h  "
     )
     print()
 
