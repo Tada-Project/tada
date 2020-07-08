@@ -42,7 +42,7 @@ def tada(tada_arguments):
     # to_markdown = tada_arguments.md
     # incorrect arguments, exit program
     if did_verify_arguments is False:
-        print(dis.output_message("Incorrect command-line arguments.", to_print))
+        dis.output_message("Incorrect command-line arguments.", to_print)
         sys.exit(constants.INCORRECT_ARGUMENTS)
     # correct arguments, run doubling experiment
     else:
@@ -60,37 +60,29 @@ def tada(tada_arguments):
                 # run the benchmark by using it through python
                 # backfill checker
                 if last_last_size == current_size:
-                    print(
-                        dis.output_message(
-                            f"lastlast: {last_last_size} \ncurrent: {current_size}",
-                            to_print,
-                        )
+                    dis.output_message(
+                        f"lastlast: {last_last_size} \ncurrent: {current_size}",
+                        to_print,
                     )
                     constants.BACKFILL_TIMES = constants.BACKFILL_TIMES + 1
-                    print(
-                        dis.output_message(
-                            dis.green("Backfill Count: ")
-                            + str(constants.BACKFILL_TIMES),
-                            to_print,
-                        )
+                    dis.output_message(
+                        dis.green("Backfill Count: ")
+                        + str(constants.BACKFILL_TIMES),
+                        to_print,
                     )
                 if constants.BACKFILL_TIMES == 2:
                     constants.QUIT_BY_BACKFILL = 1
-                    print(
-                        dis.output_message(
-                            "\nQuit due to backfill twice", to_print
-                        )
+                    dis.output_message(
+                        "\nQuit due to backfill twice", to_print
                     )
                     break
             if "hypothesis" in tada_arguments.types[0]:
                 if current_size >= tada_arguments.maxsize:
                     constants.QUIT_BY_MAX_SIZE = 1
-                    print(
-                        dis.output_message(
-                            "\nQuit due to reaching max size: "
-                            + str(tada_arguments.maxsize),
-                            to_print,
-                        )
+                    dis.output_message(
+                        "\nQuit due to reaching max size: "
+                        + str(tada_arguments.maxsize),
+                        to_print,
                     )
                     break
             print(dis.start_message(current_size, tada_arguments.function))
@@ -101,15 +93,11 @@ def tada(tada_arguments):
                 + constants.PYTHON_EXT
             )
             # display the standard output and error
-            print(
-                dis.output_message(
-                    current_output.decode(constants.UTF8), to_print
-                )
+            dis.output_message(
+                current_output.decode(constants.UTF8), to_print
             )
-            print(
-                dis.output_message(
-                    current_error.decode(constants.UTF8), to_print=True
-                )
+            dis.output_message(
+                current_error.decode(constants.UTF8), to_print=True
             )
             # read the JSON file containing the results
             current_benchmark = pyperf.Benchmark.load(
@@ -130,13 +118,9 @@ def tada(tada_arguments):
             mean = current_benchmark.mean()
             median = current_benchmark.median()
             result.update({current_size: [mean, median]})
-            print(
-                dis.output_message(dis.green("Mean: ") + str(mean), to_print,)
-            )
-            print(
-                dis.output_message(
-                    dis.green("Median: ") + str(median), to_print,
-                )
+            dis.output_message(dis.green("Mean: ") + str(mean), to_print,)
+            dis.output_message(
+                dis.green("Median: ") + str(median), to_print,
             )
             if meanlastround == 0:
                 ratio = 0
@@ -163,22 +147,16 @@ def tada(tada_arguments):
                     end_time = (meanlastround - 0.01 * mean) / 0.99
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
-                print(
-                    dis.output_message(
-                        dis.green("Last end time: ") + str(last_end_time),
-                        to_print,
-                    )
+                dis.output_message(
+                    dis.green("Last end time: ") + str(last_end_time),
+                    to_print,
                 )
                 last_end_time = end_time
-            print(
-                dis.output_message(
-                    dis.green("Current indicator: ") + str(indicator), to_print
-                )
+            dis.output_message(
+                dis.green("Current indicator: ") + str(indicator), to_print
             )
-            print(
-                dis.output_message(
-                    dis.green("Expected end time: ") + str(end_time), to_print
-                )
+            dis.output_message(
+                dis.green("Expected end time: ") + str(end_time), to_print
             )
             results.add_resultstable(
                 resultstable, current_size, mean, median, ratio
@@ -188,16 +166,12 @@ def tada(tada_arguments):
             # go to the next size for the doubling experiment
             last_last_size = last_size
             last_size = current_size
-            print(
-                dis.output_message(
-                    dis.green("End time rate: ") + str(end_time_rate), to_print
-                )
+            dis.output_message(
+                dis.green("End time rate: ") + str(end_time_rate), to_print
             )
-            print(
-                dis.output_message(
-                    dis.green("Last end time rate: ") + str(last_end_time_rate),
-                    to_print,
-                )
+            dis.output_message(
+                dis.green("Last end time rate: ") + str(last_end_time_rate),
+                to_print,
             )
             if last_end_time_rate > end_time_rate and use_backfill:
                 current_size = int(current_size / constants.FACTOR)
@@ -205,31 +179,25 @@ def tada(tada_arguments):
                 current_size = current_size * constants.FACTOR
             # check indicator and quit if smaller than decided indicator
             if indicator < tada_arguments.indicator:
-                print(
-                    dis.output_message(
-                        f"\nQuit due to indicator: {indicator}", to_print
-                    )
+                dis.output_message(
+                    f"\nQuit due to indicator: {indicator}", to_print
                 )
                 break
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
             current_runningtime = time.time() - start_time
             if current_runningtime > tada_arguments.runningtime:
-                print(
-                    dis.output_message(
-                        "\nQuit due to exceeding the max time limit: "
-                        + current_runningtime,
-                        to_print,
-                    )
+                dis.output_message(
+                    "\nQuit due to exceeding the max time limit: "
+                    + current_runningtime,
+                    to_print,
                 )
                 constants.QUIT_BY_MAX_RUNTIME = 1
                 break
             steps += 1
             if steps > tada_arguments.steps:
-                print(
-                    dis.output_message(
-                        f"\nQuit due to end of rounds: {steps}", to_print
-                    )
+                dis.output_message(
+                    f"\nQuit due to end of rounds: {steps}", to_print
                 )
                 constants.QUIT_BY_STEPS = 1
                 break
