@@ -85,3 +85,17 @@ def test_compare(capsys):
     results.compare(size, experiment_data)
     standard_out = capsys.readouterr()
     assert standard_out is not None
+
+
+def test_contrast(capsys):
+    """Test if contrast functions correctly"""
+    input_data = {
+        "insertion_sort": {50: [7.928830701700847e-06, 6.951078582763674e-06]},
+        "bubble_sort": {
+            50: [0.00012845424799804686, 0.00011387420361328127],
+            100: [0.0004576137537760417, 0.00040870740234375],
+        },
+    }
+    results.contrast(input_data)
+    standard_out = capsys.readouterr()
+    assert standard_out is not None
