@@ -127,7 +127,7 @@ def generate_func_from_single_st(function, strategy):
 
 
 # pylint: disable=W0102
-def generate_data(chosen_types, chosen_size, level=1, position=[0], path=None):
+def generate_data(chosen_types, chosen_size, level=1, position=[0], path=None, gen_func=None):
     """Generate a list of data values"""
     generated_values = ()
     if chosen_types[0] in TYPES:
@@ -138,6 +138,8 @@ def generate_data(chosen_types, chosen_size, level=1, position=[0], path=None):
             generated_values = generated_values + (generated_value,)
     elif chosen_types[0] == "hypothesis":
         generated_values = store_data_to_global(path, chosen_size, level, position)
+    elif chosen_types[0] == "custom":
+        generated_values = gen_func(chosen_size)
     return generated_values
 
 
