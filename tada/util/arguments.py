@@ -127,6 +127,13 @@ def parse(args: List[str]) -> Namespace:
         help="Show results table in markdown format",
     )
     parser.add_argument(
+        "--contrast",
+        required=False,
+        action='store_true',
+        default=False,
+        help="Show contrast result table. Only works with multiple experiments",
+    )
+    parser.add_argument(
         "--level",
         required=False,
         type=int,
