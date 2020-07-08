@@ -133,21 +133,21 @@ def parse(args: List[str]) -> Namespace:
     parser.add_argument(
         "--log",
         required=False,
-        action='store_true',
+        action="store_true",
         default=False,
         help="Show log/debug/diagnostic output",
     )
     parser.add_argument(
         "--md",
         required=False,
-        action='store_true',
+        action="store_true",
         default=False,
         help="Show results table in markdown format",
     )
     parser.add_argument(
         "--contrast",
         required=False,
-        action='store_true',
+        action="store_true",
         default=False,
         help="Show contrast result table. Only works with multiple experiments",
     )

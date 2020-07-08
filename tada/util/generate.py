@@ -126,7 +126,7 @@ def generate_func_from_single_st(function, strategy):
     return function
 
 
-# pylint: disable=W0102
+# pylint: disable=W0102, R0913
 def generate_data(
         chosen_types, chosen_size, level=1, position=[0], path=None, gen_func=None
 ):
