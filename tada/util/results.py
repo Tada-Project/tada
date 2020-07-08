@@ -86,6 +86,7 @@ def contrast(results):
     for i in range(min_rounds):
         mean = abs(second_table[i][0] - first_table[i][0])
         median = abs(second_table[i][1] - first_table[i][1])
+        mean_lastround = mean
         if i == 0:
             ratio = 0
         else:
