@@ -262,7 +262,7 @@ def test_configuration_file_correct_experiment_name(
                 "F",
                 "--types",
                 "custom",
-                "--directory",
+                "--data_directory",
                 "DD",
                 "--data_module",
                 "DM",
