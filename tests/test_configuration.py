@@ -293,7 +293,6 @@ def test_configuration_file_correct_datagen_functions(
     assert configuration.get_data_directory(tada_configuration_dict) == correct_directory
     assert configuration.get_data_function(tada_configuration_dict) == correct_function
     assert configuration.get_data_module(tada_configuration_dict) == correct_module
-    )
 
 
 @pytest.mark.parametrize(
