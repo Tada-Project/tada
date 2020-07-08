@@ -3,6 +3,7 @@
 from __future__ import division
 from typing import Union, Dict, List
 from prettytable import PrettyTable
+from . import analysis
 from . import display as dis
 
 
@@ -69,3 +70,35 @@ def compare(size, results: List[Dict[str, List[float]]]) -> None:
         + median_result
         + f" than {experiment_lst[1]}\n"
     )
+
+
+def contrast(results):
+    """Contrast two result tables"""
+    # size, _ = greatest_common_size(results)
+    contrast_table = PrettyTable()
+    contrast_table.field_names = ["Size", "Mean", "Median", "Ratio"]
+    record_keys = list(results.keys())
+    records = list(results.values())
+    rounds = list(records[0].keys())
+    first_table = list(records[0].values())
+    second_table = list(records[1].values())
+    min_rounds = min(len(first_table), len(second_table))
+    for i in range(min_rounds):
+        mean = abs(second_table[i][0] - first_table[i][0])
+        median = abs(second_table[i][1] - first_table[i][1])
+        if i == 0:
+            ratio = 0
+        else:
+            ratio = mean / mean_lastround
+        add_resultstable(contrast_table, rounds[i], mean, median, ratio)
+        mean_lastround = mean
+        big_oh = analysis.analyze_big_oh(ratio)
+    contrast_table.title = (
+        "Contrast for "
+        + dis.blue(record_keys[0])
+        + " and "
+        + dis.red(record_keys[1])
+        + ": "
+        + big_oh
+    )
+    print(contrast_table)
