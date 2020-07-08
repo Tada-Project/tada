@@ -49,6 +49,24 @@ def parse(args: List[str]) -> Namespace:
         help="""Data generation type: hypothesis or parameter types of the function""",
     )
     parser.add_argument(
+        "--data_directory",
+        required=False,
+        type=str,
+        help="Path to the package directory with function to generate data",
+    )
+    parser.add_argument(
+        "--data_module",
+        required=False,
+        type=str,
+        help="Module name with functions to generate data",
+    )
+    parser.add_argument(
+        "--data_function",
+        required=False,
+        type=str,
+        help="Name of the data generation function",
+    )
+    parser.add_argument(
         "--schema",
         required=False,
         type=str,
