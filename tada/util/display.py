@@ -1,12 +1,15 @@
 """Display output for Tada"""
 
 from colorama import init, Fore, Style
+
 init(autoreset=True)
 
 
 def welcome_message() -> None:
     """Display a welcome message"""
-    return "\n\t\tTada!: auTomAtic orDer-of-growth Analysis!\n\t\t  https://github.com/Tada-Project/tada/\n\tFor Help Information Type: pipenv run python tada_a_bigoh.py -h"
+    return "\n\t\tTada!: auTomAtic orDer-of-growth Analysis!\n\t\t  \
+https://github.com/Tada-Project/tada/\n\tFor Help Information Type: pipenv \
+run python tada_a_bigoh.py -h"
 
 
 def start_message(current_size: int, function: str) -> None:
@@ -25,9 +28,10 @@ def output_message(timing_output: str, to_print: bool = False) -> None:
     """Display the timing output as long as it is not empty"""
     if (timing_output != "") & (to_print is True):
         print(timing_output)
-        return True
+        print_out = True
     else:
-        return False
+        print_out = False
+    return print_out
 
 
 def green(msg: str) -> str:
