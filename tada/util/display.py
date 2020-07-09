@@ -1,40 +1,37 @@
 """Display output for Tada"""
 
 from colorama import init, Fore, Style
+
 init(autoreset=True)
 
 
-def display_welcome_message() -> None:
+def welcome_message() -> None:
     """Display a welcome message"""
-    print()
-    print("  Tada!: auTomAtic orDer-of-growth Analysis!  ")
-    print("    https://github.com/Tada-Project/tada/")
-    print(
-        "  For Help Information Type: pipenv run python tada_a_bigoh.py -h  "
-    )
-    print()
+    return "\n\t\tTada!: auTomAtic orDer-of-growth Analysis!\n\t\t  \
+https://github.com/Tada-Project/tada/\n\tFor Help Information Type: pipenv \
+run python tada_a_bigoh.py -h"
 
 
-def display_start_message(current_size: int, function: str) -> None:
+def start_message(current_size: int, function: str) -> None:
     """Display the start message for an experiment"""
-    print(
-        f"\nStart running experiment {blue(function)} for size \
+    return f"\nStart running experiment {blue(function)} for size \
 {cyan(current_size)} →\n"
-    )
 
 
-def display_end_message(current_size: int, function: str) -> None:
+def end_message(current_size: int, function: str) -> None:
     """Display the end message for an experiment"""
-    print(
-        f"\n→ Done running experiment {blue(function)} for size \
+    return f"\n→ Done running experiment {blue(function)} for size \
 {cyan(current_size)}\n"
-    )
 
 
-def display_output(timing_output: str, to_print: bool = False) -> None:
+def output_message(timing_output: str, to_print: bool = False) -> None:
     """Display the timing output as long as it is not empty"""
     if (timing_output != "") & (to_print is True):
         print(timing_output)
+        print_out = True
+    else:
+        print_out = False
+    return print_out
 
 
 def green(msg: str) -> str:
