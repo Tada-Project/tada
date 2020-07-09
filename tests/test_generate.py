@@ -1,7 +1,17 @@
 """Tests for the generate module"""
 
+import pytest
+
 from hypothesis_jsonschema import from_schema
 from tada.util import generate
+
+
+@pytest.fixture
+def generate_int_test():
+    def _generate_int_test(chosen_size):
+        """Generate an int value for testing"""
+        return (int(chosen_size),)
+    return _generate_int_test
 
 
 # pylint: disable=invalid-name
@@ -148,6 +158,21 @@ def test_generate_data_with_hypothesis(tmpdir):
     requested_oath = str(path)
     generated_data = generate.generate_data(
         requested_types, current_size, level, position, requested_oath
+    )
+    assert generated_data is not None
+
+
+def test_generate_data_with_gen_func(tmpdir, generate_int_test):
+    """Checks that requesting a generated hypothesis data returns one"""
+    # assume the doubling experiment is at 100
+    current_size = 100
+    level = 1
+    position = [0]
+    requested_types = ["custom"]
+    path = None
+    gen_fuc = generate_int_test
+    generated_data = generate.generate_data(
+        requested_types, current_size, level, position, path, gen_fuc
     )
     assert generated_data is not None
 
