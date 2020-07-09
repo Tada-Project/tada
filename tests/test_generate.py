@@ -8,6 +8,7 @@ from tada.util import generate
 
 @pytest.fixture
 def generate_int_test():
+    """Generate an int value for testing"""
     def _generate_int_test(chosen_size):
         """Generate an int value for testing"""
         return (int(chosen_size),)
@@ -162,7 +163,8 @@ def test_generate_data_with_hypothesis(tmpdir):
     assert generated_data is not None
 
 
-def test_generate_data_with_gen_func(tmpdir, generate_int_test):
+# pylint: disable=W0621
+def test_generate_data_with_gen_func(generate_int_test):
     """Checks that requesting a generated hypothesis data returns one"""
     # assume the doubling experiment is at 100
     current_size = 100
