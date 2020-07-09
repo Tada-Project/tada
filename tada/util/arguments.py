@@ -49,6 +49,24 @@ def parse(args: List[str]) -> Namespace:
         help="""Data generation type: hypothesis or parameter types of the function""",
     )
     parser.add_argument(
+        "--data_directory",
+        required=False,
+        type=str,
+        help="Path to the package directory with function to generate data",
+    )
+    parser.add_argument(
+        "--data_module",
+        required=False,
+        type=str,
+        help="Module name with functions to generate data",
+    )
+    parser.add_argument(
+        "--data_function",
+        required=False,
+        type=str,
+        help="Name of the data generation function",
+    )
+    parser.add_argument(
         "--schema",
         required=False,
         type=str,
@@ -115,21 +133,21 @@ def parse(args: List[str]) -> Namespace:
     parser.add_argument(
         "--log",
         required=False,
-        action='store_true',
+        action="store_true",
         default=False,
         help="Show log/debug/diagnostic output",
     )
     parser.add_argument(
         "--md",
         required=False,
-        action='store_true',
+        action="store_true",
         default=False,
         help="Show results table in markdown format",
     )
     parser.add_argument(
         "--contrast",
         required=False,
-        action='store_true',
+        action="store_true",
         default=False,
         help="Show contrast result table. Only works with multiple experiments",
     )

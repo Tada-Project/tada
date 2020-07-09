@@ -39,14 +39,26 @@ if __name__ == "__main__":
     func_type = configuration.get_types(tada_configuration_dict)
     # initialize path for schema
     path = None
+    gen_func = None
     # using hypothesis to generate experiment data
     if func_type[0] == "hypothesis":
         # read path from arguments
         path = configuration.get_schema_path(tada_configuration_dict)
+    if func_type[0] == "custom":
+        data_directory = configuration.get_data_directory(tada_configuration_dict)
+        if data_directory != "":
+            package.add_data_sys_path(configuration.get_data_directory(tada_configuration_dict))
+        data_module = importlib.import_module(
+            configuration.get_data_module(tada_configuration_dict)
+        )
+        data_function = getattr(
+            data_module, configuration.get_data_function(tada_configuration_dict)
+        )
+        gen_func = data_function
     level = configuration.get_level(tada_configuration_dict)
     position = configuration.get_position(tada_configuration_dict)
     # generate data
-    data = generate.generate_data(func_type, chosen_size, level, position, path)
+    data = generate.generate_data(func_type, chosen_size, level, position, path, gen_func)
     # run benchmark
     if configuration.get_sortinput(tada_configuration_dict):
         for t in data:

@@ -62,6 +62,24 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
             ]
         ),
         (["--dir", "/a/", "--mod", "m", "--func", "f", "--types", "t"]),
+        (
+            [
+                "--directory",
+                "/a/b/c/",
+                "--module",
+                "m.a.a",
+                "--function",
+                "full.name",
+                "--data_directory",
+                "/a/b/c/",
+                "--data_module",
+                "a.b.b",
+                "--data_function",
+                "testfunc",
+                "--types",
+                "int_list",
+            ]
+        ),
     ],
 )
 def test_directory_argument_verifiable(correct_arguments):

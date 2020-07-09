@@ -250,6 +250,52 @@ def test_configuration_file_correct_experiment_name(
 
 
 @pytest.mark.parametrize(
+    "correct_arguments, correct_directory, correct_module, correct_function",
+    [
+        (
+            [
+                "--directory",
+                "D",
+                "--module",
+                "M",
+                "--function",
+                "F",
+                "--types",
+                "custom",
+                "--data_directory",
+                "DD",
+                "--data_module",
+                "DM",
+                "--data_function",
+                "DF",
+            ],
+            "DD",
+            "DM",
+            "DF",
+        )
+    ],
+)
+# pylint: disable=invalid-name
+# pylint: disable=bad-continuation
+def test_configuration_file_correct_datagen_functions(
+    correct_arguments, correct_directory, correct_module, correct_function, tmpdir
+):
+    """Checks that the configuration file was saved to the directory"""
+    parsed_arguments = arguments.parse_args(correct_arguments)
+    directory_prefix = str(tmpdir) + "/"
+    configuration.save(
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
+    )
+    assert len(tmpdir.listdir()) == 1
+    tada_configuration_dict = configuration.read(
+        directory_prefix + constants.CONFIGURATION
+    )
+    assert configuration.get_data_directory(tada_configuration_dict) == correct_directory
+    assert configuration.get_data_function(tada_configuration_dict) == correct_function
+    assert configuration.get_data_module(tada_configuration_dict) == correct_module
+
+
+@pytest.mark.parametrize(
     "correct_arguments, correct_experiment_info",
     [
         (

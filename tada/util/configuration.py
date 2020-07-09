@@ -10,6 +10,9 @@ WRITE = "w"
 DIRECTORY = "directory"
 FUNCTION = "function"
 MODULE = "module"
+DATADIRECTORY = "data_directory"
+DATAFUNCTION = "data_function"
+DATAMODULE = "data_module"
 TYPES = "types"
 SCHEMA = "schema"
 LEVEL = "level"
@@ -58,6 +61,21 @@ def get_function(current_dictionary: Dict[str, Any]) -> str:
 def get_module(current_dictionary: Dict[str, Any]) -> str:
     """Return the module argument from the provided dictionary"""
     return current_dictionary[MODULE]
+
+
+def get_data_directory(current_dictionary):
+    """Return the directory argument from the provided dictionary"""
+    return current_dictionary[DATADIRECTORY]
+
+
+def get_data_function(current_dictionary: Dict[str, Any]) -> str:
+    """Return the function argument from the provided dictionary"""
+    return current_dictionary[DATAFUNCTION]
+
+
+def get_data_module(current_dictionary: Dict[str, Any]) -> str:
+    """Return the module argument from the provided dictionary"""
+    return current_dictionary[DATAMODULE]
 
 
 def get_types(current_dictionary):

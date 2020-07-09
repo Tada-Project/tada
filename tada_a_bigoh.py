@@ -74,15 +74,13 @@ def tada(tada_arguments):
                         "\nQuit due to backfill twice", to_print
                     )
                     break
-            if "hypothesis" in tada_arguments.types[0]:
-                if current_size >= tada_arguments.maxsize:
-                    constants.QUIT_BY_MAX_SIZE = 1
-                    dis.output_message(
-                        "\nQuit due to reaching max size: "
-                        + str(tada_arguments.maxsize),
-                        to_print,
-                    )
-                    break
+            if current_size >= tada_arguments.maxsize:
+                constants.QUIT_BY_MAX_SIZE = 1
+                dis.display_output(
+                    "\nQuit due to reaching max size: " + str(tada_arguments.maxsize),
+                    to_print,
+                )
+                break
             print(dis.start_message(current_size, tada_arguments.function))
             current_output, current_error = run.run_command(
                 constants.PYTHON_EXEC
