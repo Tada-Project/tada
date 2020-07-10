@@ -7,6 +7,7 @@ from tada.util import configuration
 from tada.util import constants
 
 
+# pylint: disable=not-callable
 @pytest.mark.parametrize(
     "correct_arguments",
     [

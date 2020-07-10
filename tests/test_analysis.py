@@ -5,6 +5,7 @@ import pytest
 from tada.util import analysis
 
 
+# pylint: disable=not-callable
 @pytest.mark.parametrize(
     "chosen_result",
     [0, 2, 4, 8, 15],
