@@ -18,3 +18,9 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
+
+# Page
+nav:
+  - Getting Started: getting-started.md
+  - Using Tada: using-tada.md
+  - Contributing: contributing.md
