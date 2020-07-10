@@ -1,0 +1,20 @@
+# Project information
+site_name: Tada!
+site_description: Tada! Docs
+# site_author:
+# site_url:
+
+# Repository
+repo_name: Tada-Project/tada
+repo_url: https://github.com/Tada-Project/tada
+
+# Configuration
+theme:
+  name: material
+  language: en
+  palette:
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
