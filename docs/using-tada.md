@@ -44,7 +44,7 @@ will just need to specify the additional function with its directory and module
 pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
 ```
 
-#### `Compare` Sample output
+#### `Compare` sample output
 
 ```bash
             Tada!: auTomAtic orDer-of-growth Analysis!
@@ -99,7 +99,7 @@ with the growth ratio analysis of the run time difference:
 pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function  graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --sta rtsize=50  --max=1000 --position 0 --contrast
 ```
 
-#### `--contrast` Sample output
+#### `--contrast` sample output
 
 ```bash
             Tada!: auTomAtic orDer-of-growth Analysis!
@@ -158,7 +158,7 @@ Median: graph_gen is 99.94% faster than graph_gen_BFS
 pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
 ```
 
-#### `--log` Sample output
+#### `--log` sample output
 
 ```bash
             Tada!: auTomAtic orDer-of-growth Analysis!
@@ -200,7 +200,7 @@ Quit due to researched max size
 O(n) linear or O(nlogn) linearithmic
 ```
 
-### Record Tada Experiment Result(s)
+### Record Tada experiment result(s)
 
 If you would like to record the results of the doubling experiment, you can use
 the command line argument `--expect` by specifying with a string of the expected
