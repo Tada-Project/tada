@@ -10,6 +10,7 @@ hypothesis-jsonschema = "*"
 pandas = "*"
 ptable = "*"
 colorama = "*"
+mkdocs-material = "*"
 
 [dev-packages]
 pylint = "*"
