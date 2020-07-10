@@ -15,7 +15,7 @@ git clone https://github.com/Tada-Project/tada.git
 
 Tada uses [Pipenv](https://github.com/pypa/pipenv) for dependency management. In
 order to to install and run Tada correctly, we recommend you to install `Pipenv`
-by running the following command at the prompt of your terminal window::
+by running the following command at the prompt of your terminal window:
 
 ```bash
 pip install pipenv --user
@@ -31,7 +31,8 @@ pipenv install
 
 ## Usage
 
-To get a quick start on the tool, you can run:
+To get a quick start on the tool, you can run the following command at the prompt
+of your terminal window:
 
 ```bash
 pipenv run python tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
@@ -127,34 +128,55 @@ pipenv install <library-name>
 Otherwise, type in the installation command that is appropriate for your own
 chosen installation method.
 
-### Sample Output
+### Full Sample Output
 
 ```bash
 $ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
 
-🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
-    https://github.com/Tada-Project/tada/
-❓  For Help Information Type: pipenv run python tada_a_bigoh.py -h  ❓
+            Tada!: auTomAtic orDer-of-growth Analysis!
+              https://github.com/Tada-Project/tada/
+    For Help Information Type: pipenv run python tada_a_bigoh.py -h
 
-Start running experiment for size 50 →
+Start running experiment insertion_sort for size 50 →
 
 
-→ Done running experiment for size 50
-.
-.
-.
-→ Done running experiment for size 800
+→ Done running experiment insertion_sort for size 50
 
-+------+------------------------+------------------------+--------------------+
-| Size |          Mean          |         Median         |       Ratio        |
-+------+------------------------+------------------------+--------------------+
-|  50  | 6.651357379150391e-06  | 6.475323577880859e-06  |         0          |
-| 100  | 1.2518058905029296e-05 | 1.2485851135253904e-05 | 1.8820307181612135 |
-| 200  | 2.4886978169759115e-05 | 2.4602192504882815e-05 | 1.9880860410203407 |
-| 400  | 5.414438324381511e-05  | 5.275118505859373e-05  | 2.1756109911972965 |
-| 800  | 0.00012107856030273438 | 0.00011683380078125006 | 2.2362164466351206 |
-+------+------------------------+------------------------+--------------------+
-O(n) linear or O(nlogn) linearithmic
+
+Start running experiment insertion_sort for size 100 →
+
+
+→ Done running experiment insertion_sort for size 100
+
+
+Start running experiment insertion_sort for size 200 →
+
+
+→ Done running experiment insertion_sort for size 200
+
+
+Start running experiment insertion_sort for size 400 →
+
+
+→ Done running experiment insertion_sort for size 400
+
+
+Start running experiment insertion_sort for size 800 →
+
+
+→ Done running experiment insertion_sort for size 800
+
++----------------------------------------------------------------------------+
+|            insertion_sort: O(n) linear or O(nlogn) linearithmic            |
++------+------------------------+-----------------------+--------------------+
+| Size |          Mean          |         Median        |       Ratio        |
++------+------------------------+-----------------------+--------------------+
+|  50  | 5.785197134908041e-06  | 5.731858932495116e-06 |         0          |
+| 100  | 1.0431019376627604e-05 | 1.038414334106445e-05 | 1.8030534022231572 |
+| 200  | 2.0322107678222658e-05 | 2.026563378906251e-05 | 1.948237937680151  |
+| 400  | 4.320502110188802e-05  | 4.316913513183593e-05 | 2.126010834407048  |
+| 800  | 9.768264929199219e-05  | 9.820762036132812e-05 | 2.2609096535708795 |
++------+------------------------+-----------------------+--------------------+
 ```
 
 ## Test
