@@ -32,6 +32,7 @@ def test_default_argument_values_incorrect(no_arguments, capsys):
     assert DIRECTORY in standard_err
 
 
+# pylint: disable=not-callable
 @pytest.mark.parametrize(
     "correct_arguments",
     [
