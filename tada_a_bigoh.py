@@ -76,7 +76,7 @@ def tada(tada_arguments):
                     break
             if current_size >= tada_arguments.maxsize:
                 constants.QUIT_BY_MAX_SIZE = 1
-                dis.display_output(
+                dis.output_message(
                     "\nQuit due to reaching max size: " + str(tada_arguments.maxsize),
                     to_print,
                 )
