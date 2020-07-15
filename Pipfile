@@ -23,6 +23,7 @@ flake8 = "*"
 pytest-cov = "*"
 deap = "*"
 python-constraint = "*"
+mkdocs = "*"
 
 [pipenv]
 allow_prereleases = true
