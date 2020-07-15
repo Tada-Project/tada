@@ -10,7 +10,6 @@ hypothesis-jsonschema = "*"
 pandas = "*"
 ptable = "*"
 colorama = "*"
-mkdocs-material = "*"
 
 [dev-packages]
 pylint = "*"
@@ -24,6 +23,7 @@ pytest-cov = "*"
 deap = "*"
 python-constraint = "*"
 mkdocs = "*"
+mkdocs-material = "*"
 
 [pipenv]
 allow_prereleases = true
