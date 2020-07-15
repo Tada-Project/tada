@@ -1,0 +1,612 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Tada! Docs">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+    
+    
+      
+        <title>Getting Started - Tada!: auTomAtic orDer-of-growth Analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fe0cca5b.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a46bcfb3.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#getting-started" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="Tada!: auTomAtic orDer-of-growth Analysis" class="md-header-nav__button md-logo" aria-label="Tada!: auTomAtic orDer-of-growth Analysis">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Tada!: auTomAtic orDer-of-growth Analysis
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Getting Started
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/Tada-Project/tada/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Tada-Project/tada
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Tada!: auTomAtic orDer-of-growth Analysis" class="md-nav__button md-logo" aria-label="Tada!: auTomAtic orDer-of-growth Analysis">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tada!: auTomAtic orDer-of-growth Analysis
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Tada-Project/tada/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Tada-Project/tada
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Getting Started
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Getting Started" class="md-nav__link md-nav__link--active">
+      Getting Started
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#full-sample-output" class="md-nav__link">
+    Full Sample Output
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test" class="md-nav__link">
+    Test
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../using-tada/" title="Using Tada" class="md-nav__link">
+      Using Tada
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contributing/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#full-sample-output" class="md-nav__link">
+    Full Sample Output
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test" class="md-nav__link">
+    Test
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Tada-Project/tada/edit/master/docs/getting-started.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="getting-started">Getting Started</h1>
+<p>"Tada!: auTomAtic orDer-of-growth Analysis" systematically runs a doubling
+experiment to ascertain the likely worst-case order-of-growth function for an
+arbitrary Python function.</p>
+<h2 id="installation">Installation</h2>
+<p>Tada can be directly used from <a href="https://github.com/Tada-Project/tada">GitHub</a> by
+cloning the repository into your local directory:</p>
+<pre><code class="bash">git clone https://github.com/Tada-Project/tada.git
+</code></pre>
+
+<p>Tada uses <a href="https://github.com/pypa/pipenv">Pipenv</a> for dependency management. In
+order to to install and run Tada correctly, we recommend you to install <code>Pipenv</code>
+by running the following command at the prompt of your terminal window:</p>
+<pre><code class="bash">pip install pipenv --user
+</code></pre>
+
+<p>Once you have installed <code>Pipenv</code> successfully, you can install the dependencies
+with the following commmand. Once finished, you will be able to run Tada with
+the virtual environment created:</p>
+<pre><code class="bash">pipenv install
+</code></pre>
+
+<h2 id="usage">Usage</h2>
+<p>To get a quick start on the tool, you can run the following command at the prompt
+of your terminal window:</p>
+<pre><code class="bash">pipenv run python tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
+</code></pre>
+
+<p>To learn more about Tada's checks and defaults, you can type the following command
+in your terminal window and then review the following output:</p>
+<pre><code class="bash">pipenv run python tada_a_bigoh.py -h
+</code></pre>
+
+<pre><code>usage: tada_a_bigoh.py [-h] --directory DIRECTORY [DIRECTORY ...] --module
+                       MODULE [MODULE ...] --function FUNCTION [FUNCTION ...]
+                       --types TYPES [TYPES ...]
+                       [--data_directory DATA_DIRECTORY]
+                       [--data_module DATA_MODULE]
+                       [--data_function DATA_FUNCTION] [--schema SCHEMA]
+                       [--startsize STARTSIZE] [--steps STEPS]
+                       [--runningtime RUNNINGTIME] [--expect EXPECT]
+                       [--backfill] [--indicator INDICATOR]
+                       [--maxsize MAXSIZE] [--sorted] [--log] [--md]
+                       [--contrast] [--level LEVEL]
+                       [--position POSITION [POSITION ...]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --directory DIRECTORY [DIRECTORY ...]
+                        Path to the package directory with functions to
+                        analyze (default: None)
+  --module MODULE [MODULE ...]
+                        Module name with functions to analyze (default: None)
+  --function FUNCTION [FUNCTION ...]
+                        Name of the function to analyze (default: None)
+  --types TYPES [TYPES ...]
+                        Data generation type: hypothesis or parameter types of
+                        the function (default: None)
+  --data_directory DATA_DIRECTORY
+                        Path to the package directory with function to
+                        generate data (default: None)
+  --data_module DATA_MODULE
+                        Module name with functions to generate data (default:
+                        None)
+  --data_function DATA_FUNCTION
+                        Name of the data generation function (default: None)
+  --schema SCHEMA       The path to the JSON schema that describes the data
+                        format (default: None)
+  --startsize STARTSIZE
+                        Starting size of the doubling experiment (default: 1)
+  --steps STEPS         Maximum rounds of the doubling experiment (default:
+                        10)
+  --runningtime RUNNINGTIME
+                        Maximum running time of the doubling experiment
+                        (default: 200)
+  --expect EXPECT       Expected Growth Ratio: O(1) | O(logn) | O(n) |
+                        O(nlogn) | O(n^2) | O(n^3) | O(c^n). By using this
+                        argument, the experiment result will be stored in a
+                        csv file (default: None)
+  --backfill            Enable backfill to shrink experiments size according
+                        to the Predicted True Value (default: False)
+  --indicator INDICATOR
+                        Indicator value (default: 0.1)
+  --maxsize MAXSIZE     Maximum size of the doubling experiment (default:
+                        1500)
+  --sorted              Enable input data to be sorted (default: False)
+  --log                 Show log/debug/diagnostic output (default: False)
+  --md                  Show results table in markdown format (default: False)
+  --contrast            Show contrast result table. Only works with multiple
+                        experiments (default: False)
+  --level LEVEL         The level of nested data structure to apply doubling
+                        experiment (default: 1)
+  --position POSITION [POSITION ...]
+                        The position of input data to double in the
+                        multivariable doubling experiment. Must be the last
+                        argument (default: [0])
+
+Sample usage: pipenv run python tada_a_bigoh.py --directory
+/Users/myname/projectdirectory --module modulename.file --function
+function_name --types hypothesis
+</code></pre>
+
+<p>It is worth noting that when the provided function is relied on an external Python
+library, it is likely that Tada might not have this dependency, and thus, it might
+cause an error when running the experiment. You can simply resolve this issue
+by installing the required dependencies. Type in this command if you are using
+<code>Pipenv</code>:</p>
+<pre><code class="bash">pipenv install &lt;library-name&gt;
+</code></pre>
+
+<p>Otherwise, type in the installation command that is appropriate for your own
+chosen installation method.</p>
+<h3 id="full-sample-output">Full Sample Output</h3>
+<pre><code class="bash">$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
+
+            Tada!: auTomAtic orDer-of-growth Analysis!
+              https://github.com/Tada-Project/tada/
+    For Help Information Type: pipenv run python tada_a_bigoh.py -h
+
+Start running experiment insertion_sort for size 50 →
+
+
+→ Done running experiment insertion_sort for size 50
+
+
+Start running experiment insertion_sort for size 100 →
+
+
+→ Done running experiment insertion_sort for size 100
+
+
+Start running experiment insertion_sort for size 200 →
+
+
+→ Done running experiment insertion_sort for size 200
+
+
+Start running experiment insertion_sort for size 400 →
+
+
+→ Done running experiment insertion_sort for size 400
+
+
+Start running experiment insertion_sort for size 800 →
+
+
+→ Done running experiment insertion_sort for size 800
+
++----------------------------------------------------------------------------+
+|            insertion_sort: O(n) linear or O(nlogn) linearithmic            |
++------+------------------------+-----------------------+--------------------+
+| Size |          Mean          |         Median        |       Ratio        |
++------+------------------------+-----------------------+--------------------+
+|  50  | 5.785197134908041e-06  | 5.731858932495116e-06 |         0          |
+| 100  | 1.0431019376627604e-05 | 1.038414334106445e-05 | 1.8030534022231572 |
+| 200  | 2.0322107678222658e-05 | 2.026563378906251e-05 | 1.948237937680151  |
+| 400  | 4.320502110188802e-05  | 4.316913513183593e-05 | 2.126010834407048  |
+| 800  | 9.768264929199219e-05  | 9.820762036132812e-05 | 2.2609096535708795 |
++------+------------------------+-----------------------+--------------------+
+</code></pre>
+
+<h2 id="test">Test</h2>
+<p>You can run the test suite for Tada's functions by typing the following in your
+terminal window:</p>
+<pre><code class="bash">pipenv run pytest
+</code></pre>
+
+<p>If you want to collect the coverage of the provided test suite, then you can
+run:</p>
+<pre><code class="bash">pipenv run pytest --cov-config pytest.cov --cov
+</code></pre>
+
+<p>If you want to collect the coverage of the provided test suite and see what
+lines of code are not covered, then you can run:</p>
+<pre><code class="bash">pipenv run pytest --cov-config pytest.cov --cov --cov-report term-missing
+</code></pre>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+        
+          <a href="../using-tada/" title="Using Tada" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Using Tada
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="../assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
