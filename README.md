@@ -356,9 +356,8 @@ You can use or test Tada in conjunction with generation functions in this
 repository by using the `--types custom` argument followed by `--data_directory`,
 `--data_module`, and `--data_function`:
 
-
 ```bash
-$ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
+pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
 ```
 
 ### Recording Tada Experiment Result(s)
