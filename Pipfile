@@ -25,8 +25,8 @@ python-constraint = "*"
 mkdocs = "*"
 mkdocs-material = "*"
 
+[requires]
+python_version = "3.7"
+
 [pipenv]
 allow_prereleases = true
-
-[requires]
-python_version = "3.6"
