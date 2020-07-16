@@ -21,6 +21,7 @@ theme:
 
 # Page
 nav:
+  - Tada: index.md
   - Getting Started: getting-started.md
   - Using Tada: using-tada.md
   - Contributing: contributing.md
