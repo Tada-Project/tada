@@ -1,3 +1,5 @@
 [build]
     command = "bash netlify-docs.sh"
     publish = "site"
+    # only build when files in docs are being updated
+    ignore = "git diff --quiet HEAD^ HEAD docs/"
