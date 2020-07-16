@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
+pip install pipenv
 
-
-pipenv shell
+pipenv install --dev
 mkdocs build
