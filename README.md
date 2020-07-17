@@ -348,6 +348,18 @@ Quit due to researched max size
 O(n) linear or O(nlogn) linearithmic
 ```
 
+### Tada-Generate-Functions
+
+We have provided an extensive library of data generation functions in
+[Tada-Generate-Functions repository](https://github.com/Tada-Project/Tada-Generate-Functions).
+You can use or test Tada in conjunction with generation functions in this
+repository by using the `--types custom` argument followed by `--data_directory`,
+`--data_module`, and `--data_function`:
+
+```bash
+pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
+```
+
 ### Recording Tada Experiment Result(s)
 
 If you would like to record the results of the doubling experiment, you can use
