@@ -8,7 +8,7 @@ init(autoreset=True)
 def welcome_message() -> None:
     """Display a welcome message"""
     return "\n\t\tTada!: auTomAtic orDer-of-growth Analysis!\n\t\t  \
-https://github.com/Tada-Project/tada/\n\tFor Help Information Type: \
+https://github.com/Tada-Project/tada/\n\t  For Help Information Type: \
 python tada_a_bigoh.py -h"
 
 
