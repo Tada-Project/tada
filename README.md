@@ -212,9 +212,9 @@ You can use or test Tada in conjunction with functions in this repository.
 ```bash
 $ python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
 
-		  Tada!: auTomAtic orDer-of-growth Analysis!
-		    https://github.com/Tada-Project/tada/
-	  For Help Information Type: python tada_a_bigoh.py -h
+      Tada!: auTomAtic orDer-of-growth Analysis!
+        https://github.com/Tada-Project/tada/
+    For Help Information Type: python tada_a_bigoh.py -h
 
 Start running experiment for size 50 →
 
@@ -248,9 +248,9 @@ will just need to specify the additional function with it's directory and module
 ```bash
 $ python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
 
-		  Tada!: auTomAtic orDer-of-growth Analysis!
-		    https://github.com/Tada-Project/tada/
-	  For Help Information Type: python tada_a_bigoh.py -h
+      Tada!: auTomAtic orDer-of-growth Analysis!
+        https://github.com/Tada-Project/tada/
+    For Help Information Type: python tada_a_bigoh.py -h
 
 Start running experiment insertion_sort for size 25 →
 .
@@ -298,9 +298,9 @@ with the growth ratio analysis of the run time difference:
 ```bash
 $ python tada_a_bigoh.py --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function  graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --sta rtsize=50  --max=1000 --position 0 --contrast
 
-		  Tada!: auTomAtic orDer-of-growth Analysis!
-		    https://github.com/Tada-Project/tada/
-	  For Help Information Type: python tada_a_bigoh.py -h
+      Tada!: auTomAtic orDer-of-growth Analysis!
+        https://github.com/Tada-Project/tada/
+    For Help Information Type: python tada_a_bigoh.py -h
 
 Start running experiment graph_gen for size 25 →
 .
@@ -353,9 +353,9 @@ Median: graph_gen is 99.94% faster than graph_gen_BFS
 ```bash
 $ python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
 
-		  Tada!: auTomAtic orDer-of-growth Analysis!
-		    https://github.com/Tada-Project/tada/
-	  For Help Information Type: python tada_a_bigoh.py -h
+      Tada!: auTomAtic orDer-of-growth Analysis!
+        https://github.com/Tada-Project/tada/
+    For Help Information Type: python tada_a_bigoh.py -h
 
 Start running experiment for size 50 →
 
