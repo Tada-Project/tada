@@ -11,7 +11,7 @@ tool, its provided test suite, and more.
 
 ## Installing and Testing Tada
 
-- Operating system: macOS / OS X · Linux · Windows (Cygwin, MinGW, Visual Studio)
+- Operating system: Unix/Linux · macOS/OS X · Windows
 - Dependency Management: [Pipenv](https://github.com/pypa/pipenv) · [Poetry](https://github.com/python-poetry/poetry)
 
 ### Pipenv
@@ -456,10 +456,16 @@ command, substituting the name of your feature for the word `feature-name`.
 - `git checkout master`
 - `git push -u origin feature-name`
 
-To install development dependencies, type the following command in the terminal:
+To install development dependencies, type the following commands in the terminal:
 
-```
+```bash
 pipenv install --dev
+```
+
+or
+
+```bash
+poetry install
 ```
 
 Finally, you should open a pull request on the GitHub repository for the new
