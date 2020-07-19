@@ -13,8 +13,6 @@ hypothesis-jsonschema = "*"
 pandas = "*"
 ptable = "*"
 colorama = "*"
-pipenv-poetry-migrate = "*"
-black = "^19.10b0"
 
 [tool.poetry.dev-dependencies]
 pylint = "*"
@@ -24,6 +22,7 @@ pytest-benchmark = "*"
 codecov = "*"
 flake8 = "*"
 pytest-cov = "*"
+black = "^19.10b0"
 
 [build-system]
 requires = ["poetry>=0.12"]
