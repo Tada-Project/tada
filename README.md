@@ -212,9 +212,9 @@ You can use or test Tada in conjunction with functions in this repository.
 ```bash
 $ python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
 
-🎆  Tada!: auTomAtic orDer-of-growth Analysis! 🎆
-    https://github.com/Tada-Project/tada/
-❓  For Help Information Type: python tada_a_bigoh.py -h  ❓
+		  Tada!: auTomAtic orDer-of-growth Analysis!
+		    https://github.com/Tada-Project/tada/
+	  For Help Information Type: python tada_a_bigoh.py -h
 
 Start running experiment for size 50 →
 
@@ -225,14 +225,16 @@ Start running experiment for size 50 →
 .
 → Done running experiment for size 800
 
++-----------------------------------------------------------------------------+
+|             insertion_sort: O(n) linear or O(nlogn) linearithmic            |
 +------+------------------------+------------------------+--------------------+
 | Size |          Mean          |         Median         |       Ratio        |
 +------+------------------------+------------------------+--------------------+
-|  50  | 6.651357379150391e-06  | 6.475323577880859e-06  |         0          |
-| 100  | 1.2518058905029296e-05 | 1.2485851135253904e-05 | 1.8820307181612135 |
-| 200  | 2.4886978169759115e-05 | 2.4602192504882815e-05 | 1.9880860410203407 |
-| 400  | 5.414438324381511e-05  | 5.275118505859373e-05  | 2.1756109911972965 |
-| 800  | 0.00012107856030273438 | 0.00011683380078125006 | 2.2362164466351206 |
+|  50  | 5.254574352518718e-06  | 5.080362350463869e-06  |         0          |
+| 100  | 1.013776767171224e-05  | 1.0109862487792971e-05 | 1.929322337375019  |
+| 200  | 2.041813344523112e-05  | 1.9827050170898433e-05 | 2.0140660258179457 |
+| 400  | 4.1289982617187504e-05 | 4.0720488891601556e-05 | 2.0222212146836194 |
+| 800  | 9.176736091308593e-05  | 9.089502807617187e-05  |  2.22250907111999  |
 +------+------------------------+------------------------+--------------------+
 O(n) linear or O(nlogn) linearithmic
 ```
@@ -246,10 +248,9 @@ will just need to specify the additional function with it's directory and module
 ```bash
 $ python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
 
-  Tada!: auTomAtic orDer-of-growth Analysis!
-    https://github.com/Tada-Project/tada/
-  For Help Information Type: python tada_a_bigoh.py -h
-
+		  Tada!: auTomAtic orDer-of-growth Analysis!
+		    https://github.com/Tada-Project/tada/
+	  For Help Information Type: python tada_a_bigoh.py -h
 
 Start running experiment insertion_sort for size 25 →
 .
@@ -297,11 +298,9 @@ with the growth ratio analysis of the run time difference:
 ```bash
 $ python tada_a_bigoh.py --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function  graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --sta rtsize=50  --max=1000 --position 0 --contrast
 
-
-Tada!: auTomAtic orDer-of-growth Analysis!
-  https://github.com/Tada-Project/tada/
-For Help Information Type: python tada_a_bigoh.py -h
-
+		  Tada!: auTomAtic orDer-of-growth Analysis!
+		    https://github.com/Tada-Project/tada/
+	  For Help Information Type: python tada_a_bigoh.py -h
 
 Start running experiment graph_gen for size 25 →
 .
@@ -354,9 +353,9 @@ Median: graph_gen is 99.94% faster than graph_gen_BFS
 ```bash
 $ python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
 
-  Tada!: auTomAtic orDer-of-growth Analysis!
-    https://github.com/Tada-Project/tada/
-  For Help Information Type: python tada_a_bigoh.py -h
+		  Tada!: auTomAtic orDer-of-growth Analysis!
+		    https://github.com/Tada-Project/tada/
+	  For Help Information Type: python tada_a_bigoh.py -h
 
 Start running experiment for size 50 →
 
@@ -372,6 +371,7 @@ expected end time: 6.756377457682293e-06
 
 end time rate: 1
 last end time rate: 1
+
 Start running experiment for size 100 →
 .
 .
@@ -380,17 +380,19 @@ Start running experiment for size 100 →
 
 end time rate: 1.0977868448462222
 last end time rate: 1.0104045516442501
-Quit due to researched max size
+
+Quit due to reaching max size: 1500
++-----------------------------------------------------------------------------+
+|             insertion_sort: O(n) linear or O(nlogn) linearithmic            |
 +------+------------------------+------------------------+--------------------+
 | Size |          Mean          |         Median         |       Ratio        |
 +------+------------------------+------------------------+--------------------+
-|  50  | 6.860612288411459e-06  | 6.584678009033201e-06  |         0          |
-| 100  | 1.3285847186279297e-05 | 1.2845127746582033e-05 | 1.9365395722362808 |
-| 200  | 2.7495347680664065e-05 | 2.698630590820313e-05  | 2.069521596564753  |
-| 400  | 5.5284626326497395e-05 |  5.4273513671875e-05   | 2.010690207251897  |
-| 800  | 0.00011595141430664063 | 0.00011436475048828127 | 2.0973536769853545 |
+|  50  | 5.108458277893066e-06  | 4.995336715698241e-06  |         0          |
+| 100  | 9.719848541259765e-06  | 9.592753784179686e-06  | 1.9026970589781584 |
+| 200  | 1.9103883695475262e-05 | 1.881045025634766e-05  | 1.9654507592768782 |
+| 400  | 4.1088669527180994e-05 | 4.0323755249023436e-05 | 2.1508019092951667 |
+| 800  |    8.721809375e-05     | 8.493975268554687e-05  | 2.1226799201250226 |
 +------+------------------------+------------------------+--------------------+
-O(n) linear or O(nlogn) linearithmic
 ```
 
 ### Tada-Generate-Functions
