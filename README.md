@@ -9,7 +9,7 @@ ascertain the likely worst-case order-of-growth function for an arbitrary Python
 function. This documentation provides a brief overview about how to run the
 tool, its provided test suite, and more.
 
-## Installing and Testing Tada
+## Install Tada
 
 - Operating system: Unix/Linux · macOS/OS X · Windows
 - Dependency Management: [Pipenv](https://github.com/pypa/pipenv) · [Poetry](https://github.com/python-poetry/poetry)
@@ -51,7 +51,7 @@ You can activate the `poetry` shell with this command:
 poetry shell
 ```
 
-### Run command
+### Run Command
 
 There are multiple ways to use either `pipenv` or `poetry` to run and test
 Tada. You can have `pipenv run` or `poetry run` followed by the command like
@@ -66,7 +66,7 @@ You can also just spawn a shell with the virtualenv activated by either `pipenv`
 or `poetry`. For ease of reading, the commands provided in the documentation will
 just be the ones that you would run in the shell.
 
-## Using Tada
+## Use Tada
 
 ### Checks
 
@@ -239,7 +239,7 @@ Start running experiment for size 50 →
 O(n) linear or O(nlogn) linearithmic
 ```
 
-#### Comparing two algorithms' performance with Tada
+#### Compare two algorithms' performance with Tada
 
 If you would like to run Tada to compare the performance of two functions, you
 will just need to specify the additional function with it's directory and module
@@ -407,7 +407,7 @@ repository by using the `--types custom` argument followed by `--data_directory`
 python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
 ```
 
-### Recording Tada Experiment Result(s)
+### Record Tada Experiment Result(s)
 
 If you would like to record the results of the doubling experiment, you can use
 the command line argument `--expect` by specifying with a string of the expected
@@ -448,7 +448,7 @@ To run with experiment data collected, add `expect` into the command like this:
 python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --expect "O(n)"
 ```
 
-## Adding New Features to Tada
+## Add New Features to Tada
 
 You can follow these steps to add a new feature if you are already a
 collaborator on the project. First, you should type the following
@@ -473,9 +473,14 @@ poetry install
 Finally, you should open a pull request on the GitHub repository for the new
 branch that you have created. This pull request should describe the new feature
 that you are adding and give examples of how to run it on the command line.
+Of course, if you are not a collaborator on this project, then you will need to
+fork the repository, add your new feature, document and test it as appropriate,
+and then create a pull request similarily.
 
 We highly recommend you to provide tests along with the feature that you
 implemented and you should not break the existing test cases or features.
+
+### Test Tada
 
 To run the test suite for Tada's functions by typing the following in your
 terminal window:
@@ -497,10 +502,6 @@ lines of code are not covered, then you can run:
 ```bash
 pytest --cov-config pytest.cov --cov --cov-report term-missing
 ```
-
-Of course, if you are not a collaborator on this project, then you will need to
-fork the repository, add your new feature, document and test it as appropriate,
-and then create a pull request similarily.
 
 ## Future Works
 
