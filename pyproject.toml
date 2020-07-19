@@ -2,7 +2,11 @@
 name = "tada"
 version = "0.1.0"
 description = ""
-authors = ["enpuyou <youe2@allegheny.edu>"]
+authors = [
+    "enpuyou <youe2@allegheny.edu>",
+    "gkapfham <gkapfham@allegheny.edu>",
+    "Lancasterwu <wuj@allegheny.edu>"
+    ]
 license = "GPL-3.0"
 
 [tool.poetry.dependencies]
