@@ -11,24 +11,60 @@ tool, its provided test suite, and more.
 
 ## Installing and Testing Tada
 
-This program uses [Pipenv](https://github.com/pypa/pipenv) for installation.
-Once you have installed `pipenv` you can run the test suite for Tada's functions
-by typing the following in your terminal window:
+- Operating system: macOS / OS X · Linux · Windows (Cygwin, MinGW, Visual Studio)
+- Dependency Management: [Pipenv](https://github.com/pypa/pipenv) · [Poetry](https://github.com/python-poetry/poetry)
+
+### Pipenv
+
+If you haven't done so already, you can run the following command to install
+`pipenv` on your local machine:
+
+```bash
+pip install pipenv
+```
+
+Once you have installed `pipenv`, you can then run the test suite for Tada's
+functions by typing the following in your terminal window:
 
 - `pipenv install`
-- `pipenv run pytest`
 
 You can also activate the `pipenv` shell by running this command: `pipenv shell`
 
-If you want to collect the coverage of the provided test suite, then you can
-run:
+### Poetry
 
-- `pipenv run pytest --cov-config pytest.cov --cov`
+Similarly, you can run the following command to install `poetry` on your local
+machine:
 
-If you want to collect the coverage of the provided test suite and see what
-lines of code are not covered, then you can run:
+```bash
+pip install poetry
+```
 
-- `pipenv run pytest --cov-config pytest.cov --cov --cov-report term-missing`
+To install dependencies with `poetry`, you can just run:
+
+```bash
+poetry install --no-dev
+```
+
+You can activate the `poetry` shell with this command:
+
+```bash
+poetry shell
+```
+
+### Run command
+
+There are multiple ways to use either `pipenv` or `poetry` to run and test
+Tada. You can have `pipenv run` or `poetry run` followed by the command like
+this:
+
+```bash
+pipenv run python
+poetry run python
+```
+
+You can also just spawn a shell with the virtualenv activated by either `pipenv`
+or `poetry`. For ease of reading, the commands provided in the documentation will
+just be the ones that you would run in the shell.
 
 ## Using Tada
 
@@ -404,14 +440,12 @@ pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speed
 ## Adding New Features to Tada
 
 You can follow these steps to add a new feature if you are already a
-collaborator on the project. If you want to add a new feature, please ensure
-that it is accompanied by high coverage test cases and that you do not break any
-of the existing test cases or features. First, you should type the following
-command, substituting the name of your feature for the word `featurename`.
+collaborator on the project. First, you should type the following
+command, substituting the name of your feature for the word `feature-name`.
 
-- `git checkout -b new-featurename`
+- `git checkout -b feature-name`
 - `git checkout master`
-- `git push -u origin new-featurename`
+- `git push -u origin feature-name`
 
 To install development dependencies, type the following command in the terminal:
 
@@ -421,10 +455,35 @@ pipenv install --dev
 
 Finally, you should open a pull request on the GitHub repository for the new
 branch that you have created. This pull request should describe the new feature
-that you are adding and give examples of how to run it on the command line. Of
-course, if you are not a collaborator on this project, then you will need to
+that you are adding and give examples of how to run it on the command line.
+
+We highly recommend you to provide tests along with the feature that you
+implemented and you should not break the existing test cases or features.
+
+To run the test suite for Tada's functions by typing the following in your
+terminal window:
+
+```bash
+pytest
+```
+
+If you want to collect the coverage of the provided test suite, then you can
+run:
+
+```bash
+pytest --cov-config pytest.cov --cov
+```
+
+If you want to collect the coverage of the provided test suite and see what
+lines of code are not covered, then you can run:
+
+```bash
+pytest --cov-config pytest.cov --cov --cov-report term-missing
+```
+
+Of course, if you are not a collaborator on this project, then you will need to
 fork the repository, add your new feature, document and test it as appropriate,
-and then create a pull request.
+and then create a pull request similarily.
 
 ## Future Works
 
