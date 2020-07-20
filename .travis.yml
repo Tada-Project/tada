@@ -31,7 +31,7 @@ cache: pip
 # --> lint the test suites with flake8
 # --> lint the functions with pylint
 # --> lint the tests with pylint
-# --> lint the README documentation with mdl
+# --> lint the README and Docs documentation with mdl
 script:
   - pipenv run pytest --cov-config pytest.cov --cov
   - pipenv run flake8 tada
@@ -39,6 +39,7 @@ script:
   - pipenv run pylint tada
   - pipenv run pylint tests
   - mdl README.md
+  - mdl docs
 
 # report coverage information to CodeCov
 after_success:

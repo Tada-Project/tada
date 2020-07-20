@@ -2,6 +2,11 @@
 
 [![Build Status](https://api.travis-ci.org/Tada-Project/tada.svg?branch=master)](https://travis-ci.org/Tada-Project/tada) [![codecov.io](https://codecov.io/github/Tada-Project/tada/coverage.svg?branch=master)](http://codecov.io/github/Tada-Project/tada?branch=master) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-orange.svg)](https://www.python.org/)
 
+<a href="https://www.netlify.com">
+  <img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" />
+</a>
+
+
 This repository contains the source code and usage instructions for a tool
 called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in the
 Python 3 language. The tool systematically runs a doubling experiment to
@@ -346,18 +351,6 @@ Quit due to researched max size
 | 800  | 0.00011595141430664063 | 0.00011436475048828127 | 2.0973536769853545 |
 +------+------------------------+------------------------+--------------------+
 O(n) linear or O(nlogn) linearithmic
-```
-
-### Tada-Generate-Functions
-
-We have provided an extensive library of data generation functions in
-[Tada-Generate-Functions repository](https://github.com/Tada-Project/Tada-Generate-Functions).
-You can use or test Tada in conjunction with generation functions in this
-repository by using the `--types custom` argument followed by `--data_directory`,
-`--data_module`, and `--data_function`:
-
-```bash
-pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
 ```
 
 ### Recording Tada Experiment Result(s)
