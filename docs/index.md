@@ -430,4 +430,3 @@ suite, then please create an issue associated with this Git repository using the
 "Issues" link at the top of this site. The contributors to Tada will do all that
 they can to resolve your issue and ensure that all of its features and the test
 suite work well in your development environment.
-
