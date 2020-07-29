@@ -3,17 +3,17 @@
 from __future__ import division
 from typing import Union, Dict, List
 from prettytable import PrettyTable
+import matplotlib.pyplot as plt
 from . import analysis
 from . import display as dis
-import matplotlib.pyplot as plt
 
 
 def add_resultstable(
-        resultstable: PrettyTable,
-        current_size: int,
-        mean: float,
-        median: float,
-        ratio: Union[int, float],
+    resultstable: PrettyTable,
+    current_size: int,
+    mean: float,
+    median: float,
+    ratio: Union[int, float],
 ) -> None:
     """Add elements into the resultstable."""
     resultstable.add_row([current_size, mean, median, ratio])
@@ -107,61 +107,111 @@ def contrast(results):
 
 
 def linegraph_viz(results):
+    """visualiza as one plot"""
     records = list(results.values())
     mean_list = []
     median_list = []
     mean_list_2 = []
     median_list_2 = []
-    plt.ylabel('Time')
-    plt.xlabel('Size')
+    plt.ylabel("Time")
+    plt.xlabel("Size")
     for time in list(records[0].values()):
         mean_list.append(time[0])
         median_list.append(time[1])
-    plt.scatter(records[0].keys(), mean_list, color='blue')
-    plt.plot(records[0].keys(), mean_list, 'o--', color='blue', label=list(results.keys())[0] + " mean")
-    plt.scatter(records[0].keys(), median_list, color='red')
-    plt.plot(records[0].keys(), median_list, 'o--', color='red', label=list(results.keys())[0] + " median")
+    plt.scatter(records[0].keys(), mean_list, color="blue")
+    plt.plot(
+        records[0].keys(),
+        mean_list,
+        "o--",
+        color="blue",
+        label=list(results.keys())[0] + " mean",
+    )
+    plt.scatter(records[0].keys(), median_list, color="red")
+    plt.plot(
+        records[0].keys(),
+        median_list,
+        "o--",
+        color="red",
+        label=list(results.keys())[0] + " median",
+    )
     if len(records) == 2:
         for time in list(records[1].values()):
             mean_list_2.append(time[0])
             median_list_2.append(time[1])
-        plt.scatter(records[1].keys(), mean_list_2, color='yellow')
-        plt.plot(records[1].keys(), mean_list_2, 'o--', color='yellow', label=list(results.keys())[1] + " mean_second")
-        plt.scatter(records[1].keys(), median_list_2, color='green')
-        plt.plot(records[1].keys(), median_list_2, 'o--', color='green', label=list(results.keys())[1] + " median_second")
+        plt.scatter(records[1].keys(), mean_list_2, color="yellow")
+        plt.plot(
+            records[1].keys(),
+            mean_list_2,
+            "o--",
+            color="yellow",
+            label=list(results.keys())[1] + " mean_second",
+        )
+        plt.scatter(records[1].keys(), median_list_2, color="green")
+        plt.plot(
+            records[1].keys(),
+            median_list_2,
+            "o--",
+            color="green",
+            label=list(results.keys())[1] + " median_second",
+        )
     plt.legend()
-    plt.grid(color='0.95')
+    plt.grid(color="0.95")
     plt.suptitle("Growth Curve")
     plt.show()
 
 
 def multiple_linegraph_viz(results):
+    """visualiza as multiple plots"""
     records = list(results.values())
     mean_list = []
     median_list = []
     mean_list_2 = []
     median_list_2 = []
-    plt.ylabel('Time')
-    plt.xlabel('Size')
+    plt.ylabel("Time")
+    plt.xlabel("Size")
     plt.subplot(1, 2, 1)
     plt.title(list(results.keys())[0])
     for time in list(records[0].values()):
         mean_list.append(time[0])
         median_list.append(time[1])
-    plt.scatter(records[0].keys(), mean_list, color='blue')
-    plt.plot(records[0].keys(), mean_list, 'o--', color='blue', label=list(results.keys())[0] + " mean")
-    plt.scatter(records[0].keys(), median_list, color='red')
-    plt.plot(records[0].keys(), median_list, 'o--', color='red', label=list(results.keys())[0] + " median")
+    plt.scatter(records[0].keys(), mean_list, color="blue")
+    plt.plot(
+        records[0].keys(),
+        mean_list,
+        "o--",
+        color="blue",
+        label=list(results.keys())[0] + " mean",
+    )
+    plt.scatter(records[0].keys(), median_list, color="red")
+    plt.plot(
+        records[0].keys(),
+        median_list,
+        "o--",
+        color="red",
+        label=list(results.keys())[0] + " median",
+    )
     plt.subplot(1, 2, 2)
     plt.title(list(results.keys())[1])
     for time in list(records[1].values()):
         mean_list_2.append(time[0])
         median_list_2.append(time[1])
-    plt.scatter(records[1].keys(), mean_list_2, color='yellow')
-    plt.plot(records[1].keys(), mean_list_2, 'o--', color='yellow', label=list(results.keys())[1] + " mean_second")
-    plt.scatter(records[1].keys(), median_list_2, color='green')
-    plt.plot(records[1].keys(), median_list_2, 'o--', color='green', label=list(results.keys())[1] + " median_second")
+    plt.scatter(records[1].keys(), mean_list_2, color="yellow")
+    plt.plot(
+        records[1].keys(),
+        mean_list_2,
+        "o--",
+        color="yellow",
+        label=list(results.keys())[1] + " mean_second",
+    )
+    plt.scatter(records[1].keys(), median_list_2, color="green")
+    plt.plot(
+        records[1].keys(),
+        median_list_2,
+        "o--",
+        color="green",
+        label=list(results.keys())[1] + " median_second",
+    )
     plt.legend()
-    plt.grid(color='0.95')
+    plt.grid(color="0.95")
     plt.suptitle("Growth Curve")
     plt.show()
