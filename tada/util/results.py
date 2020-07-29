@@ -9,11 +9,11 @@ from . import display as dis
 
 
 def add_resultstable(
-    resultstable: PrettyTable,
-    current_size: int,
-    mean: float,
-    median: float,
-    ratio: Union[int, float],
+        resultstable: PrettyTable,
+        current_size: int,
+        mean: float,
+        median: float,
+        ratio: Union[int, float],
 ) -> None:
     """Add elements into the resultstable."""
     resultstable.add_row([current_size, mean, median, ratio])
