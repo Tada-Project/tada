@@ -22,9 +22,6 @@ from tada.util import results
 
 
 def tada(tada_arguments):
-    # dirname = os.path.dirname
-    # os.chdir(dirname(__file__))
-
     start_time = time.time()
     # read and verify the command-line arguments
     did_verify_arguments = arguments.verify(tada_arguments)
@@ -39,6 +36,7 @@ def tada(tada_arguments):
     total_loop_list = []
     sum_of_loops = 0
     use_backfill = tada_arguments.backfill
+    original_dir = os.getcwd()
     tada_arguments.directory = os.path.abspath(tada_arguments.directory)
     if tada_arguments.data_directory:
         tada_arguments.data_directory = os.path.abspath(tada_arguments.data_directory)
@@ -294,8 +292,9 @@ def tada(tada_arguments):
                 index=[1],
             )
             # store to csv
+            results_file_path = os.path.join(os.sep, original_dir, constants.EXPERIMENT)
             df_new.to_csv(
-                constants.EXPERIMENT, index=False, header=False, mode="a"
+                results_file_path, index=False, header=False, mode="a"
             )
         resultstable.title = dis.blue(f"{tada_arguments.function}: ") + big_oh
         return resultstable, {tada_arguments.function: result}
@@ -324,4 +323,4 @@ def tada_main():
 
 
 if __name__ == "__main__":
-    main()
+    tada_main()
