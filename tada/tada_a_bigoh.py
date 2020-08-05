@@ -49,7 +49,6 @@ def tada(tada_arguments):  # noqa: C901
         tada_arguments.schema = os.path.abspath(tada_arguments.schema)
     # display debug output
     to_print = tada_arguments.log
-    print(tada_arguments)
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         dis.output_message("Incorrect command-line arguments.", to_print)
