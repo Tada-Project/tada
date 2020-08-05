@@ -1,12 +1,13 @@
 """Run doubling experiments and 'Tada!' you get the time complexity"""
 
 from __future__ import division
-import sys
+import json
 import os
+import sys
 import time
 import pandas as pd
 import pyperf
-import json
+
 from prettytable import PrettyTable
 
 
@@ -21,7 +22,9 @@ from tada.util import save
 from tada.util import results
 
 
-def tada(tada_arguments):
+# pylint: disable=too-many-locals, too-many-branches, too-many-statements
+def tada(tada_arguments):  # noqa: C901
+    """A single tada experiment"""
     start_time = time.time()
     # read and verify the command-line arguments
     did_verify_arguments = arguments.verify(tada_arguments)
@@ -46,6 +49,7 @@ def tada(tada_arguments):
         tada_arguments.schema = os.path.abspath(tada_arguments.schema)
     # display debug output
     to_print = tada_arguments.log
+    print(tada_arguments)
     # incorrect arguments, exit program
     if did_verify_arguments is False:
         dis.output_message("Incorrect command-line arguments.", to_print)
@@ -212,8 +216,9 @@ def tada(tada_arguments):
             constants.PYTHON_VERSION = last_bench_meta.get("python_version")
             # store run metadata
             with open(
-                constants.RESULTS + constants.SEPARATOR + name + constants.JSON_EXT,
-                "r",
+                    constants.RESULTS
+                    + constants.SEPARATOR + name + constants.JSON_EXT,
+                    "r",
             ) as f:
                 readlastjson = json.load(f)
             last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0]["metadata"]
@@ -241,7 +246,10 @@ def tada(tada_arguments):
             constants.INDICATOR_VALUE = tada_arguments.indicator
             # set numerical value to backfill for result storing
             use_backfill = 1 if use_backfill else 0
-            # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
+            # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME,
+            # QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL,
+            # MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES,
+            # PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
             df_new = pd.DataFrame(
                 {
                     "EXPERIMENT_RELIABILITY": constants.RESULT,
@@ -260,7 +268,8 @@ def tada(tada_arguments):
                     "INDICATOR_VALUE": constants.INDICATOR_VALUE,
                     "BACKFILL_TIMES": constants.BACKFILL_TIMES,
                     "PYPERF_AVG_EXPERIMENT_ROUNDS": constants.PYPERF_AVG_EXPERIMENT_ROUNDS,
-                    "PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO": constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO,
+                    "PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO":
+                        constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO,
                     "NAME_OF_EXPERIMENT": constants.NAME_OF_EXPERIMENT,
                     "PYTHON_VERSION": constants.PYTHON_VERSION,
                     "DATA_GEN_STRATEGY": constants.DATA_GEN_STRATEGY,
@@ -272,7 +281,9 @@ def tada(tada_arguments):
                 index=[1],
             )
             # store to csv in current directory
-            results_file_path = os.path.join(os.sep, original_dir, constants.EXPERIMENT)
+            results_file_path = os.path.join(
+                constants.SEPARATOR, original_dir, constants.EXPERIMENT
+            )
             df_new.to_csv(results_file_path, index=False, header=False, mode="a")
         resultstable.title = dis.blue(f"{tada_arguments.function}: ") + big_oh
         return resultstable, {tada_arguments.function: result}
@@ -290,7 +301,7 @@ def tada_main():
         table, result = tada(arg)
         resultstables.append(table)
         tada_results.update(result)
-        contrast_flag = arg.contrast
+        contrast_flag = vars(arg)["contrast"]
     # display results
     for table in resultstables:
         results.display_resultstable(table, tada_arg_list[0].md)

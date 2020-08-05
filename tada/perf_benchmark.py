@@ -66,7 +66,7 @@ if __name__ == "__main__":
     # run benchmark
     if configuration.get_sortinput(tada_configuration_dict):
         for t in data:
-            if type(t) is list:
+            if isinstance(t, list):
                 t.sort()
     current_benchmark = runner.bench_func(
         current_experiment_name, run.run_benchmark, analyzed_function, *data,
