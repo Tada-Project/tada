@@ -47,7 +47,9 @@ if __name__ == "__main__":
     if func_type[0] == "custom":
         data_directory = configuration.get_data_directory(tada_configuration_dict)
         if data_directory != "":
-            package.add_data_sys_path(configuration.get_data_directory(tada_configuration_dict))
+            package.add_data_sys_path(
+                configuration.get_data_directory(tada_configuration_dict)
+            )
         data_module = importlib.import_module(
             configuration.get_data_module(tada_configuration_dict)
         )
@@ -58,7 +60,9 @@ if __name__ == "__main__":
     level = configuration.get_level(tada_configuration_dict)
     position = configuration.get_position(tada_configuration_dict)
     # generate data
-    data = generate.generate_data(func_type, chosen_size, level, position, path, gen_func)
+    data = generate.generate_data(
+        func_type, chosen_size, level, position, path, gen_func
+    )
     # run benchmark
     if configuration.get_sortinput(tada_configuration_dict):
         for t in data:
