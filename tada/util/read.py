@@ -16,8 +16,6 @@ def read_value(filepath):
 
 def read_experiment_size():
     """Read the experiment size from the constants.file"""
-    import os
-    print(os.getcwd())
     filepath = constants.SIZE
     return read_value(filepath)
 
