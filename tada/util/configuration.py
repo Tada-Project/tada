@@ -23,6 +23,7 @@ POSITION = "position"
 
 def save(configuration_filename: str, tada_configuration: Dict[str, Any]) -> None:
     """Save the JSON file of the dictionary in configuration_file"""
+    # Change working directory to the file's grandparent dir
     dirname = os.path.dirname
     os.chdir(dirname(dirname(__file__)))
     with open(configuration_filename, WRITE) as json_output_file:
@@ -31,6 +32,7 @@ def save(configuration_filename: str, tada_configuration: Dict[str, Any]) -> Non
 
 def read(configuration_filename):
     """Read the JSON file of the dictionary in configuration_file"""
+    # Change working directory to the file's grandparent dir
     dirname = os.path.dirname
     os.chdir(dirname(dirname(__file__)))
     with open(configuration_filename) as json_data_file:

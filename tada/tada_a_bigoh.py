@@ -36,7 +36,9 @@ def tada(tada_arguments):
     total_loop_list = []
     sum_of_loops = 0
     use_backfill = tada_arguments.backfill
+    # get current directory for saving
     original_dir = os.getcwd()
+    # use absolute path for import directories
     tada_arguments.directory = os.path.abspath(tada_arguments.directory)
     if tada_arguments.data_directory:
         tada_arguments.data_directory = os.path.abspath(tada_arguments.data_directory)
@@ -291,7 +293,7 @@ def tada(tada_arguments):
                 },
                 index=[1],
             )
-            # store to csv
+            # store to csv in current directory
             results_file_path = os.path.join(os.sep, original_dir, constants.EXPERIMENT)
             df_new.to_csv(
                 results_file_path, index=False, header=False, mode="a"
