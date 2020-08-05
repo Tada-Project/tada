@@ -24,7 +24,7 @@ jobs:
         poetry install
     - name: Test with pytest
       run: |
-        poetry run pytest
+        poetry run pytest --cov-config pytest.cov --cov
     - name: Linting
       run: |
         poetry run flake8 tada
