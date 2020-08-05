@@ -28,4 +28,6 @@ jobs:
     - name: Linting
       run: |
         poetry run flake8 tada
+        poetry run flake8 test
         poetry run pylint tada
+        poetry run pylint test
