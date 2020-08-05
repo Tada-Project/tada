@@ -296,7 +296,7 @@ to get the result table generated based on the subtraction of the two algorithms
 with the growth ratio analysis of the run time difference:
 
 ```bash
-$ python tada_a_bigoh.py --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function  graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --sta rtsize=50  --max=1000 --position 0 --contrast
+$ python tada_a_bigoh.py --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --startsize=50  --max=1000 --position 0 --contrast
 
       Tada!: auTomAtic orDer-of-growth Analysis!
         https://github.com/Tada-Project/tada/
