@@ -286,6 +286,8 @@ def tada(tada_arguments):  # noqa: C901
             )
             df_new.to_csv(results_file_path, index=False, header=False, mode="a")
         resultstable.title = dis.blue(f"{tada_arguments.function}: ") + big_oh
+        # rest working
+        os.chdir(original_dir)
         return resultstable, {tada_arguments.function: result}
 
 
