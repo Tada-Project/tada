@@ -2,6 +2,7 @@
 
 from __future__ import division
 import sys
+import os
 import time
 import pandas as pd
 import pyperf
@@ -21,11 +22,13 @@ from tada.util import results
 
 
 def tada(tada_arguments):
+    # dirname = os.path.dirname
+    # os.chdir(dirname(__file__))
+
     start_time = time.time()
     # read and verify the command-line arguments
     did_verify_arguments = arguments.verify(tada_arguments)
     resultstable = PrettyTable()
-
     resultstable.field_names = ["Size", "Mean", "Median", "Ratio"]
     meanlastround = 0
     result = {}
@@ -36,6 +39,11 @@ def tada(tada_arguments):
     total_loop_list = []
     sum_of_loops = 0
     use_backfill = tada_arguments.backfill
+    tada_arguments.directory = os.path.abspath(tada_arguments.directory)
+    if tada_arguments.data_directory:
+        tada_arguments.data_directory = os.path.abspath(tada_arguments.data_directory)
+    if tada_arguments.schema:
+        tada_arguments.schema = os.path.abspath(tada_arguments.schema)
     # display debug output
     to_print = tada_arguments.log
     # incorrect arguments, exit program
@@ -293,7 +301,7 @@ def tada(tada_arguments):
         return resultstable, {tada_arguments.function: result}
 
 
-def main():
+def tada_main():
     """main"""
     tada_arg_list = arguments.parse_args(sys.argv[1:])
     resultstables = []

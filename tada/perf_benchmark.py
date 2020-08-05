@@ -13,8 +13,17 @@ from tada.util import save
 
 
 if __name__ == "__main__":
+    print("start reading")
     # read the configuration file to access the configuration dictionary
     tada_configuration_dict = configuration.read(constants.CONFIGURATION)
+
+    # print(configuration.get_module(tada_configuration_dict))
+    # print(configuration.get_directory(tada_configuration_dict))
+
+    # import os
+    # print(os.getcwd())
+
+    print("in perf benchmark")
     # add the specified directory to the system path
     package.add_sys_path(configuration.get_directory(tada_configuration_dict))
     # reflectively import the chosen module
