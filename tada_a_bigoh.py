@@ -307,7 +307,8 @@ def main():
         tada_results.update(result)
         contrast_flag = arg.contrast
     # display results
-    results.linegraph_viz(tada_results)
+    tada_configuration_dict = configuration.read(constants.CONFIGURATION)
+    results.linegraph_viz(tada_results, tada_configuration_dict)
     for table in resultstables:
         results.display_resultstable(table, tada_arg_list[0].md)
     if len(resultstables) > 1:

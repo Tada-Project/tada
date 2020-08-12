@@ -109,7 +109,7 @@ def test_contrast(capsys):
     assert standard_out is not None
 
 
-
+# pylint: disable=not-callable
 @pytest.mark.parametrize(
     "correct_arguments",
         (
@@ -142,10 +142,13 @@ def test_linegraph_viz(correct_arguments, capsys, tmpdir):
         },
     }
     parsed_arguments = arguments.parse_args(correct_arguments)
-    results.linegraph_viz(input_data)
     directory_prefix = str(tmpdir) + "/"
     configuration.save(
         directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
     )
+    tada_configuration_dict = configuration.read(
+        directory_prefix + constants.CONFIGURATION
+    )
+    results.linegraph_viz(input_data, tada_configuration_dict)
     standard_out = capsys.readouterr()
     assert standard_out is not None

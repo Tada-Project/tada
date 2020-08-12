@@ -2,9 +2,9 @@
 
 from __future__ import division
 from typing import Union, Dict, List
+import os
 from prettytable import PrettyTable
 import matplotlib.pyplot as plt
-import os
 from . import analysis
 from . import configuration
 from . import constants
@@ -110,7 +110,7 @@ def contrast(results):
     print(contrast_table)
 
 
-def linegraph_viz(results):
+def linegraph_viz(results, tada_configuration_dict):
     """visualiza as one plot"""
     records = list(results.values())
     mean_list = []
@@ -161,7 +161,6 @@ def linegraph_viz(results):
     plt.legend()
     plt.grid(color="0.95")
     plt.suptitle("Growth Curve")
-    tada_configuration_dict = configuration.read(constants.CONFIGURATION)
     chosen_size = read.read_experiment_size()
     current_experiment_name = configuration.get_experiment_name(
         tada_configuration_dict, chosen_size
@@ -170,4 +169,4 @@ def linegraph_viz(results):
         os.makedirs(constants.RESULTS)
     save_path = constants.RESULTS + constants.SEPARATOR + current_experiment_name + ".png"
     plt.savefig(save_path)
-    plt.close() 
+    plt.close()
