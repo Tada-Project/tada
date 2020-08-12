@@ -16,7 +16,16 @@ DEFAULT_VALUE_CHAR = "C"
 DEFAULT_VALUE_TEXT = "TEXT"
 DEFAULT_VALUE_BOOLEAN = True
 
-TYPES = ["int", "int_list", "char", "char_list", "boolean", "string", "float"]
+TYPES = [
+    "int",
+    "int_list",
+    "char",
+    "char_list",
+    "boolean",
+    "string",
+    "float",
+    "bitdepth",
+]
 
 # initialize data as tuple
 global_data = ()
@@ -32,7 +41,9 @@ def store_data_to_global(path, chosen_size, level=1, position=[0]):
         global global_data
         global_data = global_data + (a,)
 
-    strategies = generate_experiment_strategy(path, chosen_size, level, position)
+    strategies = generate_experiment_strategy(
+        path, chosen_size, level, position
+    )
     # store data based on the amount of parameters
     for st in strategies:
         gen = generate_func_from_single_st(store_global, st)
@@ -47,7 +58,9 @@ def generate_experiment_strategy(
     json_schema = read.read_schema(path)
 
     # pylint: disable=W0102, R1705
-    def detect_level_and_position(schema, level=1, position=[0], index_position=0):
+    def detect_level_and_position(
+            schema, level=1, position=[0], index_position=0
+    ):
         """A dummy function to store the data to file for experiment"""
         if level == 0:
             return schema
@@ -129,11 +142,15 @@ def generate_data(
     if chosen_types[0] in TYPES:
         # call a generate function for each type
         for current_type in chosen_types:
-            generator_to_invoke = getattr(GENERATE, "generate_" + str(current_type))
+            generator_to_invoke = getattr(
+                GENERATE, "generate_" + str(current_type)
+            )
             generated_value = generator_to_invoke(chosen_size)
             generated_values = generated_values + (generated_value,)
     elif chosen_types[0] == "hypothesis":
-        generated_values = store_data_to_global(path, chosen_size, level, position)
+        generated_values = store_data_to_global(
+            path, chosen_size, level, position
+        )
     elif chosen_types[0] == "custom":
         generated_values = gen_func(chosen_size)
     return generated_values

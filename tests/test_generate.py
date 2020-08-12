@@ -33,11 +33,11 @@ def test_generate_int_makes_size_default():
 def test_generate_bit_depth_makes_size_default():
     """Checks that requesting a generated int returns one"""
     # request a single tuple with an int in it
-    requested_types = ["bitdepth"]
+    requested_types = ["bitdepth",]
     # assume the doubling experiment is at 100
     current_size = 100
     # the default generator will return a tuple with 100 in it
-    # expected_tuple = (generate.generate_int(current_size),)
+    # expected_tuple = (generate.generate_bitdepth(current_size),)
     # generate the data for the requested_types and the current_size
     generated_data = generate.generate_data(requested_types, current_size)
     assert generated_data is not None
