@@ -102,3 +102,20 @@ def test_contrast(capsys):
     results.contrast(input_data)
     standard_out = capsys.readouterr()
     assert standard_out is not None
+
+
+def test_linegraph_viz(capsys):
+    """Test if contrast functions correctly"""
+    input_data = {
+        "graph_gen": {
+            50: [9.94538065592448e-06, 9.501693725585938e-06],
+            100: [1.8558588460286458e-05, 1.8363348388671875e-05],
+        },
+        "graph_gen_BFS": {
+            50: [0.0010322848828125, 0.000936182421875],
+            100: [0.0037961446354166668, 0.0036485609375],
+        },
+    }
+    results.linegraph_viz(input_data)
+    standard_out = capsys.readouterr()
+    assert standard_out is not None
