@@ -10,16 +10,26 @@ import pyperf
 
 from prettytable import PrettyTable
 
-
-from tada.util import analysis
-from tada.util import arguments
-from tada.util import configuration
-from tada.util import constants
-from tada.util import display as dis
-from tada.util import package
-from tada.util import run
-from tada.util import save
-from tada.util import results
+try:
+    from tada.util import analysis
+    from tada.util import arguments
+    from tada.util import configuration
+    from tada.util import constants
+    from tada.util import display as dis
+    from tada.util import package
+    from tada.util import run
+    from tada.util import save
+    from tada.util import results
+except ImportError:
+    from util import analysis
+    from util import arguments
+    from util import configuration
+    from util import constants
+    from util import display as dis
+    from util import package
+    from util import run
+    from util import save
+    from util import results
 
 
 # pylint: disable=too-many-locals, too-many-branches, too-many-statements

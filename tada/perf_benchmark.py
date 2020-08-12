@@ -3,14 +3,22 @@
 import importlib
 import pyperf
 
-from tada.util import configuration
-from tada.util import constants
-from tada.util import generate
-from tada.util import package
-from tada.util import read
-from tada.util import run
-from tada.util import save
-
+try:
+    from tada.util import configuration
+    from tada.util import constants
+    from tada.util import generate
+    from tada.util import package
+    from tada.util import read
+    from tada.util import run
+    from tada.util import save
+except ImportError:
+    from util import configuration
+    from util import constants
+    from util import generate
+    from util import package
+    from util import read
+    from util import run
+    from util import save
 
 if __name__ == "__main__":
     # read the configuration file to access the configuration dictionary
