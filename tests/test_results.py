@@ -150,6 +150,6 @@ def test_linegraph_viz(correct_arguments, capsys, tmpdir):
         directory_prefix + constants.CONFIGURATION
     )
     size = 800
-    results.linegraph_viz(input_data, tada_configuration_dict, 800)
+    results.linegraph_viz(input_data, tada_configuration_dict, size)
     standard_out = capsys.readouterr()
     assert standard_out is not None

@@ -108,6 +108,8 @@ optional arguments:
   --md                  Show results table in markdown format (default: False)
   --contrast            Show contrast result table. Only works with multiple
                         experiments (default: False)
+  --viz                 Visualize a simple graph for the result (default:
+                        False)
   --level LEVEL         The level of nested data structure to apply doubling
                         experiment (default: 1)
   --position POSITION [POSITION ...]

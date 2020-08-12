@@ -9,7 +9,6 @@ from . import analysis
 from . import configuration
 from . import constants
 from . import display as dis
-from . import read
 
 
 def add_resultstable(
