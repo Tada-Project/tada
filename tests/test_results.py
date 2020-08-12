@@ -48,9 +48,7 @@ def test_to_markdown_table():
     """Test to see if to_markdown_table functions properly."""
     results_table = PrettyTable(["Size", "Mean", "Median", "Ratio"])
     output = results.to_markdown_table(results_table)
-    expect = (
-        """ Size | Mean | Median | Ratio \n------|------|--------|-------"""
-    )
+    expect = """ Size | Mean | Median | Ratio \n------|------|--------|-------"""
     assert expect == output
 
 
@@ -112,22 +110,22 @@ def test_contrast(capsys):
 # pylint: disable=not-callable
 @pytest.mark.parametrize(
     "correct_arguments",
-        (
-            [
-                "--directory",
-                "../speed-surprises/",
-                "--module",
-                "speedsurprises.graph.graph_gen",
-                "--function",
-                "graph_gen graph_gen_BFS",
-                "--types",
-                "hypothesis",
-                "--schema",
-                "../speed-surprises/speedsurprises/jsonschema/int_and_int.json",
-                "--position",
-                "0",
-            ],
-        )
+    (
+        [
+            "--directory",
+            "../speed-surprises/",
+            "--module",
+            "speedsurprises.graph.graph_gen",
+            "--function",
+            "graph_gen graph_gen_BFS",
+            "--types",
+            "hypothesis",
+            "--schema",
+            "../speed-surprises/speedsurprises/jsonschema/int_and_int.json",
+            "--position",
+            "0",
+        ],
+    ),
 )
 def test_linegraph_viz(correct_arguments, capsys, tmpdir):
     """Test if contrast functions correctly"""
