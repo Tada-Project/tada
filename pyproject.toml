@@ -20,7 +20,7 @@ hypothesis-jsonschema = "*"
 pandas = "*"
 ptable = "*"
 colorama = "*"
-matplotlib = "*"
+mathplotlib = "*"
 
 [tool.poetry.dev-dependencies]
 pylint = "*"
