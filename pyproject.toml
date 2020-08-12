@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "tada"
+version = "0.1.6"
+description = "Predict the likely worst-case order-of-growth function for an arbitrary Python function."
+authors = [
+    "enpuyou <youe2@allegheny.edu>",
+    "gkapfham <gkapfham@allegheny.edu>",
+    "Lancasterwu <wuj@allegheny.edu>"
+    ]
+license = "GPL-3.0"
+readme = "README.md"
+homepage = "https://tada-predict.netlify.app"
+repository = "https://github.com/Tada-Project/tada"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+pyperf = "*"
+hypothesis = "*"
+hypothesis-jsonschema = "*"
+pandas = "*"
+ptable = "*"
+colorama = "*"
+
+[tool.poetry.dev-dependencies]
+pylint = "*"
+neovim = "*"
+pytest = "*"
+pytest-benchmark = "*"
+codecov = "*"
+flake8 = "*"
+pytest-cov = "*"
+black = "^19.10b0"
+
+[tool.poetry.scripts]
+tada = 'tada:main'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

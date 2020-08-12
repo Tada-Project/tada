@@ -1,31 +1,44 @@
 """Run doubling experiments and 'Tada!' you get the time complexity"""
 
 from __future__ import division
+import json
+import os
 import sys
 import time
 import pandas as pd
 import pyperf
-import json
+
 from prettytable import PrettyTable
 
+try:
+    from tada.util import analysis
+    from tada.util import arguments
+    from tada.util import configuration
+    from tada.util import constants
+    from tada.util import display as dis
+    from tada.util import package
+    from tada.util import run
+    from tada.util import save
+    from tada.util import results
+except ImportError:
+    from util import analysis
+    from util import arguments
+    from util import configuration
+    from util import constants
+    from util import display as dis
+    from util import package
+    from util import run
+    from util import save
+    from util import results
 
-from tada.util import analysis
-from tada.util import arguments
-from tada.util import configuration
-from tada.util import constants
-from tada.util import display as dis
-from tada.util import package
-from tada.util import run
-from tada.util import save
-from tada.util import results
 
-
-def tada(tada_arguments):
+# pylint: disable=too-many-locals, too-many-branches, too-many-statements
+def tada(tada_arguments):  # noqa: C901
+    """A single tada experiment"""
     start_time = time.time()
     # read and verify the command-line arguments
     did_verify_arguments = arguments.verify(tada_arguments)
     resultstable = PrettyTable()
-
     resultstable.field_names = ["Size", "Mean", "Median", "Ratio"]
     meanlastround = 0
     result = {}
@@ -36,6 +49,14 @@ def tada(tada_arguments):
     total_loop_list = []
     sum_of_loops = 0
     use_backfill = tada_arguments.backfill
+    # get current directory for saving
+    original_dir = os.getcwd()
+    # use absolute path for import directories
+    tada_arguments.directory = os.path.abspath(tada_arguments.directory)
+    if tada_arguments.data_directory:
+        tada_arguments.data_directory = os.path.abspath(tada_arguments.data_directory)
+    if tada_arguments.schema:
+        tada_arguments.schema = os.path.abspath(tada_arguments.schema)
     # display debug output
     to_print = tada_arguments.log
     # incorrect arguments, exit program
@@ -64,15 +85,12 @@ def tada(tada_arguments):
                     )
                     constants.BACKFILL_TIMES = constants.BACKFILL_TIMES + 1
                     dis.output_message(
-                        dis.green("Backfill Count: ")
-                        + str(constants.BACKFILL_TIMES),
+                        dis.green("Backfill Count: ") + str(constants.BACKFILL_TIMES),
                         to_print,
                     )
                 if constants.BACKFILL_TIMES == 2:
                     constants.QUIT_BY_BACKFILL = 1
-                    dis.output_message(
-                        "\nQuit due to backfill twice", to_print
-                    )
+                    dis.output_message("\nQuit due to backfill twice", to_print)
                     break
             if current_size >= tada_arguments.maxsize:
                 constants.QUIT_BY_MAX_SIZE = 1
@@ -89,19 +107,13 @@ def tada(tada_arguments):
                 + constants.PYTHON_EXT
             )
             # display the standard output and error
-            dis.output_message(
-                current_output.decode(constants.UTF8), to_print
-            )
-            dis.output_message(
-                current_error.decode(constants.UTF8), to_print=True
-            )
+            dis.output_message(current_output.decode(constants.UTF8), to_print)
+            dis.output_message(current_error.decode(constants.UTF8), to_print=True)
             # read the JSON file containing the results
             current_benchmark = pyperf.Benchmark.load(
                 constants.RESULTS
                 + constants.SEPARATOR
-                + configuration.get_experiment_name(
-                    vars(tada_arguments), current_size
-                )
+                + configuration.get_experiment_name(vars(tada_arguments), current_size)
                 + constants.JSON_EXT
             )
             # Numbers of benchmark run which include one warmup and twenty excution
@@ -114,7 +126,9 @@ def tada(tada_arguments):
             mean = current_benchmark.mean()
             median = current_benchmark.median()
             result.update({current_size: [mean, median]})
-            dis.output_message(dis.green("Mean: ") + str(mean), to_print,)
+            dis.output_message(
+                dis.green("Mean: ") + str(mean), to_print,
+            )
             dis.output_message(
                 dis.green("Median: ") + str(median), to_print,
             )
@@ -144,8 +158,7 @@ def tada(tada_arguments):
                     last_end_time_rate = end_time_rate
                     end_time_rate = (end_time - last_end_time) / last_end_time
                 dis.output_message(
-                    dis.green("Last end time: ") + str(last_end_time),
-                    to_print,
+                    dis.green("Last end time: ") + str(last_end_time), to_print,
                 )
                 last_end_time = end_time
             dis.output_message(
@@ -154,9 +167,7 @@ def tada(tada_arguments):
             dis.output_message(
                 dis.green("Expected end time: ") + str(end_time), to_print
             )
-            results.add_resultstable(
-                resultstable, current_size, mean, median, ratio
-            )
+            results.add_resultstable(resultstable, current_size, mean, median, ratio)
             # show that we are done running for a size
             print(dis.end_message(current_size, tada_arguments.function))
             # go to the next size for the doubling experiment
@@ -166,8 +177,7 @@ def tada(tada_arguments):
                 dis.green("End time rate: ") + str(end_time_rate), to_print
             )
             dis.output_message(
-                dis.green("Last end time rate: ") + str(last_end_time_rate),
-                to_print,
+                dis.green("Last end time rate: ") + str(last_end_time_rate), to_print,
             )
             if last_end_time_rate > end_time_rate and use_backfill:
                 current_size = int(current_size / constants.FACTOR)
@@ -175,9 +185,7 @@ def tada(tada_arguments):
                 current_size = current_size * constants.FACTOR
             # check indicator and quit if smaller than decided indicator
             if indicator < tada_arguments.indicator:
-                dis.output_message(
-                    f"\nQuit due to indicator: {indicator}", to_print
-                )
+                dis.output_message(f"\nQuit due to indicator: {indicator}", to_print)
                 break
             save.save_experiment_size(constants.SIZE, current_size)
             meanlastround = mean
@@ -192,9 +200,7 @@ def tada(tada_arguments):
                 break
             steps += 1
             if steps > tada_arguments.steps:
-                dis.output_message(
-                    f"\nQuit due to end of rounds: {steps}", to_print
-                )
+                dis.output_message(f"\nQuit due to end of rounds: {steps}", to_print)
                 constants.QUIT_BY_STEPS = 1
                 break
         big_oh = analysis.analyze_big_oh(ratio)
@@ -219,16 +225,12 @@ def tada(tada_arguments):
             constants.PYTHON_VERSION = last_bench_meta.get("python_version")
             # store run metadata
             with open(
-                constants.RESULTS
-                + constants.SEPARATOR
-                + name
-                + constants.JSON_EXT,
-                "r",
+                    constants.RESULTS
+                    + constants.SEPARATOR + name + constants.JSON_EXT,
+                    "r",
             ) as f:
                 readlastjson = json.load(f)
-            last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0][
-                "metadata"
-            ]
+            last_exp_run_metadata = readlastjson["benchmarks"][0]["runs"][0]["metadata"]
             constants.CPU_TEMP = last_exp_run_metadata.get("cpu_temp")
             if "mem_max_rss" in last_exp_run_metadata:
                 constants.MEM_MAX_RSS = last_exp_run_metadata["mem_max_rss"]
@@ -239,9 +241,7 @@ def tada(tada_arguments):
             for item in total_loop_list:
                 sum_of_loops += item
             # calculate avg total loops
-            constants.PYPERF_AVG_EXPERIMENT_ROUNDS = sum_of_loops / len(
-                total_loop_list
-            )
+            constants.PYPERF_AVG_EXPERIMENT_ROUNDS = sum_of_loops / len(total_loop_list)
             # calculate last two loop growth ratio
             if len(total_loop_list) >= 2:
                 constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS = (
@@ -255,7 +255,10 @@ def tada(tada_arguments):
             constants.INDICATOR_VALUE = tada_arguments.indicator
             # set numerical value to backfill for result storing
             use_backfill = 1 if use_backfill else 0
-            # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME, QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL, MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES, PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
+            # EXPERIMENT_RELIABILITY, CPU_TYPE, CPU_TEMP, TOTAL_RUNNING_TIME,
+            # QUIT_BY_MAX_RUNTIME, QUIT_BY_INDICATOR, QUIT_BY_BACKFILL,
+            # MEM_MAX_RSS, OS, INDICATOR_VALUE, BACKFILL_TIMES,
+            # PYPERF_AVG_EXPERIMENT_ROUNDS, NAME_OF_EXPERIMENT
             df_new = pd.DataFrame(
                 {
                     "EXPERIMENT_RELIABILITY": constants.RESULT,
@@ -274,7 +277,8 @@ def tada(tada_arguments):
                     "INDICATOR_VALUE": constants.INDICATOR_VALUE,
                     "BACKFILL_TIMES": constants.BACKFILL_TIMES,
                     "PYPERF_AVG_EXPERIMENT_ROUNDS": constants.PYPERF_AVG_EXPERIMENT_ROUNDS,
-                    "PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO": constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO,
+                    "PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO":
+                        constants.PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO,
                     "NAME_OF_EXPERIMENT": constants.NAME_OF_EXPERIMENT,
                     "PYTHON_VERSION": constants.PYTHON_VERSION,
                     "DATA_GEN_STRATEGY": constants.DATA_GEN_STRATEGY,
@@ -285,15 +289,18 @@ def tada(tada_arguments):
                 },
                 index=[1],
             )
-            # store to csv
-            df_new.to_csv(
-                constants.EXPERIMENT, index=False, header=False, mode="a"
+            # store to csv in current directory
+            results_file_path = os.path.join(
+                constants.SEPARATOR, original_dir, constants.EXPERIMENT
             )
+            df_new.to_csv(results_file_path, index=False, header=False, mode="a")
         resultstable.title = dis.blue(f"{tada_arguments.function}: ") + big_oh
+        # rest working
+        os.chdir(original_dir)
         return resultstable, {tada_arguments.function: result}
 
 
-def main():
+def tada_main():
     """main"""
     tada_arg_list = arguments.parse_args(sys.argv[1:])
     resultstables = []
@@ -305,7 +312,7 @@ def main():
         table, result = tada(arg)
         resultstables.append(table)
         tada_results.update(result)
-        contrast_flag = arg.contrast
+        contrast_flag = vars(arg)["contrast"]
     # display results
     for table in resultstables:
         results.display_resultstable(table, tada_arg_list[0].md)
@@ -316,4 +323,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    tada_main()

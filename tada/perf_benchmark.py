@@ -3,14 +3,22 @@
 import importlib
 import pyperf
 
-from tada.util import configuration
-from tada.util import constants
-from tada.util import generate
-from tada.util import package
-from tada.util import read
-from tada.util import run
-from tada.util import save
-
+try:
+    from tada.util import configuration
+    from tada.util import constants
+    from tada.util import generate
+    from tada.util import package
+    from tada.util import read
+    from tada.util import run
+    from tada.util import save
+except ImportError:
+    from util import configuration
+    from util import constants
+    from util import generate
+    from util import package
+    from util import read
+    from util import run
+    from util import save
 
 if __name__ == "__main__":
     # read the configuration file to access the configuration dictionary
@@ -47,7 +55,9 @@ if __name__ == "__main__":
     if func_type[0] == "custom":
         data_directory = configuration.get_data_directory(tada_configuration_dict)
         if data_directory != "":
-            package.add_data_sys_path(configuration.get_data_directory(tada_configuration_dict))
+            package.add_data_sys_path(
+                configuration.get_data_directory(tada_configuration_dict)
+            )
         data_module = importlib.import_module(
             configuration.get_data_module(tada_configuration_dict)
         )
@@ -58,11 +68,13 @@ if __name__ == "__main__":
     level = configuration.get_level(tada_configuration_dict)
     position = configuration.get_position(tada_configuration_dict)
     # generate data
-    data = generate.generate_data(func_type, chosen_size, level, position, path, gen_func)
+    data = generate.generate_data(
+        func_type, chosen_size, level, position, path, gen_func
+    )
     # run benchmark
     if configuration.get_sortinput(tada_configuration_dict):
         for t in data:
-            if type(t) is list:
+            if isinstance(t, list):
                 t.sort()
     current_benchmark = runner.bench_func(
         current_experiment_name, run.run_benchmark, analyzed_function, *data,

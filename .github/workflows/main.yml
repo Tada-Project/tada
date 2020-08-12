@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [Ubuntu, MacOS, Windows]
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -24,8 +24,10 @@ jobs:
         poetry install
     - name: Test with pytest
       run: |
-        poetry run pytest
+        poetry run pytest --cov-config pytest.cov --cov
     - name: Linting
       run: |
         poetry run flake8 tada
+        poetry run flake8 tests
         poetry run pylint tada
+        poetry run pylint tests
