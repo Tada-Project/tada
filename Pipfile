@@ -21,13 +21,11 @@ pytest-benchmark = "*"
 codecov = "*"
 flake8 = "*"
 pytest-cov = "*"
-deap = "*"
-python-constraint = "*"
 mkdocs = "*"
 mkdocs-material = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"
 
 [pipenv]
 allow_prereleases = true

@@ -376,3 +376,80 @@ def test_configuration_file_correct_position(
         directory_prefix + constants.CONFIGURATION
     )
     assert configuration.get_position(tada_configuration_dict) == correct_position
+
+
+@pytest.mark.parametrize(
+    "correct_arguments, correct_level",
+    [
+        (
+            [
+                "--directory",
+                "D",
+                "--module",
+                "M",
+                "--function",
+                "F",
+                "--types",
+                "int",
+                "float",
+                "text",
+                "--level",
+                "1",
+            ],
+            1,
+        )
+    ],
+)
+# pylint: disable=invalid-name
+def test_configuration_file_correct_level(
+        correct_arguments, correct_level, tmpdir
+):
+    """Checks that the configuration file was saved to the directory"""
+    parsed_arguments = arguments.parse_args(correct_arguments)
+    directory_prefix = str(tmpdir) + "/"
+    configuration.save(
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
+    )
+    assert len(tmpdir.listdir()) == 1
+    tada_configuration_dict = configuration.read(
+        directory_prefix + constants.CONFIGURATION
+    )
+    assert configuration.get_level(tada_configuration_dict) == correct_level
+
+
+@pytest.mark.parametrize(
+    "correct_arguments, correct_sorted",
+    [
+        (
+            [
+                "--directory",
+                "D",
+                "--module",
+                "M",
+                "--function",
+                "F",
+                "--types",
+                "int",
+                "float",
+                "text",
+                "--sorted",
+            ],
+            True,
+        )
+    ],
+)
+# pylint: disable=invalid-name
+def test_configuration_file_correct_sorted(
+        correct_arguments, correct_sorted, tmpdir
+):
+    """Checks that the configuration file was saved to the directory"""
+    parsed_arguments = arguments.parse_args(correct_arguments)
+    directory_prefix = str(tmpdir) + "/"
+    configuration.save(
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
+    )
+    assert len(tmpdir.listdir()) == 1
+    tada_configuration_dict = configuration.read(
+        directory_prefix + constants.CONFIGURATION
+    )
+    assert configuration.get_sortinput(tada_configuration_dict) == correct_sorted

@@ -6,9 +6,12 @@ from . import constants
 
 def read_value(filepath):
     """Read the value from the filepath"""
-    with open(filepath) as file_pointer:
-        chosen_line = file_pointer.readline().replace("\n", "")
-        return chosen_line
+    try:
+        with open(filepath) as file_pointer:
+            chosen_line = file_pointer.readline().replace("\n", "")
+            return chosen_line
+    except FileNotFoundError:
+        print(f"file {filepath} does not exist")
 
 
 def read_experiment_size():

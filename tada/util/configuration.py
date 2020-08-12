@@ -1,6 +1,7 @@
 """Configuration for Tada and perf"""
 
 import json
+import os
 
 from typing import Any, Dict
 from . import constants
@@ -22,12 +23,18 @@ POSITION = "position"
 
 def save(configuration_filename: str, tada_configuration: Dict[str, Any]) -> None:
     """Save the JSON file of the dictionary in configuration_file"""
+    # Change working directory to the file's grandparent dir
+    dirname = os.path.dirname
+    os.chdir(dirname(dirname(__file__)))
     with open(configuration_filename, WRITE) as json_output_file:
         json.dump(tada_configuration, json_output_file)
 
 
 def read(configuration_filename):
     """Read the JSON file of the dictionary in configuration_file"""
+    # Change working directory to the file's grandparent dir
+    dirname = os.path.dirname
+    os.chdir(dirname(dirname(__file__)))
     with open(configuration_filename) as json_data_file:
         tada_configuration = json.load(json_data_file)
     return tada_configuration
