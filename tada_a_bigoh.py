@@ -17,6 +17,7 @@ from tada.util import display as dis
 from tada.util import package
 from tada.util import run
 from tada.util import save
+from tada.util import read
 from tada.util import results
 
 
@@ -282,6 +283,8 @@ def tada(tada_arguments):
                     "USED_BACKFILL": use_backfill,
                     "AVG_RUN_TIME": constants.AVG_RUN_TIME,
                     "STEPS": steps,
+                    "FUNCTION_NAME": tada_arguments.function,
+                    "ARGUMENTS": str(vars(tada_arguments)),
                 },
                 index=[1],
             )

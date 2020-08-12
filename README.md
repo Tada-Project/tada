@@ -395,7 +395,8 @@ following variables will be stored and exported to `experiment_data.csv`. :
 - `NAME_OF_EXPERIMENT`: string := experiment information.
 - `PYTHON_VERSION`: string := current version of Python.
 - `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
-- `START_SIZE`: int := initial size of doubling experiments
+- `START_SIZE`: int := initial size of the doubling experiment
+- `ARGUMENTS`: string := input argument to run the doubling experiment
 
 To run with experiment data collected, add `expect` into the command like this:
 
