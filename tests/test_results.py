@@ -1,6 +1,11 @@
 """Tests for the resultstable and results module."""
 
+import pytest
+
 from prettytable import PrettyTable
+from tada.util import arguments
+from tada.util import configuration
+from tada.util import constants
 from tada.util import results
 
 resultstable = PrettyTable(["Size", "Mean", "Median", "Ratio"])
@@ -104,7 +109,27 @@ def test_contrast(capsys):
     assert standard_out is not None
 
 
-def test_linegraph_viz(capsys):
+
+@pytest.mark.parametrize(
+    "correct_arguments",
+        (
+            [
+                "--directory",
+                "../speed-surprises/",
+                "--module",
+                "speedsurprises.graph.graph_gen",
+                "--function",
+                "graph_gen graph_gen_BFS",
+                "--types",
+                "hypothesis",
+                "--schema",
+                "../speed-surprises/speedsurprises/jsonschema/int_and_int.json",
+                "--position",
+                "0",
+            ],
+        )
+)
+def test_linegraph_viz(correct_arguments, capsys, tmpdir):
     """Test if contrast functions correctly"""
     input_data = {
         "graph_gen": {
@@ -116,6 +141,11 @@ def test_linegraph_viz(capsys):
             100: [0.0037961446354166668, 0.0036485609375],
         },
     }
+    parsed_arguments = arguments.parse_args(correct_arguments)
     results.linegraph_viz(input_data)
+    directory_prefix = str(tmpdir) + "/"
+    configuration.save(
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
+    )
     standard_out = capsys.readouterr()
     assert standard_out is not None
