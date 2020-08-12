@@ -152,6 +152,13 @@ def parse(args: List[str]) -> Namespace:
         help="Show contrast result table. Only works with multiple experiments",
     )
     parser.add_argument(
+        "--viz",
+        required=False,
+        action="store_true",
+        default=False,
+        help="Visualize a simple graph for the result",
+    )
+    parser.add_argument(
         "--level",
         required=False,
         type=int,

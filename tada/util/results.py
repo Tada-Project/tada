@@ -110,7 +110,7 @@ def contrast(results):
     print(contrast_table)
 
 
-def linegraph_viz(results, tada_configuration_dict):
+def linegraph_viz(results, tada_configuration_dict, chosen_size):
     """visualiza as one plot"""
     records = list(results.values())
     mean_list = []
@@ -161,7 +161,6 @@ def linegraph_viz(results, tada_configuration_dict):
     plt.legend()
     plt.grid(color="0.95")
     plt.suptitle("Growth Curve")
-    chosen_size = read.read_experiment_size()
     current_experiment_name = configuration.get_experiment_name(
         tada_configuration_dict, chosen_size
     )
