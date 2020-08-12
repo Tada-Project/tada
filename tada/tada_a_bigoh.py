@@ -30,7 +30,7 @@ except ImportError:
     from util import package
     from util import run
     from util import save
-    from tada.util import read
+    from util import read
     from util import results
 
 
@@ -316,12 +316,8 @@ def tada_main():
         table, result = tada(arg)
         resultstables.append(table)
         tada_results.update(result)
-<<<<<<< HEAD:tada_a_bigoh.py
-        contrast_flag = arg.contrast
-        viz_flag = arg.viz
-=======
         contrast_flag = vars(arg)["contrast"]
->>>>>>> 48d6b8d5c49a5a9e3943f4364cf9f07a593d057f:tada/tada_a_bigoh.py
+        viz_flag = vars(arg)["viz"]
     # display results
     if viz_flag is True:
         tada_configuration_dict = configuration.read(constants.CONFIGURATION)
