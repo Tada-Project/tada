@@ -40,12 +40,6 @@ def store_data_to_global(path, chosen_size, level=1, position=[0]):
     return global_data
 
 
-def store_data_to_file(a):
-    """A dummy function to store the data to file for experiment """
-    with open("data.txt", "w+") as f:
-        f.write(str(a))
-
-
 def generate_experiment_strategy(
         path, size, level=1, position=[0]
 ):  # pylint: disable=W0102
