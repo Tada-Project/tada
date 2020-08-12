@@ -2,8 +2,12 @@
 
 from __future__ import division
 from typing import Union, Dict, List
+import os
 from prettytable import PrettyTable
+import matplotlib.pyplot as plt
 from . import analysis
+from . import configuration
+from . import constants
 from . import display as dis
 
 
@@ -103,3 +107,64 @@ def contrast(results):
         + big_oh
     )
     print(contrast_table)
+
+
+def linegraph_viz(results, tada_configuration_dict, chosen_size):
+    """visualiza as one plot"""
+    records = list(results.values())
+    mean_list = []
+    median_list = []
+    mean_list_2 = []
+    median_list_2 = []
+    plt.ylabel("Time")
+    plt.xlabel("Size")
+    for time in list(records[0].values()):
+        mean_list.append(time[0])
+        median_list.append(time[1])
+    plt.scatter(records[0].keys(), mean_list, color="blue")
+    plt.plot(
+        records[0].keys(),
+        mean_list,
+        "o--",
+        color="blue",
+        label=list(results.keys())[0] + " mean",
+    )
+    plt.scatter(records[0].keys(), median_list, color="red")
+    plt.plot(
+        records[0].keys(),
+        median_list,
+        "o--",
+        color="red",
+        label=list(results.keys())[0] + " median",
+    )
+    if len(records) == 2:
+        for time in list(records[1].values()):
+            mean_list_2.append(time[0])
+            median_list_2.append(time[1])
+        plt.scatter(records[1].keys(), mean_list_2, color="yellow")
+        plt.plot(
+            records[1].keys(),
+            mean_list_2,
+            "o--",
+            color="yellow",
+            label=list(results.keys())[1] + " mean",
+        )
+        plt.scatter(records[1].keys(), median_list_2, color="green")
+        plt.plot(
+            records[1].keys(),
+            median_list_2,
+            "o--",
+            color="green",
+            label=list(results.keys())[1] + " median",
+        )
+    plt.legend()
+    plt.grid(color="0.95")
+    plt.suptitle("Growth Curve")
+    current_experiment_name = configuration.get_experiment_name(
+        tada_configuration_dict, chosen_size
+    )
+    if not os.path.exists(constants.RESULTS):
+        os.makedirs(constants.RESULTS)
+    save_path = constants.RESULTS + constants.SEPARATOR + current_experiment_name + ".png"
+    plt.savefig(save_path)
+    plt.close()

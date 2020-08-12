@@ -1,6 +1,11 @@
 """Tests for the resultstable and results module."""
 
+import pytest
+
 from prettytable import PrettyTable
+from tada.util import arguments
+from tada.util import configuration
+from tada.util import constants
 from tada.util import results
 
 resultstable = PrettyTable(["Size", "Mean", "Median", "Ratio"])
@@ -43,9 +48,7 @@ def test_to_markdown_table():
     """Test to see if to_markdown_table functions properly."""
     results_table = PrettyTable(["Size", "Mean", "Median", "Ratio"])
     output = results.to_markdown_table(results_table)
-    expect = (
-        """ Size | Mean | Median | Ratio \n------|------|--------|-------"""
-    )
+    expect = """ Size | Mean | Median | Ratio \n------|------|--------|-------"""
     assert expect == output
 
 
@@ -100,5 +103,51 @@ def test_contrast(capsys):
         },
     }
     results.contrast(input_data)
+    standard_out = capsys.readouterr()
+    assert standard_out is not None
+
+
+# pylint: disable=not-callable
+@pytest.mark.parametrize(
+    "correct_arguments",
+    (
+        [
+            "--directory",
+            "../speed-surprises/",
+            "--module",
+            "speedsurprises.graph.graph_gen",
+            "--function",
+            "graph_gen graph_gen_BFS",
+            "--types",
+            "hypothesis",
+            "--schema",
+            "../speed-surprises/speedsurprises/jsonschema/int_and_int.json",
+            "--position",
+            "0",
+        ],
+    ),
+)
+def test_linegraph_viz(correct_arguments, capsys, tmpdir):
+    """Test if contrast functions correctly"""
+    input_data = {
+        "graph_gen": {
+            50: [9.94538065592448e-06, 9.501693725585938e-06],
+            100: [1.8558588460286458e-05, 1.8363348388671875e-05],
+        },
+        "graph_gen_BFS": {
+            50: [0.0010322848828125, 0.000936182421875],
+            100: [0.0037961446354166668, 0.0036485609375],
+        },
+    }
+    parsed_arguments = arguments.parse_args(correct_arguments)
+    directory_prefix = str(tmpdir) + "/"
+    configuration.save(
+        directory_prefix + constants.CONFIGURATION, vars(parsed_arguments[0])
+    )
+    tada_configuration_dict = configuration.read(
+        directory_prefix + constants.CONFIGURATION
+    )
+    size = 800
+    results.linegraph_viz(input_data, tada_configuration_dict, size)
     standard_out = capsys.readouterr()
     assert standard_out is not None

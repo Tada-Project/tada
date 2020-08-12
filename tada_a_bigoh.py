@@ -17,6 +17,7 @@ from tada.util import display as dis
 from tada.util import package
 from tada.util import run
 from tada.util import save
+from tada.util import read
 from tada.util import results
 
 
@@ -282,6 +283,8 @@ def tada(tada_arguments):
                     "USED_BACKFILL": use_backfill,
                     "AVG_RUN_TIME": constants.AVG_RUN_TIME,
                     "STEPS": steps,
+                    "FUNCTION_NAME": tada_arguments.function,
+                    "ARGUMENTS": str(vars(tada_arguments)),
                 },
                 index=[1],
             )
@@ -306,7 +309,12 @@ def main():
         resultstables.append(table)
         tada_results.update(result)
         contrast_flag = arg.contrast
+        viz_flag = arg.viz
     # display results
+    if viz_flag is True:
+        tada_configuration_dict = configuration.read(constants.CONFIGURATION)
+        chosen_size = read.read_experiment_size()
+        results.linegraph_viz(tada_results, tada_configuration_dict, chosen_size)
     for table in resultstables:
         results.display_resultstable(table, tada_arg_list[0].md)
     if len(resultstables) > 1:

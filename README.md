@@ -108,6 +108,8 @@ optional arguments:
   --md                  Show results table in markdown format (default: False)
   --contrast            Show contrast result table. Only works with multiple
                         experiments (default: False)
+  --viz                 Visualize a simple graph for the result (default:
+                        False)
   --level LEVEL         The level of nested data structure to apply doubling
                         experiment (default: 1)
   --position POSITION [POSITION ...]
@@ -393,7 +395,8 @@ following variables will be stored and exported to `experiment_data.csv`. :
 - `NAME_OF_EXPERIMENT`: string := experiment information.
 - `PYTHON_VERSION`: string := current version of Python.
 - `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
-- `START_SIZE`: int := initial size of doubling experiments
+- `START_SIZE`: int := initial size of the doubling experiment
+- `ARGUMENTS`: string := input argument to run the doubling experiment
 
 To run with experiment data collected, add `expect` into the command like this:
 

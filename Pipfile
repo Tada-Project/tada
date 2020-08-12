@@ -10,6 +10,7 @@ hypothesis-jsonschema = "*"
 pandas = "*"
 ptable = "*"
 colorama = "*"
+matplotlib = "*"
 
 [dev-packages]
 pylint = "*"
