@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "tada"
-version = "0.1.6"
+name = "tada-predict"
+version = "1.0.0"
 description = "Predict the likely worst-case order-of-growth function for an arbitrary Python function."
 authors = [
     "enpuyou <youe2@allegheny.edu>",
@@ -11,6 +11,9 @@ license = "GPL-3.0"
 readme = "README.md"
 homepage = "https://tada-predict.netlify.app"
 repository = "https://github.com/Tada-Project/tada"
+packages = [
+    { include = "tada"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.6"
