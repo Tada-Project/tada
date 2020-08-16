@@ -1,11 +1,15 @@
 [tool.poetry]
 name = "tada-predict"
-version = "1.0.0"
+version = "1.0.1"
 description = "Predict the likely worst-case order-of-growth function for an arbitrary Python function."
 authors = [
-    "enpuyou <youe2@allegheny.edu>",
-    "gkapfham <gkapfham@allegheny.edu>",
-    "Lancasterwu <wuj@allegheny.edu>"
+    "Enpu You <youe2@allegheny.edu>",
+    "Gregory Kapfhammer <gkapfham@allegheny.edu>",
+    "Lancaster Wu <wuj@allegheny.edu>"
+    ]
+maintainers = [
+    "Enpu You <youe2@allegheny.edu>",
+    "Lancaster Wu <wuj@allegheny.edu>"
     ]
 license = "GPL-3.0"
 readme = "README.md"
