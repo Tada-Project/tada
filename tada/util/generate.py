@@ -31,7 +31,7 @@ TYPES = [
 global_data = ()
 
 
-# pylint: disable=W0102
+# pylint: disable=W0102, R0913
 def store_data_to_global(path, chosen_size, start_size=25, level=1, position=[0]):
     """Generate data through global variable"""
 
@@ -110,7 +110,7 @@ def double_experiment_size(schema, size):
         schema["minimum"] = int(size)
 
 
-# pylint: disable=W0102
+# pylint: disable=W0102, R0913
 def generate_func(function, path, size, startsize=25, level=1, position=[0]):
     """generate a function with strategy from schema path and current input size"""
     strategy = generate_experiment_strategy(path, size, startsize, level, position)
