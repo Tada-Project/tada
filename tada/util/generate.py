@@ -32,7 +32,7 @@ global_data = ()
 
 
 # pylint: disable=W0102
-def store_data_to_global(path, chosen_size, level=1, position=[0]):
+def store_data_to_global(path, chosen_size, start_size=25, level=1, position=[0]):
     """Generate data through global variable"""
 
     def store_global(a):
@@ -42,7 +42,7 @@ def store_data_to_global(path, chosen_size, level=1, position=[0]):
         global_data = global_data + (a,)
 
     strategies = generate_experiment_strategy(
-        path, chosen_size, level, position
+        path, chosen_size, start_size, level, position
     )
     # store data based on the amount of parameters
     for st in strategies:
@@ -52,10 +52,12 @@ def store_data_to_global(path, chosen_size, level=1, position=[0]):
 
 
 def generate_experiment_strategy(
-        path, size, level=1, position=[0]
+        path, size, start_size=25, level=1, position=[0]
 ):  # pylint: disable=W0102
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
+    for schema in json_schema:
+        double_experiment_size(schema, start_size)
 
     # pylint: disable=W0102, R1705
     def detect_level_and_position(
@@ -77,6 +79,15 @@ def generate_experiment_strategy(
 
     js = detect_level_and_position(json_schema, level, position)
     double_experiment_size(js, size)
+    # hold this approach
+    # opposite_position = []
+    # for index in position:
+    #     if index is 0:
+    #         opposite_position.append(1)
+    #     elif index is 1:
+    #         opposite_position.append(0)
+    # js2 = detect_level_and_position(json_schema, level, opposite_position)
+    # double_experiment_size(js2, size)
     strategy = []
     for j in json_schema:
         strategy.append(from_schema(j))
@@ -100,9 +111,9 @@ def double_experiment_size(schema, size):
 
 
 # pylint: disable=W0102
-def generate_func(function, path, size, level=1, position=[0]):
+def generate_func(function, path, size, startsize=25, level=1, position=[0]):
     """generate a function with strategy from schema path and current input size"""
-    strategy = generate_experiment_strategy(path, size, level, position)
+    strategy = generate_experiment_strategy(path, size, startsize, level, position)
     function = given(*strategy)(function)
     # configure hypothesis
     function = settings(
@@ -135,7 +146,7 @@ def generate_func_from_single_st(function, strategy):
 
 # pylint: disable=W0102, R0913
 def generate_data(
-        chosen_types, chosen_size, level=1, position=[0], path=None, gen_func=None
+        chosen_types, chosen_size, start_size=25, level=1, position=[0], path=None, gen_func=None
 ):
     """Generate a list of data values"""
     generated_values = ()
@@ -149,7 +160,7 @@ def generate_data(
             generated_values = generated_values + (generated_value,)
     elif chosen_types[0] == "hypothesis":
         generated_values = store_data_to_global(
-            path, chosen_size, level, position
+            path, chosen_size, start_size, level, position
         )
     elif chosen_types[0] == "custom":
         generated_values = gen_func(chosen_size)
@@ -174,6 +185,14 @@ def generate_int_list(chosen_size):
     """Generate an int list"""
     output = [random.random() for _ in range(int(chosen_size))]
     return output
+
+
+# hold
+# def generate_double_int_list(chosen_size):
+#     """Generate an int list"""
+#     output = [random.random() for _ in range(int(chosen_size))]
+#     output2 = [random.random() for _ in range(int(chosen_size))]
+#     return (output, output2,)
 
 
 def generate_char_list(chosen_size):

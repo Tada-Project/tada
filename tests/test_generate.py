@@ -154,11 +154,12 @@ def test_generate_data_with_hypothesis(tmpdir):
     # assume the doubling experiment is at 100
     current_size = 100
     level = 1
+    startsize = 25
     position = [0]
     requested_types = ["hypothesis"]
     requested_oath = str(path)
     generated_data = generate.generate_data(
-        requested_types, current_size, level, position, requested_oath
+        requested_types, current_size, startsize, level, position, requested_oath
     )
     assert generated_data is not None
 
@@ -169,12 +170,13 @@ def test_generate_data_with_gen_func(generate_int_test):
     # assume the doubling experiment is at 100
     current_size = 100
     level = 1
+    startsize = 25
     position = [0]
     requested_types = ["custom"]
     path = None
     gen_fuc = generate_int_test
     generated_data = generate.generate_data(
-        requested_types, current_size, level, position, path, gen_fuc
+        requested_types, current_size, startsize, level, position, path, gen_fuc
     )
     assert generated_data is not None
 
@@ -288,16 +290,17 @@ def test_detect_level_and_position(tmpdir):
     """Checks that generate strategy works for multiple level"""
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write(
-        '[{"type": "array", "items": [{"type": "number"}, {"type": "number"}]}\n\
-        ,{"type": "array", "items": [{"type": "number"}, {"type": "number"}]}]'
+        '[{"type": "array", "items": [{"type": "number"}, {"type": "number"}], "maxItems": 0, "minItems": 0}\n\
+        ,{"type": "array", "items": [{"type": "number"}, {"type": "number"}], "maxItems": 0, "minItems": 0}]'
     )
     size = "50"
-    level = 2
-    position = [0, 0]
-    strategy = generate.generate_experiment_strategy(path, size, level, position)
+    level = 1
+    startsize = 25
+    position = [1, 1]
+    strategy = generate.generate_experiment_strategy(path, size, startsize, level, position)
     assert (
         str(strategy[1])
-        == "builds(<function _operator.add>, tuples(floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>), floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>)).map(list), lists(recursive(one_of(one_of(one_of(one_of(none(), booleans()), integers()), floats(allow_infinity=False, allow_nan=False).map(lambda x: <unknown>)), text()), lambda strategy: st.lists(strategy, max_size=3), max_leaves=100)))"  # pylint: disable=C0301
+        == "builds(<function _operator.add>, tuples(floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>), floats(allow_infinity=False, allow_nan=False).filter(lambda n: <unknown>)).map(list), lists(recursive(one_of(one_of(one_of(one_of(none(), booleans()), integers()), floats(allow_infinity=False, allow_nan=False).map(lambda x: <unknown>)), text()), lambda strategy: st.lists(strategy, max_size=3), max_leaves=100), max_size=48, min_size=48))"  # pylint: disable=C0301
     )
 
 
@@ -310,9 +313,10 @@ def test_detect_level_only(tmpdir):
     )
     size = "50"
     level = 2
+    startsize = 25
     position = [0, 0]
-    strategy = generate.generate_experiment_strategy(path, size, level, position)
-    assert str(strategy[0]) == "lists(just(50))"
+    strategy = generate.generate_experiment_strategy(path, size, startsize, level, position)
+    assert str(strategy[0]) == "lists(just(50), max_size=25, min_size=25)"
 
 
 def test_generate_func_from_single_st():
