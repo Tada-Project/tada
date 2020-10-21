@@ -19,6 +19,7 @@ SCHEMA = "schema"
 LEVEL = "level"
 SORTED = "sorted"
 POSITION = "position"
+STATSIZE = "startsize"
 
 
 def save(configuration_filename: str, tada_configuration: Dict[str, Any]) -> None:
@@ -93,6 +94,11 @@ def get_types(current_dictionary):
 def get_schema_path(current_dictionary):
     """Return the schema path argument from the provided dictionary"""
     return current_dictionary[SCHEMA]
+
+
+def get_start_size(current_dictionary):
+    """Return the startsize argument from the provided dictionary"""
+    return current_dictionary[STATSIZE]
 
 
 def get_experiment_name(current_dictionary: Dict[str, Any], chosen_size: int) -> str:
