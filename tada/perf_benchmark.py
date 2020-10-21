@@ -41,6 +41,7 @@ if __name__ == "__main__":
     current_experiment_name = configuration.get_experiment_name(
         tada_configuration_dict, chosen_size
     )
+    start_size = configuration.get_start_size(tada_configuration_dict)
     # set the name of the experiment for perf
     runner.metadata[constants.DESCRIPTION_METANAME] = current_experiment_name
     # read the chosen types
@@ -69,7 +70,7 @@ if __name__ == "__main__":
     position = configuration.get_position(tada_configuration_dict)
     # generate data
     data = generate.generate_data(
-        func_type, chosen_size, level, position, path, gen_func
+        func_type, chosen_size, start_size, level, position, path, gen_func
     )
     # run benchmark
     if configuration.get_sortinput(tada_configuration_dict):
