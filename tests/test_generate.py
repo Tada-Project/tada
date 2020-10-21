@@ -290,8 +290,7 @@ def test_detect_level_and_position(tmpdir):
     """Checks that generate strategy works for multiple level"""
     path = tmpdir.mkdir("sub").join("hello.txt")
     path.write(
-        '[{"type": "array", "items": [{"type": "number"}, {"type": "number"}], "maxItems": 0, "minItems": 0}\n\
-        ,{"type": "array", "items": [{"type": "number"}, {"type": "number"}], "maxItems": 0, "minItems": 0}]'
+        '[{"type": "array", "items": [{"type": "number"}, {"type": "number"}], "maxItems": 0, "minItems": 0},{"type": "array", "items": [{"type": "number"}, {"type": "number"}], "maxItems": 0, "minItems": 0}]'  # pylint: disable=C0301
     )
     size = "50"
     level = 1
