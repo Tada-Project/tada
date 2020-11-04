@@ -32,7 +32,9 @@ global_data = ()
 
 
 # pylint: disable=W0102
-def store_data_to_global(path, chosen_size, level=1, position=[0], doubling_strategy=False):
+def store_data_to_global(
+    path, chosen_size, level=1, position=[0], doubling_strategy=False
+):
     """Generate data through global variable"""
 
     def store_global(a):
@@ -52,15 +54,13 @@ def store_data_to_global(path, chosen_size, level=1, position=[0], doubling_stra
 
 
 def generate_experiment_strategy(
-        path, size, level=1, position=[0], doubling_strategy=False
+    path, size, level=1, position=[0], doubling_strategy=False
 ):  # pylint: disable=W0102
     """generate strategies from a schema path and current input size"""
     json_schema = read.read_schema(path)
 
     # pylint: disable=W0102, R1705
-    def detect_level_and_position(
-            schema, level=1, position=[0], index_position=0
-    ):
+    def detect_level_and_position(schema, level=1, position=[0], index_position=0):
         """A dummy function to store the data to file for experiment"""
         if level == 0:
             return schema
@@ -139,16 +139,20 @@ def generate_func_from_single_st(function, strategy):
 
 # pylint: disable=W0102, R0913
 def generate_data(
-        chosen_types, chosen_size, level=1, position=[0], path=None, gen_func=None, doubling_strategy=False
+    chosen_types,
+    chosen_size,
+    level=1,
+    position=[0],
+    path=None,
+    gen_func=None,
+    doubling_strategy=False,
 ):
     """Generate a list of data values"""
     generated_values = ()
     if chosen_types[0] in TYPES:
         # call a generate function for each type
         for current_type in chosen_types:
-            generator_to_invoke = getattr(
-                GENERATE, "generate_" + str(current_type)
-            )
+            generator_to_invoke = getattr(GENERATE, "generate_" + str(current_type))
             generated_value = generator_to_invoke(chosen_size)
             generated_values = generated_values + (generated_value,)
     elif chosen_types[0] == "hypothesis":
