@@ -163,6 +163,23 @@ def test_generate_data_with_hypothesis(tmpdir):
     assert generated_data is not None
 
 
+# pylint: disable=W0102, R0913
+def test_generate_data_with_hypothesis_doubling_both(tmpdir):
+    """Checks that requesting a generated hypothesis data returns one"""
+    path = tmpdir.mkdir("sub").join("hello.txt")
+    path.write('[{"type": "array", "items": {"type": "integer"}}]')
+    # assume the doubling experiment is at 100
+    current_size = 100
+    level = 1
+    position = [0]
+    requested_types = ["hypothesis"]
+    requested_oath = str(path)
+    generated_data = generate.generate_data(
+        requested_types, current_size, level, position, requested_oath, True
+    )
+    assert generated_data is not None
+
+
 # pylint: disable=W0621
 def test_generate_data_with_gen_func(generate_int_test):
     """Checks that requesting a generated hypothesis data returns one"""

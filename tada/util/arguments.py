@@ -138,6 +138,13 @@ def parse(args: List[str]) -> Namespace:
         help="Show log/debug/diagnostic output",
     )
     parser.add_argument(
+        "--twovar",
+        required=False,
+        action="store_true",
+        default=False,
+        help="Double both variables in doubling experiments",
+    )
+    parser.add_argument(
         "--md",
         required=False,
         action="store_true",

@@ -19,6 +19,7 @@ SCHEMA = "schema"
 LEVEL = "level"
 SORTED = "sorted"
 POSITION = "position"
+DOUBLES = "twovar"
 
 
 def save(configuration_filename: str, tada_configuration: Dict[str, Any]) -> None:
@@ -88,6 +89,11 @@ def get_data_module(current_dictionary: Dict[str, Any]) -> str:
 def get_types(current_dictionary):
     """Return the types argument from the provided dictionary"""
     return current_dictionary[TYPES]
+
+
+def get_doubling_strategy(current_dictionary):
+    """Return the doubling strategy argument from the provided dictionary"""
+    return current_dictionary[DOUBLES]
 
 
 def get_schema_path(current_dictionary):
