@@ -14,7 +14,7 @@ env:
 # install mdl for checking Markdown
 before_install:
   # update ruby and gem versions
-  - rvm reinstall ruby-head --binary
+  - rvm get stable
   - gem update --system
   - gem --version
   - gem install mdl
