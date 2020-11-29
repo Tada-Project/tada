@@ -11,10 +11,14 @@ tool, its provided test suite, and more.
 
 ## Install Tada
 
+```shell
+pip install tada-predict
+```
+
 - Operating system: Unix/Linux · macOS/OS X · Windows
 - Dependency Management: [Pipenv](https://github.com/pypa/pipenv) · [Poetry](https://github.com/python-poetry/poetry)
 
-### Pipenv
+### Install through Github Repo and Pipenv
 
 If you haven't done so already, you can run the following command to install
 `pipenv` on your local machine:
@@ -30,7 +34,7 @@ functions by typing the following in your terminal window:
 
 You can also activate the `pipenv` shell by running this command: `pipenv shell`
 
-### Poetry
+### Install through Github Repo and Pipenv
 
 Similarly, you can run the following command to install `poetry` on your local
 machine:
@@ -53,9 +57,15 @@ poetry shell
 
 ### Run Command
 
-There are multiple ways to use either `pipenv` or `poetry` to run and test
-Tada. You can have `pipenv run` or `poetry run` followed by the command like
-this:
+To run Tada, you can just type into the terminal window:
+
+```bash
+tada [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
+```
+
+There are also multiple ways to use either `pipenv` or `poetry` to run and test
+Tada if you cloned the Github repo locally. You can have `pipenv run` or
+`poetry run` followed by the command like this:
 
 ```bash
 pipenv run python
@@ -70,8 +80,7 @@ just be the ones that you would run in the shell.
 
 ### Checks
 
-Tada is currently under continuous development, it is not yet feature
-complete. However, the documentation here and in
+The documentation here and in
 [Speed-Surprises](https://github.com/Tada-Project/speed-surprises) have featured
 some examples on how to run the tool to automatically suggest the likely
 worst-case order-of-growth function for various types of provided Python function.
@@ -79,15 +88,15 @@ worst-case order-of-growth function for various types of provided Python functio
 If you want to run the tool, then you can run:
 
 ```bash
-python tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
+tada [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
 ```
 
 You can learn about Tada's checks and defaults by typing
-`python tada_a_bigoh.py -h` in your terminal window and then
+`tada -h` or `python tada_a_bigoh.py -h` in your terminal window and then
 reviewing the following output.
 
 ```
-usage: tada_a_bigoh.py [-h] --directory DIRECTORY [DIRECTORY ...] --module
+usage: tada [-h] --directory DIRECTORY [DIRECTORY ...] --module
                        MODULE [MODULE ...] --function FUNCTION [FUNCTION ...]
                        --types TYPES [TYPES ...]
                        [--data_directory DATA_DIRECTORY]
@@ -212,7 +221,7 @@ You can use or test Tada in conjunction with functions in this repository.
 ### Sample Output
 
 ```bash
-$ python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
+$ tada --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
 
       Tada!: auTomAtic orDer-of-growth Analysis!
         https://github.com/Tada-Project/tada/
@@ -248,7 +257,7 @@ will just need to specify the additional function with it's directory and module
 (if it's different from the first function) like this:
 
 ```bash
-$ python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
+$ tada --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
 
       Tada!: auTomAtic orDer-of-growth Analysis!
         https://github.com/Tada-Project/tada/
@@ -298,7 +307,7 @@ to get the result table generated based on the subtraction of the two algorithms
 with the growth ratio analysis of the run time difference:
 
 ```bash
-$ python tada_a_bigoh.py --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --startsize=50  --max=1000 --position 0 --contrast
+$ tada --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --startsize=50  --max=1000 --position 0 --contrast
 
       Tada!: auTomAtic orDer-of-growth Analysis!
         https://github.com/Tada-Project/tada/
@@ -353,7 +362,7 @@ Median: graph_gen is 99.94% faster than graph_gen_BFS
 #### Debug output with `--log`
 
 ```bash
-$ python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
+$ tada --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
 
       Tada!: auTomAtic orDer-of-growth Analysis!
         https://github.com/Tada-Project/tada/
@@ -406,7 +415,7 @@ repository by using the `--types custom` argument followed by `--data_directory`
 `--data_module`, and `--data_function`:
 
 ```bash
-python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
+tada --directory ../speed-surprises/ --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
 ```
 
 ### Record Tada Experiment Result(s)
