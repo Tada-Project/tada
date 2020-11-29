@@ -34,7 +34,7 @@ functions by typing the following in your terminal window:
 
 You can also activate the `pipenv` shell by running this command: `pipenv shell`
 
-### Install through Github Repo and Pipenv
+### Install through Github Repo and Poetry
 
 Similarly, you can run the following command to install `poetry` on your local
 machine:
