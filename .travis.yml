@@ -13,6 +13,8 @@ env:
 
 # install mdl for checking Markdown
 before_install:
+  - gem update --system
+  - gem --version
   - gem install mdl
 
 # command to install dependencies
