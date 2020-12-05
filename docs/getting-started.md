@@ -318,9 +318,9 @@ Besides, Tada also has a set of built-in data generation functions that would
 support most primary types. You can even write your own customized data
 generation function for more specific constraints the function might expect. You
 can also fine-tune your experiment through the aforementioned CLI arguments from
-starting size of the experiment `startsize` to `position` that determines which
+starting size of the experiment `--startsize` to `--position` that determines which
 parameter(s) to double within your function. You can also make use of our
-`backfill` and `indicator` checks to accelerate your experiment process. Please
+`--backfill` and `--indicator` checks to accelerate your experiment process. Please
 be sure to check out [Using Tada](https://tada-predict.netlify.app/using-tada/)
 to find out more details about these features.
 
