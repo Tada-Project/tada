@@ -31,9 +31,7 @@ You can learn more about installing and building Tada from source through
 
 </div>
 
-## Quick Start Example
-
-### Run Command
+## Run Command
 
 To run Tada, you can just type the following command with the arguments into the
 terminal window within your preferred virtual environment:
@@ -45,7 +43,11 @@ tada [-h] --directory DIRECTORY \
 ```
 
 You can learn about Tada's checks and defaults by typing `tada -h` in your
-terminal window and then reviewing all the different checks Tada provides.
+terminal window and then reviewing all the different checks Tada provides. You
+can also refer to [usage](http://tada-predict.netlify.app/getting-started/#run-command)
+to inspect a sample output.
+
+## Quick Start Example
 
 ### Speed-Surprises
 
