@@ -29,6 +29,8 @@ installing the dependencies through either [Pipenv](https://github.com/pypa/pipe
 or [Poetry](https://github.com/python-poetry/poetry). This is also the common
 way if you want to make changes to the code base.
 
+#### Clone the Github Repository
+
 First, you can clone this repository with the following command:
 
 <div class="termy">
@@ -41,53 +43,55 @@ Successfully cloned tada
 
 </div>
 
-#### Poetry
+#### Install Dependencies
 
-If you would like to install dependencies through `poetry`, you would first need
-to install `poetry` on your local machine  and install the dependencies like this:
+You can install dependencies through either `poetry` or `pipenv` with Tada; you
+would first need to install either of these dependency management tool on your
+local machine and then install the dependencies like the following:
 
-<div class="termy">
+=== "Poetry"
 
-```console
-$ pip install poetry
----> 100%
-Successfully installed poetry
-$ poetry install --no-dev
----> 100%
-Successfully installed tada-predict and dependencies from lock file
-```
+    <div class="termy">
 
-</div>
+    ```console
+    $ pip install poetry
+    ---> 100%
+    Successfully installed poetry
+    $ poetry install --no-dev
+    ---> 100%
+    Successfully installed tada-predict and dependencies from lock file
+    ```
 
-You can activate the `poetry` shell with this command:
+    </div>
 
-```shell
-poetry shell
-```
+=== "Pipenv"
 
-#### Pipenv
+    <div class="termy">
 
-Similarly, you can run the following command to install `pipenv` on your local
-machine:
+    ```console
+    $ pip install pipenv
+    ---> 100%
+    Successfully installed pipenv
+    $ pipenv install
+    ---> 100%
+    Successfully installed dependencies from Pipfile.lock
+    ```
 
-<div class="termy">
+    </div>
 
-```console
-$ pip install pipenv
----> 100%
-Successfully installed pipenv
-$ pipenv install
----> 100%
-Successfully installed dependencies from Pipfile.lock
-```
+You can activate the shell with one of the following command:
 
-</div>
+=== "Poetry"
 
-You can also activate the `pipenv` shell by running this command:
+    ```shell
+    poetry shell
+    ```
 
-```shell
-pipenv shell
-```
+=== "Pipenv"
+
+    ```shell
+    pipenv shell
+    ```
 
 ## Use Tada
 
@@ -199,14 +203,32 @@ Sample usage:
 #### Running within Tada Repo
 
 If you are running within the Tada repository, then you could also easily run
-Tada within the shell activated by the dependency management tool you previously
-installed like this:
+Tada with the dependency management tool (or within the activated shell) you
+previously installed like this:
 
-```shell
-python tada/tada_a_bigoh.py [-h] --directory DIRECTORY \
-       --module MODULE --function FUNCTION \
-       --types TYPES [TYPES ...]
-```
+=== "Poetry"
+
+    ```shell
+    poetry run python tada/tada_a_bigoh.py [-h] --directory DIRECTORY \
+          --module MODULE --function FUNCTION \
+          --types TYPES [TYPES ...]
+    ```
+
+=== "Pipenv"
+
+    ```shell
+    pipenv run python tada/tada_a_bigoh.py [-h] --directory DIRECTORY \
+          --module MODULE --function FUNCTION \
+          --types TYPES [TYPES ...]
+    ```
+
+=== "Within Shell"
+
+    ```shell
+    python tada/tada_a_bigoh.py [-h] --directory DIRECTORY \
+          --module MODULE --function FUNCTION \
+          --types TYPES [TYPES ...]
+    ```
 
 It is worth noting that when the provided experiment function is relied on an
 external Python library, it is likely that Tada might not have this dependency,
@@ -214,17 +236,17 @@ and thus, it might cause an error when running the experiment. You can simply
 resolve this issue by installing the required dependencies through your chosen
 dependency management tool like this:
 
-- With `poetry`:
+=== "Poetry"
 
-```shell
-poetry add <library-name>
-```
+    ```shell
+    poetry add <library-name>
+    ```
 
-- With `pipenv`:
+=== "Pipenv"
 
-```shell
-pipenv install <library-name>
-```
+    ```shell
+    pipenv install <library-name>
+    ```
 
 ### Quick Start Example
 
