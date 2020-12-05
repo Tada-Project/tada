@@ -31,6 +31,7 @@ matplotlib = "^3.3.0"
 mkdocs = "^1.1.2"
 mkdocs-material = "^6.1.6"
 markdown-include = "^0.6.0"
+mkdocs-git-revision-date-plugin = "^0.3.1"
 
 [tool.poetry.dev-dependencies]
 pylint = "*"
