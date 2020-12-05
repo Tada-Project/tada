@@ -1,6 +1,6 @@
 # Using Tada
 
-## Speed-Surprises
+## Speed Surprises
 
 We have provided an extensive library of functions and sample JSON schemas in
 [Speed-Surprises repository](https://github.com/Tada-Project/speed-surprises) for
@@ -32,7 +32,8 @@ For example, if you would like to conduct an experiment for a function like
 that takes an `int` list as input:
 
 ```python
-def insertion_sort(lst):
+"""speedsurprises/lists/sorting.py"""
+def insertion_sort(lst: list[int]) -> list[int]:
     for i in range(1, len(lst)):
         current_value = lst[i]
         position = i
@@ -116,19 +117,58 @@ tada --directory . --module speedsurprises.lists.sorting \
      --data_function generate_single_int_list
 ```
 
-## Configurations
+## Features
 
-### Compare two algorithms' performance with Tada
+### Compare the performance of two algorithms with Tada
 
 If you would like to run Tada to compare the performance of two functions, you
-will just need to specify the additional function with it's directory and module
-(if it's different from the first function) like this:
+will just need to specify the additional function with its directory and module
+listed in `--directory`, `--module`, `--function`
+(if it is different from the first function). Tada would conduct experiments
+in turns and provide the results tables of each experiment with some other logistics
+of run time at the end of the experiment.
 
-```shell
-tada --directory . --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json --startsize 25
+For example, if you would like to compare the performance of `insertion_sort` and
+`bubble_sort` as the following set up in `Speed Surprises`,
+
+```python
+"""speedsurprises/lists/sorting.py"""
+
+def insertion_sort(lst: list[int]) -> list[int]:
+    """Sort a list using insertion sort"""
+    for i in range(1, len(lst)):
+        current_value = lst[i]
+        position = i
+
+        while position > 0 and current_value < lst[position - 1]:
+            lst[position] = lst[position - 1]
+            position -= 1
+
+        lst[position] = current_value
+    return lst
+
+def bubble_sort(lst: list[int]) -> list[int]:
+    """Sort a list using bubble sort"""
+    for num in range(len(lst) - 1, 0, -1):
+        for i in range(num):
+            if lst[i] > lst[i + 1]:
+                temp = lst[i]
+                lst[i] = lst[i + 1]
+                lst[i + 1] = temp
+    return lst
 ```
 
-#### `compare` sample output
+Since both functions are in the same directory and module, tou could simply only
+list the names of both functions in `--function` like this:
+
+```shell
+tada --directory . --module speedsurprises.lists.sorting \
+     --function insertion_sort bubble_sort --types hypothesis \
+     --schema speedsurprises/jsonschema/single_int_list.json \
+     --startsize 25
+```
+
+#### Sample output
 
 ```shell
 Start running experiment insertion_sort for size 25 →
@@ -167,18 +207,21 @@ Mean: insertion_sort is 99.60% faster than bubble_sort
 Median: insertion_sort is 99.61% faster than bubble_sort
 ```
 
-### Contrast result tables of two algorithms' performance with Tada
+### Contrast results of two algorithms with Tada
 
-If you would like to contrast run time of two different algorithms where the run
-time of one might be included in another, you can use the `--contrast` feature
-to get the result table generated based on the subtraction of the two algorithms
-with the growth ratio analysis of the run time difference:
+If you would like to contrast run time of two different algorithms (maybe the run
+time of one might be included in another), you can use the `--contrast` flag
+to get an additional results table generated based on the subtraction of the
+results of two algorithms with the growth ratio analysis of the run time difference:
 
 ```shell
-tada --directory . --module speedsurprises.graph.graph_gen --function graph_gen graph_gen_BFS --types hypothesis --schema speedsurprises/jsonschema/int_and_int.json --startsize 50  --max 1000 --position 0 --contrast
+tada --directory . --module speedsurprises.graph.graph_gen \
+     --function graph_gen graph_gen_BFS --types hypothesis \
+     --schema speedsurprises/jsonschema/int_and_int.json \
+     --startsize 50  --max 1000 --contrast
 ```
 
-#### `--contrast` sample output
+#### Sample output
 
 ```shell
 Start running experiment graph_gen for size 25 →
@@ -227,13 +270,68 @@ Median: graph_gen is 99.94% faster than graph_gen_BFS
 +-------+---------------------------+---------------------------+------------------------+
 ```
 
-### Display debug output with `--log`
+### Record Tada experiment results
 
-```shell
-tada --directory . --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
+If you would like to record the results of your doubling experiment, you can use
+the command line argument `--expect` by specifying with a string of the expected
+Big-Oh growth ratio of the provided function (e.g. `"O(1)"`, `"O(n^2)"`).
+
+To run with experiment data collected, add `--expect` to the command like this:
+
+```bash
+tada --directory . --module speedsurprises.lists.sorting \
+     --function insertion_sort --types hypothesis \
+     --schema speedsurprises/jsonschema/single_int_list.json \
+     --expect "O(n)"
 ```
 
-#### `--log` sample output
+The following variables will be collected and stored in `experiment_data.csv`:
+
+- `EXPERIMENT_RELIABILITY`:  dummy variable := 1 if the result provided by tada tool is
+  what user expected.
+- `CPU_TYPE`: string := type information of CPU.
+- `CPU_TEMP`: string := temperature information of CPU.
+- `CPU_COUNT`: int := the number of physical CPUs.
+- `TOTAL_RUNNING_TIME`: int := total time spent on running experiment.
+- `QUIT_BY_MAX_RUNTIME`: dummy variable := 1 if the tool exits by reaching the
+  max_runtime.
+- `QUIT_BY_INDICATOR`: dummy variable := 1 if the tool exits by having indicator larger
+  than the indicator bound.
+- `QUIT_BY_BACKFILL`: dummy variable := 1 if the tool exits by having multiple times of backfills
+- `QUIT_BY_MAX_SIZE`: dummy variable := 1 if the tool exits by reaching the max_size
+  back-filling.
+- `MEM_MAX_RSS`: int := track of current machine memory usage.
+- `MEM_PEAK_PAGEFILE_USAGE`: int := track of current machine memory usage (windows).
+- `OS`: string := information of current operating system.
+- `INDICATOR_VALUE`: int := the value of the indicator boundary user set.
+- `BACKFILL_TIMES`: int := the value of the back-fill time boundary user set.
+- `PYPERF_AVG_EXPERIMENT_ROUNDS`: int := the average loops of all benchmarks in the
+  experiment, the measurement of difficulty for PyPerf to analyze the target algorithm.
+- `PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO`: int := the growth ratio of the total loops
+  in the last two benchmarks, the total loops is usually decreasing when the input get
+  larger, the measurement of reliability of the experiment analysis.
+- `NAME_OF_EXPERIMENT`: string := experiment information.
+- `PYTHON_VERSION`: string := current version of Python.
+- `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
+- `START_SIZE`: int := initial size of the doubling experiment
+- `ARGUMENTS`: string := input argument to run the doubling experiment
+
+## Other Configuration
+
+### Display debug output with `--log`
+
+Tada will hide the run time information of each round of the experiment such as
+mean, median, end time, and etc. in default. To display these run time output,
+you can use the `--log` flag in the command like this:
+
+```shell
+tada --directory . --module speedsurprises.lists.sorting \
+     --function insertion_sort --types hypothesis \
+     --schema speedsurprises/jsonschema/single_int_list.json \
+     --log
+```
+
+#### Sample output
 
 ```shell
 Start running experiment for size 50 →
@@ -269,46 +367,4 @@ Quit due to researched max size
 | 800  | 0.00011595141430664063 | 0.00011436475048828127 | 2.0973536769853545 |
 +------+------------------------+------------------------+--------------------+
 O(n) linear or O(nlogn) linearithmic
-```
-
-### Record Tada experiment result(s)
-
-If you would like to record the results of the doubling experiment, you can use
-the command line argument `--expect` by specifying with a string of the expected
-Big-Oh growth ratio of the provided function (e.g. `"O(1)"`, `"O(n^2)"`). The
-following variables will be stored and exported to `experiment_data.csv`. :
-
-- `EXPERIMENT_RELIABILITY`:  dummy variable := 1 if the result provided by tada tool is
-  what user expected.
-- `CPU_TYPE`: string := type information of CPU.
-- `CPU_TEMP`: string := temperature information of CPU.
-- `CPU_COUNT`: int := the number of physical CPUs.
-- `TOTAL_RUNNING_TIME`: int := total time spent on running experiment.
-- `QUIT_BY_MAX_RUNTIME`: dummy variable := 1 if the tool exits by reaching the
-  max_runtime.
-- `QUIT_BY_INDICATOR`: dummy variable := 1 if the tool exits by having indicator larger
-  than the indicator bound.
-- `QUIT_BY_BACKFILL`: dummy variable := 1 if the tool exits by having multiple times of backfills
-- `QUIT_BY_MAX_SIZE`: dummy variable := 1 if the tool exits by reaching the max_size
-  back-filling.
-- `MEM_MAX_RSS`: int := track of current machine memory usage.
-- `MEM_PEAK_PAGEFILE_USAGE`: int := track of current machine memory usage (windows).
-- `OS`: string := information of current operating system.
-- `INDICATOR_VALUE`: int := the value of the indicator boundary user set.
-- `BACKFILL_TIMES`: int := the value of the back-fill time boundary user set.
-- `PYPERF_AVG_EXPERIMENT_ROUNDS`: int := the average loops of all benchmarks in the
-  experiment, the measurement of difficulty for PyPerf to analyze the target algorithm.
-- `PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO`: int := the growth ratio of the total loops
-  in the last two benchmarks, the total loops is usually decreasing when the input get
-  larger, the measurement of reliability of the experiment analysis.
-- `NAME_OF_EXPERIMENT`: string := experiment information.
-- `PYTHON_VERSION`: string := current version of Python.
-- `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
-- `START_SIZE`: int := initial size of the doubling experiment
-- `ARGUMENTS`: string := input argument to run the doubling experiment
-
-To run with experiment data collected, add `expect` into the command like this:
-
-```bash
-tada --directory . --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json --startsize 50 --expect "O(n)"
 ```
