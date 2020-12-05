@@ -26,10 +26,10 @@ $ pip install tada-predict
 Successfully installed tada-predict
 ```
 
-You can learn more about installing and building Tada from source through
-[here](http://tada-predict.netlify.app/getting-started/#install-through-github-repo)
-
 </div>
+
+You can learn more about installing and building Tada from source through
+[here](http://tada-predict.netlify.app/getting-started/#install-through-github-repo).
 
 ## Run Command
 
