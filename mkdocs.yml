@@ -1,5 +1,5 @@
 # Project information
-site_name: "Tada!: auTomAtic orDer-of-growth Analysis"
+site_name: "Tada"
 site_description: Tada! Docs
 # site_author:
 # site_url:
@@ -13,11 +13,13 @@ theme:
   name: material
   language: en
   palette:
-    primary: indigo
+    primary: blue grey
     accent: indigo
   font:
     text: Roboto
     code: Roboto Mono
+  icon:
+    repo: fontawesome/brands/github
 
 # Page
 nav:
@@ -25,3 +27,33 @@ nav:
   - Getting Started: getting-started.md
   - Using Tada: using-tada.md
   - Contributing: contributing.md
+
+plugins:
+  - search
+  - git-revision-date
+
+markdown_extensions:
+    - toc:
+        permalink: true
+    - markdown.extensions.codehilite:
+        guess_lang: false
+    - markdown_include.include:
+        base_path: docs
+    - admonition
+    - codehilite
+    - extra
+    - pymdownx.superfences:
+        custom_fences:
+            - name: mermaid
+              class: mermaid
+              format: !!python/name:pymdownx.superfences.fence_div_format
+    - pymdownx.tabbed
+
+extra_css:
+    - 'css/termynal.css'
+    - 'css/custom.css'
+
+extra_javascript:
+    # - 'https://unpkg.com/mermaid@8.4.6/dist/mermaid.min.js'
+    - 'js/termynal.js'
+    - 'js/custom.js'
