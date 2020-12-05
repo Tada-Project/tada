@@ -1,47 +1,120 @@
 # Using Tada
 
-## Data Generation
-
-Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
-provided Python function. Therefore, we encourage you to create a file of
-a JSON array that contains JSON schemas of each parameter passed into the provided
-function. Tada also supports data generation through our built-in
-[data generation functions](https://github.com/Tada-Project/tada/blob/master/tada/util/generate.py)
-including these following types:
-`int, int_list, char, char_list, boolean, string, float, bitdepth`
-
-To specify the data generation strategy, we encourage you to set argument
-`--types TYPES [TYPES ...]` with `hypothesis` or one of the aforementioned
-generation types. When using `hypothesis` to generate experiment data, you can
-simply set the `maxItems` and `minItems` in the json schema to zero. The size
-doubling will be enabled through the command line check `--startsize STARTSIZE`,
-which will be the starting size of the doubling experiment.
-
-For further usage of JSON schemas and how to write them for various data types:
-please refer to [JSON schema](https://json-schema.org/understanding-json-schema/reference/type.html)
-and
-[sample JSON schemas](https://github.com/Tada-Project/speed-surprises/tree/master/speedsurprises/jsonschema).
-
-When completed, Tada will be used to estimate the worst-case time complexity for
-Python functions.
-
-### Tada-Generate-Functions
-
-We have provided an extensive library of data generation functions in
-[Tada-Generate-Functions repository](https://github.com/Tada-Project/Tada-Generate-Functions).
-You can use or test Tada in conjunction with generation functions in this
-repository by using the `--types custom` argument followed by `--data_directory`,
-`--data_module`, and `--data_function`:
-
-```bash
-tada --directory . --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
-```
-
 ## Speed-Surprises
 
 We have provided an extensive library of functions and sample JSON schemas in
-[Speed-Surprises repository](https://github.com/Tada-Project/speed-surprises).
-You can use or test Tada in conjunction with functions in this repository.
+[Speed-Surprises repository](https://github.com/Tada-Project/speed-surprises) for
+you to test Tada in conjunction and experience how Tada automatically suggests
+the likely worst-case order-of-growth function for various types of Python function.
+The examples provided in this documentation will be mostly coming from `Speed-Surprises`.
+
+## Data Generation
+
+Tada generates experiment data with the generation strategy you prefer to
+conduct our doubling experiments. To specify the data generation strategy for
+your experiment, we encourage you to set the argument `--types` as `hypothesis`
+or one of the built-in primitive data generation functions. When completed, the
+tool will be generating data based on these requirements and estimate the
+worst-case time complexity for your chosen Python function. The size
+doubling will be enabled through the command line check `--startsize`,
+which will be the starting size for the parameter of the doubling experiment.
+The default `startsize` is 1.
+
+### Hypothesis
+
+Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate a dynamic
+range of random data. Therefore, in order to make use of this feature, we
+encourage you to create a file of JSON array that contains JSON schemas of
+each parameter of your experiment function.
+
+For example, if you would like to conduct an experiment for a function like
+[insertion sort](https://github.com/Tada-Project/speed-surprises/blob/master/speedsurprises/lists/sorting.py)
+that takes an `int` list as input:
+
+```python
+def insertion_sort(lst):
+    for i in range(1, len(lst)):
+        current_value = lst[i]
+        position = i
+
+        while position > 0 and current_value < lst[position - 1]:
+            lst[position] = lst[position - 1]
+            position -= 1
+
+        lst[position] = current_value
+    return lst
+```
+
+You can create a [JSON schema](https://github.com/Tada-Project/speed-surprises/blob/master/speedsurprises/jsonschema/single_int_list.json)
+like this accordingly:
+
+```json
+[{
+  "type": "array",
+  "items": {
+    "type": "integer"
+  },
+  "uniqueItems": true,
+  "maxItems": 0,
+  "minItems": 0
+}]
+```
+
+!!! tip
+    When using `hypothesis` to generate experiment data, you can simply set the
+    `maxItems` and `minItems` as zero in the JSON schema for the parameter you
+    choose to double. Tada will read and modify this value as the size of the
+    input accordingly based on the round of the experiment.
+
+After filling in the path to the function and the JSON schema in the CLI
+arguments like the following, you can execute the command to start the experiment.
+
+```shell
+tada --directory . --module speedsurprises.lists.sorting \
+     --function insertion_sort --types hypothesis \
+     --schema speedsurprises/jsonschema/single_int_list.json
+```
+
+For further usage of JSON schemas and how to write them for various data types,
+please refer to [JSON schema documentation](https://json-schema.org/understanding-json-schema/reference/type.html)
+and check out some
+[sample JSON schemas](https://github.com/Tada-Project/speed-surprises/tree/master/speedsurprises/jsonschema)
+we have provided in Speed Surprises.
+
+### Built-in Data Generation Functions
+
+As mentioned previously, Tada also supports data generation through our built-in
+[data generation functions](https://github.com/Tada-Project/tada/blob/master/tada/util/generate.py)
+including these following types:
+`int`, `int_list`, `char`, `char_list`, `boolean`, `string`, `float`, `bitdepth`.
+
+With the same example of insertion sort, you can conduct the experiment with
+this following command:
+
+```shell
+tada --directory . --module speedsurprises.lists.sorting \
+     --function insertion_sort --types int_list
+```
+
+### Customized Data Generation Functions
+
+If you would like to write your own customized data generation function to
+satisfy more specific constraints, you can set the `--types` argument as `custom`,
+followed by clarifying the path to your customized generation function using
+`--data_directory`, `--data_module`, and `--data_function`.
+
+We have also provided a library of sample customized data generation functions in
+[Tada-Generate-Functions repository](https://github.com/Tada-Project/Tada-Generate-Functions).
+You are welcomed to check them out and use Tada in conjunction with
+any of these generation functions.
+
+```shell
+tada --directory . --module speedsurprises.lists.sorting \
+     --function insertion_sort --types custom \
+     --data_directory ../Tada-Generate-Functions \
+     --data_module generatefunctions.generate_lists  \
+     --data_function generate_single_int_list
+```
 
 ## Configurations
 
