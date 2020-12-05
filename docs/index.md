@@ -31,6 +31,8 @@ You can learn more about installing and building Tada from source through
 
 </div>
 
+## Quick Start Example
+
 ### Run Command
 
 To run Tada, you can just type the following command with the arguments into the
@@ -43,9 +45,7 @@ tada [-h] --directory DIRECTORY \
 ```
 
 You can learn about Tada's checks and defaults by typing `tada -h` in your
-terminal window and then reviewing the following output.
-
-## Quick Start Example
+terminal window and then reviewing all the different checks Tada provides.
 
 ### Speed-Surprises
 
