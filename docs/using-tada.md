@@ -2,18 +2,17 @@
 
 ## Data Generation
 
-Tada adopts [Hypothesis](https://hypothesis.works) and
-[Hypothesis-jsonschema](https://github.com/Zac-HD/hypothesis-jsonschema) to
-generate random data for the provided Python function. Therefore, we encourage
-you to create a file of a JSON array that contains JSON schemas of each parameter
-passed into the provided function. Tada also supports data generation through our
-built-in [data generation functions](https://github.com/Tada-Project/tada/blob/master/tada/util/generate.py)
+Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
+provided Python function. Therefore, we encourage you to create a file of
+a JSON array that contains JSON schemas of each parameter passed into the provided
+function. Tada also supports data generation through our built-in
+[data generation functions](https://github.com/Tada-Project/tada/blob/master/tada/util/generate.py)
 including these following types:
 `int, int_list, char, char_list, boolean, string, float, bitdepth`
 
 To specify the data generation strategy, we encourage you to set argument
-`--types TYPES [TYPES ...]` with `Hypothesis` or one of the aforementioned
-generation types. When using `Hypothesis` to generate experiment data, you can
+`--types TYPES [TYPES ...]` with `hypothesis` or one of the aforementioned
+generation types. When using `hypothesis` to generate experiment data, you can
 simply set the `maxItems` and `minItems` in the json schema to zero. The size
 doubling will be enabled through the command line check `--startsize STARTSIZE`,
 which will be the starting size of the doubling experiment.
@@ -24,12 +23,24 @@ and
 [sample JSON schemas](https://github.com/Tada-Project/speed-surprises/tree/master/speedsurprises/jsonschema).
 
 When completed, Tada will be used to estimate the worst-case time complexity for
-the given Python function(s).
+Python functions.
+
+### Tada-Generate-Functions
+
+We have provided an extensive library of data generation functions in
+[Tada-Generate-Functions repository](https://github.com/Tada-Project/Tada-Generate-Functions).
+You can use or test Tada in conjunction with generation functions in this
+repository by using the `--types custom` argument followed by `--data_directory`,
+`--data_module`, and `--data_function`:
+
+```bash
+tada --directory . --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
+```
 
 ## Speed-Surprises
 
-We have provided an extensive library of functions, experiment scripts, and
-sample JSON schemas in [Speed-Surprises repository](https://github.com/Tada-Project/speed-surprises).
+We have provided an extensive library of functions and sample JSON schemas in
+[Speed-Surprises repository](https://github.com/Tada-Project/speed-surprises).
 You can use or test Tada in conjunction with functions in this repository.
 
 ## Configurations
@@ -37,21 +48,16 @@ You can use or test Tada in conjunction with functions in this repository.
 ### Compare two algorithms' performance with Tada
 
 If you would like to run Tada to compare the performance of two functions, you
-will just need to specify the additional function with its directory and module
+will just need to specify the additional function with it's directory and module
 (if it's different from the first function) like this:
 
-```bash
-pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
+```shell
+tada --directory . --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json --startsize 25
 ```
 
-#### `Compare` sample output
+#### `compare` sample output
 
-```bash
-            Tada!: auTomAtic orDer-of-growth Analysis!
-              https://github.com/Tada-Project/tada/
-    For Help Information Type: pipenv run python tada_a_bigoh.py -h
-
-
+```shell
 Start running experiment insertion_sort for size 25 →
 .
 .
@@ -95,17 +101,13 @@ time of one might be included in another, you can use the `--contrast` feature
 to get the result table generated based on the subtraction of the two algorithms
 with the growth ratio analysis of the run time difference:
 
-```bash
-pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function  graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --sta rtsize=50  --max=1000 --position 0 --contrast
+```shell
+tada --directory . --module speedsurprises.graph.graph_gen --function graph_gen graph_gen_BFS --types hypothesis --schema speedsurprises/jsonschema/int_and_int.json --startsize 50  --max 1000 --position 0 --contrast
 ```
 
 #### `--contrast` sample output
 
-```bash
-            Tada!: auTomAtic orDer-of-growth Analysis!
-              https://github.com/Tada-Project/tada/
-    For Help Information Type: pipenv run python tada_a_bigoh.py -h
-
+```shell
 Start running experiment graph_gen for size 25 →
 .
 .
@@ -154,17 +156,13 @@ Median: graph_gen is 99.94% faster than graph_gen_BFS
 
 ### Display debug output with `--log`
 
-```bash
-pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
+```shell
+tada --directory . --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
 ```
 
 #### `--log` sample output
 
-```bash
-            Tada!: auTomAtic orDer-of-growth Analysis!
-              https://github.com/Tada-Project/tada/
-    For Help Information Type: pipenv run python tada_a_bigoh.py -h
-
+```shell
 Start running experiment for size 50 →
 
 .....................
@@ -233,10 +231,11 @@ following variables will be stored and exported to `experiment_data.csv`. :
 - `NAME_OF_EXPERIMENT`: string := experiment information.
 - `PYTHON_VERSION`: string := current version of Python.
 - `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
-- `START_SIZE`: int := initial size of doubling experiments
+- `START_SIZE`: int := initial size of the doubling experiment
+- `ARGUMENTS`: string := input argument to run the doubling experiment
 
 To run with experiment data collected, add `expect` into the command like this:
 
 ```bash
-pipenv run python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --expect "O(n)"
+tada --directory . --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json --startsize 50 --expect "O(n)"
 ```
