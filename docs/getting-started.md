@@ -1,8 +1,8 @@
 # Getting Started
 
-"Tada!: auTomAtic orDer-of-growth Analysis" systematically runs a doubling
-experiment to ascertain the likely worst-case order-of-growth function for an
-arbitrary Python function.
+Tada is a tool that systematically runs
+a doubling experiment to ascertain the likely worst-case order-of-growth function
+for an arbitrary Python function.
 
 ## Install Tada
 
@@ -10,13 +10,17 @@ arbitrary Python function.
 - Python version: Python 3.6+
 - Dependency Management: [Pipenv](https://github.com/pypa/pipenv) · [Poetry](https://github.com/python-poetry/poetry)
 
-### Install Tada with pip
+### Install Tada with [pip](https://pip.pypa.io/en/stable/)
 
-Install Tada with [pip](https://pip.pypa.io/en/stable/):
+<div class="termy">
 
-```shell
-pip install tada-predict
+```console
+$ pip install tada-predict
+---> 100%
+Successfully installed tada-predict
 ```
+
+</div>
 
 ### Install through Github Repo
 
@@ -27,46 +31,33 @@ way if you want to make changes to the code base.
 
 First, you can clone this repository with the following command:
 
-```shell
-git clone git@github.com:Tada-Project/tada.git
+<div class="termy">
+
+```console
+$ git clone git@github.com:Tada-Project/tada.git
+---> 100%
+Successfully cloned tada
 ```
 
-#### Pipenv
-
-If you would like to install dependencies through `pipenv`, you would first need
-to install `pipenv` on your local machine like this:
-
-```shell
-pip install pipenv
-```
-
-Once you have installed `pipenv`, you can then install the dependencies for
-Tada with the following command.
-
-```shell
-pipenv install
-```
-
-You can also activate the `pipenv` shell by running this command:
-
-```shell
-pipenv shell
-```
+</div>
 
 #### Poetry
 
-Similarly, you can run the following command to install `poetry` on your local
-machine:
+If you would like to install dependencies through `poetry`, you would first need
+to install `poetry` on your local machine  and install the dependencies like this:
 
-```shell
-pip install poetry
+<div class="termy">
+
+```console
+$ pip install poetry
+---> 100%
+Successfully installed poetry
+$ poetry install --no-dev
+---> 100%
+Successfully installed tada-predict and dependencies from lock file
 ```
 
-To install dependencies with `poetry`, you can just run:
-
-```shell
-poetry install --no-dev
-```
+</div>
 
 You can activate the `poetry` shell with this command:
 
@@ -74,89 +65,136 @@ You can activate the `poetry` shell with this command:
 poetry shell
 ```
 
+#### Pipenv
+
+Similarly, you can run the following command to install `pipenv` on your local
+machine:
+
+<div class="termy">
+
+```console
+$ pip install pipenv
+---> 100%
+Successfully installed pipenv
+$ pipenv install
+---> 100%
+Successfully installed dependencies from Pipfile.lock
+```
+
+</div>
+
+You can also activate the `pipenv` shell by running this command:
+
+```shell
+pipenv shell
+```
+
+## Use Tada
+
+
 ### Run Command
 
 To run Tada, you can just type the following command with the arguments into the
 terminal window within your preferred virtual environment:
 
 ```shell
-tada [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
+tada [-h] --directory DIRECTORY \
+          --module MODULE --function FUNCTION \
+          --types TYPES [TYPES ...]
 ```
 
 You can learn about Tada's checks and defaults by typing `tada -h` in your
 terminal window and then reviewing the following output.
 
-```shell
-usage: tada [-h] --directory DIRECTORY [DIRECTORY ...] --module
-                       MODULE [MODULE ...] --function FUNCTION [FUNCTION ...]
-                       --types TYPES [TYPES ...]
-                       [--data_directory DATA_DIRECTORY]
-                       [--data_module DATA_MODULE]
-                       [--data_function DATA_FUNCTION] [--schema SCHEMA]
-                       [--startsize STARTSIZE] [--steps STEPS]
-                       [--runningtime RUNNINGTIME] [--expect EXPECT]
-                       [--backfill] [--indicator INDICATOR]
-                       [--maxsize MAXSIZE] [--sorted] [--log] [--md]
-                       [--contrast] [--level LEVEL]
-                       [--position POSITION [POSITION ...]]
+<div class="termy">
+
+```console
+usage: tada [-h] --directory DIRECTORY [DIRECTORY ...]
+            --module [MODULE [MODULE ...]
+            --function FUNCTION [FUNCTION ...]
+            --types TYPES [TYPES ...]
+            [--data_directory DATA_DIRECTORY]
+            [--data_module DATA_MODULE]
+            [--data_function DATA_FUNCTION] [--schema SCHEMA]
+            [--startsize STARTSIZE] [--steps STEPS]
+            [--runningtime RUNNINGTIME] [--expect EXPECT]
+            [--backfill] [--indicator INDICATOR]
+            [--maxsize MAXSIZE] [--sorted] [--log] [--md]
+            [--contrast] [--level LEVEL]
+            [--position] POSITION [POSITION ...]]
 
 optional arguments:
-  -h, --help            show this help message and exit
+  -h, --help
+        show this help message and exit
   --directory DIRECTORY [DIRECTORY ...]
-                        Path to the package directory with functions to
-                        analyze (default: None)
+        Path to the package directory with functions to
+        analyze (default: None)
   --module MODULE [MODULE ...]
-                        Module name with functions to analyze (default: None)
+        Module name with functions to analyze (default: None)
   --function FUNCTION [FUNCTION ...]
-                        Name of the function to analyze (default: None)
+        Name of the function to analyze (default: None)
   --types TYPES [TYPES ...]
-                        Data generation type: hypothesis or parameter types of
-                        the function (default: None)
+        Data generation type: hypothesis or parameter types
+        of the function (default: None)
   --data_directory DATA_DIRECTORY
-                        Path to the package directory with function to
-                        generate data (default: None)
+        Path to the package directory with function to
+        generate data (default: None)
   --data_module DATA_MODULE
-                        Module name with functions to generate data (default:
-                        None)
+        Module name with functions to generate data
+        (default: None)
   --data_function DATA_FUNCTION
-                        Name of the data generation function (default: None)
-  --schema SCHEMA       The path to the JSON schema that describes the data
-                        format (default: None)
+        Name of the data generation function (default: None)
+  --schema SCHEMA
+        The path to the JSON schema that describes the data
+        format (default: None)
   --startsize STARTSIZE
-                        Starting size of the doubling experiment (default: 1)
-  --steps STEPS         Maximum rounds of the doubling experiment (default:
-                        10)
+        Starting size of the doubling experiment (default: 1)
+  --steps STEPS
+        Maximum rounds of the doubling experiment
+        (default: 10)
   --runningtime RUNNINGTIME
-                        Maximum running time of the doubling experiment
-                        (default: 200)
-  --expect EXPECT       Expected Growth Ratio: O(1) | O(logn) | O(n) |
-                        O(nlogn) | O(n^2) | O(n^3) | O(c^n). By using this
-                        argument, the experiment result will be stored in a
-                        csv file (default: None)
-  --backfill            Enable backfill to shrink experiments size according
-                        to the Predicted True Value (default: False)
+        Maximum running time of the doubling experiment
+        (default: 200)
+  --expect EXPECT
+        Expected Growth Ratio: O(1) | O(logn) | O(n) |
+        O(nlogn) | O(n^2) | O(n^3) | O(c^n). By using this
+        argument, the experiment result will be stored in a
+        csv file (default: None)
+  --backfill
+        Enable backfill to shrink experiments size according
+        to the Predicted True Value (default: False)
   --indicator INDICATOR
-                        Indicator value (default: 0.1)
-  --maxsize MAXSIZE     Maximum size of the doubling experiment (default:
-                        1500)
-  --sorted              Enable input data to be sorted (default: False)
-  --log                 Show log/debug/diagnostic output (default: False)
-  --md                  Show results table in markdown format (default: False)
-  --contrast            Show contrast result table. Only works with multiple
-                        experiments (default: False)
-  --viz                 Visualize a simple graph for the result (default:
-                        False)
-  --level LEVEL         The level of nested data structure to apply doubling
-                        experiment (default: 1)
+        Indicator value (default: 0.1)
+  --maxsize MAXSIZE
+        Maximum size of the doubling experiment
+        (default: 1500)
+  --sorted
+        Enable input data to be sorted (default: False)
+  --log
+        Show log/debug/diagnostic output (default: False)
+  --md
+        Show results table in markdown format (default: False)
+  --contrast
+        Show contrast result table. Only works with multiple
+        experiments (default: False)
+  --viz
+        Visualize a simple graph for the result
+        (default: False)
+  --level LEVEL
+        The level of nested data structure to apply doubling
+        experiment (default: 1)
   --position POSITION [POSITION ...]
-                        The position of input data to double in the
-                        multivariable doubling experiment. Must be the last
-                        argument (default: [0])
+        The position of input data to double in the
+        multivariable doubling experiment. Must be the last
+        argument (default: [0])
 
-Sample usage: python tada_a_bigoh.py --directory
-/Users/myname/projectdirectory --module modulename.file --function
-function_name --types hypothesis
+Sample usage:
+  tada --directory /path/to/project_directory --module
+  module_name.file_name --function function_name
+  --types hypothesis
 ```
+
+</div>
 
 #### Running within Tada Repo
 
@@ -165,7 +203,9 @@ Tada within the shell activated by the dependency management tool you previously
 installed like this:
 
 ```shell
-python tada/tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
+python tada/tada_a_bigoh.py [-h] --directory DIRECTORY \
+       --module MODULE --function FUNCTION \
+       --types TYPES [TYPES ...]
 ```
 
 It is worth noting that when the provided experiment function is relied on an
@@ -174,10 +214,17 @@ and thus, it might cause an error when running the experiment. You can simply
 resolve this issue by installing the required dependencies through your chosen
 dependency management tool like this:
 
-- With `pipenv`: `pipenv install <library-name>`
-- With `poetry`: `poetry add <library-name>`
+- With `poetry`:
 
-## Use Tada
+```shell
+poetry add <library-name>
+```
+
+- With `pipenv`:
+
+```shell
+pipenv install <library-name>
+```
 
 ### Quick Start Example
 
@@ -198,7 +245,11 @@ tada --directory . --module speedsurprises.lists.sorting --function insertion_so
 Within a minute or so, you will be able to inspect an output similar to the
 following with a results table provided at the end of the experiment.
 
-```shell
+<div class="termy">
+
+```console
+$ tada --directory . --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json
+
         Tada!: auTomAtic orDer-of-growth Analysis!
           https://github.com/Tada-Project/tada/
       For Help Information Type: python tada_a_bigoh.py -h
@@ -211,7 +262,11 @@ Start running experiment insertion_sort for size 1 →
 .
 .
 → Done running experiment insertion_sort for size 64
+```
 
+</div>
+
+```
 +-----------------------------------------------------------------------------+
 |             insertion_sort: O(n) linear or O(nlogn) linearithmic            |
 +------+------------------------+------------------------+--------------------+
@@ -228,10 +283,28 @@ Start running experiment insertion_sort for size 1 →
 O(n) linear or O(nlogn) linearithmic
 ```
 
+### Features
+
+Tada provides more features and customization on argument parameters for you
+to choose. The tool adopts `Hypothesis` and `Hypothesis-jsonschema` to generate
+random data for your provided Python function, so that you can easily conduct
+a doubling experiment with a dynamic range of data by simply providing a JSON
+schema that describes the type and constraints of your function arguments.
+Besides, Tada also has a set of built-in data generation functions that would
+support most primary types. You can even write your own customized data
+generation function for more specific constraints the function might expect. You
+can also fine-tune your experiment through the aforementioned CLI arguments from
+starting size of the experiment `startsize` to `position` that determines which
+parameter(s) to double within your function. You can also make use of our
+`backfill` and `indicator` checks to accelerate your experiment process. Please
+be sure to check out [Using Tada](https://tada-predict.netlify.app/using-tada/)
+to find out more details about these features.
+
 ## Test
 
-Tada comes with an extensive test suite. In order to run the tests suite, you will
+Tada comes with an extensive test suite. In order to run the tests, you will
 need to clone the git repository and set up the development environment for Tada
 using either `pipenv` or `poetry`
 
-See the documentation for more details and information.
+See [Test Tada](http://tada-predict.netlify.app/contributing/#test-tada) for
+more details and information.
