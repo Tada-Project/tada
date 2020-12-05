@@ -261,7 +261,9 @@ then run the following command to conduct an experiment for `insertion_sort`
 within the `speed-surprises` repository:
 
 ```shell
-tada --directory . --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json
+tada --directory . --module speedsurprises.lists.sorting \
+     --function insertion_sort --types hypothesis \
+     --schema speedsurprises/jsonschema/single_int_list.json
 ```
 
 Within a minute or so, you will be able to inspect an output similar to the
