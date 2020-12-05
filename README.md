@@ -2,100 +2,93 @@
 
 [![Build Status](https://api.travis-ci.org/Tada-Project/tada.svg?branch=master)](https://travis-ci.org/Tada-Project/tada) [![codecov.io](https://codecov.io/github/Tada-Project/tada/coverage.svg?branch=master)](http://codecov.io/github/Tada-Project/tada?branch=master) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-orange.svg)](https://www.python.org/)
 
-This repository contains the source code and usage instructions for a tool
-called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in the
-Python 3 language. The tool systematically runs a doubling experiment to
-ascertain the likely worst-case order-of-growth function for an arbitrary Python
-function. This documentation provides a brief overview about how to run the
-tool, its provided test suite, and more.
+Tada is a tool that systematically runs a doubling experiment to ascertain the
+likely worst-case order-of-growth function for an arbitrary Python function.
+This documentation provides a brief overview about how to run the tool, its
+provided test suite, and more.
 
 ## Install Tada
+
+- Operating system: Linux · macOS/OS X · Windows
+- Python version: Python 3.6+
+- Dependency Management: [Pipenv](https://github.com/pypa/pipenv) · [Poetry](https://github.com/python-poetry/poetry)
+
+### Install Tada with pip
+
+Install Tada with [pip](https://pip.pypa.io/en/stable/):
 
 ```shell
 pip install tada-predict
 ```
 
-- Operating system: Unix/Linux · macOS/OS X · Windows
-- Dependency Management: [Pipenv](https://github.com/pypa/pipenv) · [Poetry](https://github.com/python-poetry/poetry)
+### Install through Github Repo and Pipenv or Poetry
 
-### Install through Github Repo and Pipenv
+Alternatively, you can also install Tada manually by cloning the repository and
+install the dependencies through either [Pipenv](https://github.com/pypa/pipenv)
+or [Poetry](https://github.com/python-poetry/poetry).
 
-If you haven't done so already, you can run the following command to install
-`pipenv` on your local machine:
+First, you can clone this repository with the following command:
 
-```bash
+```shell
+git clone git@github.com:Tada-Project/tada.git
+```
+
+#### Pipenv
+
+If you would like to install dependencies through `pipenv`, you would first need
+to install `pipenv` on your local machine like this:
+
+```shell
 pip install pipenv
 ```
 
-Once you have installed `pipenv`, you can then run the test suite for Tada's
-functions by typing the following in your terminal window:
+Once you have installed `pipenv`, you can then install the dependencies for
+Tada with the following command.
 
-- `pipenv install`
+```shell
+pipenv install
+```
 
-You can also activate the `pipenv` shell by running this command: `pipenv shell`
+You can also activate the `pipenv` shell by running this command:
 
-### Install through Github Repo and Poetry
+```shell
+pipenv shell
+```
+
+#### Poetry
 
 Similarly, you can run the following command to install `poetry` on your local
 machine:
 
-```bash
+```shell
 pip install poetry
 ```
 
 To install dependencies with `poetry`, you can just run:
 
-```bash
+```shell
 poetry install --no-dev
 ```
 
 You can activate the `poetry` shell with this command:
 
-```bash
+```shell
 poetry shell
 ```
 
 ### Run Command
 
-To run Tada, you can just type into the terminal window:
+To run Tada, you can just type the following command with the arguments into the
+terminal window within your preferred virtual environment:
 
-```bash
+```shell
 tada [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
 ```
 
-There are also multiple ways to use either `pipenv` or `poetry` to run and test
-Tada if you cloned the Github repo locally. You can have `pipenv run` or
-`poetry run` followed by the command like this:
+You can learn about Tada's checks and defaults by typing `tada -h` in your
+terminal window and then reviewing the following output.
 
-```bash
-pipenv run python
-poetry run python
-```
-
-You can also just spawn a shell with the virtualenv activated by either `pipenv`
-or `poetry`. For ease of reading, the commands provided in the documentation will
-just be the ones that you would run in the shell.
-
-## Use Tada
-
-### Checks
-
-The documentation here and in
-[Speed-Surprises](https://github.com/Tada-Project/speed-surprises) have featured
-some examples on how to run the tool to automatically suggest the likely
-worst-case order-of-growth function for various types of provided Python function.
-
-If you want to run the tool, then you can run:
-
-```bash
-tada [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
-```
-
-You can learn about Tada's checks and defaults by typing
-`tada -h` or `python tada_a_bigoh.py -h` in your terminal window and then
-reviewing the following output.
-
-```
+```shell
 usage: tada [-h] --directory DIRECTORY [DIRECTORY ...] --module
                        MODULE [MODULE ...] --function FUNCTION [FUNCTION ...]
                        --types TYPES [TYPES ...]
@@ -167,25 +160,32 @@ Sample usage: python tada_a_bigoh.py --directory
 function_name --types hypothesis
 ```
 
-It is worth noting that when the provided function is relied on an external Python
-library, it is likely that Tada might not have this dependency, and thus, it might
-cause an error when running the experiment. You can simply resolve this issue
-by installing the required dependencies.
+#### Running within Tada Repo
 
-Type in this command if you are using `pipenv`:
+If you are running within the Tada repository, then you could also easily run
+Tada within the shell activated by the dependency management tool you previously
+installed like this:
 
-```bash
-pipenv install <library-name>
+```shell
+python tada/tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
 ```
 
-or this command if you are using `poetry`:
+It is worth noting that when the provided experiment function is relied on an
+external Python library, it is likely that Tada might not have this dependency,
+and thus, it might cause an error when running the experiment. You can simply
+resolve this issue by installing the required dependencies through your chosen
+dependency management tool like this:
 
-```bash
-poetry add <library-name>
-```
+- With `pipenv`: `pipenv install <library-name>`
+- With `poetry`: `poetry add <library-name>`
 
-Otherwise, type in the installation command that is appropriate for your own
-chosen installation method.
+## Use Tada
+
+### Quick Start Example
+
+We have provided some code examples in [Speed-Surprises](https://github.com/Tada-Project/speed-surprises)
+for you to run Tada in parallel and experience how Tada automatically suggests
+the likely worst-case order-of-growth function for various types of Python function.
 
 ### Data Generation
 
