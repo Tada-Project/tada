@@ -184,8 +184,51 @@ dependency management tool like this:
 ### Quick Start Example
 
 We have provided some code examples in [Speed-Surprises](https://github.com/Tada-Project/speed-surprises)
-for you to run Tada in parallel and experience how Tada automatically suggests
+for you to run Tada in conjunction and experience how Tada automatically suggests
 the likely worst-case order-of-growth function for various types of Python function.
+You can follow the instructions in [Speed-Surprises](https://github.com/Tada-Project/speed-surprises)
+to clone the repository and install the dependencies.
+
+After successfully setting up the repository on your local machine, you can
+then run the following command to conduct an experiment for `insertion_sort`
+within the `speed-surprises` repository:
+
+```shell
+tada --directory . --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json
+```
+
+Within a minute or so, you will be able to inspect an output similar to the
+following with a results table provided at the end of the experiment.
+
+```shell
+        Tada!: auTomAtic orDer-of-growth Analysis!
+          https://github.com/Tada-Project/tada/
+      For Help Information Type: python tada_a_bigoh.py -h
+
+Start running experiment insertion_sort for size 1 →
+
+
+→ Done running experiment insertion_sort for size 1
+.
+.
+.
+→ Done running experiment insertion_sort for size 64
+
++-----------------------------------------------------------------------------+
+|             insertion_sort: O(n) linear or O(nlogn) linearithmic            |
++------+------------------------+------------------------+--------------------+
+| Size |          Mean          |         Median         |       Ratio        |
++------+------------------------+------------------------+--------------------+
+|  1   | 4.882118635177613e-07  | 4.6806960487365676e-07 |         0          |
+|  2   | 7.456634746551513e-07  | 7.133920059204101e-07  | 1.527335835885569  |
+|  4   |  9.27755012257894e-07  | 9.209306488037112e-07  | 1.2442006934655812 |
+|  8   | 1.3545460286458332e-06 | 1.3353490028381343e-06 | 1.4600255571233727 |
+|  16  | 2.2379635269165037e-06 | 2.2146971740722657e-06 | 1.6521871384125948 |
+|  32  | 3.9610248652140306e-06 | 3.913619827270508e-06  | 1.7699237800678478 |
+|  64  | 7.2769234293619794e-06 | 7.211799896240237e-06  | 1.837131468996415  |
++------+------------------------+------------------------+--------------------+
+O(n) linear or O(nlogn) linearithmic
+```
 
 ### Data Generation
 
@@ -487,7 +530,7 @@ branch that you have created. This pull request should describe the new feature
 that you are adding and give examples of how to run it on the command line.
 Of course, if you are not a collaborator on this project, then you will need to
 fork the repository, add your new feature, document and test it as appropriate,
-and then create a pull request similarily.
+and then create a pull request similarly.
 
 We highly recommend you to provide tests along with the feature that you
 implemented and you should not break the existing test cases or features.
@@ -514,10 +557,6 @@ lines of code are not covered, then you can run:
 ```bash
 pytest --cov-config pytest.cov --cov --cov-report term-missing
 ```
-
-## Future Works
-
-- Further verification of the accuracy and efficiency of the tool
 
 ## Problems or Praise
 
