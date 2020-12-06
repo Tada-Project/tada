@@ -14,9 +14,9 @@ def parse(args: List[str]) -> Namespace:
     # create the parser with the default help formatter
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-        epilog="""Sample usage: pipenv run python tada_a_bigoh.py --directory
-            /Users/myname/projectdirectory
-            --module modulename.file --function function_name --types hypothesis""",
+        epilog="""Sample usage: tada --directory /path/to/project_directory
+        --module module_name.file_name --function function_name
+        --types hypothesis""",
     )
 
     # add all of the arguments to the command-line interface
