@@ -192,7 +192,7 @@ def test_configuration_file_correct_schema_path(
 )
 # pylint: disable=invalid-name
 def test_configuration_file_correct_functions_modules(
-    correct_arguments, correct_function, correct_module, tmpdir
+        correct_arguments, correct_function, correct_module, tmpdir
 ):
     """Checks that the configuration file was saved to the directory"""
     parsed_arguments = arguments.parse_args(correct_arguments)
@@ -230,7 +230,7 @@ def test_configuration_file_correct_functions_modules(
 )
 # pylint: disable=invalid-name
 def test_configuration_file_correct_experiment_name(
-    correct_arguments, correct_experiment_name, tmpdir
+        correct_arguments, correct_experiment_name, tmpdir
 ):
     """Checks that the configuration file was saved to the directory"""
     parsed_arguments = arguments.parse_args(correct_arguments)
@@ -276,7 +276,7 @@ def test_configuration_file_correct_experiment_name(
 )
 # pylint: disable=invalid-name
 def test_configuration_file_correct_datagen_functions(
-    correct_arguments, correct_directory, correct_module, correct_function, tmpdir
+        correct_arguments, correct_directory, correct_module, correct_function, tmpdir
 ):
     """Checks that the configuration file was saved to the directory"""
     parsed_arguments = arguments.parse_args(correct_arguments)
@@ -315,7 +315,7 @@ def test_configuration_file_correct_datagen_functions(
 )
 # pylint: disable=invalid-name
 def test_configuration_file_correct_experiment_info(
-    correct_arguments, correct_experiment_info, tmpdir
+        correct_arguments, correct_experiment_info, tmpdir
 ):
     """Checks that the configuration file was saved to the directory"""
     parsed_arguments = arguments.parse_args(correct_arguments)
