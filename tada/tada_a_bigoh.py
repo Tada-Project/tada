@@ -195,7 +195,7 @@ def tada(tada_arguments):  # noqa: C901
             if current_runningtime > tada_arguments.runningtime:
                 dis.output_message(
                     "\nQuit due to exceeding the max time limit: "
-                    + current_runningtime,
+                    + str(current_runningtime),
                     to_print,
                 )
                 constants.QUIT_BY_MAX_RUNTIME = 1
