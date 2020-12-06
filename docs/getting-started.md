@@ -95,7 +95,6 @@ You can activate the shell with one of the following command:
 
 ## Use Tada
 
-
 ### Run Command
 
 To run Tada, you can just type the following command with the arguments into the

@@ -7,6 +7,8 @@ likely worst-case order-of-growth function for an arbitrary Python function.
 This documentation provides a brief overview about how to run the tool, its
 provided test suite, and more.
 
+**Documentation**: https://tada-predict.netlify.app
+
 ## Install Tada
 
 - Operating system: Linux · macOS/OS X · Windows
@@ -34,47 +36,47 @@ First, you can clone this repository with the following command:
 git clone git@github.com:Tada-Project/tada.git
 ```
 
-#### Pipenv
-
-If you would like to install dependencies through `pipenv`, you would first need
-to install `pipenv` on your local machine like this:
-
-```shell
-pip install pipenv
-```
-
-Once you have installed `pipenv`, you can then install the dependencies for
-Tada with the following command.
-
-```shell
-pipenv install
-```
-
-You can also activate the `pipenv` shell by running this command:
-
-```shell
-pipenv shell
-```
-
 #### Poetry
 
-Similarly, you can run the following command to install `poetry` on your local
-machine:
+If you would like to install dependencies through `poetry`, you would first need
+to install `poetry` on your local machine like this:
 
 ```shell
 pip install poetry
 ```
 
-To install dependencies with `poetry`, you can just run:
+Once you have installed `poetry`, you can then install the dependencies for
+Tada with the following command.
 
 ```shell
-poetry install --no-dev
+poetry install
 ```
 
-You can activate the `poetry` shell with this command:
+You can also activate the `poetry` shell by running this command:
 
 ```shell
 poetry shell
+```
+
+#### Pipenv
+
+Similarly, you can run the following command to install `pipenv` on your local
+machine:
+
+```shell
+pip install pipenv
+```
+
+To install dependencies with `pipenv`, you can just run:
+
+```shell
+pipenv install --no-dev
+```
+
+You can activate the `pipenv` shell with this command:
+
+```shell
+pipenv shell
 ```
 
 ### Run Command
@@ -90,75 +92,89 @@ You can learn about Tada's checks and defaults by typing `tada -h` in your
 terminal window and then reviewing the following output.
 
 ```shell
-usage: tada [-h] --directory DIRECTORY [DIRECTORY ...] --module
-                       MODULE [MODULE ...] --function FUNCTION [FUNCTION ...]
-                       --types TYPES [TYPES ...]
-                       [--data_directory DATA_DIRECTORY]
-                       [--data_module DATA_MODULE]
-                       [--data_function DATA_FUNCTION] [--schema SCHEMA]
-                       [--startsize STARTSIZE] [--steps STEPS]
-                       [--runningtime RUNNINGTIME] [--expect EXPECT]
-                       [--backfill] [--indicator INDICATOR]
-                       [--maxsize MAXSIZE] [--sorted] [--log] [--md]
-                       [--contrast] [--level LEVEL]
-                       [--position POSITION [POSITION ...]]
+usage: tada [-h] --directory DIRECTORY [DIRECTORY ...]
+            --module [MODULE [MODULE ...]
+            --function FUNCTION [FUNCTION ...]
+            --types TYPES [TYPES ...]
+            [--data_directory DATA_DIRECTORY]
+            [--data_module DATA_MODULE]
+            [--data_function DATA_FUNCTION] [--schema SCHEMA]
+            [--startsize STARTSIZE] [--steps STEPS]
+            [--runningtime RUNNINGTIME] [--expect EXPECT]
+            [--backfill] [--indicator INDICATOR]
+            [--maxsize MAXSIZE] [--sorted] [--log] [--md]
+            [--contrast] [--level LEVEL]
+            [--position] POSITION [POSITION ...]]
 
 optional arguments:
-  -h, --help            show this help message and exit
+  -h, --help
+        show this help message and exit
   --directory DIRECTORY [DIRECTORY ...]
-                        Path to the package directory with functions to
-                        analyze (default: None)
+        Path to the package directory with functions to
+        analyze (default: None)
   --module MODULE [MODULE ...]
-                        Module name with functions to analyze (default: None)
+        Module name with functions to analyze (default: None)
   --function FUNCTION [FUNCTION ...]
-                        Name of the function to analyze (default: None)
+        Name of the function to analyze (default: None)
   --types TYPES [TYPES ...]
-                        Data generation type: hypothesis or parameter types of
-                        the function (default: None)
+        Data generation type: hypothesis or parameter types
+        of the function (default: None)
   --data_directory DATA_DIRECTORY
-                        Path to the package directory with function to
-                        generate data (default: None)
+        Path to the package directory with function to
+        generate data (default: None)
   --data_module DATA_MODULE
-                        Module name with functions to generate data (default:
-                        None)
+        Module name with functions to generate data
+        (default: None)
   --data_function DATA_FUNCTION
-                        Name of the data generation function (default: None)
-  --schema SCHEMA       The path to the JSON schema that describes the data
-                        format (default: None)
+        Name of the data generation function (default: None)
+  --schema SCHEMA
+        The path to the JSON schema that describes the data
+        format (default: None)
   --startsize STARTSIZE
-                        Starting size of the doubling experiment (default: 1)
-  --steps STEPS         Maximum rounds of the doubling experiment (default:
-                        10)
+        Starting size of the doubling experiment (default: 1)
+  --steps STEPS
+        Maximum rounds of the doubling experiment
+        (default: 10)
   --runningtime RUNNINGTIME
-                        Maximum running time of the doubling experiment
-                        (default: 200)
-  --expect EXPECT       Expected Growth Ratio: O(1) | O(logn) | O(n) |
-                        O(nlogn) | O(n^2) | O(n^3) | O(c^n). By using this
-                        argument, the experiment result will be stored in a
-                        csv file (default: None)
-  --backfill            Enable backfill to shrink experiments size according
-                        to the Predicted True Value (default: False)
+        Maximum running time of the doubling experiment
+        (default: 200)
+  --expect EXPECT
+        Expected Growth Ratio: O(1) | O(logn) | O(n) |
+        O(nlogn) | O(n^2) | O(n^3) | O(c^n). By using this
+        argument, the experiment result will be stored in a
+        csv file (default: None)
+  --backfill
+        Enable backfill to shrink experiments size according
+        to the Predicted True Value (default: False)
   --indicator INDICATOR
-                        Indicator value (default: 0.1)
-  --maxsize MAXSIZE     Maximum size of the doubling experiment (default:
-                        1500)
-  --sorted              Enable input data to be sorted (default: False)
-  --log                 Show log/debug/diagnostic output (default: False)
-  --md                  Show results table in markdown format (default: False)
-  --contrast            Show contrast result table. Only works with multiple
-                        experiments (default: False)
-  --viz                 Visualize a simple graph for the result (default:
-                        False)
-  --level LEVEL         The level of nested data structure to apply doubling
-                        experiment (default: 1)
+        Indicator value (default: 0.1)
+  --maxsize MAXSIZE
+        Maximum size of the doubling experiment
+        (default: 1500)
+  --sorted
+        Enable input data to be sorted (default: False)
+  --log
+        Show log/debug/diagnostic output (default: False)
+  --md
+        Show results table in markdown format (default: False)
+  --contrast
+        Show contrast result table. Only works with multiple
+        experiments (default: False)
+  --viz
+        Visualize a simple graph for the result
+        (default: False)
+  --level LEVEL
+        The level of nested data structure to apply doubling
+        experiment (default: 1)
   --position POSITION [POSITION ...]
-                        The position of input data to double in the
-                        multivariable doubling experiment. Must be the last
-                        argument (default: [0])
+        The position of input data to double in the
+        multivariable doubling experiment. Must be the last
+        argument (default: [0])
 
-Sample usage: python tada_a_bigoh.py --directory
-/Users/myname/projectdirectory --module modulename.file --function
-function_name --types hypothesis
+Sample usage:
+  tada --directory /path/to/project_directory --module
+  module_name.file_name --function function_name
+  --types hypothesis
 ```
 
 #### Running within Tada Repo
@@ -202,7 +218,7 @@ following with a results table provided at the end of the experiment.
 ```shell
         Tada!: auTomAtic orDer-of-growth Analysis!
           https://github.com/Tada-Project/tada/
-      For Help Information Type: python tada_a_bigoh.py -h
+        For Help Information Type: python tada -h
 
 Start running experiment insertion_sort for size 1 →
 
@@ -273,7 +289,7 @@ To run the test suite for Tada's functions within the shell by typing the
 following in your terminal window:
 
 ```shell
-pytest
+pytest tests
 ```
 
 If you want to collect the coverage of the provided test suite, then you can
