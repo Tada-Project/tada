@@ -172,9 +172,9 @@ optional arguments:
         argument (default: [0])
 
 Sample usage:
-  tada --directory /path/to/project_directory --module
-  module_name.file_name --function function_name
-  --types hypothesis
+  tada --directory /path/to/project_directory
+       --module module_name.file_name --function function_name
+       --types hypothesis
 ```
 
 #### Running within Tada Repo
@@ -184,7 +184,8 @@ Tada within the shell activated by the dependency management tool you previously
 installed like this:
 
 ```shell
-python tada/tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
+python tada/tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE \
+      --function FUNCTION --types TYPES [TYPES ...]
 ```
 
 It is worth noting that when the provided experiment function is relied on an
@@ -209,7 +210,9 @@ then run the following command to conduct an experiment for `insertion_sort`
 within the `speed-surprises` repository:
 
 ```shell
-tada --directory . --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema speedsurprises/jsonschema/single_int_list.json
+tada --directory . --module speedsurprises.lists.sorting \
+     --function insertion_sort --types hypothesis \
+     --schema speedsurprises/jsonschema/single_int_list.json
 ```
 
 Within a minute or so, you will be able to inspect an output similar to the
