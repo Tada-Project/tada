@@ -79,7 +79,7 @@ local machine and then install the dependencies like the following:
 
     </div>
 
-You can activate the shell with one of the following command:
+You can activate the shell with one of the following commands:
 
 === "Poetry"
 

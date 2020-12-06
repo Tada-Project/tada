@@ -158,7 +158,7 @@ def bubble_sort(lst: list[int]) -> list[int]:
     return lst
 ```
 
-Since both functions are in the same directory and module, tou could simply only
+Since both functions are in the same directory and module, you could simply just
 list the names of both functions in `--function` like this:
 
 ```shell
@@ -210,9 +210,9 @@ Median: insertion_sort is 99.61% faster than bubble_sort
 ### Contrast results of two algorithms with Tada
 
 If you would like to contrast run time of two different algorithms (maybe the run
-time of one might be included in another), you can use the `--contrast` flag
-to get an additional results table generated based on the subtraction of the
-results of two algorithms with the growth ratio analysis of the run time difference:
+time of one is included in another), you can use the `--contrast` flag to get
+an additional results table generated based on the subtraction of the results of
+two algorithms with the growth ratio analysis of the run time difference:
 
 ```shell
 tada --directory . --module speedsurprises.graph.graph_gen \
@@ -224,7 +224,7 @@ tada --directory . --module speedsurprises.graph.graph_gen \
 #### Sample output
 
 ```shell
-Start running experiment graph_gen for size 25 →
+Start running experiment graph_gen for size 50 →
 .
 .
 .
