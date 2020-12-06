@@ -2,469 +2,263 @@
 
 [![Build Status](https://api.travis-ci.org/Tada-Project/tada.svg?branch=master)](https://travis-ci.org/Tada-Project/tada) [![codecov.io](https://codecov.io/github/Tada-Project/tada/coverage.svg?branch=master)](http://codecov.io/github/Tada-Project/tada?branch=master) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-orange.svg)](https://www.python.org/)
 
-This repository contains the source code and usage instructions for a tool
-called "Tada: auTomAtic orDer-of-growth Analysis" that is implemented in the
-Python 3 language. The tool systematically runs a doubling experiment to
-ascertain the likely worst-case order-of-growth function for an arbitrary Python
-function. This documentation provides a brief overview about how to run the
-tool, its provided test suite, and more.
+Tada is a tool that systematically runs a doubling experiment to ascertain the
+likely worst-case order-of-growth function for an arbitrary Python function.
+This documentation provides a brief overview about how to run the tool, its
+provided test suite, and more.
+
+**Documentation**: https://tada-predict.netlify.app
 
 ## Install Tada
+
+- Operating system: Linux · macOS/OS X · Windows
+- Python version: Python 3.6+
+- Dependency Management: [Pipenv](https://github.com/pypa/pipenv) · [Poetry](https://github.com/python-poetry/poetry)
+
+### Install Tada with pip
+
+Install Tada with [pip](https://pip.pypa.io/en/stable/):
 
 ```shell
 pip install tada-predict
 ```
 
-- Operating system: Unix/Linux · macOS/OS X · Windows
-- Dependency Management: [Pipenv](https://github.com/pypa/pipenv) · [Poetry](https://github.com/python-poetry/poetry)
+### Install through Github Repo
 
-### Install through Github Repo and Pipenv
+Alternatively, you can also install Tada manually by cloning the repository and
+installing the dependencies through either [Pipenv](https://github.com/pypa/pipenv)
+or [Poetry](https://github.com/python-poetry/poetry). This is also the common
+way if you want to make changes to the code base.
 
-If you haven't done so already, you can run the following command to install
-`pipenv` on your local machine:
+First, you can clone this repository with the following command:
 
-```bash
-pip install pipenv
+```shell
+git clone git@github.com:Tada-Project/tada.git
 ```
 
-Once you have installed `pipenv`, you can then run the test suite for Tada's
-functions by typing the following in your terminal window:
+#### Poetry
 
-- `pipenv install`
+If you would like to install dependencies through `poetry`, you would first need
+to install `poetry` on your local machine like this:
 
-You can also activate the `pipenv` shell by running this command: `pipenv shell`
-
-### Install through Github Repo and Poetry
-
-Similarly, you can run the following command to install `poetry` on your local
-machine:
-
-```bash
+```shell
 pip install poetry
 ```
 
-To install dependencies with `poetry`, you can just run:
+Once you have installed `poetry`, you can then install the dependencies for
+Tada with the following command.
 
-```bash
-poetry install --no-dev
+```shell
+poetry install
 ```
 
-You can activate the `poetry` shell with this command:
+You can also activate the `poetry` shell by running this command:
 
-```bash
+```shell
 poetry shell
+```
+
+#### Pipenv
+
+Similarly, you can run the following command to install `pipenv` on your local
+machine:
+
+```shell
+pip install pipenv
+```
+
+To install dependencies with `pipenv`, you can just run:
+
+```shell
+pipenv install --no-dev
+```
+
+You can activate the `pipenv` shell with this command:
+
+```shell
+pipenv shell
 ```
 
 ### Run Command
 
-To run Tada, you can just type into the terminal window:
+To run Tada, you can just type the following command with the arguments into the
+terminal window within your preferred virtual environment:
 
-```bash
+```shell
 tada [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
 ```
 
-There are also multiple ways to use either `pipenv` or `poetry` to run and test
-Tada if you cloned the Github repo locally. You can have `pipenv run` or
-`poetry run` followed by the command like this:
+You can learn about Tada's checks and defaults by typing `tada -h` in your
+terminal window and then reviewing the following output.
 
-```bash
-pipenv run python
-poetry run python
-```
-
-You can also just spawn a shell with the virtualenv activated by either `pipenv`
-or `poetry`. For ease of reading, the commands provided in the documentation will
-just be the ones that you would run in the shell.
-
-## Use Tada
-
-### Checks
-
-The documentation here and in
-[Speed-Surprises](https://github.com/Tada-Project/speed-surprises) have featured
-some examples on how to run the tool to automatically suggest the likely
-worst-case order-of-growth function for various types of provided Python function.
-
-If you want to run the tool, then you can run:
-
-```bash
-tada [-h] --directory DIRECTORY --module MODULE --function FUNCTION --types TYPES [TYPES ...]
-```
-
-You can learn about Tada's checks and defaults by typing
-`tada -h` or `python tada_a_bigoh.py -h` in your terminal window and then
-reviewing the following output.
-
-```
-usage: tada [-h] --directory DIRECTORY [DIRECTORY ...] --module
-                       MODULE [MODULE ...] --function FUNCTION [FUNCTION ...]
-                       --types TYPES [TYPES ...]
-                       [--data_directory DATA_DIRECTORY]
-                       [--data_module DATA_MODULE]
-                       [--data_function DATA_FUNCTION] [--schema SCHEMA]
-                       [--startsize STARTSIZE] [--steps STEPS]
-                       [--runningtime RUNNINGTIME] [--expect EXPECT]
-                       [--backfill] [--indicator INDICATOR]
-                       [--maxsize MAXSIZE] [--sorted] [--log] [--md]
-                       [--contrast] [--level LEVEL]
-                       [--position POSITION [POSITION ...]]
+```shell
+usage: tada [-h] --directory DIRECTORY [DIRECTORY ...]
+            --module [MODULE [MODULE ...]
+            --function FUNCTION [FUNCTION ...]
+            --types TYPES [TYPES ...]
+            [--data_directory DATA_DIRECTORY]
+            [--data_module DATA_MODULE]
+            [--data_function DATA_FUNCTION] [--schema SCHEMA]
+            [--startsize STARTSIZE] [--steps STEPS]
+            [--runningtime RUNNINGTIME] [--expect EXPECT]
+            [--backfill] [--indicator INDICATOR]
+            [--maxsize MAXSIZE] [--sorted] [--log] [--md]
+            [--contrast] [--level LEVEL]
+            [--position] POSITION [POSITION ...]]
 
 optional arguments:
-  -h, --help            show this help message and exit
+  -h, --help
+        show this help message and exit
   --directory DIRECTORY [DIRECTORY ...]
-                        Path to the package directory with functions to
-                        analyze (default: None)
+        Path to the package directory with functions to
+        analyze (default: None)
   --module MODULE [MODULE ...]
-                        Module name with functions to analyze (default: None)
+        Module name with functions to analyze (default: None)
   --function FUNCTION [FUNCTION ...]
-                        Name of the function to analyze (default: None)
+        Name of the function to analyze (default: None)
   --types TYPES [TYPES ...]
-                        Data generation type: hypothesis or parameter types of
-                        the function (default: None)
+        Data generation type: hypothesis or parameter types
+        of the function (default: None)
   --data_directory DATA_DIRECTORY
-                        Path to the package directory with function to
-                        generate data (default: None)
+        Path to the package directory with function to
+        generate data (default: None)
   --data_module DATA_MODULE
-                        Module name with functions to generate data (default:
-                        None)
+        Module name with functions to generate data
+        (default: None)
   --data_function DATA_FUNCTION
-                        Name of the data generation function (default: None)
-  --schema SCHEMA       The path to the JSON schema that describes the data
-                        format (default: None)
+        Name of the data generation function (default: None)
+  --schema SCHEMA
+        The path to the JSON schema that describes the data
+        format (default: None)
   --startsize STARTSIZE
-                        Starting size of the doubling experiment (default: 1)
-  --steps STEPS         Maximum rounds of the doubling experiment (default:
-                        10)
+        Starting size of the doubling experiment (default: 1)
+  --steps STEPS
+        Maximum rounds of the doubling experiment
+        (default: 10)
   --runningtime RUNNINGTIME
-                        Maximum running time of the doubling experiment
-                        (default: 200)
-  --expect EXPECT       Expected Growth Ratio: O(1) | O(logn) | O(n) |
-                        O(nlogn) | O(n^2) | O(n^3) | O(c^n). By using this
-                        argument, the experiment result will be stored in a
-                        csv file (default: None)
-  --backfill            Enable backfill to shrink experiments size according
-                        to the Predicted True Value (default: False)
+        Maximum running time of the doubling experiment
+        (default: 200)
+  --expect EXPECT
+        Expected Growth Ratio: O(1) | O(logn) | O(n) |
+        O(nlogn) | O(n^2) | O(n^3) | O(c^n). By using this
+        argument, the experiment result will be stored in a
+        csv file (default: None)
+  --backfill
+        Enable backfill to shrink experiments size according
+        to the Predicted True Value (default: False)
   --indicator INDICATOR
-                        Indicator value (default: 0.1)
-  --maxsize MAXSIZE     Maximum size of the doubling experiment (default:
-                        1500)
-  --sorted              Enable input data to be sorted (default: False)
-  --log                 Show log/debug/diagnostic output (default: False)
-  --md                  Show results table in markdown format (default: False)
-  --contrast            Show contrast result table. Only works with multiple
-                        experiments (default: False)
-  --viz                 Visualize a simple graph for the result (default:
-                        False)
-  --level LEVEL         The level of nested data structure to apply doubling
-                        experiment (default: 1)
+        Indicator value (default: 0.1)
+  --maxsize MAXSIZE
+        Maximum size of the doubling experiment
+        (default: 1500)
+  --sorted
+        Enable input data to be sorted (default: False)
+  --log
+        Show log/debug/diagnostic output (default: False)
+  --md
+        Show results table in markdown format (default: False)
+  --contrast
+        Show contrast result table. Only works with multiple
+        experiments (default: False)
+  --viz
+        Visualize a simple graph for the result
+        (default: False)
+  --level LEVEL
+        The level of nested data structure to apply doubling
+        experiment (default: 1)
   --position POSITION [POSITION ...]
-                        The position of input data to double in the
-                        multivariable doubling experiment. Must be the last
-                        argument (default: [0])
+        The position of input data to double in the
+        multivariable doubling experiment. Must be the last
+        argument (default: [0])
 
-Sample usage: python tada_a_bigoh.py --directory
-/Users/myname/projectdirectory --module modulename.file --function
-function_name --types hypothesis
+Sample usage:
+  tada --directory /path/to/project_directory
+       --module module_name.file_name --function function_name
+       --types hypothesis
 ```
 
-It is worth noting that when the provided function is relied on an external Python
-library, it is likely that Tada might not have this dependency, and thus, it might
-cause an error when running the experiment. You can simply resolve this issue
-by installing the required dependencies.
+#### Running within Tada Repo
 
-Type in this command if you are using `pipenv`:
+If you are running within the Tada repository, then you could also easily run
+Tada within the shell activated by the dependency management tool you previously
+installed like this:
 
-```bash
-pipenv install <library-name>
+```shell
+python tada/tada_a_bigoh.py [-h] --directory DIRECTORY --module MODULE \
+      --function FUNCTION --types TYPES [TYPES ...]
 ```
 
-or this command if you are using `poetry`:
+It is worth noting that when the provided experiment function is relied on an
+external Python library, it is likely that Tada might not have this dependency,
+and thus, it might cause an error when running the experiment. You can simply
+resolve this issue by installing the required dependencies through your chosen
+dependency management tool like this:
 
-```bash
-poetry add <library-name>
+- With `pipenv`: `pipenv install <library-name>`
+- With `poetry`: `poetry add <library-name>`
+
+## Quick Start Example
+
+We have provided some code examples in [Speed-Surprises](https://github.com/Tada-Project/speed-surprises)
+for you to run Tada in conjunction and experience how Tada automatically suggests
+the likely worst-case order-of-growth function for various types of Python function.
+You can follow the instructions in [Speed-Surprises](https://github.com/Tada-Project/speed-surprises)
+to clone the repository and install the dependencies.
+
+After successfully setting up the repository on your local machine, you can
+then run the following command to conduct an experiment for `insertion_sort`
+within the `speed-surprises` repository:
+
+```shell
+tada --directory . --module speedsurprises.lists.sorting \
+     --function insertion_sort --types hypothesis \
+     --schema speedsurprises/jsonschema/single_int_list.json
 ```
 
-Otherwise, type in the installation command that is appropriate for your own
-chosen installation method.
+Within a minute or so, you will be able to inspect an output similar to the
+following with a results table provided at the end of the experiment.
 
-### Data Generation
+```shell
+        Tada!: auTomAtic orDer-of-growth Analysis!
+          https://github.com/Tada-Project/tada/
+        For Help Information Type: python tada -h
 
-Tada adopts `Hypothesis` and `Hypothesis-jsonschema` to generate random data for the
-provided Python function. Therefore, we encourage you to create a file of
-a JSON array that contains JSON schemas of each parameter passed into the provided
-function. Tada also supports data generation through our built-in
-[data generation functions](https://github.com/Tada-Project/tada/blob/master/tada/util/generate.py)
-including these following types:
-`int, int_list, char, char_list, boolean, string, float, bitdepth`
-
-To specify the data generation strategy, we encourage you to set argument
-`--types TYPES [TYPES ...]` with `hypothesis` or one of the aforementioned
-generation types. When using `hypothesis` to generate experiment data, you can
-simply set the `maxItems` and `minItems` in the json schema to zero. The size
-doubling will be enabled through the command line check `--startsize STARTSIZE`,
-which will be the starting size of the doubling experiment.
-
-For further usage of JSON schemas and how to write them for various data types:
-please refer to [JSON schema](https://json-schema.org/understanding-json-schema/reference/type.html)
-and
-[sample JSON schemas](https://github.com/Tada-Project/speed-surprises/tree/master/speedsurprises/jsonschema).
-
-When completed, Tada will be used to estimate the worst-case time complexity for
-Python functions.
-
-### Speed-Surprises
-
-We have provided an extensive library of functions and sample JSON schemas in
-[Speed-Surprises repository](https://github.com/Tada-Project/speed-surprises).
-You can use or test Tada in conjunction with functions in this repository.
-
-### Sample Output
-
-```bash
-$ tada --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50
-
-      Tada!: auTomAtic orDer-of-growth Analysis!
-        https://github.com/Tada-Project/tada/
-    For Help Information Type: python tada_a_bigoh.py -h
-
-Start running experiment for size 50 →
+Start running experiment insertion_sort for size 1 →
 
 
-→ Done running experiment for size 50
+→ Done running experiment insertion_sort for size 1
 .
 .
 .
-→ Done running experiment for size 800
+→ Done running experiment insertion_sort for size 64
 
 +-----------------------------------------------------------------------------+
 |             insertion_sort: O(n) linear or O(nlogn) linearithmic            |
 +------+------------------------+------------------------+--------------------+
 | Size |          Mean          |         Median         |       Ratio        |
 +------+------------------------+------------------------+--------------------+
-|  50  | 5.254574352518718e-06  | 5.080362350463869e-06  |         0          |
-| 100  | 1.013776767171224e-05  | 1.0109862487792971e-05 | 1.929322337375019  |
-| 200  | 2.041813344523112e-05  | 1.9827050170898433e-05 | 2.0140660258179457 |
-| 400  | 4.1289982617187504e-05 | 4.0720488891601556e-05 | 2.0222212146836194 |
-| 800  | 9.176736091308593e-05  | 9.089502807617187e-05  |  2.22250907111999  |
+|  1   | 4.882118635177613e-07  | 4.6806960487365676e-07 |         0          |
+|  2   | 7.456634746551513e-07  | 7.133920059204101e-07  | 1.527335835885569  |
+|  4   |  9.27755012257894e-07  | 9.209306488037112e-07  | 1.2442006934655812 |
+|  8   | 1.3545460286458332e-06 | 1.3353490028381343e-06 | 1.4600255571233727 |
+|  16  | 2.2379635269165037e-06 | 2.2146971740722657e-06 | 1.6521871384125948 |
+|  32  | 3.9610248652140306e-06 | 3.913619827270508e-06  | 1.7699237800678478 |
+|  64  | 7.2769234293619794e-06 | 7.211799896240237e-06  | 1.837131468996415  |
 +------+------------------------+------------------------+--------------------+
 O(n) linear or O(nlogn) linearithmic
 ```
 
-#### Compare two algorithms' performance with Tada
-
-If you would like to run Tada to compare the performance of two functions, you
-will just need to specify the additional function with it's directory and module
-(if it's different from the first function) like this:
-
-```bash
-$ tada --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort bubble_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 25
-
-      Tada!: auTomAtic orDer-of-growth Analysis!
-        https://github.com/Tada-Project/tada/
-    For Help Information Type: python tada_a_bigoh.py -h
-
-Start running experiment insertion_sort for size 25 →
-.
-.
-.
-→ Done running experiment bubble_sort for size 800
-
-+-----------------------------------------------------------------------------+
-|             insertion_sort: O(n) linear or O(nlogn) linearithmic            |
-+------+------------------------+------------------------+--------------------+
-| Size |          Mean          |         Median         |       Ratio        |
-+------+------------------------+------------------------+--------------------+
-|  25  | 3.644364811706543e-06  | 3.498709533691405e-06  |         0          |
-|  50  | 6.535123836263021e-06  | 6.483351989746092e-06  | 1.793213405878218  |
-| 100  | 1.2902192108154296e-05 | 1.2540842590332028e-05 | 1.9742842571032526 |
-| 200  | 2.5023900944010416e-05 | 2.4608139038085928e-05 | 1.9395077002608803 |
-| 400  | 5.526396857910156e-05  | 5.3515207031250005e-05 | 2.2084473840729952 |
-| 800  | 0.00011801120257161459 |  0.00011251379296875   | 2.1354094829925283 |
-+------+------------------------+------------------------+--------------------+
-+-----------------------------------------------------------------------------+
-|                        bubble_sort: O(n^2) quadratic                        |
-+------+------------------------+------------------------+--------------------+
-| Size |          Mean          |         Median         |       Ratio        |
-+------+------------------------+------------------------+--------------------+
-|  25  | 2.8776128824869792e-05 | 2.846207250976562e-05  |         0          |
-|  50  | 0.00010703222574869792 | 0.00010308191601562499 | 3.7194796562140504 |
-| 100  | 0.0004109644687825521  | 0.00039437410449218743 | 3.8396330255474633 |
-| 200  |   0.0015730586140625   | 0.0015326660937500002  | 3.8277241308051635 |
-| 400  |    0.00632440301875    |  0.006229572156249999  | 4.020449690947576  |
-| 800  |  0.029292134683333335  |  0.028519337000000006  | 4.631604690038055  |
-+------+------------------------+------------------------+--------------------+
-
-At the greatest common size 800:
-Mean: insertion_sort is 99.60% faster than bubble_sort
-Median: insertion_sort is 99.61% faster than bubble_sort
-```
-
-##### Contrast result tables of two algorithms' performance with Tada
-
-If you would like to contrast run time of two different algorithms where the run
-time of one might be included in another, you can use the `--contrast` feature
-to get the result table generated based on the subtraction of the two algorithms
-with the growth ratio analysis of the run time difference:
-
-```bash
-$ tada --directory ../speed-surprises/ --module=speedsurprises.graph.graph_gen --function graph_gen graph_gen_BFS --types hypothesis --schema=../speed-surprises/speedsurprises/jsonschema/int_and_int.json --startsize=50  --max=1000 --position 0 --contrast
-
-      Tada!: auTomAtic orDer-of-growth Analysis!
-        https://github.com/Tada-Project/tada/
-    For Help Information Type: python tada_a_bigoh.py -h
-
-Start running experiment graph_gen for size 25 →
-.
-.
-.
-→ Done running experiment graph_gen_BFS for size 800
-
-+-----------------------------------------------------------------------------+
-|               graph_gen: O(n) linear or O(nlogn) linearithmic               |
-+------+------------------------+------------------------+--------------------+
-| Size |          Mean          |         Median         |       Ratio        |
-+------+------------------------+------------------------+--------------------+
-|  50  |  9.94538065592448e-06  | 9.501693725585938e-06  |         0          |
-| 100  | 1.8558588460286458e-05 | 1.8363348388671875e-05 | 1.8660510947090876 |
-| 200  | 3.7122855631510415e-05 | 3.560983886718751e-05  | 2.000305988300223  |
-| 400  | 7.208413248697916e-05  | 7.197658691406252e-05  | 1.9417722925871337 |
-| 800  | 0.00015173049479166666 | 0.00014575283203125002 | 2.104908383534675  |
-+------+------------------------+------------------------+--------------------+
-+-------------------------------------------------------------------------+
-|                     graph_gen_BFS: O(n^2) quadratic                     |
-+------+-----------------------+---------------------+--------------------+
-| Size |          Mean         |        Median       |       Ratio        |
-+------+-----------------------+---------------------+--------------------+
-|  50  |   0.0010322848828125  |  0.000936182421875  |         0          |
-| 100  | 0.0037961446354166668 |   0.0036485609375   | 3.6774195753733445 |
-| 200  |  0.014912410624999999 |    0.01433645625    | 3.928304123576473  |
-| 400  |  0.06095087833333333  | 0.05791582499999999 | 4.087258583877236  |
-| 800  |      0.252504645      | 0.23859980000000003 | 4.1427564606875915 |
-+------+-----------------------+---------------------+--------------------+
-
-At the greatest common size 800:
-Mean: graph_gen is 99.94% faster than graph_gen_BFS
-Median: graph_gen is 99.94% faster than graph_gen_BFS
-
-+----------------------------------------------------------------------------------------+
-|               Contrast for graph_gen and graph_gen_BFS: O(n^2) quadratic               |
-+-------+---------------------------+---------------------------+------------------------+
-|  Size |            Mean           |           Median          |         Ratio          |
-+-------+---------------------------+---------------------------+------------------------+
-|   50  |   0.0010223395021565756   |   0.0009266807281494141   |           0            |
-|  100  |   0.0037775860469563805   |    0.003630197589111328   |   3.6950406777667753   |
-|  200  |    0.014875287769368488   |    0.014300846411132813   |   3.9377760253412575   |
-|  400  |    0.06087879420084635    |    0.05784384841308593    |   4.092612872082332    |
-|  800  |    0.25235291450520836    |    0.23845404716796878    |   4.145169394660909    |
-+-------+---------------------------+---------------------------+------------------------+
-```
-
-#### Debug output with `--log`
-
-```bash
-$ tada --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --log
-
-      Tada!: auTomAtic orDer-of-growth Analysis!
-        https://github.com/Tada-Project/tada/
-    For Help Information Type: python tada_a_bigoh.py -h
-
-Start running experiment for size 50 →
-
-.....................
-tada_speedsurpriseslistssorting_insertionsort_50: Mean +- std dev: 6.76 us +- 0.38 us
-
-Mean 6.756377457682293e-06
-Median 6.655228393554689e-06
-current indicator: 0.1
-expected end time: 6.756377457682293e-06
-
-→ Done running experiment for size 50
-
-end time rate: 1
-last end time rate: 1
-
-Start running experiment for size 100 →
-.
-.
-.
-→ Done running experiment for size 800
-
-end time rate: 1.0977868448462222
-last end time rate: 1.0104045516442501
-
-Quit due to reaching max size: 1500
-+-----------------------------------------------------------------------------+
-|             insertion_sort: O(n) linear or O(nlogn) linearithmic            |
-+------+------------------------+------------------------+--------------------+
-| Size |          Mean          |         Median         |       Ratio        |
-+------+------------------------+------------------------+--------------------+
-|  50  | 5.108458277893066e-06  | 4.995336715698241e-06  |         0          |
-| 100  | 9.719848541259765e-06  | 9.592753784179686e-06  | 1.9026970589781584 |
-| 200  | 1.9103883695475262e-05 | 1.881045025634766e-05  | 1.9654507592768782 |
-| 400  | 4.1088669527180994e-05 | 4.0323755249023436e-05 | 2.1508019092951667 |
-| 800  |    8.721809375e-05     | 8.493975268554687e-05  | 2.1226799201250226 |
-+------+------------------------+------------------------+--------------------+
-```
-
-### Tada-Generate-Functions
-
-We have provided an extensive library of data generation functions in
-[Tada-Generate-Functions repository](https://github.com/Tada-Project/Tada-Generate-Functions).
-You can use or test Tada in conjunction with generation functions in this
-repository by using the `--types custom` argument followed by `--data_directory`,
-`--data_module`, and `--data_function`:
-
-```bash
-tada --directory ../speed-surprises/ --module speedsurprises.lists.python_basic --function list_copy --types custom --data_directory ../Tada-Generate-Functions/ --data_module generatefunctions.generate_lists  --data_function generate_single_int_list --startsize 25 --maxsize 1000
-```
-
-### Record Tada Experiment Result(s)
-
-If you would like to record the results of the doubling experiment, you can use
-the command line argument `--expect` by specifying with a string of the expected
-Big-Oh growth ratio of the provided function (e.g. `"O(1)"`, `"O(n^2)"`). The
-following variables will be stored and exported to `experiment_data.csv`. :
-
-- `EXPERIMENT_RELIABILITY`:  dummy variable := 1 if the result provided by tada tool is
-  what user expected.
-- `CPU_TYPE`: string := type information of CPU.
-- `CPU_TEMP`: string := temperature information of CPU.
-- `CPU_COUNT`: int := the number of physical CPUs.
-- `TOTAL_RUNNING_TIME`: int := total time spent on running experiment.
-- `QUIT_BY_MAX_RUNTIME`: dummy variable := 1 if the tool exits by reaching the
-  max_runtime.
-- `QUIT_BY_INDICATOR`: dummy variable := 1 if the tool exits by having indicator larger
-  than the indicator bound.
-- `QUIT_BY_BACKFILL`: dummy variable := 1 if the tool exits by having multiple times of backfills
-- `QUIT_BY_MAX_SIZE`: dummy variable := 1 if the tool exits by reaching the max_size
-  back-filling.
-- `MEM_MAX_RSS`: int := track of current machine memory usage.
-- `MEM_PEAK_PAGEFILE_USAGE`: int := track of current machine memory usage (windows).
-- `OS`: string := information of current operating system.
-- `INDICATOR_VALUE`: int := the value of the indicator boundary user set.
-- `BACKFILL_TIMES`: int := the value of the back-fill time boundary user set.
-- `PYPERF_AVG_EXPERIMENT_ROUNDS`: int := the average loops of all benchmarks in the
-  experiment, the measurement of difficulty for PyPerf to analyze the target algorithm.
-- `PYPERF_LAST_TWO_EXPERIMENT_ROUNDS_RATIO`: int := the growth ratio of the total loops
-  in the last two benchmarks, the total loops is usually decreasing when the input get
-  larger, the measurement of reliability of the experiment analysis.
-- `NAME_OF_EXPERIMENT`: string := experiment information.
-- `PYTHON_VERSION`: string := current version of Python.
-- `DATA_GEN_STRATEGY`: string := the chosen data generation strategy
-- `START_SIZE`: int := initial size of the doubling experiment
-- `ARGUMENTS`: string := input argument to run the doubling experiment
-
-To run with experiment data collected, add `expect` into the command like this:
-
-```bash
-python tada_a_bigoh.py --directory ../speed-surprises/ --module speedsurprises.lists.sorting --function insertion_sort --types hypothesis --schema ../speed-surprises/speedsurprises/jsonschema/single_int_list.json --startsize 50 --expect "O(n)"
-```
+You can find more information about Tada usage, including experiment data
+generation and using different flags and arguments to configure your Tada
+experiment through our [documentation](https://tada-predict.netlify.app/using-tada/)
+here.
 
 ## Add New Features to Tada
 
 You can follow these steps to add a new feature if you are already a
-collaborator on the project. First, you should type the following
-command, substituting the name of your feature for the word `feature-name`.
+collaborator on the project. First, you should create and publish your new branch
+via the following command. Substitute the name of your feature/branch for the word
+`feature-name`.
 
 - `git checkout -b feature-name`
 - `git checkout master`
@@ -473,13 +267,13 @@ command, substituting the name of your feature for the word `feature-name`.
 To install development dependencies, type the following commands in the terminal:
 
 ```bash
-pipenv install --dev
+poetry install
 ```
 
-or
+You can activate the shell with the following command:
 
-```bash
-poetry install
+```shell
+poetry shell
 ```
 
 Finally, you should open a pull request on the GitHub repository for the new
@@ -487,42 +281,38 @@ branch that you have created. This pull request should describe the new feature
 that you are adding and give examples of how to run it on the command line.
 Of course, if you are not a collaborator on this project, then you will need to
 fork the repository, add your new feature, document and test it as appropriate,
-and then create a pull request similarily.
+and then create a pull request similarly.
 
 We highly recommend you to provide tests along with the feature that you
 implemented and you should not break the existing test cases or features.
 
 ### Test Tada
 
-To run the test suite for Tada's functions by typing the following in your
-terminal window:
+To run the test suite for Tada's functions within the shell by typing the
+following in your terminal window:
 
-```bash
-pytest
+```shell
+pytest tests
 ```
 
 If you want to collect the coverage of the provided test suite, then you can
 run:
 
-```bash
+```shell
 pytest --cov-config pytest.cov --cov
 ```
 
 If you want to collect the coverage of the provided test suite and see what
 lines of code are not covered, then you can run:
 
-```bash
+```shell
 pytest --cov-config pytest.cov --cov --cov-report term-missing
 ```
-
-## Future Works
-
-- Further verification of the accuracy and efficiency of the tool
 
 ## Problems or Praise
 
 If you have any problems with installing or using the Tada or its provided test
 suite, then please create an issue associated with this Git repository using the
-"Issues" link at the top of this site. The contributors to Tada will do all that
+[Issues](https://github.com/Tada-Project/tada/issues) link at the top of this site. The contributors to Tada will do all that
 they can to resolve your issue and ensure that all of its features and the test
 suite work well in your development environment.
