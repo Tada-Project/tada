@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # install pipenv
-pip install pipenv
+pip install poetry
 # install all dev dependencies (including mkdocs)
-pipenv install --dev
+poetry install
 # build mkdocs site
 mkdocs build
