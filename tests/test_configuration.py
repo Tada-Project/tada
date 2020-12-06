@@ -191,7 +191,6 @@ def test_configuration_file_correct_schema_path(
     ],
 )
 # pylint: disable=invalid-name
-# pylint: disable=bad-continuation
 def test_configuration_file_correct_functions_modules(
     correct_arguments, correct_function, correct_module, tmpdir
 ):
@@ -230,7 +229,6 @@ def test_configuration_file_correct_functions_modules(
     ],
 )
 # pylint: disable=invalid-name
-# pylint: disable=bad-continuation
 def test_configuration_file_correct_experiment_name(
     correct_arguments, correct_experiment_name, tmpdir
 ):
@@ -277,7 +275,6 @@ def test_configuration_file_correct_experiment_name(
     ],
 )
 # pylint: disable=invalid-name
-# pylint: disable=bad-continuation
 def test_configuration_file_correct_datagen_functions(
     correct_arguments, correct_directory, correct_module, correct_function, tmpdir
 ):
@@ -317,7 +314,6 @@ def test_configuration_file_correct_datagen_functions(
     ],
 )
 # pylint: disable=invalid-name
-# pylint: disable=bad-continuation
 def test_configuration_file_correct_experiment_info(
     correct_arguments, correct_experiment_info, tmpdir
 ):
