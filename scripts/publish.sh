@@ -2,6 +2,7 @@
 
 set -e
 
+# Update project version with the tag version
 version=$(git describe --tags --abbrev=0)
 poetry version "${version}"
 
