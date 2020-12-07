@@ -217,3 +217,34 @@ doc site at `http://127.0.0.1:8000`.
     ```
 
     </div>
+
+## Publish a Release
+
+Tada uses `poetry` and [Github Action](https://github.com/features/actions)
+workflow to automate the process of publishing package to
+[PyPI](https://pypi.org). The PyPI publish will be made automatically when a
+github release is published through a commit that is associated with a
+[Git Tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging). All release numbers
+in this repository should adhere to the [Semantic Versioning](http://semver.org/)
+standard that all GitHub projects are asked to adopt.
+
+In order to make a github release, you should commit your file using a
+`git commit` command as followed where the version number should be changed
+accordingly:
+
+```shell
+git tag 1.0.0
+```
+
+The version of the PyPI package will also be automatically set as the tag
+version. At this point, you are ready to push the changes with the appropriate
+tag by typing the following command:
+
+```shell
+git push --tags
+```
+
+After waiting for a period of time, a new release of the project will be created
+on the Github repository page if all the test cases and linting checks have passed.
+Once the Github release has been created successfully, Github Action wil then
+publish the latest release to PyPI.
