@@ -241,7 +241,7 @@ version. At this point, you are ready to push the changes with the appropriate
 tag by typing the following command:
 
 ```shell
-git push --tags
+git push -u origin --tags
 ```
 
 After waiting for a period of time, a new release of the project will be created
