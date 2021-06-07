@@ -94,7 +94,7 @@ def tada(tada_arguments):  # noqa: C901
                     constants.QUIT_BY_BACKFILL = 1
                     dis.output_message("\nQuit due to backfill twice", to_print)
                     break
-            if current_size >= tada_arguments.maxsize:
+            if current_size > tada_arguments.maxsize:
                 constants.QUIT_BY_MAX_SIZE = 1
                 dis.output_message(
                     "\nQuit due to reaching max size: " + str(tada_arguments.maxsize),
